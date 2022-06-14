@@ -159,12 +159,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<br>‘’’<br>yay -S rdesktop<br>‘’’</li>
+<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>安装后可以用命令来访问远程windows系统</p>
-<p>‘’’<br>rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22<br>‘’’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+
 <h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<br>‘’’<br>yay -S krdc<br>‘’’</li>
+<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
 <li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
@@ -233,7 +234,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid #查看硬盘uuid</span><br><span class="line">sudo vim /etc/fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID /media ext4  defaults  0 0</span><br><span class="line">sudo mount /dev/sdb1 /media # 临时挂载硬盘</span><br><span class="line">sudo ln -s /media/abelxiaoxing /home/abelxiaoxing # 创建软链接</span><br><span class="line">sudo useradd -d /home/abelxiaoxing abelxiaoxing # 创建用户,并制定用户目录</span><br><span class="line">sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing # 修改目录所属权</span><br></pre></td></tr></table></figure>
+        <h2 id="查看硬盘uuid"><a href="#查看硬盘uuid" class="headerlink" title="查看硬盘uuid"></a>查看硬盘uuid</h2><p><code>sudo blkid</code> </p>
+<h2 id="开机自动挂载硬盘-在文件的最后新增加一行代码"><a href="#开机自动挂载硬盘-在文件的最后新增加一行代码" class="headerlink" title="开机自动挂载硬盘,在文件的最后新增加一行代码"></a>开机自动挂载硬盘,在文件的最后新增加一行代码</h2><p><code>sudo vim /etc/fstab</code><br><code>输入硬盘UUID /media ext4  defaults  0 0</code></p>
+<h2 id="临时挂载硬盘"><a href="#临时挂载硬盘" class="headerlink" title="临时挂载硬盘"></a>临时挂载硬盘</h2><p><code>sudo mount /dev/sdb1 /media </code></p>
+<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p><code>sudo ln -s /media/abelxiaoxing /home/abelxiaoxing</code> </p>
+<h2 id="创建用户-并制定用户目录"><a href="#创建用户-并制定用户目录" class="headerlink" title="创建用户,并制定用户目录"></a>创建用户,并制定用户目录</h2><p><code>sudo useradd -d /home/abelxiaoxing abelxiaoxing </code></p>
+<h2 id="修改目录所属权"><a href="#修改目录所属权" class="headerlink" title="修改目录所属权"></a>修改目录所属权</h2><p><code>sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing </code></p>
 
       
 

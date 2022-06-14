@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>home目录迁移方法 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="123456sudo blkid #查看硬盘uuidsudo vim &#x2F;etc&#x2F;fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID &#x2F;media ext4  defaults  0 0sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media # 临时挂载硬盘sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing # 创建">
+  <meta name="description" content="查看硬盘uuidsudo blkid  开机自动挂载硬盘,在文件的最后新增加一行代码sudo vim &#x2F;etc&#x2F;fstab输入硬盘UUID &#x2F;media ext4  defaults  0 0 临时挂载硬盘sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media  创建软链接sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing  创建用户,并制定用户目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="home目录迁移方法">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="123456sudo blkid #查看硬盘uuidsudo vim &#x2F;etc&#x2F;fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID &#x2F;media ext4  defaults  0 0sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media # 临时挂载硬盘sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing # 创建">
+<meta property="og:description" content="查看硬盘uuidsudo blkid  开机自动挂载硬盘,在文件的最后新增加一行代码sudo vim &#x2F;etc&#x2F;fstab输入硬盘UUID &#x2F;media ext4  defaults  0 0 临时挂载硬盘sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media  创建软链接sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing  创建用户,并制定用户目录">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-24T16:06:45.000Z">
-<meta property="article:modified_time" content="2022-06-14T02:31:47.019Z">
+<meta property="article:modified_time" content="2022-06-14T02:58:13.709Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -158,7 +158,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid #查看硬盘uuid</span><br><span class="line">sudo vim /etc/fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID /media ext4  defaults  0 0</span><br><span class="line">sudo mount /dev/sdb1 /media # 临时挂载硬盘</span><br><span class="line">sudo ln -s /media/abelxiaoxing /home/abelxiaoxing # 创建软链接</span><br><span class="line">sudo useradd -d /home/abelxiaoxing abelxiaoxing # 创建用户,并制定用户目录</span><br><span class="line">sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing # 修改目录所属权</span><br></pre></td></tr></table></figure>
+        <h2 id="查看硬盘uuid"><a href="#查看硬盘uuid" class="headerlink" title="查看硬盘uuid"></a>查看硬盘uuid</h2><p><code>sudo blkid</code> </p>
+<h2 id="开机自动挂载硬盘-在文件的最后新增加一行代码"><a href="#开机自动挂载硬盘-在文件的最后新增加一行代码" class="headerlink" title="开机自动挂载硬盘,在文件的最后新增加一行代码"></a>开机自动挂载硬盘,在文件的最后新增加一行代码</h2><p><code>sudo vim /etc/fstab</code><br><code>输入硬盘UUID /media ext4  defaults  0 0</code></p>
+<h2 id="临时挂载硬盘"><a href="#临时挂载硬盘" class="headerlink" title="临时挂载硬盘"></a>临时挂载硬盘</h2><p><code>sudo mount /dev/sdb1 /media </code></p>
+<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p><code>sudo ln -s /media/abelxiaoxing /home/abelxiaoxing</code> </p>
+<h2 id="创建用户-并制定用户目录"><a href="#创建用户-并制定用户目录" class="headerlink" title="创建用户,并制定用户目录"></a>创建用户,并制定用户目录</h2><p><code>sudo useradd -d /home/abelxiaoxing abelxiaoxing </code></p>
+<h2 id="修改目录所属权"><a href="#修改目录所属权" class="headerlink" title="修改目录所属权"></a>修改目录所属权</h2><p><code>sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing </code></p>
 
       
 
