@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>linux常用命令 | abel的小天地</title>
+  <title>home目录迁移方法 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12pkill -KILL -u 用户名 #注销某用户">
+  <meta name="description" content="123456sudo blkid #查看硬盘uuidsudo vim &#x2F;etc&#x2F;fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID &#x2F;media ext4  defaults  0 0sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media # 临时挂载硬盘sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing # 创建">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux常用命令">
+<meta property="og:title" content="home目录迁移方法">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/04/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="12pkill -KILL -u 用户名 #注销某用户">
+<meta property="og:description" content="123456sudo blkid #查看硬盘uuidsudo vim &#x2F;etc&#x2F;fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID &#x2F;media ext4  defaults  0 0sudo mount &#x2F;dev&#x2F;sdb1 &#x2F;media # 临时挂载硬盘sudo ln -s &#x2F;media&#x2F;abelxiaoxing &#x2F;home&#x2F;abelxiaoxing # 创建">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-24T16:06:45.000Z">
-<meta property="article:modified_time" content="2022-05-12T08:55:04.298Z">
+<meta property="article:modified_time" content="2022-06-14T02:31:47.019Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -145,7 +145,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      linux常用命令
+      home目录迁移方法
     </h1>
   
 
@@ -158,7 +158,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pkill -KILL -u 用户名 #注销某用户</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid #查看硬盘uuid</span><br><span class="line">sudo vim /etc/fstab # 开机自动挂载硬盘,在文件的最后新增加一行代码     输入硬盘UUID /media ext4  defaults  0 0</span><br><span class="line">sudo mount /dev/sdb1 /media # 临时挂载硬盘</span><br><span class="line">sudo ln -s /media/abelxiaoxing /home/abelxiaoxing # 创建软链接</span><br><span class="line">sudo useradd -d /home/abelxiaoxing abelxiaoxing # 创建用户,并制定用户目录</span><br><span class="line">sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing # 修改目录所属权</span><br></pre></td></tr></table></figure>
 
       
 
@@ -251,6 +251,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          linux连接windows方法
+        
+      </div>
+    </a>
   
   
     <a href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">

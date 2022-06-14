@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>arcolinux安装 | abel的小天地</title>
+  <title>linux连接windows方法 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="arcolinux基于archlinux，适合懒癌，其默认配置相当好用 下载L为旗舰版，安装了各类软件，桌面xfce4,最后成功安装在arcolinux可通过ctrl+alt+e可安装其他桌面 1https:&#x2F;&#x2F;sourceforge.net&#x2F;projects&#x2F;arcolinux&#x2F;files&#x2F;ArcoLinuxL&#x2F; 安装准备用rufus安装改镜像于u盘，bios设置u盘为第一启动项，进入安装系统">
+  <meta name="description" content="linux远程桌面访问windowsRDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统‘’’yay -S rdesktop‘’’安装后可以用命令来访问远程windows系统‘’’rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22‘’’  图形前端工具krd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="arcolinux安装">
-<meta property="og:url" content="https://abelxiaoxing.github.io/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="linux连接windows方法">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="arcolinux基于archlinux，适合懒癌，其默认配置相当好用 下载L为旗舰版，安装了各类软件，桌面xfce4,最后成功安装在arcolinux可通过ctrl+alt+e可安装其他桌面 1https:&#x2F;&#x2F;sourceforge.net&#x2F;projects&#x2F;arcolinux&#x2F;files&#x2F;ArcoLinuxL&#x2F; 安装准备用rufus安装改镜像于u盘，bios设置u盘为第一启动项，进入安装系统">
+<meta property="og:description" content="linux远程桌面访问windowsRDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统‘’’yay -S rdesktop‘’’安装后可以用命令来访问远程windows系统‘’’rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22‘’’  图形前端工具krd">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-17T23:59:16.000Z">
-<meta property="article:modified_time" content="2022-04-18T00:24:06.781Z">
+<meta property="article:published_time" content="2022-06-14T01:43:59.000Z">
+<meta property="article:modified_time" content="2022-06-14T02:11:33.673Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -138,33 +138,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-arcolinux安装" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-linux连接windows方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      arcolinux安装
+      linux连接windows方法
     </h1>
   
 
         
-        <a href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2022-04-17T23:59:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-18</time>
+        <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2022-06-14T01:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>arcolinux基于archlinux，适合懒癌，其默认配置相当好用</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>L为旗舰版，安装了各类软件，桌面xfce4,最后成功安装在arcolinux可通过ctrl+alt+e可安装其他桌面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://sourceforge.net/projects/arcolinux/files/ArcoLinuxL/</span><br></pre></td></tr></table></figure>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>用rufus安装改镜像于u盘，bios设置u盘为第一启动项，进入安装系统</p>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>arco通过检测google来判断是否联网，因此先把google换成baidu</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/calamares/modules/welcome.conf</span><br><span class="line">sudo vim usr/share/arcolinux-welcome-app/arcolinux-welcome-app.py</span><br></pre></td></tr></table></figure>
-<p>后面的一路确定就行了，略。</p>
+        <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
+<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<br>‘’’<br>yay -S rdesktop<br>‘’’<br>安装后可以用命令来访问远程windows系统<br>‘’’<br>rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22<br>‘’’</li>
+</ul>
+<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
+<li>krdc为kde系的远程图形化界面工具<br>‘’’<br>yay -S krdc<br>‘’’</li>
+</ul>
+<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
+<li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
+<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
+<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
+</ol>
 
       
 
@@ -244,7 +248,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -258,18 +262,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/04/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          home目录迁移方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/03/03/archlinux%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">archlinux配置</div>
+    <a href="/2022/04/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">home目录迁移方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
