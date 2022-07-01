@@ -138,68 +138,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-kvm虚拟机硬件直通" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/01/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A/">kvm虚拟机硬件直通</a>
-    </h1>
-  
-
-        
-        <a href="/2022/07/01/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A/" class="archive-article-date">
-  	<time datetime="2022-07-01T03:37:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/07/01/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-i3wm环境配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -998,10 +936,72 @@ https://www.zhihu.com/search?type=content&amp;q=arch%20linux%20%E5%AE%89%E8%A3%8
 
 
   
+    <article id="post-hexo博客搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">hexo博客搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2022-02-27T17:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs npm</code><br>查看版本并检验<br><code>node -V</code><br><code>npm -V</code><br>安装cnpm(国内源加速)<br><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br>检查cnpm<br><code>cnpm</code><br>安装hexo<br><code>sudo cnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>sudo hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>sudo cnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<p>生成密匙<br><code>ssh-keygen -t rsa</code><br>github提交密匙<br>检查是否密匙配置成功<br><code>ssh -T git@github.com</code><br>deploy到github<br><code>hexo d</code><br>主题修改yilia<br><code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在&#x2F;blog&#x2F;theme中git clone合适主题,并在blog下的_config文件下修改theme</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=erKYtw4Rfhk">https://www.youtube.com/watch?v=erKYtw4Rfhk</a><br><a target="_blank" rel="noopener" href="https://tding.top/archives/aad98408.html#more">https://tding.top/archives/aad98408.html#more</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
