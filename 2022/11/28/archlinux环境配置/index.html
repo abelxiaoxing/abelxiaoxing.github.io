@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>archlinux环境配置 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,xfce4,dwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作，xfce4效率低一些，dwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar插件   快捷键查看处   wayfire: ~&#x2F;.config&amp;#">
+  <meta name="description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="archlinux环境配置">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,xfce4,dwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作，xfce4效率低一些，dwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar插件   快捷键查看处   wayfire: ~&#x2F;.config&amp;#">
+<meta property="og:description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-28T05:24:01.000Z">
-<meta property="article:modified_time" content="2022-11-29T05:54:30.272Z">
+<meta property="article:modified_time" content="2023-02-02T03:08:53.314Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -159,19 +159,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><ol>
-<li>提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,xfce4,dwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作，xfce4效率低一些，dwm又仅做了快捷键适配，补丁较少接近原版）  </li>
+<li>提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）  </li>
 <li>已完成一些美化工作，仅个人癖好  </li>
 <li>已完成一些快捷型的脚本，例如wayfire环境下的waybar插件  </li>
 <li>快捷键查看处  <ul>
 <li>wayfire: ~&#x2F;.config&#x2F;wayfire.ini</li>
 <li>i3: ~&#x2F;.config&#x2F;i3&#x2F;config&#x2F;config</li>
+<li>hyprland: ~&#x2F;.config&#x2F;hypr&#x2F;hyprland.ini</li>
 <li>dwm: ~&#x2F;.config&#x2F;dwm&#x2F;</li>
 <li>xfce: 去图形化界面里面自行设置</li>
 </ul>
 </li>
 </ol>
 <h2 id="下载安装相关配置文件"><a href="#下载安装相关配置文件" class="headerlink" title="下载安装相关配置文件"></a>下载安装相关配置文件</h2><ol>
-<li>下载并且进入下载目录（github偶尔抽风，网络实在不行就去浏览器下载，网址<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/.config">https://github.com/abelxiaoxing/.config</a>)<br><code>git clone https://github.com/abelxiaoxing/.config.git ~/Downloads/abelxiaoxing_config_tmp/.config &amp;&amp; cd ~/Downloads/abelxiaoxing_config_tmp/.config/</code>  </li>
+<li>下载并且进入下载目录（github偶尔抽风，网络实在不行就去浏览器下载，网址<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/.config">https://github.com/abelxiaoxing/.config</a>)<br><code>git clone https://github.com/abelxiaoxing/archlinux_config.git ~/Downloads/abelxiaoxing_config_tmp/.config &amp;&amp; cd ~/Downloads/abelxiaoxing_config_tmp/.config/</code>  </li>
 <li>移动并且覆盖重复文件,删除下载临时文件夹<br><code>mv -f * ~/.config/ &amp;&amp; cd ~/.config/OtherUtils</code><br><code>rm -rf ~/Downloads/abelxiaoxing_config_tmp</code>  </li>
 <li>执行自动安装脚本<br><code>sh autostart.sh</code>  </li>
 <li>安装好clash后配置好科学上网（自行搭建,本文不提供教程），终端输入setproxy开启终端代理后执行额外组建安装<br><code>yay clash-for-windows</code><br><code>sh OptionalInstallation.sh</code>  <h2 id="配置主题与界面"><a href="#配置主题与界面" class="headerlink" title="配置主题与界面"></a>配置主题与界面</h2><h3 id="kvantum环境配置"><a href="#kvantum环境配置" class="headerlink" title="kvantum环境配置"></a>kvantum环境配置</h3><code>yay -S kvantum-theme-arc</code></li>
@@ -328,7 +329,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 abelxiaoxing
+    		&copy; 2023 abelxiaoxing
     	</div>
       	<div class="footer-right">
     

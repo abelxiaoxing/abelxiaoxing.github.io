@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>开机自启动脚本配置 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="创建一个启动service脚本sudo vim &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;rclocal.service 写入内容  12345678910111213[Unit]Description&#x3D;&quot;&#x2F;etc&#x2F;rc.local Compatibility&quot;[Service]Type&#x3D;forkingExecStart&#x3D;&#x2F;etc&#x2F;rc.local startTimeo">
+  <meta name="description" content="创建一个启动service脚本sudo vim &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;rclocal.service 写入内容  12345678910111213[Unit]Description&#x3D;&#x2F;etc&#x2F;rc.local Compatibility[Service]Type&#x3D;forkingExecStart&#x3D;&#x2F;etc&#x2F;rc.local startTimeoutSec&#x3D;0Stand">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开机自启动脚本配置">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="创建一个启动service脚本sudo vim &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;rclocal.service 写入内容  12345678910111213[Unit]Description&#x3D;&quot;&#x2F;etc&#x2F;rc.local Compatibility&quot;[Service]Type&#x3D;forkingExecStart&#x3D;&#x2F;etc&#x2F;rc.local startTimeo">
+<meta property="og:description" content="创建一个启动service脚本sudo vim &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;rclocal.service 写入内容  12345678910111213[Unit]Description&#x3D;&#x2F;etc&#x2F;rc.local Compatibility[Service]Type&#x3D;forkingExecStart&#x3D;&#x2F;etc&#x2F;rc.local startTimeoutSec&#x3D;0Stand">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-29T06:15:05.000Z">
-<meta property="article:modified_time" content="2022-11-29T06:21:08.159Z">
+<meta property="article:modified_time" content="2023-02-02T03:14:17.169Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -160,7 +160,7 @@
       
         <ol>
 <li>创建一个启动service脚本<br><code>sudo vim /usr/lib/systemd/system/rclocal.service</code><ul>
-<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=&quot;/etc/rc.local Compatibility&quot;</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardInput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
+<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.local Compatibility</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardOutput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li>创建 &#x2F;etc&#x2F;rc.local 文件<br><code>sudo vim /etc/rc.local</code><ul>
@@ -318,7 +318,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 abelxiaoxing
+    		&copy; 2023 abelxiaoxing
     	</div>
       	<div class="footer-right">
     
