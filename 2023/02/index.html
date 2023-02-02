@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>abel的小天地</title>
+  <title>Archives: 2023/2 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一个个人资料记录的小地方">
 <meta property="og:type" content="website">
 <meta property="og:title" content="abel的小天地">
-<meta property="og:url" content="https://abelxiaoxing.github.io/aaa/index.html">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2023/02/index.html">
 <meta property="og:site_name" content="abel的小天地">
 <meta property="og:description" content="一个个人资料记录的小地方">
 <meta property="og:locale" content="zh_CN">
@@ -138,759 +138,74 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-linux下KVM虚拟机文件共享配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/">linux下KVM虚拟机文件共享配置.md</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2023" class="archive-year">2023</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/" class="archive-article-date">
   	<time datetime="2023-02-02T10:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>安装samba<br><code>yay -S samba</code>  </li>
-<li>创建配置文件<br><code>sudo vim /etc/samba/smb.conf</code>  </li>
-<li>写入需要共享的文件夹<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[homes] # 文件夹名称</span><br><span class="line">   comment = Home Directories # 注释</span><br><span class="line">   path = /home/smb_user/ # 共享的路径</span><br><span class="line">   browseable = yes # 是否显示文件夹</span><br><span class="line">   writable = no # 是否可写</span><br></pre></td></tr></table></figure></li>
-<li>创建samba日记文件夹:<br><code>sudo mkdir -p /usr/local/samba/var/</code>  </li>
-<li>添加samba 访问用户并设置密码，smb_user为你自己设置的用户名：<br><code>sudo smbpasswd -a smb_user</code></li>
-<li>启动服务<br><code>sudo systemctl enable --now smb.service nmb.service</code></li>
-<li>在win10文件夹点击网络，输入“\xxx”,xxx为linux宿主机的ip地址</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-chatgpt论文叙述模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/">chatgpt论文叙述模板.md</a>
+      <a class="archive-article-title" href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/">linux下KVM虚拟机文件共享配置.md</a>
     </h1>
   
 
-        
-        <a href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
+        <div class="article-info info-on-right">
+          
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
   	<time datetime="2023-02-02T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>Q:</p>
-<p>  一篇以“基于生活化材料在小学科学教育实验的设计探讨”为题的硕士研究生论文的结构纲要是什么样的？</p>
-</li>
-<li><p>A：</p>
-<p>  一篇以“基于生活化材料在小学科学教育实验的设计探讨”为题的硕士研究生论文的结构纲要可能包括以下几个部分：<br>  引言：简要介绍小学科学教育实验的重要性和当前的问题，并引出研究的目的和意义。<br>  文献综述：回顾和评价过去关于生活化材料在科学教育实验方面的相关研究。<br>  研究方法：详细描述研究的方法，包括研究设计、研究对象、数据收集方法、分析方法等。<br>  研究结果：呈现研究的结果，并用图表、表格等形式进行展示。<br>  讨论：对研究结果进行分析，并评价生活化材料在小学科学教育实验中的应用效果。<br>  结论：对研究结果进行总结，并对未来科学教育实验的改进方向进行展望。<br>  参考文献：列出所有引用的文献，遵循正式的文献引用格式。  </p>
-</li>
-<li><p>启动一个new chat,并提问Q:</p>
-<p>  一篇以“基于生活化材料在小学科学教育实验的设计探讨”为题的文章结构纲要可能包括以下几个部分：<br>  引言：简要介绍小学科学教育实验的重要性和当前的问题，并引出研究的目的和意义。<br>  文献综述：回顾和评价过去关于生活化材料在科学教育实验方面的相关研究。<br>  研究方法：详细描述研究的方法，包括研究设计、研究对象、数据收集方法、分析方法等。<br>  研究结果：呈现研究的结果，并用图表、表格等形式进行展示。<br>  讨论：对研究结果进行分析，并评价生活化材料在小学科学教育实验中的应用效果。<br>  结论：对研究结果进行总结，并对未来科学教育实验的改进方向进行展望。<br>  参考文献：列出所有引用的文献，遵循正式的文献引用格式。<br>  请以“基于生活化材料在小学科学教育实验的设计探讨”为题按照以上结构写他的引言部分。  </p>
-</li>
-<li><p>A:</p>
-<p>  引言：科学教育实验是小学科学教育的重要组成部分，其目的是帮助学生理解科学知识，培养科学素养和创新能力。然而，现有科学教育实验的材料往往不够生活化，导致学生缺乏兴趣和积极性。因此，本研究旨在探讨基于生活化材料在小学科学教育实验的设计方法，以期望提高学生对科学知识的理解和科学能力的培养。本研究结果将为未来科学教育实验的改进提供重要参考。  </p>
-</li>
-<li><p>Q：</p>
-<p>  以下是论文《基于生活化材料在小学科学教育实验的设计探讨》引言中的一段文字。请将其扩写到500字以上：<br>  “科学教育实验是小学科学教育的重要组成部分，其目的是帮助学生理解科学知识，培养科学素养和创新能力。然而，现有科学教育实验的材料往往不够生活化，导致学生缺乏兴趣和积极性。因此，本研究旨在探讨基于生活化材料在小学科学教育实验的设计方法，以期望提高学生对科学知识的理解和科学能力的培养。本研究结果将为未来科学教育实验的改进提供重要参考。”</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vim快捷键记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">vim快捷键记录</a>
+      <a class="archive-article-title" href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/">chatgpt论文叙述模板.md</a>
     </h1>
   
 
-        
-        <a href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-12-22T09:53:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
-<li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
-<li>ctrl+u,ctrl+f上下翻页(upword&#x2F;forward),zz把当前行设置为屏幕中间</li>
-</ul>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-亮度变换器脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">亮度变换器脚本</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/" class="archive-article-date">
-  	<time datetime="2022-11-29T07:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol start="0">
-<li>archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本</li>
-<li>下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;<br><code>git clone https://github.com/abelxiaoxing/brightness.git</code><br><code>cd brightness</code><br><code>chmod +x brightness</code><br><code>sudo mv brightness /usr/local/bin</code>  </li>
-<li>我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本<br><code>sudo nvim /etc/rc.local</code></li>
-</ol>
-<ul>
-<li>末尾添加以下内容<br>  <code>/usr/local/bin/brightness restore</code>  </li>
-<li>重新启动rclocal服务(有的人是rc-local,自行修改)<br>  <code>sudo systemctl restart rclocal</code></li>
-</ul>
-<ol start="3">
-<li>brightness脚本使用方法</li>
-</ol>
-<ul>
-<li><code>brightness</code> 获取当前亮度设置  </li>
-<li><code>brightness xx</code> 将亮度设置为xx,xx为亮度信息,最高亮度255  </li>
-<li><code>brightness inc step</code> , <code>brightness dec step</code> 增加或降低亮度,step为设定的值,不输入step默认为系统亮度的10%</li>
-</ul>
-<ol start="4">
-<li>最后将brightness映射为快捷键(自行设置)  </li>
-<li>如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbacklight -dec 20</span><br></pre></td></tr></table></figure>
-然后对权限不够的文件设置开机sudo chmod o+w</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开机自启动脚本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">开机自启动脚本配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-11-29T06:15:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>创建一个启动service脚本<br><code>sudo vim /usr/lib/systemd/system/rclocal.service</code><ul>
-<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.local Compatibility</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardOutput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>创建 &#x2F;etc&#x2F;rc.local 文件<br><code>sudo vim /etc/rc.local</code><ul>
-<li>写入内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># /etc/rc.local</span><br><span class="line">if test -d /etc/rc.local.d; then</span><br><span class="line">    for rcscript in /etc/rc.local.d/*.sh; do</span><br><span class="line">        test -r &quot;$&#123;rcscript&#125;&quot; &amp;&amp; sh $&#123;rcscript&#125;</span><br><span class="line">    done</span><br><span class="line">    unset rcscript</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>添加执行权限<br><code>sudo chmod a+x /etc/rc.local</code></li>
-<li>添加&#x2F;etc&#x2F;rc.local.d文件夹<br><code>sudo mkdir /etc/rc.local.d</code></li>
-<li>启动并设置开机自启动<br><code>sudo systemctl start rclocal</code><br><code>sudo systemctl enable rclocal</code></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-archlinux环境配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">archlinux环境配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-11-28T05:24:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><ol>
-<li>提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）  </li>
-<li>已完成一些美化工作，仅个人癖好  </li>
-<li>已完成一些快捷型的脚本，例如wayfire环境下的waybar插件  </li>
-<li>快捷键查看处  <ul>
-<li>wayfire: ~&#x2F;.config&#x2F;wayfire.ini</li>
-<li>i3: ~&#x2F;.config&#x2F;i3&#x2F;config&#x2F;config</li>
-<li>hyprland: ~&#x2F;.config&#x2F;hypr&#x2F;hyprland.ini</li>
-<li>dwm: ~&#x2F;.config&#x2F;dwm&#x2F;</li>
-<li>xfce: 去图形化界面里面自行设置</li>
-</ul>
-</li>
-</ol>
-<h2 id="下载安装相关配置文件"><a href="#下载安装相关配置文件" class="headerlink" title="下载安装相关配置文件"></a>下载安装相关配置文件</h2><ol>
-<li>下载并且进入下载目录（github偶尔抽风，网络实在不行就去浏览器下载，网址<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/.config">https://github.com/abelxiaoxing/.config</a>)<br><code>git clone https://github.com/abelxiaoxing/archlinux_config.git ~/Downloads/abelxiaoxing_config_tmp/.config &amp;&amp; cd ~/Downloads/abelxiaoxing_config_tmp/.config/</code>  </li>
-<li>移动并且覆盖重复文件,删除下载临时文件夹<br><code>mv -f * ~/.config/ &amp;&amp; cd ~/.config/OtherUtils</code><br><code>rm -rf ~/Downloads/abelxiaoxing_config_tmp</code>  </li>
-<li>执行自动安装脚本<br><code>sh autostart.sh</code>  </li>
-<li>安装好clash后配置好科学上网（自行搭建,本文不提供教程），终端输入setproxy开启终端代理后执行额外组建安装<br><code>yay clash-for-windows</code><br><code>sh OptionalInstallation.sh</code>  <h2 id="配置主题与界面"><a href="#配置主题与界面" class="headerlink" title="配置主题与界面"></a>配置主题与界面</h2><h3 id="kvantum环境配置"><a href="#kvantum环境配置" class="headerlink" title="kvantum环境配置"></a>kvantum环境配置</h3><code>yay -S kvantum-theme-arc</code></li>
-</ol>
-<ul>
-<li>打开kvantum,应用arc-dark主题<h3 id="解决dolphin等界面问题"><a href="#解决dolphin等界面问题" class="headerlink" title="解决dolphin等界面问题"></a>解决dolphin等界面问题</h3></li>
-<li>修改&#x2F;etc&#x2F;profile文件<br><code>sudo nvim /etc/profile</code>  </li>
-<li>并且添加以下内容<br><code>export QT_STYLE_OVERRIDE=kvantum</code></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-wayfire下obs屏幕捕捉" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">wayfire下obs屏幕捕捉</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="archive-article-date">
-  	<time datetime="2022-09-01T07:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><p>‘’’<br>yay -S obs-studio<br>yay -S xdg-desktop-portal-wlr xdg-desktop-portal<br>‘’’</p>
-<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可<br>‘’’<br>QT_QPA_PLATFORM&#x3D;xcb obs<br>‘’’</p>
-<p>或者用写入.zshrc里,用xobs代替这个命令</p>
-<p>‘’’<br>alias xobs &#x3D;’QT_QPA_PLATFORM&#x3D;xcb obs’<br>‘’’</p>
-<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg<br>‘’’<br>yay -S wlrobs-hg<br>‘’’</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-便携式linux制作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">便携式linux制作</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2022-06-21T02:35:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><p>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</p>
-<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2><ul>
-<li>安装和普通流程基本一样,主要讲两点不太一样的</li>
-</ul>
-<ol>
-<li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
-<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  <h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2></li>
-<li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
-<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2></li>
-<li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2></li>
-</ol>
-<p>1.linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux连接windows方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">linux连接windows方法</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-06-14T01:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
-<h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br><span class="line">yay -S freerdp</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>安装后可以用命令来访问远程windows系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
-
-<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
-<li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
-<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
-<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-home目录迁移方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/">home目录迁移方法</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-04-24T16:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="查看硬盘uuid"><a href="#查看硬盘uuid" class="headerlink" title="查看硬盘uuid"></a>查看硬盘uuid</h2><p><code>sudo blkid</code> </p>
-<h2 id="开机自动挂载硬盘-在文件的最后新增加一行代码"><a href="#开机自动挂载硬盘-在文件的最后新增加一行代码" class="headerlink" title="开机自动挂载硬盘,在文件的最后新增加一行代码"></a>开机自动挂载硬盘,在文件的最后新增加一行代码</h2><p><code>sudo vim /etc/fstab</code><br><code>输入硬盘UUID /media ext4  defaults  0 0</code></p>
-<h2 id="临时挂载硬盘"><a href="#临时挂载硬盘" class="headerlink" title="临时挂载硬盘"></a>临时挂载硬盘</h2><p><code>sudo mount /dev/sdb1 /media </code></p>
-<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p><code>sudo ln -s /media/abelxiaoxing /home/abelxiaoxing</code> </p>
-<h2 id="创建用户-并制定用户目录"><a href="#创建用户-并制定用户目录" class="headerlink" title="创建用户,并制定用户目录"></a>创建用户,并制定用户目录</h2><p><code>sudo useradd -d /home/abelxiaoxing abelxiaoxing </code></p>
-<h2 id="修改目录所属权"><a href="#修改目录所属权" class="headerlink" title="修改目录所属权"></a>修改目录所属权</h2><p><code>sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing </code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -924,9 +239,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
