@@ -142,6 +142,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-archlinux的kvm-qmenu虚拟机建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">archlinux的kvm+qmenu虚拟机建立</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
+  	<time datetime="2023-04-16T09:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装kvm基础组建"><a href="#安装kvm基础组建" class="headerlink" title="安装kvm基础组建"></a>安装kvm基础组建</h2><ul>
+<li>sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</li>
+<li>sudo pacman -S ebtables iptables</li>
+</ul>
+<ol>
+<li>kvm 负责CPU和内存的虚拟化</li>
+<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
+<li>ovmf 为虚拟机启用UEFI支持</li>
+<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
+<li>virt-manager 是管理虚拟机的GUI<h2 id="在Arch-Linux-x2F-Manjaro上安装libguestfs"><a href="#在Arch-Linux-x2F-Manjaro上安装libguestfs" class="headerlink" title="在Arch Linux&#x2F;Manjaro上安装libguestfs"></a>在Arch Linux&#x2F;Manjaro上安装libguestfs</h2></li>
+</ol>
+<ul>
+<li>paru -S libguestfs<h2 id="启动KVM-libvirt服务"><a href="#启动KVM-libvirt服务" class="headerlink" title="启动KVM libvirt服务"></a>启动KVM libvirt服务</h2></li>
+<li>sudo systemctl enable libvirtd.service</li>
+<li>sudo systemctl start libvirtd.service<h2 id="启用普通用户帐户以使用KVM"><a href="#启用普通用户帐户以使用KVM" class="headerlink" title="启用普通用户帐户以使用KVM"></a>启用普通用户帐户以使用KVM</h2></li>
+<li>sudo vim &#x2F;etc&#x2F;libvirt&#x2F;libvirtd.conf<br>将UNIX域套接字组所有权设置为libvirt(第85行)：<br>unix_sock_group &#x3D; “libvirt”<br>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：<br>unix_sock_rw_perms &#x3D; “0770”<br>将你的用户帐户添加到libvirt组：<br>sudo usermod -a -G libvirt $(whoami)<br>newgrp libvirt<br>重启libvirt守护进程：<br>sudo systemctl restart libvirtd.service <h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2></li>
+<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化：<br>sudo modprobe -r kvm_intel<br>sudo modprobe kvm_intel nested&#x3D;1<br>要使此配置持久，请运行：<br>echo “options kvm-intel nested&#x3D;1” | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;kvm-intel.conf<br>确认嵌套虚拟化设置为是：<br>systool -m kvm_intel -v | grep nested<br>nested              &#x3D; “Y”<br>nested_early_check  &#x3D; “N”<br>cat &#x2F;sys&#x2F;module&#x2F;kvm_intel&#x2F;parameters&#x2F;nested</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基于虚拟硬盘技术的wintogo扩容笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -382,7 +462,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
+        <h2 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h2><ul>
 <li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
 <li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
 <li>ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页</li>
@@ -390,6 +470,21 @@
 <li>zz让光标所在行居屏幕中央</li>
 <li>zt让光标所在行居屏幕最上一行 t&#x3D;top</li>
 <li>zb 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
+<li>w&#x2F;W移到下一个word&#x2F;WORD开头,e&#x2F;E下一个word&#x2F;WORD尾</li>
+<li>b&#x2F;B(backword)回到上一个word&#x2F;WORD开头</li>
+<li>使用f{char}可以移动到char字符上,t移动到char的前一个字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个</li>
+<li>0移动到行首,$移动到行尾</li>
+</ul>
+<h2 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h2><ul>
+<li>dw删除单词,x删除字符</li>
+<li>dt)删除右边到)为止的所有字符</li>
+<li>r(replace)可以替换一个字符</li>
+<li>s(substitute)替换并进入插入模式</li>
+<li>c(change)配合文本对象快速修改,例如caw先回到当前单词光标首字符并删除单词并进入插入模式,cw从当前光标删除到单词结束并进入插入模式,ct)删除到括号并进入插入模式</li>
+<li>使用&#x2F;或者?进行前向或者反向搜索</li>
+<li>使用n&#x2F;N跳转到下一个或者上一个匹配</li>
+<li>使用*或者#进行当前单词的前向或者后向匹配</li>
+<li></li>
 </ul>
 
       
@@ -790,83 +885,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux连接windows方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">linux连接windows方法</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-06-14T01:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
-<h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br><span class="line">yay -S freerdp</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>安装后可以用命令来访问远程windows系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
-
-<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
-<li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
-<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
-<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">展开全文 >></a>
         </p>
       
 

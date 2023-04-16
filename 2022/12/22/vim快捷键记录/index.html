@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>vim快捷键记录 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回 H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower) ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页 ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页 zz让光标所在行居屏幕中央 zt让光标所在行居屏幕最上一行 t&amp;#x3D">
+  <meta name="description" content="快速移动 gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回 H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower) ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页 ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页 zz让光标所在行居屏幕中央 zt让光标所在行居屏幕最上一行 t&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim快捷键记录">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回 H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower) ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页 ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页 zz让光标所在行居屏幕中央 zt让光标所在行居屏幕最上一行 t&amp;#x3D">
+<meta property="og:description" content="快速移动 gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回 H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower) ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页 ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页 zz让光标所在行居屏幕中央 zt让光标所在行居屏幕最上一行 t&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-22T09:53:55.000Z">
-<meta property="article:modified_time" content="2023-03-10T13:55:16.391Z">
+<meta property="article:modified_time" content="2023-03-12T09:42:25.081Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -162,7 +162,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
+        <h2 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h2><ul>
 <li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
 <li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
 <li>ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页</li>
@@ -170,6 +170,21 @@
 <li>zz让光标所在行居屏幕中央</li>
 <li>zt让光标所在行居屏幕最上一行 t&#x3D;top</li>
 <li>zb 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
+<li>w&#x2F;W移到下一个word&#x2F;WORD开头,e&#x2F;E下一个word&#x2F;WORD尾</li>
+<li>b&#x2F;B(backword)回到上一个word&#x2F;WORD开头</li>
+<li>使用f{char}可以移动到char字符上,t移动到char的前一个字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个</li>
+<li>0移动到行首,$移动到行尾</li>
+</ul>
+<h2 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h2><ul>
+<li>dw删除单词,x删除字符</li>
+<li>dt)删除右边到)为止的所有字符</li>
+<li>r(replace)可以替换一个字符</li>
+<li>s(substitute)替换并进入插入模式</li>
+<li>c(change)配合文本对象快速修改,例如caw先回到当前单词光标首字符并删除单词并进入插入模式,cw从当前光标删除到单词结束并进入插入模式,ct)删除到括号并进入插入模式</li>
+<li>使用&#x2F;或者?进行前向或者反向搜索</li>
+<li>使用n&#x2F;N跳转到下一个或者上一个匹配</li>
+<li>使用*或者#进行当前单词的前向或者后向匹配</li>
+<li></li>
 </ul>
 
       

@@ -142,6 +142,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux连接windows方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">linux连接windows方法</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2022-06-14T01:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
+<h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
+<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br><span class="line">yay -S freerdp</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>安装后可以用命令来访问远程windows系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+
+<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
+<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
+<li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
+<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
+<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-home目录迁移方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

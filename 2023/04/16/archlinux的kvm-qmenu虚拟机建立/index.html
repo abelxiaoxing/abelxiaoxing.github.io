@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>基于虚拟硬盘技术的wintogo扩容笔记 | abel的小天地</title>
+  <title>archlinux的kvm+qmenu虚拟机建立 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="查看虚拟磁盘wtg.vhdx信息qemu-img info wtg.vhdx vhdx格式转换成qcow2qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2 对wtg.qcow2扩容到100Gqemu-img resize wtg.qcow2 100G 将qcow2文件转换回vhdx格式qemu-img convert -f qcow2 -O">
+  <meta name="description" content="安装kvm基础组建 sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat sudo pacman -S ebtables iptables   kvm 负责CPU和内存的虚拟化 qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等） ovmf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于虚拟硬盘技术的wintogo扩容笔记">
-<meta property="og:url" content="https://abelxiaoxing.github.io/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="archlinux的kvm+qmenu虚拟机建立">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="查看虚拟磁盘wtg.vhdx信息qemu-img info wtg.vhdx vhdx格式转换成qcow2qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2 对wtg.qcow2扩容到100Gqemu-img resize wtg.qcow2 100G 将qcow2文件转换回vhdx格式qemu-img convert -f qcow2 -O">
+<meta property="og:description" content="安装kvm基础组建 sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat sudo pacman -S ebtables iptables   kvm 负责CPU和内存的虚拟化 qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等） ovmf">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-10T11:21:23.000Z">
-<meta property="article:modified_time" content="2023-03-10T11:28:34.678Z">
+<meta property="article:published_time" content="2023-04-16T09:11:13.000Z">
+<meta property="article:modified_time" content="2023-04-16T09:40:03.935Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -142,33 +142,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-基于虚拟硬盘技术的wintogo扩容笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-archlinux的kvm-qmenu虚拟机建立" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      基于虚拟硬盘技术的wintogo扩容笔记
+      archlinux的kvm+qmenu虚拟机建立
     </h1>
   
 
         
-        <a href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2023-03-10T11:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
+        <a href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
+  	<time datetime="2023-04-16T09:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>查看虚拟磁盘wtg.vhdx信息<br><code>qemu-img info wtg.vhdx</code></li>
-<li>vhdx格式转换成qcow2<br><code>qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</code></li>
-<li>对wtg.qcow2扩容到100G<br><code>qemu-img resize wtg.qcow2 100G</code></li>
-<li>将qcow2文件转换回vhdx格式<br><code>qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</code></li>
-<li>重命名文件<br><code>mv wtg.vhdx wtg_old.vhdx</code><br><code>mv wtg_expanded.vhdx wtg.vhdx</code></li>
-<li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
+        <h2 id="安装kvm基础组建"><a href="#安装kvm基础组建" class="headerlink" title="安装kvm基础组建"></a>安装kvm基础组建</h2><ul>
+<li>sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</li>
+<li>sudo pacman -S ebtables iptables</li>
+</ul>
+<ol>
+<li>kvm 负责CPU和内存的虚拟化</li>
+<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
+<li>ovmf 为虚拟机启用UEFI支持</li>
+<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
+<li>virt-manager 是管理虚拟机的GUI<h2 id="在Arch-Linux-x2F-Manjaro上安装libguestfs"><a href="#在Arch-Linux-x2F-Manjaro上安装libguestfs" class="headerlink" title="在Arch Linux&#x2F;Manjaro上安装libguestfs"></a>在Arch Linux&#x2F;Manjaro上安装libguestfs</h2></li>
+</ol>
+<ul>
+<li>paru -S libguestfs<h2 id="启动KVM-libvirt服务"><a href="#启动KVM-libvirt服务" class="headerlink" title="启动KVM libvirt服务"></a>启动KVM libvirt服务</h2></li>
+<li>sudo systemctl enable libvirtd.service</li>
+<li>sudo systemctl start libvirtd.service<h2 id="启用普通用户帐户以使用KVM"><a href="#启用普通用户帐户以使用KVM" class="headerlink" title="启用普通用户帐户以使用KVM"></a>启用普通用户帐户以使用KVM</h2></li>
+<li>sudo vim &#x2F;etc&#x2F;libvirt&#x2F;libvirtd.conf<br>将UNIX域套接字组所有权设置为libvirt(第85行)：<br>unix_sock_group &#x3D; “libvirt”<br>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：<br>unix_sock_rw_perms &#x3D; “0770”<br>将你的用户帐户添加到libvirt组：<br>sudo usermod -a -G libvirt $(whoami)<br>newgrp libvirt<br>重启libvirt守护进程：<br>sudo systemctl restart libvirtd.service <h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2></li>
+<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化：<br>sudo modprobe -r kvm_intel<br>sudo modprobe kvm_intel nested&#x3D;1<br>要使此配置持久，请运行：<br>echo “options kvm-intel nested&#x3D;1” | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;kvm-intel.conf<br>确认嵌套虚拟化设置为是：<br>systool -m kvm_intel -v | grep nested<br>nested              &#x3D; “Y”<br>nested_early_check  &#x3D; “N”<br>cat &#x2F;sys&#x2F;module&#x2F;kvm_intel&#x2F;parameters&#x2F;nested</li>
 </ul>
 
       
@@ -249,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -263,18 +273,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          archlinux的kvm+qmenu虚拟机建立
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux下KVM虚拟机文件共享配置.md</div>
+    <a href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于虚拟硬盘技术的wintogo扩容笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
