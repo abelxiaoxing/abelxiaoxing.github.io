@@ -178,7 +178,7 @@
 <li>sudo systemctl enable libvirtd.service</li>
 <li>sudo systemctl start libvirtd.service<h2 id="启用普通用户帐户以使用KVM"><a href="#启用普通用户帐户以使用KVM" class="headerlink" title="启用普通用户帐户以使用KVM"></a>启用普通用户帐户以使用KVM</h2></li>
 <li>sudo vim &#x2F;etc&#x2F;libvirt&#x2F;libvirtd.conf<br>将UNIX域套接字组所有权设置为libvirt(第85行)：<br>unix_sock_group &#x3D; “libvirt”<br>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：<br>unix_sock_rw_perms &#x3D; “0770”<br>将你的用户帐户添加到libvirt组：<br>sudo usermod -a -G libvirt $(whoami)<br>newgrp libvirt<br>重启libvirt守护进程：<br>sudo systemctl restart libvirtd.service <h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2></li>
-<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化：<br>sudo modprobe -r kvm_intel<br>sudo modprobe kvm_intel nested&#x3D;1<br>要使此配置持久，请运行：<br>echo “options kvm-intel nested&#x3D;1” | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;kvm-intel.conf<br>确认嵌套虚拟化设置为是：<br>systool -m kvm_intel -v | grep nested<br>nested              &#x3D; “Y”<br>nested_early_check  &#x3D; “N”<br>cat &#x2F;sys&#x2F;module&#x2F;kvm_intel&#x2F;parameters&#x2F;nested</li>
+<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化：<br>sudo modprobe -r kvm_intel<br>sudo modprobe kvm_intel nested&#x3D;1<br>要使此配置持久，请运行：<br>echo “options kvm-intel nested&#x3D;1” | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;kvm-intel.conf<br>确认嵌套虚拟化设置为是：<br>systool -m kvm_intel -v | grep nested<br>nested              &#x3D; “Y”<br>nested_early_check  &#x3D; “N”<br>cat &#x2F;sys&#x2F;module&#x2F;kvm_intel&#x2F;parameters&#x2F;nested<br>Y</li>
 </ul>
 
       
