@@ -793,11 +793,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><p>‘’’<br>yay -S obs-studio<br>yay -S xdg-desktop-portal-wlr xdg-desktop-portal<br>‘’’</p>
-<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可<br>‘’’<br>QT_QPA_PLATFORM&#x3D;xcb obs<br>‘’’</p>
+        <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S obs-studio</span><br><span class="line">yay -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
+
+<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
 <p>或者用写入.zshrc里,用xobs代替这个命令</p>
-<p>‘’’<br>alias xobs &#x3D;’QT_QPA_PLATFORM&#x3D;xcb obs’<br>‘’’</p>
-<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg<br>‘’’<br>yay -S wlrobs-hg<br>‘’’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S wlrobs-hg</span><br></pre></td></tr></table></figure>
 
       
 
