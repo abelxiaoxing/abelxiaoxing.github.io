@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>(勿看)废弃的linux软件配置 | abel的小天地</title>
+  <title>一站式安装abel的arch环境 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="更改系统源、社区源添加multilib支持添加国内源1sudo vim &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist 在开头添加以下内容 1234567# 清华大学Server &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;archlinux&#x2F;$repo&#x2F;os&#x2F;$arch## 163Server &#x3D; http:&#x2F;&#x2F;mirrors.163.com&#x2F;archlinu">
+  <meta name="description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(勿看)废弃的linux软件配置">
-<meta property="og:url" content="https://abelxiaoxing.github.io/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="一站式安装abel的arch环境">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/11/28/%E4%B8%80%E7%AB%99%E5%BC%8F%E5%AE%89%E8%A3%85abel%E7%9A%84arch%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="更改系统源、社区源添加multilib支持添加国内源1sudo vim &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist 在开头添加以下内容 1234567# 清华大学Server &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;archlinux&#x2F;$repo&#x2F;os&#x2F;$arch## 163Server &#x3D; http:&#x2F;&#x2F;mirrors.163.com&#x2F;archlinu">
+<meta property="og:description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-03T15:19:57.000Z">
-<meta property="article:modified_time" content="2023-03-10T13:42:21.000Z">
+<meta property="article:published_time" content="2022-11-28T05:24:01.000Z">
+<meta property="article:modified_time" content="2024-05-15T12:26:34.821Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -142,117 +142,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-(勿看)废弃的软件配置" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-一站式安装abel的arch环境" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      (勿看)废弃的linux软件配置
+      一站式安装abel的arch环境
     </h1>
   
 
         
-        <a href="/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-03-03T15:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
+        <a href="/2022/11/28/%E4%B8%80%E7%AB%99%E5%BC%8F%E5%AE%89%E8%A3%85abel%E7%9A%84arch%E7%8E%AF%E5%A2%83/" class="archive-article-date">
+  	<time datetime="2022-11-28T05:24:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="更改系统源、社区源添加multilib支持"><a href="#更改系统源、社区源添加multilib支持" class="headerlink" title="更改系统源、社区源添加multilib支持"></a>更改系统源、社区源添加multilib支持</h2><h3 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
-<p>在开头添加以下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</span><br><span class="line">## 163</span><br><span class="line">Server = http://mirrors.163.com/archlinux/$repo/os/$arch</span><br><span class="line">## aliyun</span><br><span class="line">Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="添加archlinuxcn、添加multilib"><a href="#添加archlinuxcn、添加multilib" class="headerlink" title="添加archlinuxcn、添加multilib"></a>添加archlinuxcn、添加multilib</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
-<p>在最后添加以下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line"># The Chinese Arch Linux communities packages.</span><br><span class="line"># SigLevel = Optional TrustedOnly</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
-<p>取消掉[multilib]的注释</p>
-<h3 id="安装同步密匙"><a href="#安装同步密匙" class="headerlink" title="安装同步密匙"></a>安装同步密匙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu &amp;&amp; pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
-<h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
-<h2 id="安装yay"><a href="#安装yay" class="headerlink" title="安装yay"></a>安装yay</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
-<p>用yay代替pacman进行安装，但注意升级系统还应使用<code>pacman -Syu</code></p>
-<h2 id="安装Display-Server"><a href="#安装Display-Server" class="headerlink" title="安装Display Server"></a>安装Display Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xorg</span><br></pre></td></tr></table></figure>
-<h2 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h2><h3 id="安装AMD显卡驱动"><a href="#安装AMD显卡驱动" class="headerlink" title="安装AMD显卡驱动"></a>安装AMD显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xf86-video-amdgpu</span><br></pre></td></tr></table></figure>
-<h3 id="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"><a href="#安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）" class="headerlink" title="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"></a>安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S cudnn</span><br></pre></td></tr></table></figure>
-<h3 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S nvidia nvidia-utils</span><br></pre></td></tr></table></figure>
-<h2 id="安装Display-Manager"><a href="#安装Display-Manager" class="headerlink" title="安装Display Manager"></a>安装Display Manager</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S sddm</span><br></pre></td></tr></table></figure>
-<h3 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable sddm</span><br></pre></td></tr></table></figure>
-<h2 id="安装桌面环境"><a href="#安装桌面环境" class="headerlink" title="安装桌面环境"></a>安装桌面环境</h2><p>kde美观功能强系统占用大<br>xfce轻量，linus御用桌面<br>i3wm平铺式桌面</p>
-<h3 id="kde"><a href="#kde" class="headerlink" title="kde"></a>kde</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S plasma kde-applications packagekit-qt5</span><br></pre></td></tr></table></figure>
-<h3 id="xfce"><a href="#xfce" class="headerlink" title="xfce"></a>xfce</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xfce4 xfce4-goodies</span><br></pre></td></tr></table></figure>
-<h3 id="i3wm"><a href="#i3wm" class="headerlink" title="i3wm"></a>i3wm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S i3</span><br></pre></td></tr></table></figure>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>桌面环境安装后进行重启</p>
-<h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>选择自己喜欢的字体</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S ttf-sarasa-gothic noto-fonts-cjk</span><br></pre></td></tr></table></figure>
-<h3 id="安装x2go远程环境"><a href="#安装x2go远程环境" class="headerlink" title="安装x2go远程环境"></a>安装x2go远程环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S x2goserver # 安装x2go被控服务</span><br><span class="line">yay -S x2goclient # 安装x2go主控界面（单纯被控可不装）</span><br><span class="line">sudo x2godbadmin --createdb # 创建数据库</span><br></pre></td></tr></table></figure>
-<h2 id="设置壁纸"><a href="#设置壁纸" class="headerlink" title="设置壁纸"></a>设置壁纸</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S feh</span><br><span class="line">feh --randomize --bg-fill ~/Pictures/DesktopBackground </span><br></pre></td></tr></table></figure>
-<p>会随机切换一张图片作为墙纸，可以配合linux的crontab 设置成每隔10分钟自动切换壁纸。crontab的安装使用很简单，请自行百度。</p>
-<h3 id="向日葵远程控制"><a href="#向日葵远程控制" class="headerlink" title="向日葵远程控制"></a>向日葵远程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S sunloginclient #安装向日葵</span><br><span class="line">systemctl start runsunloginclient #启动向日葵服务</span><br><span class="line">systemctl enable runsunloginclient #开机自启动向日葵服务</span><br></pre></td></tr></table></figure>
-<h3 id="企业微信"><a href="#企业微信" class="headerlink" title="企业微信"></a>企业微信</h3><p>安装企业微信前必须先安装微信  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S com.qq.weixin.deepin #微信</span><br><span class="line">yay -S com.qq.weixin.work.deepin #企业微信</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安装微信时字体无法显示</li>
+        <h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><ol>
+<li>提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）  </li>
+<li>已完成一些美化工作，仅个人癖好  </li>
+<li>已完成一些快捷型的脚本，例如wayfire环境下的waybar插件  </li>
+<li>快捷键查看处  <ul>
+<li>wayfire: ~&#x2F;.config&#x2F;wayfire.ini</li>
+<li>i3: ~&#x2F;.config&#x2F;i3&#x2F;config&#x2F;config</li>
+<li>hyprland: ~&#x2F;.config&#x2F;hypr&#x2F;hyprland.ini</li>
+<li>dwm: ~&#x2F;.config&#x2F;dwm&#x2F;</li>
+<li>xfce: 去图形化界面里面自行设置</li>
 </ul>
-<p>把修改后的字体（就叫fake_simsun.ttc吧）放到~&#x2F;.deepinwine&#x2F;Deepin-QQ&#x2F;drive_c&#x2F;windows&#x2F;Fonts下<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw">https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw</a> 提取码: 96qm</p>
+</li>
+</ol>
+<h2 id="下载安装相关配置文件"><a href="#下载安装相关配置文件" class="headerlink" title="下载安装相关配置文件"></a>下载安装相关配置文件</h2><ol>
+<li>下载并且进入下载目录（github偶尔抽风，网络实在不行就去浏览器下载，网址<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/.config">https://github.com/abelxiaoxing/.config</a>)<br><code>git clone https://github.com/abelxiaoxing/archlinux_config.git ~/Downloads/abelxiaoxing_config_tmp/.config &amp;&amp; cd ~/Downloads/abelxiaoxing_config_tmp/.config/</code>  </li>
+<li>移动并且覆盖重复文件,删除下载临时文件夹<br><code>mv -f * ~/.config/ &amp;&amp; cd ~/.config/OtherUtils</code><br><code>rm -rf ~/Downloads/abelxiaoxing_config_tmp</code>  </li>
+<li>执行自动安装脚本<br><code>sh autostart.sh</code>  </li>
+<li>安装好clash后配置好科学上网（自行搭建,本文不提供教程），终端输入setproxy开启终端代理后执行额外组建安装<br><code>yay clash-for-windows</code><br><code>sh OptionalInstallation.sh</code>  <h2 id="配置主题与界面"><a href="#配置主题与界面" class="headerlink" title="配置主题与界面"></a>配置主题与界面</h2><h3 id="kvantum环境配置"><a href="#kvantum环境配置" class="headerlink" title="kvantum环境配置"></a>kvantum环境配置</h3><code>yay -S kvantum-theme-arc</code></li>
+</ol>
 <ul>
-<li>企业微信调整（重要，否则无法使用）<br>更新后3.1.12版本不能使用的原因是因为系统把libldap&#x2F;libber等此类与网络有关的openLDAP库由2.4升级到2.6,有以下后果:</li>
+<li>打开kvantum,应用arc-dark主题<h3 id="解决dolphin等界面问题"><a href="#解决dolphin等界面问题" class="headerlink" title="解决dolphin等界面问题"></a>解决dolphin等界面问题</h3></li>
+<li>修改&#x2F;etc&#x2F;profile文件<br><code>sudo nvim /etc/profile</code>  </li>
+<li>并且添加以下内容<br><code>export QT_STYLE_OVERRIDE=kvantum</code></li>
 </ul>
-<ol>
-<li>wine6在使用网络功能时最终有依赖链透到libldap&#x2F;libber,随着系统更新，wine6与libldap也都同步进行了更新，所以才有你们修改程序启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh里的APPRUN_CMD由deepin-wine6-stable改成wine后可以使程序运行  </li>
-<li>deepin那边的兄弟估计偷懒或是基于什么原因，编译deepin-wine6-stable的时候还是使用旧的依赖链，所以程序使用网络时在系统里找不到旧版libldap&#x2F;libber而停止运行  </li>
-<li>本次系统更新会导致很多软件无法运行，例如那些使用了最广泛网络库libcurl的软件都有相同的依赖，锅在openLDAP这些开源组织在做大版本变更的不兼容<br>建议的解决方式:  </li>
-<li>安装com.qq.weixin.deepin这个微信包（估计和本包是同一个作者），它里面打包了旧版本的libldap这些库，在&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib里  </li>
-<li>拷贝lib目录到某个地方，如cp -r &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib  </li>
-<li>修改程序的启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh,里面加上export LD_LIBRARY_PATH&#x3D;&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib,使deepin-wine6-stable运行时能找到并使用这个lib目录<br>不建议直接改APPRUN_CMD成wine,毕竟deepin-wine6-stable做了很多工作，比如去阴影、支持文件关联、字体搜索、屏幕识别截图等等，用了wine这些特性就没了。其他很多deepin软件无法运行的都可以用这个方式。<br>后续等这个包作者更新打包或者是deepin-wine6-stable编译使用新依赖链。</li>
-</ol>
-<h3 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">yay -S vmware-workstation #虚拟机</span><br><span class="line">sudo modprobe -a vmw_vmci vmmon #启动虚拟机相关应用</span><br><span class="line">lsmod | grep ^vm</span><br><span class="line">vmware-networks --start #配置vmware网络</span><br><span class="line">yay -S alacritty #可用gpu渲染的终端</span><br><span class="line">sudo vim ~/.config/alacritty/alacritty.yml #调节alacritty配置文件，如字体大小（size）</span><br><span class="line">yay -S safeeyes #护眼软件定时提醒休息</span><br><span class="line">yay -S redshiftgui-bin #图形化版本</span><br><span class="line">yay -S krita #作图工具，类似ps</span><br><span class="line">yay -S gimp #作图工具，类似ps</span><br><span class="line">yay -S obs-studio # 录屏推流工具</span><br><span class="line">yay -S fish # 一款shell</span><br><span class="line">yay -S firefox #火狐浏览器</span><br><span class="line">yay -S google-chrome #谷歌浏览器</span><br><span class="line">yay -S opera #opera浏览器</span><br><span class="line">yay -S microsoft-edge-dev-bin #edge浏览器</span><br><span class="line">yay -S gitter #开发者交流社区软件</span><br><span class="line">yay -S com.qq.weixin.deepin #微信</span><br><span class="line">yay -S mitalk #米聊(垃圾腾讯不开发linux版本)</span><br><span class="line">yay -S deepin-wine-tim #tim（qq替代版）</span><br><span class="line">yay -S visual-studio-code-bin #vscode</span><br><span class="line">yay -S ranger #终端文件浏览器</span><br><span class="line">yay -S neovim #最强终端编辑器</span><br><span class="line">yay -S wps-office wps-office-mui-zh-cn ttf-wps-fonts # 安装wps、中文支持、字体支持</span><br><span class="line">yay -S netease-cloud-music #网易云音乐</span><br><span class="line">yay -S qqmusic-bin #qq音乐</span><br><span class="line">yay -S freemind #思维导图</span><br><span class="line">yay -S filezilla #远程ftp工具</span><br><span class="line">yay -S htop #资源进程管理器 top命令的升级版</span><br><span class="line">yay -S lolcat #文本查看 也就是cat命令的升级版</span><br><span class="line">yay -S evolution # 邮箱管理器</span><br><span class="line">yay -S baidunetdisk-electrion #百度云</span><br><span class="line">yay -S uget #下载管理器</span><br><span class="line">yay -S timeshift #备份工具</span><br><span class="line">yay -S clash-for-windows-electron-bin #科学上网</span><br><span class="line">yay -S neofetch #显示系统信息</span><br><span class="line">yay -S lolcate #配合neofetch，使其炫酷渐变色</span><br><span class="line">yay -S flameshot #截图软件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="双时钟系统同步"><a href="#双时钟系统同步" class="headerlink" title="双时钟系统同步"></a>双时钟系统同步</h3><p>按照 Arch WiKi 的建议，这里修改Windows系统的注册表：</p>
-<p>鼠标右键左下角win按钮，以管理员方式打开PowerShell，输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&quot; /v RealTimeIsUniversal /d 1 /t REG_QWORD /f</span><br></pre></td></tr></table></figure>
-<h2 id="安装fricx5输入法"><a href="#安装fricx5输入法" class="headerlink" title="安装fricx5输入法"></a>安装fricx5输入法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color fcitx5-nord</span><br></pre></td></tr></table></figure>
-<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
-<p>然后配置自动启动，提供以下3种方法，第一个不行，试第2个，然后第3个</p>
-<ol>
-<li>如果，支持XDG桌面环境，例如KDE,GNOME, Xfce,默认重启后即可</li>
-<li>在~&#x2F;.config&#x2F;autostart目录下添加fcitx-autostart.desktop文件，可以从目录etc&#x2F;xdg&#x2F;autostart中复制</li>
-<li>对于i3-wm,可以在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># fcitx5</span><br><span class="line">exec_always --no-startup-id fcitx5</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="fcitx4输入法安装-i3wm可能fcitx5有问题"><a href="#fcitx4输入法安装-i3wm可能fcitx5有问题" class="headerlink" title="fcitx4输入法安装(i3wm可能fcitx5有问题)"></a>fcitx4输入法安装(i3wm可能fcitx5有问题)</h2><p>i3wm环境下fcitx5有问题，因此选用fcitx4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-im</span><br><span class="line">yay -S fcitx-rime</span><br></pre></td></tr></table></figure>
-<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
-<p>在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec_always --no-startup-id fcitx</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装花生壳内网穿透"><a href="#安装花生壳内网穿透" class="headerlink" title="安装花生壳内网穿透"></a>安装花生壳内网穿透</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S phddns-bin # 安装花生壳</span><br></pre></td></tr></table></figure>
-
-<p>在linux中安装好花生壳后，进入目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br></pre></td></tr></table></figure>
-
-<p>创建启动文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch phddns.service</span><br></pre></td></tr></table></figure>
-
-<p>编辑文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim phddns.service </span><br></pre></td></tr></table></figure>
-
-<p>在文件中加入如下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=phddns Service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line"># default start cmd</span><br><span class="line">ExecStart=/usr/sbin/phddns start</span><br><span class="line"># Suppress stderr to eliminate duplicated messages in syslog. NM calls openlog()</span><br><span class="line"># with LOG_PERROR when run in foreground. But systemd redirects stderr to</span><br><span class="line"># syslog by default, which results in logging each message twice.</span><br><span class="line">StandardOutput=syslog</span><br><span class="line">StandardError=null</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-<p>设置开机自启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start phddns.service</span><br><span class="line">systemctl enable phddns.service</span><br></pre></td></tr></table></figure>
-<h2 id="让终端走代理"><a href="#让终端走代理" class="headerlink" title="让终端走代理"></a>让终端走代理</h2><p>在终端输入以下内容可临时走代理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:7890</span><br><span class="line">export https_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
-<p>在~&#x2F;.zshrc最后添加以下两行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># clash</span><br><span class="line">alias setproxy=&quot;export ALL_PROXY=socks5://127.0.0.1:7890&quot;</span><br><span class="line">alias unsetproxy=&quot;unset All_PROXY&quot;</span><br></pre></td></tr></table></figure>
-<p>通过setproxy unsetproxy命令来控制代理</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Fcitx5_(简体中文)</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/157260502">https://zhuanlan.zhihu.com/p/157260502</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46973701">https://zhuanlan.zhihu.com/p/46973701</a></li>
-</ol>
 
       
 
@@ -332,7 +265,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/11/28/%E4%B8%80%E7%AB%99%E5%BC%8F%E5%AE%89%E8%A3%85abel%E7%9A%84arch%E7%8E%AF%E5%A2%83/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -346,18 +279,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          arcolinux安装
+          开机自启动脚本配置
         
       </div>
     </a>
   
   
-    <a href="/2022/03/03/archlinux%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">archlinux安装</div>
+    <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">wayfire下obs屏幕捕捉</div>
       <i class="icon-circle-right"></i>
     </a>
   

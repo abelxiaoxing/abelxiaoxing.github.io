@@ -16,7 +16,7 @@
 <meta property="og:description" content="ventoy安装制作u盘 找个固态u盘或者移动固态,制作成ventoy启动盘(略)  virtualbox安装linux镜像系统 安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小   在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI    linux镜像系统添加ventoy插件 在虚拟机中打开浏览器,输入vento">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-21T02:35:28.000Z">
-<meta property="article:modified_time" content="2024-05-15T12:23:50.544Z">
+<meta property="article:modified_time" content="2024-05-15T12:24:35.115Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -176,12 +176,12 @@
 <li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
 <li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功</li>
 </ol>
-<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2><ol>
+<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2><ul>
 <li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可</li>
-</ol>
-<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2><ol>
+</ul>
+<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2><ul>
 <li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
-</ol>
+</ul>
 
       
 
