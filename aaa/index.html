@@ -548,28 +548,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol start="0">
-<li>archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本</li>
-<li>下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;<br><code>git clone https://github.com/abelxiaoxing/brightness.git</code><br><code>cd brightness</code><br><code>chmod +x brightness</code><br><code>sudo mv brightness /usr/local/bin</code>  </li>
-<li>我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本<br><code>sudo nvim /etc/rc.local</code></li>
-</ol>
+        <h2 id="一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本"><a href="#一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本" class="headerlink" title="一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本"></a>一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本</h2><h2 id="二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F"><a href="#二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F" class="headerlink" title="二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;"></a>二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;</h2><p><code>git clone https://github.com/abelxiaoxing/brightness.git</code><br><code>cd brightness</code><br><code>chmod +x brightness</code><br><code>sudo mv brightness /usr/local/bin</code>  </p>
+<h2 id="三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本"><a href="#三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本" class="headerlink" title="三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本"></a>三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本</h2><p><code>sudo nvim /etc/rc.local</code>  </p>
 <ul>
 <li>末尾添加以下内容<br>  <code>/usr/local/bin/brightness restore</code>  </li>
-<li>重新启动rclocal服务(有的人是rc-local,自行修改)<br>  <code>sudo systemctl restart rclocal</code></li>
-</ul>
-<ol start="3">
-<li>brightness脚本使用方法</li>
-</ol>
-<ul>
+<li>重新启动rclocal服务(有的人是rc-local,自行修改)<br>  <code>sudo systemctl restart rclocal</code>  <h2 id="四-brightness脚本使用方法"><a href="#四-brightness脚本使用方法" class="headerlink" title="四 brightness脚本使用方法"></a>四 brightness脚本使用方法</h2></li>
 <li><code>brightness</code> 获取当前亮度设置  </li>
 <li><code>brightness xx</code> 将亮度设置为xx,xx为亮度信息,最高亮度255  </li>
-<li><code>brightness inc step</code> , <code>brightness dec step</code> 增加或降低亮度,step为设定的值,不输入step默认为系统亮度的10%</li>
+<li><code>brightness inc step</code> , <code>brightness dec step</code> 增加或降低亮度,step为设定的值,不输入step默认为系统亮度的10%<br> 最后将brightness映射为快捷键(自行设置)  <h2 id="五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如"><a href="#五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如" class="headerlink" title="五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如"></a>五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbacklight -dec 20</span><br></pre></td></tr></table></figure></li>
+<li>然后对权限不够的文件设置开机sudo chmod o+w</li>
 </ul>
-<ol start="4">
-<li>最后将brightness映射为快捷键(自行设置)  </li>
-<li>如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbacklight -dec 20</span><br></pre></td></tr></table></figure>
-然后对权限不够的文件设置开机sudo chmod o+w</li>
-</ol>
 
       
 
@@ -863,18 +851,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><p>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</p>
-<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2><ul>
-<li>安装和普通流程基本一样,主要讲两点不太一样的</li>
-</ul>
-<ol>
+        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ul>
+<li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2></li>
+<li>安装和普通流程基本一样,主要讲两点不太一样的  <ol>
 <li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
 <li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  <h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2></li>
 <li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
 <li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2></li>
 <li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2></li>
+<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
 </ol>
-<p>1.linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></p>
+</li>
+</ul>
 
       
 

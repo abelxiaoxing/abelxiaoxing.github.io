@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>便携式linux制作 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ventoy安装制作u盘找个固态u盘或者移动固态,制作成ventoy启动盘(略) virtualbox安装linux镜像系统 安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小   在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  linux镜像系统添加ventoy插件 在虚拟机中打开浏览器,输入ventoy.ne">
+  <meta name="description" content="ventoy安装制作u盘 找个固态u盘或者移动固态,制作成ventoy启动盘(略)virtualbox安装linux镜像系统 安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小   在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  linux镜像系统添加ventoy插件 在虚拟机中打开浏览器,输入ventoy.ne">
 <meta property="og:type" content="article">
 <meta property="og:title" content="便携式linux制作">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="ventoy安装制作u盘找个固态u盘或者移动固态,制作成ventoy启动盘(略) virtualbox安装linux镜像系统 安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小   在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  linux镜像系统添加ventoy插件 在虚拟机中打开浏览器,输入ventoy.ne">
+<meta property="og:description" content="ventoy安装制作u盘 找个固态u盘或者移动固态,制作成ventoy启动盘(略)virtualbox安装linux镜像系统 安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小   在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  linux镜像系统添加ventoy插件 在虚拟机中打开浏览器,输入ventoy.ne">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-21T02:35:28.000Z">
-<meta property="article:modified_time" content="2022-06-21T03:04:12.000Z">
+<meta property="article:modified_time" content="2024-05-15T12:21:42.717Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -162,18 +162,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><p>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</p>
-<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2><ul>
-<li>安装和普通流程基本一样,主要讲两点不太一样的</li>
-</ul>
-<ol>
+        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ul>
+<li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2></li>
+<li>安装和普通流程基本一样,主要讲两点不太一样的  <ol>
 <li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
 <li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI  <h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2></li>
 <li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
 <li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2></li>
 <li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2></li>
+<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
 </ol>
-<p>1.linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></p>
+</li>
+</ul>
 
       
 
