@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>abel的小天地</title>
+  <title>一站式安装abel的arch环境 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个个人资料记录的小地方">
-<meta property="og:type" content="website">
-<meta property="og:title" content="abel的小天地">
-<meta property="og:url" content="https://abelxiaoxing.github.io/aaa/page/2/index.html">
+  <meta name="description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一站式安装abel的arch环境">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="一个个人资料记录的小地方">
+<meta property="og:description" content="配置文件介绍 提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）   已完成一些美化工作，仅个人癖好   已完成一些快捷型的脚本，例如wayfire环境下的waybar">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-28T05:24:01.000Z">
+<meta property="article:modified_time" content="2024-05-15T12:26:34.821Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -140,418 +142,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-便携式linux制作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-archlinux环境配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">便携式linux制作</a>
+    <h1 class="article-title" itemprop="name">
+      一站式安装abel的arch环境
     </h1>
   
 
         
-        <a href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2022-06-21T02:35:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
+        <a href="/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2022-11-28T05:24:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ul>
-<li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</li>
+        <h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><ol>
+<li>提供了多种配置好统一快捷键的工作环境，比如wayfire,i3,hyprland,xfce4,dwm,lefwwm（个人推荐wayfire和i3。其中个人喜欢纯键盘工作,hyprland的bug多一些，xfce4效率低一些，dwm和leftwm又仅做了快捷键适配，补丁较少接近原版）  </li>
+<li>已完成一些美化工作，仅个人癖好  </li>
+<li>已完成一些快捷型的脚本，例如wayfire环境下的waybar插件  </li>
+<li>快捷键查看处  <ul>
+<li>wayfire: ~&#x2F;.config&#x2F;wayfire.ini</li>
+<li>i3: ~&#x2F;.config&#x2F;i3&#x2F;config&#x2F;config</li>
+<li>hyprland: ~&#x2F;.config&#x2F;hypr&#x2F;hyprland.ini</li>
+<li>dwm: ~&#x2F;.config&#x2F;dwm&#x2F;</li>
+<li>xfce: 去图形化界面里面自行设置</li>
 </ul>
-<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2><ul>
-<li>安装和普通流程基本一样,主要讲两点不太一样的  <ol>
-<li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
-<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI</li>
-</ol>
 </li>
-</ul>
-<h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2><ol>
-<li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
-<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功</li>
 </ol>
-<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2><ul>
-<li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可</li>
-</ul>
-<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2><ul>
-<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux连接windows方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">linux连接windows方法</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-06-14T01:43:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
-<h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br><span class="line">yay -S freerdp</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>安装后可以用命令来访问远程windows系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
-
-<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
-<li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
-<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
-<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
+<h2 id="下载安装相关配置文件"><a href="#下载安装相关配置文件" class="headerlink" title="下载安装相关配置文件"></a>下载安装相关配置文件</h2><ol>
+<li>下载并且进入下载目录（github偶尔抽风，网络实在不行就去浏览器下载，网址<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/.config">https://github.com/abelxiaoxing/.config</a>)<br><code>git clone https://github.com/abelxiaoxing/archlinux_config.git ~/Downloads/abelxiaoxing_config_tmp/.config &amp;&amp; cd ~/Downloads/abelxiaoxing_config_tmp/.config/</code>  </li>
+<li>移动并且覆盖重复文件,删除下载临时文件夹<br><code>mv -f * ~/.config/ &amp;&amp; cd ~/.config/OtherUtils</code><br><code>rm -rf ~/Downloads/abelxiaoxing_config_tmp</code>  </li>
+<li>执行自动安装脚本<br><code>sh autostart.sh</code>  </li>
+<li>安装好clash后配置好科学上网（自行搭建,本文不提供教程），终端输入setproxy开启终端代理后执行额外组建安装<br><code>yay clash-for-windows</code><br><code>sh OptionalInstallation.sh</code>  <h2 id="配置主题与界面"><a href="#配置主题与界面" class="headerlink" title="配置主题与界面"></a>配置主题与界面</h2><h3 id="kvantum环境配置"><a href="#kvantum环境配置" class="headerlink" title="kvantum环境配置"></a>kvantum环境配置</h3><code>yay -S kvantum-theme-arc</code></li>
 </ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-home目录迁移方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/">home目录迁移方法</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-04-24T16:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="查看硬盘uuid"><a href="#查看硬盘uuid" class="headerlink" title="查看硬盘uuid"></a>查看硬盘uuid</h2><p><code>sudo blkid</code> </p>
-<h2 id="开机自动挂载硬盘-在文件的最后新增加一行代码"><a href="#开机自动挂载硬盘-在文件的最后新增加一行代码" class="headerlink" title="开机自动挂载硬盘,在文件的最后新增加一行代码"></a>开机自动挂载硬盘,在文件的最后新增加一行代码</h2><p><code>sudo vim /etc/fstab</code><br><code>输入硬盘UUID /media ext4  defaults  0 0</code></p>
-<h2 id="临时挂载硬盘"><a href="#临时挂载硬盘" class="headerlink" title="临时挂载硬盘"></a>临时挂载硬盘</h2><p><code>sudo mount /dev/sdb1 /media </code></p>
-<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p><code>sudo ln -s /media/abelxiaoxing /home/abelxiaoxing</code> </p>
-<h2 id="创建用户-并制定用户目录"><a href="#创建用户-并制定用户目录" class="headerlink" title="创建用户,并制定用户目录"></a>创建用户,并制定用户目录</h2><p><code>sudo useradd -d /home/abelxiaoxing abelxiaoxing </code></p>
-<h2 id="修改目录所属权"><a href="#修改目录所属权" class="headerlink" title="修改目录所属权"></a>修改目录所属权</h2><p><code>sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing </code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-arcolinux安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/">arcolinux安装</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2022-04-17T23:59:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>arcolinux基于archlinux，适合懒癌，其默认配置相当好用</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>L为旗舰版，安装了各类软件，桌面xfce4,最后成功安装在arcolinux可通过ctrl+alt+e可安装其他桌面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://sourceforge.net/projects/arcolinux/files/ArcoLinuxL/</span><br></pre></td></tr></table></figure>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>用rufus安装改镜像于u盘，bios设置u盘为第一启动项，进入安装系统</p>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>arco通过检测google来判断是否联网，因此先把google换成baidu</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/calamares/modules/welcome.conf</span><br><span class="line">sudo vim /usr/share/arcolinux-welcome-app/arcolinux-welcome-app.py</span><br></pre></td></tr></table></figure>
-<p>后面的一路确定就行了，略。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/18/arcolinux%E5%AE%89%E8%A3%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-(勿看)废弃的软件配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">archlinux软件配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-03-03T15:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="更改系统源、社区源添加multilib支持"><a href="#更改系统源、社区源添加multilib支持" class="headerlink" title="更改系统源、社区源添加multilib支持"></a>更改系统源、社区源添加multilib支持</h2><h3 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
-<p>在开头添加以下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</span><br><span class="line">## 163</span><br><span class="line">Server = http://mirrors.163.com/archlinux/$repo/os/$arch</span><br><span class="line">## aliyun</span><br><span class="line">Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="添加archlinuxcn、添加multilib"><a href="#添加archlinuxcn、添加multilib" class="headerlink" title="添加archlinuxcn、添加multilib"></a>添加archlinuxcn、添加multilib</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
-<p>在最后添加以下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line"># The Chinese Arch Linux communities packages.</span><br><span class="line"># SigLevel = Optional TrustedOnly</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
-<p>取消掉[multilib]的注释</p>
-<h3 id="安装同步密匙"><a href="#安装同步密匙" class="headerlink" title="安装同步密匙"></a>安装同步密匙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu &amp;&amp; pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
-<h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
-<h2 id="安装yay"><a href="#安装yay" class="headerlink" title="安装yay"></a>安装yay</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
-<p>用yay代替pacman进行安装，但注意升级系统还应使用<code>pacman -Syu</code></p>
-<h2 id="安装Display-Server"><a href="#安装Display-Server" class="headerlink" title="安装Display Server"></a>安装Display Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xorg</span><br></pre></td></tr></table></figure>
-<h2 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h2><h3 id="安装AMD显卡驱动"><a href="#安装AMD显卡驱动" class="headerlink" title="安装AMD显卡驱动"></a>安装AMD显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xf86-video-amdgpu</span><br></pre></td></tr></table></figure>
-<h3 id="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"><a href="#安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）" class="headerlink" title="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"></a>安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S cudnn</span><br></pre></td></tr></table></figure>
-<h3 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S nvidia nvidia-utils</span><br></pre></td></tr></table></figure>
-<h2 id="安装Display-Manager"><a href="#安装Display-Manager" class="headerlink" title="安装Display Manager"></a>安装Display Manager</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S sddm</span><br></pre></td></tr></table></figure>
-<h3 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable sddm</span><br></pre></td></tr></table></figure>
-<h2 id="安装桌面环境"><a href="#安装桌面环境" class="headerlink" title="安装桌面环境"></a>安装桌面环境</h2><p>kde美观功能强系统占用大<br>xfce轻量，linus御用桌面<br>i3wm平铺式桌面</p>
-<h3 id="kde"><a href="#kde" class="headerlink" title="kde"></a>kde</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S plasma kde-applications packagekit-qt5</span><br></pre></td></tr></table></figure>
-<h3 id="xfce"><a href="#xfce" class="headerlink" title="xfce"></a>xfce</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S xfce4 xfce4-goodies</span><br></pre></td></tr></table></figure>
-<h3 id="i3wm"><a href="#i3wm" class="headerlink" title="i3wm"></a>i3wm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S i3</span><br></pre></td></tr></table></figure>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>桌面环境安装后进行重启</p>
-<h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>选择自己喜欢的字体</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S ttf-sarasa-gothic noto-fonts-cjk</span><br></pre></td></tr></table></figure>
-<h3 id="安装x2go远程环境"><a href="#安装x2go远程环境" class="headerlink" title="安装x2go远程环境"></a>安装x2go远程环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S x2goserver # 安装x2go被控服务</span><br><span class="line">yay -S x2goclient # 安装x2go主控界面（单纯被控可不装）</span><br><span class="line">sudo x2godbadmin --createdb # 创建数据库</span><br></pre></td></tr></table></figure>
-<h2 id="设置壁纸"><a href="#设置壁纸" class="headerlink" title="设置壁纸"></a>设置壁纸</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S feh</span><br><span class="line">feh --randomize --bg-fill ~/Pictures/DesktopBackground </span><br></pre></td></tr></table></figure>
-<p>会随机切换一张图片作为墙纸，可以配合linux的crontab 设置成每隔10分钟自动切换壁纸。crontab的安装使用很简单，请自行百度。</p>
-<h3 id="向日葵远程控制"><a href="#向日葵远程控制" class="headerlink" title="向日葵远程控制"></a>向日葵远程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S sunloginclient #安装向日葵</span><br><span class="line">systemctl start runsunloginclient #启动向日葵服务</span><br><span class="line">systemctl enable runsunloginclient #开机自启动向日葵服务</span><br></pre></td></tr></table></figure>
-<h3 id="企业微信"><a href="#企业微信" class="headerlink" title="企业微信"></a>企业微信</h3><p>安装企业微信前必须先安装微信  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S com.qq.weixin.deepin #微信</span><br><span class="line">yay -S com.qq.weixin.work.deepin #企业微信</span><br></pre></td></tr></table></figure>
 <ul>
-<li>安装微信时字体无法显示</li>
+<li>打开kvantum,应用arc-dark主题<h3 id="解决dolphin等界面问题"><a href="#解决dolphin等界面问题" class="headerlink" title="解决dolphin等界面问题"></a>解决dolphin等界面问题</h3></li>
+<li>修改&#x2F;etc&#x2F;profile文件<br><code>sudo nvim /etc/profile</code>  </li>
+<li>并且添加以下内容<br><code>export QT_STYLE_OVERRIDE=kvantum</code></li>
 </ul>
-<p>把修改后的字体（就叫fake_simsun.ttc吧）放到~&#x2F;.deepinwine&#x2F;Deepin-QQ&#x2F;drive_c&#x2F;windows&#x2F;Fonts下<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw">https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw</a> 提取码: 96qm</p>
-<ul>
-<li>企业微信调整（重要，否则无法使用）<br>更新后3.1.12版本不能使用的原因是因为系统把libldap&#x2F;libber等此类与网络有关的openLDAP库由2.4升级到2.6,有以下后果:</li>
-</ul>
-<ol>
-<li>wine6在使用网络功能时最终有依赖链透到libldap&#x2F;libber,随着系统更新，wine6与libldap也都同步进行了更新，所以才有你们修改程序启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh里的APPRUN_CMD由deepin-wine6-stable改成wine后可以使程序运行  </li>
-<li>deepin那边的兄弟估计偷懒或是基于什么原因，编译deepin-wine6-stable的时候还是使用旧的依赖链，所以程序使用网络时在系统里找不到旧版libldap&#x2F;libber而停止运行  </li>
-<li>本次系统更新会导致很多软件无法运行，例如那些使用了最广泛网络库libcurl的软件都有相同的依赖，锅在openLDAP这些开源组织在做大版本变更的不兼容<br>建议的解决方式:  </li>
-<li>安装com.qq.weixin.deepin这个微信包（估计和本包是同一个作者），它里面打包了旧版本的libldap这些库，在&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib里  </li>
-<li>拷贝lib目录到某个地方，如cp -r &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib  </li>
-<li>修改程序的启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh,里面加上export LD_LIBRARY_PATH&#x3D;&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib,使deepin-wine6-stable运行时能找到并使用这个lib目录<br>不建议直接改APPRUN_CMD成wine,毕竟deepin-wine6-stable做了很多工作，比如去阴影、支持文件关联、字体搜索、屏幕识别截图等等，用了wine这些特性就没了。其他很多deepin软件无法运行的都可以用这个方式。<br>后续等这个包作者更新打包或者是deepin-wine6-stable编译使用新依赖链。</li>
-</ol>
-<h3 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">yay -S vmware-workstation #虚拟机</span><br><span class="line">sudo modprobe -a vmw_vmci vmmon #启动虚拟机相关应用</span><br><span class="line">lsmod | grep ^vm</span><br><span class="line">vmware-networks --start #配置vmware网络</span><br><span class="line">yay -S alacritty #可用gpu渲染的终端</span><br><span class="line">sudo vim ~/.config/alacritty/alacritty.yml #调节alacritty配置文件，如字体大小（size）</span><br><span class="line">yay -S safeeyes #护眼软件定时提醒休息</span><br><span class="line">yay -S redshiftgui-bin #图形化版本</span><br><span class="line">yay -S krita #作图工具，类似ps</span><br><span class="line">yay -S gimp #作图工具，类似ps</span><br><span class="line">yay -S obs-studio # 录屏推流工具</span><br><span class="line">yay -S fish # 一款shell</span><br><span class="line">yay -S firefox #火狐浏览器</span><br><span class="line">yay -S google-chrome #谷歌浏览器</span><br><span class="line">yay -S opera #opera浏览器</span><br><span class="line">yay -S microsoft-edge-dev-bin #edge浏览器</span><br><span class="line">yay -S gitter #开发者交流社区软件</span><br><span class="line">yay -S com.qq.weixin.deepin #微信</span><br><span class="line">yay -S mitalk #米聊(垃圾腾讯不开发linux版本)</span><br><span class="line">yay -S deepin-wine-tim #tim（qq替代版）</span><br><span class="line">yay -S visual-studio-code-bin #vscode</span><br><span class="line">yay -S ranger #终端文件浏览器</span><br><span class="line">yay -S neovim #最强终端编辑器</span><br><span class="line">yay -S wps-office wps-office-mui-zh-cn ttf-wps-fonts # 安装wps、中文支持、字体支持</span><br><span class="line">yay -S netease-cloud-music #网易云音乐</span><br><span class="line">yay -S qqmusic-bin #qq音乐</span><br><span class="line">yay -S freemind #思维导图</span><br><span class="line">yay -S filezilla #远程ftp工具</span><br><span class="line">yay -S htop #资源进程管理器 top命令的升级版</span><br><span class="line">yay -S lolcat #文本查看 也就是cat命令的升级版</span><br><span class="line">yay -S evolution # 邮箱管理器</span><br><span class="line">yay -S baidunetdisk-electrion #百度云</span><br><span class="line">yay -S uget #下载管理器</span><br><span class="line">yay -S timeshift #备份工具</span><br><span class="line">yay -S clash-for-windows-electron-bin #科学上网</span><br><span class="line">yay -S neofetch #显示系统信息</span><br><span class="line">yay -S lolcate #配合neofetch，使其炫酷渐变色</span><br><span class="line">yay -S flameshot #截图软件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="双时钟系统同步"><a href="#双时钟系统同步" class="headerlink" title="双时钟系统同步"></a>双时钟系统同步</h3><p>按照 Arch WiKi 的建议，这里修改Windows系统的注册表：</p>
-<p>鼠标右键左下角win按钮，以管理员方式打开PowerShell，输入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&quot; /v RealTimeIsUniversal /d 1 /t REG_QWORD /f</span><br></pre></td></tr></table></figure>
-<h2 id="安装fricx5输入法"><a href="#安装fricx5输入法" class="headerlink" title="安装fricx5输入法"></a>安装fricx5输入法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color fcitx5-nord</span><br></pre></td></tr></table></figure>
-<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
-<p>然后配置自动启动，提供以下3种方法，第一个不行，试第2个，然后第3个</p>
-<ol>
-<li>如果，支持XDG桌面环境，例如KDE,GNOME, Xfce,默认重启后即可</li>
-<li>在~&#x2F;.config&#x2F;autostart目录下添加fcitx-autostart.desktop文件，可以从目录etc&#x2F;xdg&#x2F;autostart中复制</li>
-<li>对于i3-wm,可以在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># fcitx5</span><br><span class="line">exec_always --no-startup-id fcitx5</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="fcitx4输入法安装-i3wm可能fcitx5有问题"><a href="#fcitx4输入法安装-i3wm可能fcitx5有问题" class="headerlink" title="fcitx4输入法安装(i3wm可能fcitx5有问题)"></a>fcitx4输入法安装(i3wm可能fcitx5有问题)</h2><p>i3wm环境下fcitx5有问题，因此选用fcitx4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-im</span><br><span class="line">yay -S fcitx-rime</span><br></pre></td></tr></table></figure>
-<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
-<p>在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec_always --no-startup-id fcitx</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装花生壳内网穿透"><a href="#安装花生壳内网穿透" class="headerlink" title="安装花生壳内网穿透"></a>安装花生壳内网穿透</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S phddns-bin # 安装花生壳</span><br></pre></td></tr></table></figure>
-
-<p>在linux中安装好花生壳后，进入目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br></pre></td></tr></table></figure>
-
-<p>创建启动文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch phddns.service</span><br></pre></td></tr></table></figure>
-
-<p>编辑文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim phddns.service </span><br></pre></td></tr></table></figure>
-
-<p>在文件中加入如下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=phddns Service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line"># default start cmd</span><br><span class="line">ExecStart=/usr/sbin/phddns start</span><br><span class="line"># Suppress stderr to eliminate duplicated messages in syslog. NM calls openlog()</span><br><span class="line"># with LOG_PERROR when run in foreground. But systemd redirects stderr to</span><br><span class="line"># syslog by default, which results in logging each message twice.</span><br><span class="line">StandardOutput=syslog</span><br><span class="line">StandardError=null</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-<p>设置开机自启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start phddns.service</span><br><span class="line">systemctl enable phddns.service</span><br></pre></td></tr></table></figure>
-<h2 id="让终端走代理"><a href="#让终端走代理" class="headerlink" title="让终端走代理"></a>让终端走代理</h2><p>在终端输入以下内容可临时走代理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:7890</span><br><span class="line">export https_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
-<p>在~&#x2F;.zshrc最后添加以下两行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># clash</span><br><span class="line">alias setproxy=&quot;export ALL_PROXY=socks5://127.0.0.1:7890&quot;</span><br><span class="line">alias unsetproxy=&quot;unset All_PROXY&quot;</span><br></pre></td></tr></table></figure>
-<p>通过setproxy unsetproxy命令来控制代理</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Fcitx5_(简体中文)</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/157260502">https://zhuanlan.zhihu.com/p/157260502</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46973701">https://zhuanlan.zhihu.com/p/46973701</a></li>
-</ol>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -560,16 +218,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/03/(%E5%8B%BF%E7%9C%8B)%E5%BA%9F%E5%BC%83%E7%9A%84%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/11/28/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          开机自启动脚本配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">wayfire下obs屏幕捕捉</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -589,356 +315,14 @@
 
 
 
-
-  
-    <article id="post-archlinux安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/03/archlinux%E5%AE%89%E8%A3%85/">archlinux安装</a>
-    </h1>
-  
-
-        
-        <a href="/2022/03/03/archlinux%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2022-03-03T15:19:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、下载安装archlinux"><a href="#一、下载安装archlinux" class="headerlink" title="一、下载安装archlinux"></a>一、下载安装archlinux</h1><h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ul>
-<li>下载镜像<a target="_blank" rel="noopener" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a></li>
-<li>插入U盘，win10用rufus安装，linux用dd命令安装。（dd命令参考<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-dd.html%EF%BC%89">https://www.runoob.com/linux/linux-comm-dd.html）</a><h2 id="更改bios启动顺序和引导方式"><a href="#更改bios启动顺序和引导方式" class="headerlink" title="更改bios启动顺序和引导方式"></a>更改bios启动顺序和引导方式</h2></li>
-<li>开机按住del或者f2或者f8等（具体百度：主板品牌+启动顺序）。</li>
-<li>启动顺序将U盘设为第一</li>
-<li>将系统引导改为EFI模式（推荐），BIOS（LENGACY）容易有坑，在此不多介绍。<h2 id="archlinstall安装脚本-可选"><a href="#archlinstall安装脚本-可选" class="headerlink" title="archlinstall安装脚本(可选)"></a>archlinstall安装脚本(可选)</h2>输入archinstall即可<h2 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h2></li>
-<li>开机进入Boot Arch Linux(x86_64)</li>
-<li>连接无线网络（有线插入即可）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iwctl</span><br><span class="line">device list</span><br></pre></td></tr></table></figure>
-得到无线网卡的设备详细信息，记住Name的信息，以下以wlan0作为示范。<br>扫描并列出无线网络  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">station wlan0 scan   # 扫描</span><br><span class="line">station wlan0 get-networks  # 列出</span><br></pre></td></tr></table></figure>
-最后输入下列命令连接指定网络并输入密码：（wlan0替换成你自己的网卡名称，TPlink777替换为你想连的网络名称）<br>如果是中文的建议先取消密码或者修改用户名（中文乱码警告）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">station wlan0 connect CatAndPomelo</span><br></pre></td></tr></table></figure>
-完成网络连接退出iwd<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit</span><br></pre></td></tr></table></figure>
-测试网络<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
-<h2 id="更新系统时间"><a href="#更新系统时间" class="headerlink" title="更新系统时间"></a>更新系统时间</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl set-ntp true</span><br></pre></td></tr></table></figure>
-<h2 id="分区与格式化"><a href="#分区与格式化" class="headerlink" title="分区与格式化"></a>分区与格式化</h2>检查当前磁盘分区<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
-选择系统安装的磁盘，本文以sda为例，（请将sda替换成你要操作的磁盘如sdb sdc等）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
-<h3 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h3>选择gpt分区表，先删除所有硬盘分区（双系统记得保留），创建三块分区，创建完记得write！：   </li>
-<li>size:200M; type:EFI system</li>
-<li>size：32G(此大小为电脑内存大小); type:linux swap</li>
-<li>size：剩余全部大小; type:linux Filesystem<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.vfat /dev/sda1</span><br><span class="line">sudo mkfs.xfs -f /dev/sda3</span><br><span class="line">sudo mkswap /dev/sda2</span><br><span class="line">lsblk   ## 查看分区情况</span><br></pre></td></tr></table></figure>
-<h3 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda3 /mnt</span><br><span class="line">mkdir -p /mnt/boot</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br><span class="line">swapon /dev/sda2</span><br><span class="line">lsblk   ## 查看分区情况</span><br></pre></td></tr></table></figure>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><h3 id="安装基础软件包"><a href="#安装基础软件包" class="headerlink" title="安装基础软件包"></a>安装基础软件包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt linux linux-firmware linux-headers base base-devel vim git bash-completion</span><br></pre></td></tr></table></figure>
-<h3 id="生成文件系统的表文件"><a href="#生成文件系统的表文件" class="headerlink" title="生成文件系统的表文件"></a>生成文件系统的表文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
-<h3 id="进入新系统"><a href="#进入新系统" class="headerlink" title="进入新系统"></a>进入新系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
-<h3 id="设置时区"><a href="#设置时区" class="headerlink" title="设置时区"></a>设置时区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-<h3 id="同步硬件时钟"><a href="#同步硬件时钟" class="headerlink" title="同步硬件时钟"></a>同步硬件时钟</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
-<h3 id="设置系统语言"><a href="#设置系统语言" class="headerlink" title="设置系统语言"></a>设置系统语言</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
-将以下两行取消注释(删除前面的井号)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
-<h3 id="生成本地语言信息"><a href="#生成本地语言信息" class="headerlink" title="生成本地语言信息"></a>生成本地语言信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
-<h3 id="设置本地语言环境变量"><a href="#设置本地语言环境变量" class="headerlink" title="设置本地语言环境变量"></a>设置本地语言环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.conf</span><br></pre></td></tr></table></figure>
-内容为以下三选一(系统locale不推荐中文，会导致tty乱码)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
-<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><h4 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
-内容为<br>archlinux（随便起，这就是你的主机名）<h4 id="生成对应host"><a href="#生成对应host" class="headerlink" title="生成对应host"></a>生成对应host</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-内容为<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.1.1   archlinux.localdomain archlinux   # 这里的archlinux是主机名</span><br></pre></td></tr></table></figure>
-<h3 id="安装grub系统引导"><a href="#安装grub系统引导" class="headerlink" title="安装grub系统引导"></a>安装grub系统引导</h3>如果是intel直接用<code>intel-ucode</code>如果是amdcpu则换成<code>amd-ucode</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr efivar networkmanager intel-ucode</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-<h3 id="激活启用NetworkManager"><a href="#激活启用NetworkManager" class="headerlink" title="激活启用NetworkManager"></a>激活启用NetworkManager</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable NetworkManager</span><br></pre></td></tr></table></figure>
-<h3 id="建立用户名和密码"><a href="#建立用户名和密码" class="headerlink" title="建立用户名和密码"></a>建立用户名和密码</h3><h4 id="给root建立密码"><a href="#给root建立密码" class="headerlink" title="给root建立密码"></a>给root建立密码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br><span class="line">输入密码</span><br></pre></td></tr></table></figure>
-<h3 id="退出并重启"><a href="#退出并重启" class="headerlink" title="退出并重启"></a>退出并重启</h3>重启时，请在关机后开机前拔下u盘<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br><span class="line">umount -a</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<h2 id="新系统配置"><a href="#新系统配置" class="headerlink" title="新系统配置"></a>新系统配置</h2><h3 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iwd.service # 启动服务</span><br><span class="line">systemctl enable iwd.service # 开机自启动服务</span><br><span class="line">systemctl enable --now NetworkManager</span><br><span class="line">nmtui       # 设置wifi</span><br></pre></td></tr></table></figure>
-<h3 id="创建新用户名和密码"><a href="#创建新用户名和密码" class="headerlink" title="创建新用户名和密码"></a>创建新用户名和密码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel 用户名</span><br><span class="line">passwd 用户名</span><br><span class="line">pacman -S sudo</span><br></pre></td></tr></table></figure>
-在<code>/etc/sudoers</code>文件中的<code>root ALL=(ALL) ALL</code>行下添加<code>用户名 ALL=(ALL) ALL</code></li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Installation_guide_(简体中文)</a><br><a target="_blank" rel="noopener" href="https://www.viseator.com/2017/05/17/arch_install/">https://www.viseator.com/2017/05/17/arch_install/</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=arch%20linux%20%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B">https://www.zhihu.com/search?type=content&amp;q=arch%20linux%20%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/03/archlinux%E5%AE%89%E8%A3%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-frp内网穿透搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/">frp内网穿透搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-03-02T06:17:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="云服务器frps配置"><a href="#云服务器frps配置" class="headerlink" title="云服务器frps配置"></a>云服务器frps配置</h1><p>去<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a> 下载对应资源</p>
-<h2 id="下载并解压缩"><a href="#下载并解压缩" class="headerlink" title="下载并解压缩"></a>下载并解压缩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.45.0/frp_0.45.0_linux_amd64.tar.gz</span><br><span class="line">tar -xzvf frp_0.45.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
-<h2 id="删除多余配置并移到根目录"><a href="#删除多余配置并移到根目录" class="headerlink" title="删除多余配置并移到根目录"></a>删除多余配置并移到根目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd frp_0.45.0_linux_amd64</span><br><span class="line">sudo rm frpc frpc.ini frpc_full.ini </span><br><span class="line">cd</span><br><span class="line">mv download/frp_0.45.0_linux_amd64 frp</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改frps-ini"><a href="#修改frps-ini" class="headerlink" title="修改frps.ini"></a>修改frps.ini</h2><p>修改公网服务器上的服务端配置文件 frps.ini，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000  #frp服务端端口（必须）</span><br></pre></td></tr></table></figure>
-<h2 id="后台运行frps"><a href="#后台运行frps" class="headerlink" title="后台运行frps"></a>后台运行frps</h2><p>先cd进frp文件后</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./frps -c ./frps.ini &gt; /dev/null 2&gt;1&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-
-<h1 id="内网主机frpc配置"><a href="#内网主机frpc配置" class="headerlink" title="内网主机frpc配置"></a>内网主机frpc配置</h1><h2 id="下载并解压缩-1"><a href="#下载并解压缩-1" class="headerlink" title="下载并解压缩"></a>下载并解压缩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.45.0/frp_0.45.0_linux_amd64.tar.gz</span><br><span class="line">tar -xzvf frp_0.45.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
-<h2 id="删除多余配置并移到根目录-1"><a href="#删除多余配置并移到根目录-1" class="headerlink" title="删除多余配置并移到根目录"></a>删除多余配置并移到根目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd frp_0.45.0_linux_amd64</span><br><span class="line">sudo rm frps frps.ini frps_full.ini </span><br><span class="line">cd</span><br><span class="line">mv download/frp_0.45.0_linux_amd64 frp</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改frpc-ini"><a href="#修改frpc-ini" class="headerlink" title="修改frpc.ini"></a>修改frpc.ini</h2><p>修改内网目标主机的客户端配置文件 frpc.ini，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = xxx.xxx.xxx.xxx   #frp服务端地址，必须是公网ip或者域名，这里假设为xxx.xxx.xxx.xxx</span><br><span class="line">server_port = 7000      #frp服务端端口，即填写服务端配置中的 bind_port</span><br><span class="line"></span><br><span class="line">[ssh]              #必须换掉名字，以免重复</span><br><span class="line">type = tcp              #连接类型，填tcp或udp</span><br><span class="line">local_ip = 127.0.0.1    #填127.0.0.1或内网ip都可以</span><br><span class="line">local_port = 22         #需要转发到的端口，ssh端口是22</span><br><span class="line">remote_port = 6000      #frp服务端的远程监听端口，即你访问服务端的remote_port就相当于访</span><br><span class="line">                        #问客户端的 local_port，如果填0则会随机分配一个端口</span><br></pre></td></tr></table></figure>
-
-<h1 id="设置开机自启动脚本"><a href="#设置开机自启动脚本" class="headerlink" title="设置开机自启动脚本"></a>设置开机自启动脚本</h1><h2 id="创建一个启动service脚本"><a href="#创建一个启动service脚本" class="headerlink" title="创建一个启动service脚本"></a>创建一个启动service脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
-
-<p>写入内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#服务描述</span><br><span class="line">Description=frpc service </span><br><span class="line">After=network-online.target syslog.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">#执行命令 </span><br><span class="line">ExecStart=/home/用户名/.frp/frpc -c /home/用户名/.frp/frpc.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="设置开机自启"><a href="#设置开机自启" class="headerlink" title="设置开机自启"></a>设置开机自启</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start frpc</span><br><span class="line">sudo systemctl enable frpc</span><br></pre></td></tr></table></figure>
-
-<h1 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h1><p>去云服务器上开放相关的端口</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深度学习环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">深度学习环境搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-02-27T19:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如为archlinux,一行命令完成GPU驱动、cuda Toolkits、cudnn的安装<br><code>yay -S cudnn</code></p>
-<h1 id="GPU驱动安装"><a href="#GPU驱动安装" class="headerlink" title="GPU驱动安装"></a>GPU驱动安装</h1><p>首先ctrl + alt + F1进入字符界面</p>
-<h2 id="1-删除原有驱动"><a href="#1-删除原有驱动" class="headerlink" title="1.删除原有驱动"></a>1.删除原有驱动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br><span class="line">sudo apt-get autoremove</span><br><span class="line">sudo ./NIVIDIA-Linux-X86_64-384.59.run --uninstall</span><br></pre></td></tr></table></figure>
-<h2 id="2-安装依赖"><a href="#2-安装依赖" class="headerlink" title="2.安装依赖"></a>2.安装依赖</h2><p><code>sudo apt-get install build-essential gcc-multilib dkms</code></p>
-<h2 id="3-禁用nouveau驱动"><a href="#3-禁用nouveau驱动" class="headerlink" title="3.禁用nouveau驱动"></a>3.禁用nouveau驱动</h2><p>编辑 &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist-nouveau.conf 文件，添加以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line">alias nouveau off</span><br><span class="line">alias lbm-nouveau off</span><br></pre></td></tr></table></figure>
-<p>关闭nouveau：<br><code>echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf</code></p>
-<h2 id="4-reboot"><a href="#4-reboot" class="headerlink" title="4.reboot"></a>4.reboot</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-<h2 id="5-获取kernel-source"><a href="#5-获取kernel-source" class="headerlink" title="5.获取kernel source"></a>5.获取kernel source</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install linux-source</span><br><span class="line">apt-get install linux-headers-x.x.x-x-generic</span><br></pre></td></tr></table></figure>
-<p>其中x.x.x-x-generic可以通过$(uname -r)替换得到</p>
-<h2 id="6-关掉x-graphic-服务"><a href="#6-关掉x-graphic-服务" class="headerlink" title="6.关掉x graphic 服务"></a>6.关掉x graphic 服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop lightdm(or sudo service lightdm stop)</span><br><span class="line">sudo systemctl stop gdm</span><br><span class="line">sudo systemctl stop kdm</span><br></pre></td></tr></table></figure>
-<h2 id="7-安装nvidia驱动"><a href="#7-安装nvidia驱动" class="headerlink" title="7.安装nvidia驱动"></a>7.安装nvidia驱动</h2><p>下载对应版本<a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx?lang=cn">https://www.nvidia.cn/Download/index.aspx?lang=cn</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod NVIDIA*.run</span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-384.59.run</span><br></pre></td></tr></table></figure>
-<h2 id="8-显卡驱动检查"><a href="#8-显卡驱动检查" class="headerlink" title="8.显卡驱动检查"></a>8.显卡驱动检查</h2><p><code>nvidia-smi</code></p>
-<h1 id="安装cuda-Toolkits"><a href="#安装cuda-Toolkits" class="headerlink" title="安装cuda Toolkits"></a>安装cuda Toolkits</h1><h2 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a><br>fedora版本可用于archlinux</p>
-<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x cudxxxxxxxxxxxx</span><br><span class="line">sudo ./cudxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
-<h2 id="3-检查"><a href="#3-检查" class="headerlink" title="3.检查"></a>3.检查</h2><p><code>nvcc -V</code></p>
-<h1 id="安装cudnn（cuda加速库）"><a href="#安装cudnn（cuda加速库）" class="headerlink" title="安装cudnn（cuda加速库）"></a>安装cudnn（cuda加速库）</h1><h2 id="1-下载-1"><a href="#1-下载-1" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a></p>
-<h2 id="2-复制cudnn头文件"><a href="#2-复制cudnn头文件" class="headerlink" title="2.复制cudnn头文件"></a>2.复制cudnn头文件</h2><p><code>sudo cp include/* /usr/local/cuda-11.6/include/</code></p>
-<h2 id="3-复制cudnn的库"><a href="#3-复制cudnn的库" class="headerlink" title="3.复制cudnn的库"></a>3.复制cudnn的库</h2><p><code>sudo cp lib/* /usr/local/cuda/lib64/</code></p>
-<h2 id="4-添加可执行权限"><a href="#4-添加可执行权限" class="headerlink" title="4.添加可执行权限"></a>4.添加可执行权限</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/cuda-11.6/include/cudnn.h</span><br><span class="line">sudo chmod +x /usr/local/cuda-11.6/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
-<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5.检查"></a>5.检查</h2><p>cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn_version.h | grep CUDNN_MAJOR -A 2</p>
-<h1 id="切换cuda版本"><a href="#切换cuda版本" class="headerlink" title="切换cuda版本"></a>切换cuda版本</h1><h2 id="进入目录"><a href="#进入目录" class="headerlink" title="进入目录"></a>进入目录</h2><p><code>cd /usr/local</code></p>
-<h2 id="删除原cuda映射"><a href="#删除原cuda映射" class="headerlink" title="删除原cuda映射"></a>删除原cuda映射</h2><p><code>sudo rm -rf cuda</code></p>
-<h2 id="建立新的cuda映射"><a href="#建立新的cuda映射" class="headerlink" title="建立新的cuda映射"></a>建立新的cuda映射</h2><p><code>ln -s cuda-9.0 cuda</code></p>
-<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p><code>nvcc -V</code></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/NVIDIA_(简体中文)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40907977/article/details/115305634">https://blog.csdn.net/qq_40907977/article/details/115305634</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/public669/article/details/98470857">https://blog.csdn.net/public669/article/details/98470857</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigconvience/article/details/8782668">https://blog.csdn.net/bigconvience/article/details/8782668</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo博客搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">hexo博客搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-02-27T17:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs npm</code><br>查看版本并检验<br><code>node -V</code><br><code>npm -V</code><br>安装cnpm(国内源加速)<br><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br>检查cnpm<br><code>cnpm</code><br>安装hexo<br><code>sudo cnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>sudo hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>sudo cnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
-<p>生成密匙<br><code>ssh-keygen -t rsa</code><br>github提交密匙<br>检查是否密匙配置成功<br><code>ssh -T git@github.com</code><br>deploy到github<br><code>hexo d</code><br>主题修改yilia<br><code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在&#x2F;blog&#x2F;theme中git clone合适主题,并在blog下的_config文件下修改theme</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=erKYtw4Rfhk">https://www.youtube.com/watch?v=erKYtw4Rfhk</a><br><a target="_blank" rel="noopener" href="https://tding.top/archives/aad98408.html#more">https://tding.top/archives/aad98408.html#more</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/aaa/">&amp;laquo; Prev</a><a class="page-number" href="/aaa/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -973,8 +357,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
