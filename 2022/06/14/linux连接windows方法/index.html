@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
   <title>linux连接windows方法 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux远程桌面访问windowswindows远程桌面开启略 RDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统12yay -S rdesktopyay -S freerdp  安装后可以用命令来访问远程windows系统 1rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.1">
+  <meta name="description" content="linux远程桌面访问windowswindows远程桌面开启略 RDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统12paru -S rdesktopparu -S freerdp  安装后可以用命令来访问远程windows系统 1rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux连接windows方法">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="linux远程桌面访问windowswindows远程桌面开启略 RDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统12yay -S rdesktopyay -S freerdp  安装后可以用命令来访问远程windows系统 1rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.1">
+<meta property="og:description" content="linux远程桌面访问windowswindows远程桌面开启略 RDP协议 rdesktop实现了RDP协议,允许linux系统远程登陆windows系统12paru -S rdesktopparu -S freerdp  安装后可以用命令来访问远程windows系统 1rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-14T01:43:59.000Z">
-<meta property="article:modified_time" content="2022-06-21T03:01:30.000Z">
+<meta property="article:modified_time" content="2024-07-19T07:51:52.177Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -164,13 +164,13 @@
       
         <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
 <h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S rdesktop</span><br><span class="line">yay -S freerdp</span><br></pre></td></tr></table></figure></li>
+<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S rdesktop</span><br><span class="line">paru -S freerdp</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>安装后可以用命令来访问远程windows系统</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
 
 <h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S krdc</span><br></pre></td></tr></table></figure></li>
+<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S krdc</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
 <li>打开Windows设置–&gt;应用–&gt;应用和功能-可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
