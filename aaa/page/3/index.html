@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>Archives | abel的小天地</title>
+  <title>abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一个个人资料记录的小地方">
 <meta property="og:type" content="website">
 <meta property="og:title" content="abel的小天地">
-<meta property="og:url" content="https://abelxiaoxing.github.io/index.html">
+<meta property="og:url" content="https://abelxiaoxing.github.io/aaa/page/3/index.html">
 <meta property="og:site_name" content="abel的小天地">
 <meta property="og:description" content="一个个人资料记录的小地方">
 <meta property="og:locale" content="zh_CN">
@@ -142,312 +142,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hexo博客搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">hexo博客搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2022-02-27T17:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
+</a>
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs npm</code><br>查看版本并检验<br><code>node -V</code><br><code>npm -V</code><br>安装cnpm(国内源加速)<br><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br>检查cnpm<br><code>cnpm</code><br>安装hexo<br><code>sudo cnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>sudo hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>sudo cnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<p>生成密匙<br><code>ssh-keygen -t rsa</code><br>github提交密匙<br>检查是否密匙配置成功<br><code>ssh -T git@github.com</code><br>deploy到github<br><code>hexo d</code><br>主题修改yilia<br><code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在&#x2F;blog&#x2F;theme中git clone合适主题,并在blog下的_config文件下修改theme</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=erKYtw4Rfhk">https://www.youtube.com/watch?v=erKYtw4Rfhk</a><br><a target="_blank" rel="noopener" href="https://tding.top/archives/aad98408.html#more">https://tding.top/archives/aad98408.html#more</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">KVM虚拟化教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:15:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Cmake使用方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/" class="archive-article-date">
-  	<time datetime="2024-07-19T07:49:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/">linux安装MATLAB步骤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/" class="archive-article-date">
-  	<time datetime="2024-06-14T02:29:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/">i3与dolphin文件关联</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">展开全文 >></a>
+        </p>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
-  	<time datetime="2023-04-16T09:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">archlinux的kvm+qmenu虚拟机建立</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2023-03-10T11:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/">基于虚拟硬盘技术的wintogo扩容笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2023-02-02T10:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/02/linux%E4%B8%8BKVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE/">linux下KVM虚拟机文件共享配置.md</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/">chatgpt论文叙述模板.md</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-12-22T09:53:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">vim快捷键记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/" class="archive-article-date">
-  	<time datetime="2022-11-29T07:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">亮度变换器脚本</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+  
+  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/aaa/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/aaa/">1</a><a class="page-number" href="/aaa/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
 
@@ -483,9 +246,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

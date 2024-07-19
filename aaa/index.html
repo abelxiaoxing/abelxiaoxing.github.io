@@ -142,6 +142,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KVM虚拟化教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">KVM虚拟化教程</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2024-07-19T08:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="KVM虚拟化教程"><a href="#KVM虚拟化教程" class="headerlink" title="KVM虚拟化教程"></a>KVM虚拟化教程</h1><ol>
+<li><p>环境检查</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo <span class="comment"># 检测CPU是否支持虚拟化，若大于0则支持</span></span><br><span class="line">sudo apt install -y cpu-checker <span class="comment"># 安装cpu-checker软件包检查kvm环境</span></span><br><span class="line">kvm-ok <span class="comment"># 运行kvm-ok命令检查，输出KVM acceleration can be used即为可用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>软件包安装</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils libguestfs-tools virt-viewer virt-manager virtins</span><br><span class="line">t</span><br><span class="line">sudo apt install python3-libvirt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>qemu-kvm：即qemu+kvm，kvm负责cpu和内存的虚拟化，而qemu负责IO设备，如网卡和磁盘等的虚拟化。</li>
+<li>libvirt-daemon-system：KVM管理工具，为不同的虚拟机监视器提供了统一的接口。</li>
+<li>libvirt-clients: 包含了一组用于与 libvirt 库交互的命令行工具，包括virsh、virt-install，virt-clone<ul>
+<li>virsh: 用于虚拟机的创建，启动，停止，迁移，克隆，配置文件管理等操作。</li>
+<li>virt-install：用于GuestOS安装</li>
+<li>virt-clone：用于虚拟机克隆</li>
+</ul>
+</li>
+<li>bridge-utils：配置网桥</li>
+<li>libguestfs-tools：虚拟机镜像管理工具，包括virt-cat、virt-edit、virt-ls、virt-rescue</li>
+<li>virt-viewer：用于虚拟机控制台</li>
+<li>virt-manager：图形界面管理KVM虚拟化</li>
+<li>virtinst: 命令行工具，包括virt-install、virt-clone、virt-manager等。</li>
+<li>python3-libvirt：libvirt库的Python 绑定，在Python中使用 libvirt 的功能，包括对虚拟机、存储池、网络等资源的管理，以及对虚拟化宿主机的监控和控制。</li>
+</ul>
+</li>
+<li><p>启用和启动 libvirtd 服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> libvirtd</span><br><span class="line">sudo systemctl start libvirtd</span><br><span class="line">sudo systemctl status libvirtd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查kvm模块</span></span><br><span class="line">$ lsmod  | grep kvm</span><br><span class="line">kvm_intel             372736  5</span><br><span class="line">kvm                  1032192  1 kvm_intel</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加当前用户到 kvm和libvirt 组（可选）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG kvm <span class="variable">$USER</span></span><br><span class="line">sudo usermod -aG libvirt $(<span class="built_in">whoami</span>)</span><br><span class="line"><span class="built_in">id</span> $(<span class="built_in">whoami</span>) <span class="comment"># 验证用户是否加入组中</span></span><br><span class="line">uid=1001(gycx) gid=1001(gycx) <span class="built_in">groups</span>=1001(gycx),108(kvm),138(libvirt)</span><br></pre></td></tr></table></figure>
+<p> 修改组后，需要重新登录或注销再登录才能使更改生效。</p>
+</li>
+<li><p>创建网桥(br0)，配置同一网段</p>
+<p> 为实现从本机外访问该虚拟机必须将虚拟机的网卡映射至网桥。virbr0 网桥是 KVM 安装完成后自动创建的，仅做测试用途。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brtcl show <span class="comment"># 显示网桥信息</span></span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400a882e2       <span class="built_in">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure>
+<p> 通过如下内容在 &#x2F;etc&#x2F;netplan 目录下创建文件 01-netcfg.yaml 来新建网桥：</p>
+<p> 输入ifconfig确认当前网口设备、ip地址和mac地址，本案例中设备为eno2，ip地址填入addresses中，mac地址填入macaddress中</p>
+<p> 输入ip route得到默认via和metric，填入routes的via和metric中</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network</span>:</span><br><span class="line">  <span class="attr">ethernets</span>:</span><br><span class="line">    <span class="attr">eno2</span>:</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">bridges</span>:</span><br><span class="line">    <span class="attr">br0</span>:</span><br><span class="line">      <span class="attr">interfaces</span>: [eno2]</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">addresses</span>: [<span class="number">192.168</span><span class="number">.100</span><span class="number">.123</span>/<span class="number">24</span>]</span><br><span class="line">      <span class="attr">macaddress</span>: 7<span class="attr">c</span>:<span class="attr">c2</span>:<span class="number">55</span>:4<span class="attr">d</span>:<span class="attr">e1</span>:e9</span><br><span class="line">      <span class="attr">routes</span>:</span><br><span class="line">        - <span class="attr">to</span>: <span class="keyword">default</span></span><br><span class="line">          <span class="attr">via</span>: <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span></span><br><span class="line">          <span class="attr">metric</span>: <span class="number">101</span></span><br><span class="line">      <span class="attr">nameservers</span>:</span><br><span class="line">        <span class="attr">addresses</span>: [<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>]</span><br><span class="line">      <span class="attr">parameters</span>:</span><br><span class="line">        <span class="attr">stp</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">version</span>: <span class="number">2</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用网络配置</span></span><br><span class="line">sudo netplan apply</span><br><span class="line">ip add show</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建虚拟机（二选一）</p>
+<ol>
+<li><p>图形化创建虚拟机</p>
+<p> 运行virt-manager，启动图形化界面进行kvm虚拟机安装</p>
+<p> add connection——local install media——choose iso or CDROM install media——选择要安装的iso镜像点击choose volume——Forward——设置CPU和Memory点击Forward——点击enable storage for this virtual machine并点击create a disk image for the virtual machine选择硬盘大小点击Forward——选择网桥为br0点击Finish</p>
+</li>
+<li><p>终端创建虚拟机</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建4c8g200G的虚拟机,磁盘为稀疏模式，格式为qcow2，总线类型为virtio。同启动一个串行终端打印输出</span></span><br><span class="line">virt-install  --virt-type=kvm --name=win10   --vcpus=4  --memory=8192 --osinfo=win10 --cdrom=/var/lib/libvirt/images/win10.iso  --disk path=/var/lib/libvirt/images/win10.qcow2,size=200,format=qcow2,bus=virtio,sparse --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --force</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Cmake使用方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -924,84 +1036,9 @@
 
 
   
-    <article id="post-开机自启动脚本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">开机自启动脚本配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-11-29T06:15:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>创建一个启动service脚本<br><code>sudo vim /usr/lib/systemd/system/rclocal.service</code><ul>
-<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.local Compatibility</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">   # ExecStart=/usr/bin/su -c &#x27;/etc/user.local start&#x27; 用户名</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardOutput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>创建 &#x2F;etc&#x2F;rc.local 文件<br><code>sudo vim /etc/rc.local</code><ul>
-<li>写入内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># /etc/rc.local</span><br><span class="line">if test -d /etc/rc.local.d; then</span><br><span class="line">    for rcscript in /etc/rc.local.d/*.sh; do</span><br><span class="line">        test -r &quot;$&#123;rcscript&#125;&quot; &amp;&amp; sh $&#123;rcscript&#125;</span><br><span class="line">    done</span><br><span class="line">    unset rcscript</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>添加执行权限<br><code>sudo chmod a+x /etc/rc.local</code></li>
-<li>添加&#x2F;etc&#x2F;rc.local.d文件夹<br><code>sudo mkdir /etc/rc.local.d</code></li>
-<li>启动并设置开机自启动<br><code>sudo systemctl start rclocal</code><br><code>sudo systemctl enable rclocal</code></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="page-number" href="/aaa/page/3/">3</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
