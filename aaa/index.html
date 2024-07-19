@@ -162,7 +162,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="KVM虚拟化教程"><a href="#KVM虚拟化教程" class="headerlink" title="KVM虚拟化教程"></a>KVM虚拟化教程</h1><ol>
+        <h1 id="ARCH系"><a href="#ARCH系" class="headerlink" title="ARCH系"></a>ARCH系</h1><h2 id="安装kvm基础组建"><a href="#安装kvm基础组建" class="headerlink" title="安装kvm基础组建"></a>安装kvm基础组建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</span><br><span class="line">sudo pacman -S ebtables iptables</span><br></pre></td></tr></table></figure>
+<ul>
+<li>kvm 负责CPU和内存的虚拟化</li>
+<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
+<li>ovmf 为虚拟机启用UEFI支持</li>
+<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
+<li>virt-manager 是管理虚拟机的GUI<h2 id="在Arch-Linux-x2F-Manjaro上安装libguestfs"><a href="#在Arch-Linux-x2F-Manjaro上安装libguestfs" class="headerlink" title="在Arch Linux&#x2F;Manjaro上安装libguestfs"></a>在Arch Linux&#x2F;Manjaro上安装libguestfs</h2><code>paru -S libguestfs</code><h2 id="启动KVM-libvirt服务"><a href="#启动KVM-libvirt服务" class="headerlink" title="启动KVM libvirt服务"></a>启动KVM libvirt服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable libvirtd.service</span><br><span class="line">sudo systemctl start libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="启用普通用户帐户以使用KVM"><a href="#启用普通用户帐户以使用KVM" class="headerlink" title="启用普通用户帐户以使用KVM"></a>启用普通用户帐户以使用KVM</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/libvirt/libvirtd.conf</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>将UNIX域套接字组所有权设置为libvirt(第85行)： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_group = &quot;libvirt&quot;</span><br></pre></td></tr></table></figure>
+
+<p>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_rw_perms = &quot;0770&quot;  </span><br></pre></td></tr></table></figure>
+<p>将你的用户帐户添加到libvirt组： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -a -G libvirt $(whoami)  </span><br><span class="line">newgrp libvirt  </span><br></pre></td></tr></table></figure>
+<p>重启libvirt守护进程： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2><ul>
+<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe -r kvm_intel </span><br><span class="line">sudo modprobe kvm_intel nested=1 </span><br></pre></td></tr></table></figure>
+要使此配置持久，请运行： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;options kvm-intel nested=1&quot; | sudo tee /etc/modprobe.d/kvm-intel.conf </span><br></pre></td></tr></table></figure>
+确认嵌套虚拟化设置为是： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systool -m kvm_intel -v | grep nested </span><br><span class="line">nested              = &quot;Y&quot; </span><br><span class="line">nested_early_check  = &quot;N&quot; </span><br><span class="line">cat /sys/module/kvm_intel/parameters/nested </span><br><span class="line">Y </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="Debian系"><a href="#Debian系" class="headerlink" title="Debian系"></a>Debian系</h1><ol>
 <li><p>环境检查</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo <span class="comment"># 检测CPU是否支持虚拟化，若大于0则支持</span></span><br><span class="line">sudo apt install -y cpu-checker <span class="comment"># 安装cpu-checker软件包检查kvm环境</span></span><br><span class="line">kvm-ok <span class="comment"># 运行kvm-ok命令检查，输出KVM acceleration can be used即为可用</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -578,19 +601,19 @@
 
 
   
-    <article id="post-archlinux的kvm-qmenu虚拟机建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-kvm-qmenu虚拟机建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">archlinux的kvm+qmenu虚拟机建立</a>
+      <a class="article-title" href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">kvm+qmenu虚拟机建立</a>
     </h1>
   
 
         
-        <a href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
+        <a href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
   	<time datetime="2023-04-16T09:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-16</time>
 </a>
         
@@ -628,7 +651,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/16/archlinux%E7%9A%84kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">展开全文 >></a>
         </p>
       
 
