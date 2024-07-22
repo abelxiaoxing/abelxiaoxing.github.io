@@ -242,32 +242,32 @@
 <li><p>终端输入<code>wsl --install</code>，安装wsl2</p>
 </li>
 <li><p>将wsl从系统盘迁移到D盘</p>
-<ol>
+<ul>
 <li><code>wsl -l -v</code>，查看正在运行的实例</li>
 <li><code>wsl —terminate &lt;instance_name&gt;</code>,终止正在运行的实例</li>
 <li><code>wsl --export &lt;instance_name&gt; D:\export.tar</code>将需要迁移的实例，进行导出，导出路径自定义</li>
 <li><code>wsl --unregister &lt;instance_name&gt;</code>导出完成之后，就需要将原有的实例进行卸载</li>
 <li><code>wsl --import &lt;instance_name&gt; D:\import\ D:\export.tar --version 2</code>使用导出的文件进行导入即可(<code>--version 2</code>可以不加，现在默认都是 WSL2)</li>
-</ol>
+</ul>
 </li>
 <li><p>设置wsl启动方式为<code>systemd</code></p>
-<ol>
+<ul>
 <li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
 </li>
 <li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
 </li>
 <li><p>重启wsl</p>
- <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
-</ol>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
 <li><p>配置开启自启动wsl</p>
-<ol>
+<ul>
 <li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
-</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
 </ol>
 <h2 id="设置开启启动frpc"><a href="#设置开启启动frpc" class="headerlink" title="设置开启启动frpc"></a>设置开启启动frpc</h2><p>先在你的 Frp 文件目录下新建一个名为start.txt的文本文档，在里面输入如下内容：</p>
