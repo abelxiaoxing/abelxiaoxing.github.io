@@ -6,17 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>Archives: 2024/7 | abel的小天地</title>
+  <title>win环境配置 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个个人资料记录的小地方">
-<meta property="og:type" content="website">
-<meta property="og:title" content="abel的小天地">
-<meta property="og:url" content="https://abelxiaoxing.github.io/2024/07/index.html">
+  <meta name="description" content="终端代理配置 安装Windows Terminal   系统变量配置Windows Terminal的代理  配置WSL2 终端输入wsl --install，安装wsl2  将wsl从系统盘迁移到D盘  wsl -l -v，查看正在运行的实例 wsl —terminate &lt;instance_name&gt;,终止正在运行的实例 wsl --export &lt;instance_name">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win环境配置">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="一个个人资料记录的小地方">
+<meta property="og:description" content="终端代理配置 安装Windows Terminal   系统变量配置Windows Terminal的代理  配置WSL2 终端输入wsl --install，安装wsl2  将wsl从系统盘迁移到D盘  wsl -l -v，查看正在运行的实例 wsl —terminate &lt;instance_name&gt;,终止正在运行的实例 wsl --export &lt;instance_name">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png">
+<meta property="article:published_time" content="2024-07-22T09:10:00.000Z">
+<meta property="article:modified_time" content="2024-07-22T07:54:36.478Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png">
   
     <link rel="alternative" href="/atom.xml" title="abel的小天地" type="application/atom+xml">
   
@@ -140,157 +149,249 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-win环境配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      win环境配置
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/22/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/" class="archive-article-date">
+
+        
+        <a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
   	<time datetime="2024-07-22T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/22/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/">Imagenet1k数据集导入</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="终端代理配置"><a href="#终端代理配置" class="headerlink" title="终端代理配置"></a>终端代理配置</h2><ul>
+<li>安装Windows Terminal  </li>
+<li>系统变量配置Windows Terminal的代理<br><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png" alt="Untitled"></li>
+</ul>
+<h2 id="配置WSL2"><a href="#配置WSL2" class="headerlink" title="配置WSL2"></a>配置WSL2</h2><ol>
+<li><p>终端输入<code>wsl --install</code>，安装wsl2</p>
+</li>
+<li><p>将wsl从系统盘迁移到D盘</p>
+<ol>
+<li><code>wsl -l -v</code>，查看正在运行的实例</li>
+<li><code>wsl —terminate &lt;instance_name&gt;</code>,终止正在运行的实例</li>
+<li><code>wsl --export &lt;instance_name&gt; D:\export.tar</code>将需要迁移的实例，进行导出，导出路径自定义</li>
+<li><code>wsl --unregister &lt;instance_name&gt;</code>导出完成之后，就需要将原有的实例进行卸载</li>
+<li><code>wsl --import &lt;instance_name&gt; D:\import\ D:\export.tar --version 2</code>使用导出的文件进行导入即可(<code>--version 2</code>可以不加，现在默认都是 WSL2)</li>
+</ol>
+</li>
+<li><p>设置wsl启动方式为<code>systemd</code></p>
+<ol>
+<li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
+</li>
+<li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
+</li>
+<li><p>重启wsl</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>配置开启自启动wsl</p>
+<ol>
+<li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h2 id="设置开启启动frpc"><a href="#设置开启启动frpc" class="headerlink" title="设置开启启动frpc"></a>设置开启启动frpc</h2><p>先在你的 Frp 文件目录下新建一个名为start.txt的文本文档，在里面输入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">:home</span><br><span class="line">frpc -c frpc.ini</span><br><span class="line">goto home</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>保存后，改名为 start.bat，这样双击运行start.bat就可以启动frp客户端，而 Frp 在崩溃、异常退出进程后，将会自动重新启动。</p>
+<p>如果电脑没有显示扩展名请自行百度 “显示文件扩展名”</p>
+<p>但是我们需要的是frpc开机自己启动，我们让系统开机自己运行start.bat就可以了~</p>
+<h3 id="方法1：利用Windows开始菜单启动项"><a href="#方法1：利用Windows开始菜单启动项" class="headerlink" title="方法1：利用Windows开始菜单启动项"></a><strong>方法1：利用Windows开始菜单启动项</strong></h3><ol>
+<li><p>右键 start.bat，创建快捷方式。</p>
+</li>
+<li><p>打开</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的电脑用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将创建的快捷方式复制进去</p>
+</li>
+</ol>
+<p>这个方法的优缺点：</p>
+<p>优点：操作简单，拖进去就可以了。</p>
+<p>缺点：会显示出命令行窗口。</p>
+<h3 id="方法2：利用Windows任务计划程序"><a href="#方法2：利用Windows任务计划程序" class="headerlink" title="方法2：利用Windows任务计划程序"></a><strong>方法2：利用Windows任务计划程序</strong></h3><ol>
+<li>打开任务计划程序<ol>
+<li>打开开始菜单，输入 “任务计划程序” 将会自动搜索，接着打开它。</li>
+</ol>
+</li>
+<li>创建计划任务<ol>
+<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。</p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
+</li>
+<li><p>【常规】选项卡设置</p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"></p>
+<p> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。</p>
+<p> “使用最高权限运行” 也是可选的，根据个人需要可以选上。</p>
+<p> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。</p>
+</li>
+<li><p><strong>【触发器】选项卡设置</strong></p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"></p>
+<p> <strong>触发器页，点击新建，选择 “启动时”</strong></p>
+</li>
+<li><p><strong>接着转到 【操作</strong>】选项卡</p>
+<p>点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）</p>
+<p>例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong></p>
+<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"></p>
+<p>接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。</p>
+<p>以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~</p>
+<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/C_C666/article/details/127619978">https://blog.csdn.net/C_C666/article/details/127619978</a></p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2024-07-22T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2024/07/22/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Imagenet1k数据集导入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">KVM虚拟化教程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">win环境配置</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">KVM虚拟化教程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:15:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Cmake使用方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/" class="archive-article-date">
-  	<time datetime="2024-07-19T07:49:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/">linux安装MATLAB步骤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -325,8 +426,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -162,7 +162,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Imagenet1k数据集导入"><a href="#Imagenet1k数据集导入" class="headerlink" title="Imagenet1k数据集导入"></a>Imagenet1k数据集导入</h1><h2 id="下载imagenet1k数据集"><a href="#下载imagenet1k数据集" class="headerlink" title="下载imagenet1k数据集"></a>下载imagenet1k数据集</h2><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel">https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel</a> 提取码: abel</p>
+        <h2 id="下载imagenet1k数据集"><a href="#下载imagenet1k数据集" class="headerlink" title="下载imagenet1k数据集"></a>下载imagenet1k数据集</h2><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel">https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel</a> 提取码: abel</p>
 <h2 id="数据格式配置"><a href="#数据格式配置" class="headerlink" title="数据格式配置"></a>数据格式配置</h2><p>创建train,val,test文件夹,把压缩包放入各文件夹中,解压各个压缩包文件.其中train压缩包会产生1000个子压缩包,删除原压缩包,输入以下shell命令进行批量解压缩  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> *.tar; do [ -f <span class="string">&quot;$f&quot;</span> ] &amp;&amp; mkdir -p <span class="string">&quot;$&#123;f%.tar&#125;&quot;</span> &amp;&amp; tar -xf <span class="string">&quot;$f&quot;</span> -C <span class="string">&quot;$&#123;f%.tar&#125;&quot;</span>; done &amp;&amp; rm *.rar</span><br><span class="line">```    </span><br><span class="line">执行脚本之后，我们就获得了train文件夹下<span class="number">1000</span>个文件夹和对应的图片数据</span><br><span class="line"><span class="comment">## 数据标记映射</span></span><br><span class="line"><span class="number">1.</span> 先解压devkit压缩包</span><br><span class="line">    </span><br><span class="line">    ```python</span><br><span class="line">    tar -xzf ILSVRC2012_devkit_t12.tar.gz</span><br></pre></td></tr></table></figure>
 <ol start="2">
@@ -185,6 +185,153 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/07/22/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-win环境配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">win环境配置</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2024-07-22T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="终端代理配置"><a href="#终端代理配置" class="headerlink" title="终端代理配置"></a>终端代理配置</h2><ul>
+<li>安装Windows Terminal  </li>
+<li>系统变量配置Windows Terminal的代理<br><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png" alt="Untitled"></li>
+</ul>
+<h2 id="配置WSL2"><a href="#配置WSL2" class="headerlink" title="配置WSL2"></a>配置WSL2</h2><ol>
+<li><p>终端输入<code>wsl --install</code>，安装wsl2</p>
+</li>
+<li><p>将wsl从系统盘迁移到D盘</p>
+<ol>
+<li><code>wsl -l -v</code>，查看正在运行的实例</li>
+<li><code>wsl —terminate &lt;instance_name&gt;</code>,终止正在运行的实例</li>
+<li><code>wsl --export &lt;instance_name&gt; D:\export.tar</code>将需要迁移的实例，进行导出，导出路径自定义</li>
+<li><code>wsl --unregister &lt;instance_name&gt;</code>导出完成之后，就需要将原有的实例进行卸载</li>
+<li><code>wsl --import &lt;instance_name&gt; D:\import\ D:\export.tar --version 2</code>使用导出的文件进行导入即可(<code>--version 2</code>可以不加，现在默认都是 WSL2)</li>
+</ol>
+</li>
+<li><p>设置wsl启动方式为<code>systemd</code></p>
+<ol>
+<li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
+</li>
+<li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
+</li>
+<li><p>重启wsl</p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>配置开启自启动wsl</p>
+<ol>
+<li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h2 id="设置开启启动frpc"><a href="#设置开启启动frpc" class="headerlink" title="设置开启启动frpc"></a>设置开启启动frpc</h2><p>先在你的 Frp 文件目录下新建一个名为start.txt的文本文档，在里面输入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">:home</span><br><span class="line">frpc -c frpc.ini</span><br><span class="line">goto home</span><br></pre></td></tr></table></figure>
+
+<p>保存后，改名为 start.bat，这样双击运行start.bat就可以启动frp客户端，而 Frp 在崩溃、异常退出进程后，将会自动重新启动。</p>
+<p>如果电脑没有显示扩展名请自行百度 “显示文件扩展名”</p>
+<p>但是我们需要的是frpc开机自己启动，我们让系统开机自己运行start.bat就可以了~</p>
+<h3 id="方法1：利用Windows开始菜单启动项"><a href="#方法1：利用Windows开始菜单启动项" class="headerlink" title="方法1：利用Windows开始菜单启动项"></a><strong>方法1：利用Windows开始菜单启动项</strong></h3><ol>
+<li><p>右键 start.bat，创建快捷方式。</p>
+</li>
+<li><p>打开</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的电脑用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将创建的快捷方式复制进去</p>
+</li>
+</ol>
+<p>这个方法的优缺点：</p>
+<p>优点：操作简单，拖进去就可以了。</p>
+<p>缺点：会显示出命令行窗口。</p>
+<h3 id="方法2：利用Windows任务计划程序"><a href="#方法2：利用Windows任务计划程序" class="headerlink" title="方法2：利用Windows任务计划程序"></a><strong>方法2：利用Windows任务计划程序</strong></h3><ol>
+<li>打开任务计划程序<ol>
+<li>打开开始菜单，输入 “任务计划程序” 将会自动搜索，接着打开它。</li>
+</ol>
+</li>
+<li>创建计划任务<ol>
+<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。</p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
+</li>
+<li><p>【常规】选项卡设置</p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"></p>
+<p> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。</p>
+<p> “使用最高权限运行” 也是可选的，根据个人需要可以选上。</p>
+<p> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。</p>
+</li>
+<li><p><strong>【触发器】选项卡设置</strong></p>
+<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"></p>
+<p> <strong>触发器页，点击新建，选择 “启动时”</strong></p>
+</li>
+<li><p><strong>接着转到 【操作</strong>】选项卡</p>
+<p>点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）</p>
+<p>例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong></p>
+<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"></p>
+<p>接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。</p>
+<p>以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~</p>
+<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/C_C666/article/details/127619978">https://blog.csdn.net/C_C666/article/details/127619978</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">展开全文 >></a>
         </p>
       
 
@@ -979,84 +1126,9 @@
 
 
   
-    <article id="post-开机自启动脚本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">开机自启动脚本配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-11-29T06:15:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>创建一个启动service脚本<br><code>sudo vim /usr/lib/systemd/system/rclocal.service</code><ul>
-<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.local Compatibility</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">   # ExecStart=/usr/bin/su -c &#x27;/etc/user.local start&#x27; 用户名</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardOutput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>创建 &#x2F;etc&#x2F;rc.local 文件<br><code>sudo vim /etc/rc.local</code><ul>
-<li>写入内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># /etc/rc.local</span><br><span class="line">if test -d /etc/rc.local.d; then</span><br><span class="line">    for rcscript in /etc/rc.local.d/*.sh; do</span><br><span class="line">        test -r &quot;$&#123;rcscript&#125;&quot; &amp;&amp; sh $&#123;rcscript&#125;</span><br><span class="line">    done</span><br><span class="line">    unset rcscript</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>添加执行权限<br><code>sudo chmod a+x /etc/rc.local</code></li>
-<li>添加&#x2F;etc&#x2F;rc.local.d文件夹<br><code>sudo mkdir /etc/rc.local.d</code></li>
-<li>启动并设置开机自启动<br><code>sudo systemctl start rclocal</code><br><code>sudo systemctl enable rclocal</code></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="page-number" href="/aaa/page/3/">3</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
