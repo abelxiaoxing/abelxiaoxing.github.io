@@ -142,89 +142,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-wayfire下obs屏幕捕捉" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-wintogo&amp;&amp;linuxtogo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">wayfire下obs屏幕捕捉</a>
+      <a class="article-title" href="/2022/06/21/wintogo&&linuxtogo/">wintogo&amp;&amp;linuxtogo</a>
     </h1>
   
 
         
-        <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="archive-article-date">
-  	<time datetime="2022-09-01T07:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S obs-studio</span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
-
-<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
-<p>或者用写入.zshrc里,用xobs代替这个命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
-<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-便携式linux制作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">便携式linux制作</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/" class="archive-article-date">
+        <a href="/2022/06/21/wintogo&&linuxtogo/" class="archive-article-date">
   	<time datetime="2022-06-21T02:35:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
 </a>
         
@@ -232,26 +162,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ul>
+        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ol>
 <li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</li>
-</ul>
-<h2 id="virtualbox安装linux镜像系统"><a href="#virtualbox安装linux镜像系统" class="headerlink" title="virtualbox安装linux镜像系统"></a>virtualbox安装linux镜像系统</h2><ul>
-<li>安装和普通流程基本一样,主要讲两点不太一样的  <ol>
+<li>将ventoy的启动盘格式化成NTFS格式</li>
+<li>安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">vhd文件启动插件</a><h2 id="virtualbox安装linux或windows镜像系统"><a href="#virtualbox安装linux或windows镜像系统" class="headerlink" title="virtualbox安装linux或windows镜像系统"></a>virtualbox安装linux或windows镜像系统</h2>安装和普通流程基本一样,主要讲两点不太一样的  </li>
 <li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
-<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI</li>
-</ol>
-</li>
-</ul>
-<h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2><ol>
+<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI<h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2></li>
 <li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
-<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功</li>
-</ol>
-<h2 id="便携式linux文件提取制作"><a href="#便携式linux文件提取制作" class="headerlink" title="便携式linux文件提取制作"></a>便携式linux文件提取制作</h2><ul>
+<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功<h2 id="linuxtogo提取制作"><a href="#linuxtogo提取制作" class="headerlink" title="linuxtogo提取制作"></a>linuxtogo提取制作</h2></li>
 <li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可</li>
+<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code><h2 id="wintogo提取制作"><a href="#wintogo提取制作" class="headerlink" title="wintogo提取制作"></a>wintogo提取制作</h2></li>
+</ol>
+<ul>
+<li>将windows虚拟机关机,打开虚拟机安装目录,找到.vhd文件,移动到ventoy启动盘即可<h2 id="wintogo扩容"><a href="#wintogo扩容" class="headerlink" title="wintogo扩容"></a>wintogo扩容</h2></li>
 </ul>
-<h2 id="重要提醒"><a href="#重要提醒" class="headerlink" title="重要提醒"></a>重要提醒</h2><ul>
-<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
-</ul>
+<ol>
+<li>查看虚拟磁盘wtg.vhdx信息<br>  <code>qemu-img info wtg.vhdx</code></li>
+<li>vhdx格式转换成qcow2<br>  <code>qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</code></li>
+<li>对wtg.qcow2扩容到100G<br>  <code>qemu-img resize wtg.qcow2 100G</code></li>
+<li>将qcow2文件转换回vhdx格式<br>  <code>qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</code></li>
+<li>重命名文件<br>  <code>mv wtg.vhdx wtg_old.vhdx</code><br>  <code>mv wtg_expanded.vhdx wtg.vhdx</code>  </li>
+<li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
+</ol>
 
       
 
@@ -264,7 +196,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/21/%E4%BE%BF%E6%90%BA%E5%BC%8Flinux%E5%88%B6%E4%BD%9C/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/06/21/wintogo&&linuxtogo/">展开全文 >></a>
         </p>
       
 

@@ -599,76 +599,6 @@
 
 
   
-    <article id="post-基于虚拟硬盘技术的wintogo扩容笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/">基于虚拟硬盘技术的wintogo扩容笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2023-03-10T11:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>查看虚拟磁盘wtg.vhdx信息<br><code>qemu-img info wtg.vhdx</code></li>
-<li>vhdx格式转换成qcow2<br><code>qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</code></li>
-<li>对wtg.qcow2扩容到100G<br><code>qemu-img resize wtg.qcow2 100G</code></li>
-<li>将qcow2文件转换回vhdx格式<br><code>qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</code></li>
-<li>重命名文件<br><code>mv wtg.vhdx wtg_old.vhdx</code><br><code>mv wtg_expanded.vhdx wtg.vhdx</code></li>
-<li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/03/10/%E5%9F%BA%E4%BA%8E%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98%E6%8A%80%E6%9C%AF%E7%9A%84wintogo%E6%89%A9%E5%AE%B9%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-linux下KVM虚拟机文件共享配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1023,6 +953,76 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-wayfire下obs屏幕捕捉" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">wayfire下obs屏幕捕捉</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="archive-article-date">
+  	<time datetime="2022-09-01T07:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S obs-studio</span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
+
+<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
+<p>或者用写入.zshrc里,用xobs代替这个命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">展开全文 >></a>
         </p>
       
 
