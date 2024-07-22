@@ -599,86 +599,6 @@
 
 
   
-    <article id="post-kvm-qmenu虚拟机建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">kvm+qmenu虚拟机建立</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/" class="archive-article-date">
-  	<time datetime="2023-04-16T09:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装kvm基础组建"><a href="#安装kvm基础组建" class="headerlink" title="安装kvm基础组建"></a>安装kvm基础组建</h2><ul>
-<li>sudo pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</li>
-<li>sudo pacman -S ebtables iptables</li>
-</ul>
-<ol>
-<li>kvm 负责CPU和内存的虚拟化</li>
-<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
-<li>ovmf 为虚拟机启用UEFI支持</li>
-<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
-<li>virt-manager 是管理虚拟机的GUI<h2 id="在Arch-Linux-x2F-Manjaro上安装libguestfs"><a href="#在Arch-Linux-x2F-Manjaro上安装libguestfs" class="headerlink" title="在Arch Linux&#x2F;Manjaro上安装libguestfs"></a>在Arch Linux&#x2F;Manjaro上安装libguestfs</h2></li>
-</ol>
-<ul>
-<li>paru -S libguestfs<h2 id="启动KVM-libvirt服务"><a href="#启动KVM-libvirt服务" class="headerlink" title="启动KVM libvirt服务"></a>启动KVM libvirt服务</h2></li>
-<li>sudo systemctl enable libvirtd.service</li>
-<li>sudo systemctl start libvirtd.service<h2 id="启用普通用户帐户以使用KVM"><a href="#启用普通用户帐户以使用KVM" class="headerlink" title="启用普通用户帐户以使用KVM"></a>启用普通用户帐户以使用KVM</h2></li>
-<li>sudo vim &#x2F;etc&#x2F;libvirt&#x2F;libvirtd.conf<br>将UNIX域套接字组所有权设置为libvirt(第85行)：<br>unix_sock_group &#x3D; “libvirt”<br>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：<br>unix_sock_rw_perms &#x3D; “0770”<br>将你的用户帐户添加到libvirt组：<br>sudo usermod -a -G libvirt $(whoami)<br>newgrp libvirt<br>重启libvirt守护进程：<br>sudo systemctl restart libvirtd.service <h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2></li>
-<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化：<br>sudo modprobe -r kvm_intel<br>sudo modprobe kvm_intel nested&#x3D;1<br>要使此配置持久，请运行：<br>echo “options kvm-intel nested&#x3D;1” | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;kvm-intel.conf<br>确认嵌套虚拟化设置为是：<br>systool -m kvm_intel -v | grep nested<br>nested              &#x3D; “Y”<br>nested_early_check  &#x3D; “N”<br>cat &#x2F;sys&#x2F;module&#x2F;kvm_intel&#x2F;parameters&#x2F;nested<br>Y</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/16/kvm-qmenu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BB%BA%E7%AB%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-基于虚拟硬盘技术的wintogo扩容笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1057,9 +977,84 @@
 
 
   
+    <article id="post-开机自启动脚本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">开机自启动脚本配置</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2022-11-29T06:15:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>创建一个启动service脚本<br><code>sudo vim /usr/lib/systemd/system/rclocal.service</code><ul>
+<li>写入内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.local Compatibility</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start</span><br><span class="line">   # ExecStart=/usr/bin/su -c &#x27;/etc/user.local start&#x27; 用户名</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardOutput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>创建 &#x2F;etc&#x2F;rc.local 文件<br><code>sudo vim /etc/rc.local</code><ul>
+<li>写入内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"># /etc/rc.local</span><br><span class="line">if test -d /etc/rc.local.d; then</span><br><span class="line">    for rcscript in /etc/rc.local.d/*.sh; do</span><br><span class="line">        test -r &quot;$&#123;rcscript&#125;&quot; &amp;&amp; sh $&#123;rcscript&#125;</span><br><span class="line">    done</span><br><span class="line">    unset rcscript</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>添加执行权限<br><code>sudo chmod a+x /etc/rc.local</code></li>
+<li>添加&#x2F;etc&#x2F;rc.local.d文件夹<br><code>sudo mkdir /etc/rc.local.d</code></li>
+<li>启动并设置开机自启动<br><code>sudo systemctl start rclocal</code><br><code>sudo systemctl enable rclocal</code></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="page-number" href="/aaa/page/3/">3</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/aaa/page/2/">2</a><a class="extend next" rel="next" href="/aaa/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
