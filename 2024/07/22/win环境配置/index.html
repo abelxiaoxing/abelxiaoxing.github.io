@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png">
 <meta property="og:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png">
 <meta property="article:published_time" content="2024-07-22T09:10:00.000Z">
-<meta property="article:modified_time" content="2024-07-22T07:58:22.984Z">
+<meta property="article:modified_time" content="2024-07-23T03:15:35.112Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://abelxiaoxing.github.io/images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png">
@@ -190,18 +190,18 @@
 <li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
 </li>
 <li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
 </li>
 <li><p>重启wsl</p>
-  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>配置开启自启动wsl</p>
 <ul>
 <li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ol>
@@ -228,29 +228,16 @@
 <li>打开开始菜单，输入 “任务计划程序” 将会自动搜索，接着打开它。</li>
 </ol>
 </li>
-<li>创建计划任务<ol>
-<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。</p>
-<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
+<li>创建计划任务<ul>
+<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
 </li>
-<li><p>【常规】选项卡设置</p>
-<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"></p>
-<p> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。</p>
-<p> “使用最高权限运行” 也是可选的，根据个人需要可以选上。</p>
-<p> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。</p>
+<li><p>【常规】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"><br> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。<br> “使用最高权限运行” 也是可选的，根据个人需要可以选上。<br> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。  </p>
 </li>
-<li><p><strong>【触发器】选项卡设置</strong></p>
-<p> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"></p>
-<p> <strong>触发器页，点击新建，选择 “启动时”</strong></p>
+<li><p>【触发器】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"><br> 触发器页，点击新建，选择 “启动时”</p>
 </li>
-<li><p><strong>接着转到 【操作</strong>】选项卡</p>
-<p>点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）</p>
-<p>例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong></p>
-<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"></p>
-<p>接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。</p>
-<p>以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~</p>
-<p><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
+<li><p>接着转到 【<strong>操作</strong>】选项卡<br>   点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）<br>   例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong><br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"><br>   接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。<br>   以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~<br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
 </li>
-</ol>
+</ul>
 </li>
 </ol>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/C_C666/article/details/127619978">https://blog.csdn.net/C_C666/article/details/127619978</a></p>
