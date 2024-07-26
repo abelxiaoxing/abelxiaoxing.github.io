@@ -16,7 +16,7 @@
 <meta property="og:description" content="方式1（自主配置，推荐！）更改系统源、社区源添加multilib支持添加国内源1sudo vim &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist 在开头添加以下内容 1234567# 清华大学Server &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;archlinux&#x2F;$repo&#x2F;os&#x2F;$arch## 163Server &#x3D; http:&#x2F;&#x2F;mirrors.163">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-03T15:19:57.000Z">
-<meta property="article:modified_time" content="2024-07-19T09:03:43.646Z">
+<meta property="article:modified_time" content="2024-07-23T05:24:57.520Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -187,6 +187,7 @@
 <h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>选择自己喜欢的字体</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S ttf-sarasa-gothic noto-fonts-cjk</span><br></pre></td></tr></table></figure>
 <h3 id="安装x2go远程环境"><a href="#安装x2go远程环境" class="headerlink" title="安装x2go远程环境"></a>安装x2go远程环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S x2goserver # 安装x2go被控服务</span><br><span class="line">paru -S x2goclient # 安装x2go主控界面（单纯被控可不装）</span><br><span class="line">sudo x2godbadmin --createdb # 创建数据库</span><br></pre></td></tr></table></figure>
+<h3 id="解决win11下弹窗bug插曲"><a href="#解决win11下弹窗bug插曲" class="headerlink" title="解决win11下弹窗bug插曲"></a>解决win11下弹窗bug插曲</h3><p>在 Windows 中打开“终端”应用程序<br>转到设置<br>在打开的面板上，选择左侧的“启动”<br>在右侧，将“默认终端应用程序”更改为“Windows 控制台主机”  </p>
 <h2 id="设置壁纸"><a href="#设置壁纸" class="headerlink" title="设置壁纸"></a>设置壁纸</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S feh</span><br><span class="line">feh --randomize --bg-fill ~/Pictures/DesktopBackground </span><br></pre></td></tr></table></figure>
 <p>会随机切换一张图片作为墙纸，可以配合linux的crontab 设置成每隔10分钟自动切换壁纸。crontab的安装使用很简单，请自行百度。</p>
 <h3 id="向日葵远程控制"><a href="#向日葵远程控制" class="headerlink" title="向日葵远程控制"></a>向日葵远程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S sunloginclient #安装向日葵</span><br><span class="line">systemctl start runsunloginclient #启动向日葵服务</span><br><span class="line">systemctl enable runsunloginclient #开机自启动向日葵服务</span><br></pre></td></tr></table></figure>

@@ -440,7 +440,7 @@
 <p>确认嵌套虚拟化设置为是： </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systool -m kvm_intel -v | grep nested </span><br><span class="line">nested              = &quot;Y&quot; </span><br><span class="line">nested_early_check  = &quot;N&quot; </span><br><span class="line">cat /sys/module/kvm_intel/parameters/nested </span><br><span class="line">Y </span><br></pre></td></tr></table></figure>
 <h2 id="创建网桥-br0-，配置同一网段"><a href="#创建网桥-br0-，配置同一网段" class="headerlink" title="创建网桥(br0)，配置同一网段"></a>创建网桥(br0)，配置同一网段</h2><p>为实现从本机外访问该虚拟机必须将虚拟机的网卡映射至网桥。virbr0 网桥是 KVM 安装完成后自动创建的，仅做测试用途。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brtcl show <span class="comment"># 显示网桥信息</span></span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400a882e2       <span class="built_in">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brctl show <span class="comment"># 显示网桥信息</span></span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400a882e2       <span class="built_in">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>通过如下内容在 &#x2F;etc&#x2F;netplan 目录下创建文件 01-netcfg.yaml 来新建网桥：<br>输入ifconfig确认当前网口设备、ip地址和mac地址，本案例中设备为eno2，ip地址填入addresses中，mac地址填入macaddress中<br>输入ip route得到默认via和metric，填入routes的via和metric中  </p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network</span>:</span><br><span class="line">  <span class="attr">ethernets</span>:</span><br><span class="line">    <span class="attr">eno2</span>:</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">bridges</span>:</span><br><span class="line">    <span class="attr">br0</span>:</span><br><span class="line">      <span class="attr">interfaces</span>: [eno2]</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">addresses</span>: [<span class="number">192.168</span><span class="number">.100</span><span class="number">.123</span>/<span class="number">24</span>]</span><br><span class="line">      <span class="attr">macaddress</span>: 7<span class="attr">c</span>:<span class="attr">c2</span>:<span class="number">55</span>:4<span class="attr">d</span>:<span class="attr">e1</span>:e9</span><br><span class="line">      <span class="attr">routes</span>:</span><br><span class="line">          <span class="attr">to</span>: <span class="keyword">default</span></span><br><span class="line">          <span class="attr">via</span>: <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span></span><br><span class="line">          <span class="attr">metric</span>: <span class="number">101</span></span><br><span class="line">      <span class="attr">nameservers</span>:</span><br><span class="line">        <span class="attr">addresses</span>: [<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>]</span><br><span class="line">      <span class="attr">parameters</span>:</span><br><span class="line">        <span class="attr">stp</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">version</span>: <span class="number">2</span></span><br></pre></td></tr></table></figure>
@@ -1040,49 +1040,35 @@
 
 
   
-    <article id="post-vim快捷键记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-亮度变换器脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">vim快捷键记录</a>
+      <a class="article-title" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">亮度变换器脚本</a>
     </h1>
   
 
         
-        <a href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2022-12-22T09:53:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-22</time>
+        <a href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/" class="archive-article-date">
+  	<time datetime="2022-11-29T07:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h2><ul>
-<li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
-<li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
-<li>ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页</li>
-<li>ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页</li>
-<li>zz让光标所在行居屏幕中央</li>
-<li>zt让光标所在行居屏幕最上一行 t&#x3D;top</li>
-<li>zb 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
-<li>w&#x2F;W移到下一个word&#x2F;WORD开头,e&#x2F;E下一个word&#x2F;WORD尾</li>
-<li>b&#x2F;B(backword)回到上一个word&#x2F;WORD开头</li>
-<li>使用f{char}可以移动到char字符上,t移动到char的前一个字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个</li>
-<li>0移动到行首,$移动到行尾</li>
-</ul>
-<h2 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h2><ul>
-<li>dw删除单词,x删除字符</li>
-<li>dt)删除右边到)为止的所有字符</li>
-<li>r(replace)可以替换一个字符</li>
-<li>s(substitute)替换并进入插入模式</li>
-<li>c(change)配合文本对象快速修改,例如caw先回到当前单词光标首字符并删除单词并进入插入模式,cw从当前光标删除到单词结束并进入插入模式,ct)删除到括号并进入插入模式</li>
-<li>使用&#x2F;或者?进行前向或者反向搜索</li>
-<li>使用n&#x2F;N跳转到下一个或者上一个匹配</li>
-<li>使用*或者#进行当前单词的前向或者后向匹配</li>
-<li></li>
+        <h2 id="一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本"><a href="#一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本" class="headerlink" title="一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本"></a>一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本</h2><h2 id="二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F"><a href="#二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F" class="headerlink" title="二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;"></a>二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;</h2><p><code>git clone https://github.com/abelxiaoxing/brightness.git</code><br><code>cd brightness</code><br><code>chmod +x brightness</code><br><code>sudo mv brightness /usr/local/bin</code>  </p>
+<h2 id="三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本"><a href="#三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本" class="headerlink" title="三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本"></a>三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本</h2><p><code>sudo nvim /etc/rc.local</code>  </p>
+<ul>
+<li>末尾添加以下内容<br>  <code>/usr/local/bin/brightness restore</code>  </li>
+<li>重新启动rclocal服务(有的人是rc-local,自行修改)<br>  <code>sudo systemctl restart rclocal</code>  <h2 id="四-brightness脚本使用方法"><a href="#四-brightness脚本使用方法" class="headerlink" title="四 brightness脚本使用方法"></a>四 brightness脚本使用方法</h2></li>
+<li><code>brightness</code> 获取当前亮度设置  </li>
+<li><code>brightness xx</code> 将亮度设置为xx,xx为亮度信息,最高亮度255  </li>
+<li><code>brightness inc step</code> , <code>brightness dec step</code> 增加或降低亮度,step为设定的值,不输入step默认为系统亮度的10%<br> 最后将brightness映射为快捷键(自行设置)  <h2 id="五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如"><a href="#五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如" class="headerlink" title="五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如"></a>五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbacklight -dec 20</span><br></pre></td></tr></table></figure></li>
+<li>然后对权限不够的文件设置开机sudo chmod o+w</li>
 </ul>
 
       
@@ -1096,7 +1082,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/12/22/vim%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">展开全文 >></a>
         </p>
       
 

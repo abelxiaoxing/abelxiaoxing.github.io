@@ -142,78 +142,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-亮度变换器脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">亮度变换器脚本</a>
-    </h1>
-  
-
-        
-        <a href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/" class="archive-article-date">
-  	<time datetime="2022-11-29T07:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本"><a href="#一-archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令-在一些精简linux系统下需要自行编写亮度调节脚本" class="headerlink" title="一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本"></a>一 archlinux下可以下载acpilight使用xbacklight命令或者下载light使用light命令,在一些精简linux系统下需要自行编写亮度调节脚本</h2><h2 id="二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F"><a href="#二-下载我的亮度变换器脚本-允许它执行-并将其放到-x2F-usr-x2F-local-x2F-bin-x2F" class="headerlink" title="二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;"></a>二 下载我的亮度变换器脚本,允许它执行,并将其放到&#x2F;usr&#x2F;local&#x2F;bin&#x2F;</h2><p><code>git clone https://github.com/abelxiaoxing/brightness.git</code><br><code>cd brightness</code><br><code>chmod +x brightness</code><br><code>sudo mv brightness /usr/local/bin</code>  </p>
-<h2 id="三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本"><a href="#三-我们必须允许编辑亮度文件-以便在任何地方都不需要sudo-然而亮度文件开机后默认修改回root权限-因此需要添加开机启动脚本" class="headerlink" title="三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本"></a>三 我们必须允许编辑亮度文件,以便在任何地方都不需要sudo,然而亮度文件开机后默认修改回root权限,因此需要添加开机启动脚本</h2><p><code>sudo nvim /etc/rc.local</code>  </p>
-<ul>
-<li>末尾添加以下内容<br>  <code>/usr/local/bin/brightness restore</code>  </li>
-<li>重新启动rclocal服务(有的人是rc-local,自行修改)<br>  <code>sudo systemctl restart rclocal</code>  <h2 id="四-brightness脚本使用方法"><a href="#四-brightness脚本使用方法" class="headerlink" title="四 brightness脚本使用方法"></a>四 brightness脚本使用方法</h2></li>
-<li><code>brightness</code> 获取当前亮度设置  </li>
-<li><code>brightness xx</code> 将亮度设置为xx,xx为亮度信息,最高亮度255  </li>
-<li><code>brightness inc step</code> , <code>brightness dec step</code> 增加或降低亮度,step为设定的值,不输入step默认为系统亮度的10%<br> 最后将brightness映射为快捷键(自行设置)  <h2 id="五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如"><a href="#五-如果用其他的亮度命令如-xbacklight-或者light等请自行安装并设置权限-例如" class="headerlink" title="五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如"></a>五 如果用其他的亮度命令如:xbacklight 或者light等请自行安装并设置权限,例如</h2>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xbacklight -dec 20</span><br></pre></td></tr></table></figure></li>
-<li>然后对权限不够的文件设置开机sudo chmod o+w</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/11/29/%E4%BA%AE%E5%BA%A6%E5%8F%98%E6%8D%A2%E5%99%A8%E8%84%9A%E6%9C%AC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-开机自启动脚本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -702,6 +630,7 @@
 <h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>选择自己喜欢的字体</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S ttf-sarasa-gothic noto-fonts-cjk</span><br></pre></td></tr></table></figure>
 <h3 id="安装x2go远程环境"><a href="#安装x2go远程环境" class="headerlink" title="安装x2go远程环境"></a>安装x2go远程环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S x2goserver # 安装x2go被控服务</span><br><span class="line">paru -S x2goclient # 安装x2go主控界面（单纯被控可不装）</span><br><span class="line">sudo x2godbadmin --createdb # 创建数据库</span><br></pre></td></tr></table></figure>
+<h3 id="解决win11下弹窗bug插曲"><a href="#解决win11下弹窗bug插曲" class="headerlink" title="解决win11下弹窗bug插曲"></a>解决win11下弹窗bug插曲</h3><p>在 Windows 中打开“终端”应用程序<br>转到设置<br>在打开的面板上，选择左侧的“启动”<br>在右侧，将“默认终端应用程序”更改为“Windows 控制台主机”  </p>
 <h2 id="设置壁纸"><a href="#设置壁纸" class="headerlink" title="设置壁纸"></a>设置壁纸</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S feh</span><br><span class="line">feh --randomize --bg-fill ~/Pictures/DesktopBackground </span><br></pre></td></tr></table></figure>
 <p>会随机切换一张图片作为墙纸，可以配合linux的crontab 设置成每隔10分钟自动切换壁纸。crontab的安装使用很简单，请自行百度。</p>
 <h3 id="向日葵远程控制"><a href="#向日葵远程控制" class="headerlink" title="向日葵远程控制"></a>向日葵远程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S sunloginclient #安装向日葵</span><br><span class="line">systemctl start runsunloginclient #启动向日葵服务</span><br><span class="line">systemctl enable runsunloginclient #开机自启动向日葵服务</span><br></pre></td></tr></table></figure>
@@ -971,6 +900,95 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Ubuntu深度学习环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Ubuntu深度学习环境搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2022-02-27T19:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如为archlinux,一行命令完成GPU驱动、cuda Toolkits、cudnn的安装<br><code>paru -S cudnn</code></p>
+<h1 id="GPU驱动安装"><a href="#GPU驱动安装" class="headerlink" title="GPU驱动安装"></a>GPU驱动安装</h1><p>首先ctrl + alt + F1进入字符界面</p>
+<h2 id="1-删除原有驱动"><a href="#1-删除原有驱动" class="headerlink" title="1.删除原有驱动"></a>1.删除原有驱动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br><span class="line">sudo apt-get autoremove</span><br><span class="line">sudo ./NIVIDIA-Linux-X86_64-384.59.run --uninstall</span><br></pre></td></tr></table></figure>
+<h2 id="2-安装依赖"><a href="#2-安装依赖" class="headerlink" title="2.安装依赖"></a>2.安装依赖</h2><p><code>sudo apt-get install build-essential gcc-multilib dkms</code></p>
+<h2 id="3-禁用nouveau驱动"><a href="#3-禁用nouveau驱动" class="headerlink" title="3.禁用nouveau驱动"></a>3.禁用nouveau驱动</h2><p>编辑 &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist-nouveau.conf 文件，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line">alias nouveau off</span><br><span class="line">alias lbm-nouveau off</span><br></pre></td></tr></table></figure>
+<p>关闭nouveau：<br><code>echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf</code></p>
+<h2 id="4-reboot"><a href="#4-reboot" class="headerlink" title="4.reboot"></a>4.reboot</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<h2 id="5-获取kernel-source"><a href="#5-获取kernel-source" class="headerlink" title="5.获取kernel source"></a>5.获取kernel source</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install linux-source</span><br><span class="line">apt-get install linux-headers-x.x.x-x-generic</span><br></pre></td></tr></table></figure>
+<p>其中x.x.x-x-generic可以通过$(uname -r)替换得到</p>
+<h2 id="6-关掉x-graphic-服务"><a href="#6-关掉x-graphic-服务" class="headerlink" title="6.关掉x graphic 服务"></a>6.关掉x graphic 服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop lightdm(or sudo service lightdm stop)</span><br><span class="line">sudo systemctl stop gdm</span><br><span class="line">sudo systemctl stop kdm</span><br></pre></td></tr></table></figure>
+<h2 id="7-安装nvidia驱动"><a href="#7-安装nvidia驱动" class="headerlink" title="7.安装nvidia驱动"></a>7.安装nvidia驱动</h2><p>下载对应版本<a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx?lang=cn">https://www.nvidia.cn/Download/index.aspx?lang=cn</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod NVIDIA*.run</span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-384.59.run</span><br></pre></td></tr></table></figure>
+<h2 id="8-显卡驱动检查"><a href="#8-显卡驱动检查" class="headerlink" title="8.显卡驱动检查"></a>8.显卡驱动检查</h2><p><code>nvidia-smi</code></p>
+<h1 id="安装cuda-Toolkits"><a href="#安装cuda-Toolkits" class="headerlink" title="安装cuda Toolkits"></a>安装cuda Toolkits</h1><h2 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a><br>fedora版本可用于archlinux</p>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x cudxxxxxxxxxxxx</span><br><span class="line">sudo ./cudxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+<h2 id="3-检查"><a href="#3-检查" class="headerlink" title="3.检查"></a>3.检查</h2><p><code>nvcc -V</code></p>
+<h1 id="安装cudnn（cuda加速库）"><a href="#安装cudnn（cuda加速库）" class="headerlink" title="安装cudnn（cuda加速库）"></a>安装cudnn（cuda加速库）</h1><h2 id="1-下载-1"><a href="#1-下载-1" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a></p>
+<h2 id="2-复制cudnn头文件"><a href="#2-复制cudnn头文件" class="headerlink" title="2.复制cudnn头文件"></a>2.复制cudnn头文件</h2><p><code>sudo cp include/* /usr/local/cuda-11.6/include/</code></p>
+<h2 id="3-复制cudnn的库"><a href="#3-复制cudnn的库" class="headerlink" title="3.复制cudnn的库"></a>3.复制cudnn的库</h2><p><code>sudo cp lib/* /usr/local/cuda/lib64/</code></p>
+<h2 id="4-添加可执行权限"><a href="#4-添加可执行权限" class="headerlink" title="4.添加可执行权限"></a>4.添加可执行权限</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/cuda-11.6/include/cudnn.h</span><br><span class="line">sudo chmod +x /usr/local/cuda-11.6/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
+<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5.检查"></a>5.检查</h2><p>cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn_version.h | grep CUDNN_MAJOR -A 2</p>
+<h1 id="切换cuda版本"><a href="#切换cuda版本" class="headerlink" title="切换cuda版本"></a>切换cuda版本</h1><h2 id="进入目录"><a href="#进入目录" class="headerlink" title="进入目录"></a>进入目录</h2><p><code>cd /usr/local</code></p>
+<h2 id="删除原cuda映射"><a href="#删除原cuda映射" class="headerlink" title="删除原cuda映射"></a>删除原cuda映射</h2><p><code>sudo rm -rf cuda</code></p>
+<h2 id="建立新的cuda映射"><a href="#建立新的cuda映射" class="headerlink" title="建立新的cuda映射"></a>建立新的cuda映射</h2><p><code>ln -s cuda-9.0 cuda</code></p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p><code>nvcc -V</code></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/NVIDIA_(简体中文)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40907977/article/details/115305634">https://blog.csdn.net/qq_40907977/article/details/115305634</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/public669/article/details/98470857">https://blog.csdn.net/public669/article/details/98470857</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigconvience/article/details/8782668">https://blog.csdn.net/bigconvience/article/details/8782668</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
         </p>
       
 
