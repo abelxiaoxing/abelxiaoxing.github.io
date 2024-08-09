@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://abelxiaoxing.github.io">
-  <title>Archives: 2024 | abel的小天地</title>
+  <title>vim学习路 | abel的小天地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个个人资料记录的小地方">
-<meta property="og:type" content="website">
-<meta property="og:title" content="abel的小天地">
-<meta property="og:url" content="https://abelxiaoxing.github.io/2024/index.html">
+  <meta name="description" content="你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。   存活 了解normal模式和insert模式,在normal模式下按i进入insert模式,按ESC回到normal模式 h&#x2F;j&#x2F;k&#x2F;l在normal模式下分别表示向左下上右移动 :q!不保存退出 :w保存进阶快速移动 gg&#x2F;G移动到文件的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim学习路">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/12/22/vim%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="一个个人资料记录的小地方">
+<meta property="og:description" content="你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。   存活 了解normal模式和insert模式,在normal模式下按i进入insert模式,按ESC回到normal模式 h&#x2F;j&#x2F;k&#x2F;l在normal模式下分别表示向左下上右移动 :q!不保存退出 :w保存进阶快速移动 gg&#x2F;G移动到文件的">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-22T09:53:55.000Z">
+<meta property="article:modified_time" content="2024-07-25T09:02:39.614Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
   
@@ -140,238 +142,193 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vim学习路" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vim学习路
+    </h1>
+  
+
+        
+        <a href="/2022/12/22/vim%E5%AD%A6%E4%B9%A0%E8%B7%AF/" class="archive-article-date">
+  	<time datetime="2022-12-22T09:53:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。  </p>
+<h2 id="存活"><a href="#存活" class="headerlink" title="存活"></a>存活</h2><ul>
+<li>了解normal模式和insert模式,在normal模式下按i进入insert模式,按ESC回到normal模式</li>
+<li>h&#x2F;j&#x2F;k&#x2F;l在normal模式下分别表示向左下上右移动</li>
+<li>:q!不保存退出</li>
+<li>:w保存<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h3></li>
+<li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
+<li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
+<li>ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页</li>
+<li>ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页</li>
+<li>zz让光标所在行居屏幕中央</li>
+<li>zt让光标所在行居屏幕最上一行 t&#x3D;top</li>
+<li>zb 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
+<li>w&#x2F;W移到下一个word&#x2F;WORD开头,e&#x2F;E下一个word&#x2F;WORD尾</li>
+<li>b&#x2F;B(backword)回到上一个word&#x2F;WORD开头</li>
+<li>使用f{char}可以移动到char字符上,t移动到char的前一个字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个,3f{char}可以移动到第三个char字符上</li>
+<li>0移动到行首,$移动到行尾</li>
+<li>字符# 和 * :  匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）</li>
+<li>% : 匹配括号移动，包括 (, {, [<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3></li>
+<li>dw删除单词,x删除字符</li>
+<li>dt)删除右边到)为止的所有字符，其中”)”可以为任意字符</li>
+<li>r(replace)可以替换一个字符</li>
+<li>s(substitute)替换并进入插入模式</li>
+<li>c(change)配合文本对象快速修改,例如caw先回到当前单词光标首字符并删除单词并进入插入模式,cw从当前光标删除到单词结束并进入插入模式,ct)删除到括号并进入插入模式,其中”)”可以为任意字符</li>
+<li>使用&#x2F;或者?进行前向或者反向搜索</li>
+<li>使用n&#x2F;N跳转到下一个或者上一个匹配</li>
+<li>使用*或者#进行当前单词的前向或者后向匹配</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2024-08-09T06:20:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/">昇腾CANN模型转换</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://abelxiaoxing.github.io/2022/12/22/vim%E5%AD%A6%E4%B9%A0%E8%B7%AF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/" class="archive-article-date">
-  	<time datetime="2024-07-22T19:24:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-23</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2023/02/02/chatgpt%E8%AE%BA%E6%96%87%E5%8F%99%E8%BF%B0%E6%A8%A1%E6%9D%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          chatgpt论文叙述模板
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开机自启动脚本配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/">Unet发展历程和思路</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2024-07-22T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">win环境配置</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">KVM虚拟化教程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2024-07-19T08:15:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Cmake使用方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/" class="archive-article-date">
-  	<time datetime="2024-07-19T07:49:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/">linux安装MATLAB步骤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/06/23/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2024-06-23T09:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/06/23/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/">Imagenet1k数据集导入</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/" class="archive-article-date">
-  	<time datetime="2024-06-14T02:29:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/">i3与dolphin文件关联</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -406,8 +363,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
