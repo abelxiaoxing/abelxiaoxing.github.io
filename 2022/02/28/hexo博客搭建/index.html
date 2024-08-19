@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="博客搭建安装nodejssudo pacman -S nodejs npm查看版本并检验node -Vnpm -V安装cnpm(国内源加速)sudo npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org检查cnpmcnpm安装hexosudo cnpm install -g hexo-cli检查hexo安装hexo -v初始化">
+    <meta name="description" content="2024年pnpm博客搭建安装nodejssudo pacman -S nodejs pnpm查看版本并检验node -Vpnpm -V设置国内源加速pnpm config set registry https:&#x2F;&#x2F;registry.npmmirror.com&#x2F;安装hexopnpm install -g hexo-cli检查hexo安装hexo -v初始化hexomkdir blogcd blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo博客搭建">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/02/28/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="博客搭建安装nodejssudo pacman -S nodejs npm查看版本并检验node -Vnpm -V安装cnpm(国内源加速)sudo npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org检查cnpmcnpm安装hexosudo cnpm install -g hexo-cli检查hexo安装hexo -v初始化">
+<meta property="og:description" content="2024年pnpm博客搭建安装nodejssudo pacman -S nodejs pnpm查看版本并检验node -Vpnpm -V设置国内源加速pnpm config set registry https:&#x2F;&#x2F;registry.npmmirror.com&#x2F;安装hexopnpm install -g hexo-cli检查hexo安装hexo -v初始化hexomkdir blogcd blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-27T17:52:08.000Z">
-<meta property="article:modified_time" content="2024-08-19T02:51:35.853Z">
+<meta property="article:modified_time" content="2024-08-19T05:33:41.933Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
 
@@ -104,7 +104,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">博客搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2024%E5%B9%B4pnpm%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">2024年pnpm博客搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2022%E5%B9%B4cnpm%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">2022年cnpm博客搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,7 +175,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2024-08-19 13:33:41" itemprop="dateModified" datetime="2024-08-19T13:33:41+08:00">2024-08-19</time>
     </span>
 
   
@@ -187,7 +187,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs npm</code><br>查看版本并检验<br><code>node -V</code><br><code>npm -V</code><br>安装cnpm(国内源加速)<br><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br>检查cnpm<br><code>cnpm</code><br>安装hexo<br><code>sudo cnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>sudo hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>sudo cnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
+    <div class="post-body" itemprop="articleBody"><h1 id="2024年pnpm博客搭建"><a href="#2024年pnpm博客搭建" class="headerlink" title="2024年pnpm博客搭建"></a>2024年pnpm博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs pnpm</code><br>查看版本并检验<br><code>node -V</code><br><code>pnpm -V</code><br>设置国内源加速<br><code>pnpm config set registry https://registry.npmmirror.com/</code><br>安装hexo<br><code>pnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>pnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<p>生成密匙<br><code>ssh-keygen -t rsa</code><br>github提交密匙<br>检查是否密匙配置成功<br><code>ssh -T git@github.com</code><br>deploy到github<br><code>hexo d</code><br>主题修改next<br><code>git clone https://github.com/next-theme/hexo-theme-next themes/next</code><br>在&#x2F;blog&#x2F;theme中git clone合适主题,并在blog下的_config文件下修改theme</p>
+<h1 id="2022年cnpm博客搭建"><a href="#2022年cnpm博客搭建" class="headerlink" title="2022年cnpm博客搭建"></a>2022年cnpm博客搭建</h1><p>安装nodejs<br><code>sudo pacman -S nodejs npm</code><br>查看版本并检验<br><code>node -V</code><br><code>npm -V</code><br>安装cnpm(国内源加速)<br><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code><br>检查cnpm<br><code>cnpm</code><br>安装hexo<br><code>sudo cnpm install -g hexo-cli</code><br>检查hexo安装<br><code>hexo -v</code><br>初始化hexo<br><code>mkdir blog</code><br><code>cd blog</code><br><code>sudo hexo init</code> 卡进度就考虑翻墙或者换源<br>启动博客<br><code>hexo s</code>本地默认地址localhost:4000<br>创建博客<br><code>hexo n “你的博客标题” </code>在source&#x2F;_posts&#x2F;生成md文件<br>清理与生成<br><code>hexo clean</code><br><code>hexo g</code><br>安装git部署插件<br><code>sudo cnpm install --save hexo-deployer-git</code><br>config设置<br><code>vim _config.yml</code> 找到deployment  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 <p>生成密匙<br><code>ssh-keygen -t rsa</code><br>github提交密匙<br>检查是否密匙配置成功<br><code>ssh -T git@github.com</code><br>deploy到github<br><code>hexo d</code><br>主题修改yilia<br><code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在&#x2F;blog&#x2F;theme中git clone合适主题,并在blog下的_config文件下修改theme</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=erKYtw4Rfhk">https://www.youtube.com/watch?v=erKYtw4Rfhk</a><br><a target="_blank" rel="noopener" href="https://tding.top/archives/aad98408.html#more">https://tding.top/archives/aad98408.html#more</a></p>
