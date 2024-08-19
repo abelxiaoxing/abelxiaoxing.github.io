@@ -370,6 +370,11 @@ pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<fig
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li><p>配置wsl代理</p>
+<ul>
+<li>在<code>C:\Users\&lt;UserName&gt;\.wslconfig</code>文件中 (如果不存在就手动创建一个) 加入以下内容: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">ipv6=true</span><br><span class="line">dnsTunneling=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li><p>配置开启自启动wsl</p>
 <ul>
 <li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
