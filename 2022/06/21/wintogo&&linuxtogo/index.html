@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.1">
 
-  
-  <title>wintogo&amp;&amp;linuxtogo | abel的小天地</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ventoy安装制作u盘 找个固态u盘或者移动固态,制作成ventoy启动盘(略) 将ventoy的启动盘格式化成NTFS格式 安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。vhd文件启动插件virtualbox安装linux或windows镜像系统安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="ventoy安装制作u盘 找个固态u盘或者移动固态,制作成ventoy启动盘(略) 将ventoy的启动盘格式化成NTFS格式 安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。vhd文件启动插件virtualbox安装linux或windows镜像系统安装和普通流程基本一样,主要讲两点不太一样的   虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wintogo&amp;&amp;linuxtogo">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/index.html">
@@ -18,77 +30,164 @@
 <meta property="article:modified_time" content="2024-07-22T05:43:55.592Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="abel的小天地" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.4.1"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">abel的小天地</a>
-      </h1>
-      
+<link rel="canonical" href="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/","path":"2022/06/21/wintogo&&linuxtogo/","title":"wintogo&&linuxtogo"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>wintogo&&linuxtogo | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://abelxiaoxing.github.io"></form>
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ventoy%E5%AE%89%E8%A3%85%E5%88%B6%E4%BD%9Cu%E7%9B%98"><span class="nav-number">1.</span> <span class="nav-text">ventoy安装制作u盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virtualbox%E5%AE%89%E8%A3%85linux%E6%88%96windows%E9%95%9C%E5%83%8F%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">virtualbox安装linux或windows镜像系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E9%95%9C%E5%83%8F%E7%B3%BB%E7%BB%9F%E6%B7%BB%E5%8A%A0ventoy%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">linux镜像系统添加ventoy插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linuxtogo%E6%8F%90%E5%8F%96%E5%88%B6%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">linuxtogo提取制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wintogo%E6%8F%90%E5%8F%96%E5%88%B6%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">wintogo提取制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wintogo%E6%89%A9%E5%AE%B9"><span class="nav-number">6.</span> <span class="nav-text">wintogo扩容</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+  </nav>
+</div>
+
+        </div>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-wintogo&amp;&amp;linuxtogo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/06/21/wintogo&&linuxtogo/" class="article-date">
-  <time datetime="2022-06-21T02:35:28.000Z" itemprop="datePublished">2022-06-21</time>
-</a>
+
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      wintogo&amp;&amp;linuxtogo
-    </h1>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
   
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="wintogo&&linuxtogo | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wintogo&&linuxtogo
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-21 10:35:28" itemprop="dateCreated datePublished" datetime="2022-06-21T10:35:28+08:00">2022-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-22 13:43:55" itemprop="dateModified" datetime="2024-07-22T13:43:55+08:00">2024-07-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ol>
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ol>
 <li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</li>
 <li>将ventoy的启动盘格式化成NTFS格式</li>
 <li>安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">vhd文件启动插件</a><h2 id="virtualbox安装linux或windows镜像系统"><a href="#virtualbox安装linux或windows镜像系统" class="headerlink" title="virtualbox安装linux或windows镜像系统"></a>virtualbox安装linux或windows镜像系统</h2>安装和普通流程基本一样,主要讲两点不太一样的  </li>
@@ -111,130 +210,90 @@
 <li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
 </ol>
 
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/" data-id="cm00d4rk0000imrsbacwr9h2v" class="article-share-link">Share</a>
-      
-      
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" rel="prev" title="linux连接windows方法">
+                  <i class="fa fa-angle-left"></i> linux连接windows方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" rel="next" title="wayfire下obs屏幕捕捉">
+                  wayfire下obs屏幕捕捉 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          wayfire下obs屏幕捕捉
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">linux连接windows方法</div>
-    </a>
-  
-</nav>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" target="_blank" rel="noopener" href="//2022/02/">二月 2022</a></li></ul>
     </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
   </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/">昇腾CANN模型转换</a>
-          </li>
-        
-          <li>
-            <a href="/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/">Unet发展历程和思路</a>
-          </li>
-        
-          <li>
-            <a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">win环境配置</a>
-          </li>
-        
-          <li>
-            <a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">KVM虚拟化教程</a>
-          </li>
-        
-          <li>
-            <a href="/2024/07/19/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Cmake使用方法</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2024 abelxiaoxing<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
+
+
+  
 
 
 
 
-  </div>
+
 </body>
 </html>
