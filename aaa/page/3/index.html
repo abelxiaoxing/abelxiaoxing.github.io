@@ -135,6 +135,237 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/03/03/archlinux%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/03/archlinux%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">archlinux安装</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-03 23:19:02" itemprop="dateCreated datePublished" datetime="2022-03-03T23:19:02+08:00">2022-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一、下载安装archlinux"><a href="#一、下载安装archlinux" class="headerlink" title="一、下载安装archlinux"></a>一、下载安装archlinux</h1><h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ul>
+<li>下载镜像<a target="_blank" rel="noopener" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a></li>
+<li>插入U盘，win10用rufus安装，linux用dd命令安装。（dd命令参考<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-dd.html%EF%BC%89">https://www.runoob.com/linux/linux-comm-dd.html）</a></li>
+</ul>
+<h2 id="更改bios启动顺序和引导方式"><a href="#更改bios启动顺序和引导方式" class="headerlink" title="更改bios启动顺序和引导方式"></a>更改bios启动顺序和引导方式</h2><ul>
+<li>开机按住del或者f2或者f8等（具体百度：主板品牌+启动顺序）。</li>
+<li>启动顺序将U盘设为第一</li>
+<li>将系统引导改为EFI模式（推荐），BIOS（LENGACY）容易有坑，在此不多介绍。</li>
+</ul>
+<h2 id="archlinstall安装脚本-可选"><a href="#archlinstall安装脚本-可选" class="headerlink" title="archlinstall安装脚本(可选)"></a>archlinstall安装脚本(可选)</h2><p>输入archinstall即可</p>
+<h2 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h2><ul>
+<li>开机进入Boot Arch Linux(x86_64)</li>
+<li>连接无线网络（有线插入即可）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iwctl</span><br><span class="line">device list</span><br></pre></td></tr></table></figure>
+得到无线网卡的设备详细信息，记住Name的信息，以下以wlan0作为示范。<br>扫描并列出无线网络  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">station wlan0 scan   # 扫描</span><br><span class="line">station wlan0 get-networks  # 列出</span><br></pre></td></tr></table></figure>
+最后输入下列命令连接指定网络并输入密码：（wlan0替换成你自己的网卡名称，TPlink777替换为你想连的网络名称）<br>如果是中文的建议先取消密码或者修改用户名（中文乱码警告）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">station wlan0 connect TPlink777</span><br></pre></td></tr></table></figure>
+完成网络连接退出iwd<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit</span><br></pre></td></tr></table></figure>
+测试网络<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="更新系统时间"><a href="#更新系统时间" class="headerlink" title="更新系统时间"></a>更新系统时间</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl set-ntp true</span><br></pre></td></tr></table></figure>
+<h2 id="分区与格式化"><a href="#分区与格式化" class="headerlink" title="分区与格式化"></a>分区与格式化</h2><p>检查当前磁盘分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+<p>选择系统安装的磁盘，本文以sda为例，（请将sda替换成你要操作的磁盘如sdb sdc等）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<h3 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h3><p>选择gpt分区表，先删除所有硬盘分区（双系统记得保留），创建三块分区，创建完记得write！：   </p>
+<ul>
+<li>size:200M; type:EFI system</li>
+<li>size：32G(此大小为电脑内存大小); type:linux swap</li>
+<li>size：剩余全部大小; type:linux Filesystem</li>
+</ul>
+<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.vfat /dev/sda1</span><br><span class="line">sudo mkfs.xfs -f /dev/sda3</span><br><span class="line">sudo mkswap /dev/sda2</span><br><span class="line">lsblk   ## 查看分区情况</span><br></pre></td></tr></table></figure>
+<h3 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda3 /mnt</span><br><span class="line">mkdir -p /mnt/boot</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br><span class="line">swapon /dev/sda2</span><br><span class="line">lsblk   ## 查看分区情况</span><br></pre></td></tr></table></figure>
+<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><h3 id="安装基础软件包"><a href="#安装基础软件包" class="headerlink" title="安装基础软件包"></a>安装基础软件包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt linux linux-firmware linux-headers base base-devel vim git bash-completion</span><br></pre></td></tr></table></figure>
+<h3 id="生成文件系统的表文件"><a href="#生成文件系统的表文件" class="headerlink" title="生成文件系统的表文件"></a>生成文件系统的表文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h3 id="进入新系统"><a href="#进入新系统" class="headerlink" title="进入新系统"></a>进入新系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<h3 id="设置时区"><a href="#设置时区" class="headerlink" title="设置时区"></a>设置时区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+<h3 id="同步硬件时钟"><a href="#同步硬件时钟" class="headerlink" title="同步硬件时钟"></a>同步硬件时钟</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h3 id="设置系统语言"><a href="#设置系统语言" class="headerlink" title="设置系统语言"></a>设置系统语言</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>将以下两行取消注释(删除前面的井号)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
+<h3 id="生成本地语言信息"><a href="#生成本地语言信息" class="headerlink" title="生成本地语言信息"></a>生成本地语言信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+<h3 id="设置本地语言环境变量"><a href="#设置本地语言环境变量" class="headerlink" title="设置本地语言环境变量"></a>设置本地语言环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.conf</span><br></pre></td></tr></table></figure>
+<p>内容为以下三选一(系统locale不推荐中文，会导致tty乱码)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><h4 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
+<p>内容为<br>archlinux（随便起，这就是你的主机名）</p>
+<h4 id="生成对应host"><a href="#生成对应host" class="headerlink" title="生成对应host"></a>生成对应host</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>内容为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.1.1   archlinux.localdomain archlinux   # 这里的archlinux是主机名</span><br></pre></td></tr></table></figure>
+<h3 id="安装grub系统引导"><a href="#安装grub系统引导" class="headerlink" title="安装grub系统引导"></a>安装grub系统引导</h3><p>如果是intel直接用<code>intel-ucode</code>如果是amdcpu则换成<code>amd-ucode</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr efivar networkmanager intel-ucode</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="激活启用NetworkManager"><a href="#激活启用NetworkManager" class="headerlink" title="激活启用NetworkManager"></a>激活启用NetworkManager</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable NetworkManager</span><br></pre></td></tr></table></figure>
+<h3 id="建立用户名和密码"><a href="#建立用户名和密码" class="headerlink" title="建立用户名和密码"></a>建立用户名和密码</h3><h4 id="给root建立密码"><a href="#给root建立密码" class="headerlink" title="给root建立密码"></a>给root建立密码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br><span class="line">输入密码</span><br></pre></td></tr></table></figure>
+<h3 id="退出并重启"><a href="#退出并重启" class="headerlink" title="退出并重启"></a>退出并重启</h3><p>重启时，请在关机后开机前拔下u盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br><span class="line">umount -a</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="新系统配置"><a href="#新系统配置" class="headerlink" title="新系统配置"></a>新系统配置</h2><h3 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iwd.service # 启动服务</span><br><span class="line">systemctl enable iwd.service # 开机自启动服务</span><br><span class="line">systemctl enable --now NetworkManager</span><br><span class="line">nmtui       # 设置wifi</span><br></pre></td></tr></table></figure>
+<h3 id="创建新用户名和密码"><a href="#创建新用户名和密码" class="headerlink" title="创建新用户名和密码"></a>创建新用户名和密码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel 用户名</span><br><span class="line">passwd 用户名</span><br><span class="line">pacman -S sudo</span><br></pre></td></tr></table></figure>
+<p>在<code>/etc/sudoers</code>文件中的<code>root ALL=(ALL) ALL</code>行下添加<code>用户名 ALL=(ALL) ALL</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Installation_guide_(简体中文)</a><br><a target="_blank" rel="noopener" href="https://www.viseator.com/2017/05/17/arch_install/">https://www.viseator.com/2017/05/17/arch_install/</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&q=arch%20linux%20%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B">https://www.zhihu.com/search?type=content&amp;q=arch%20linux%20%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">frp内网穿透搭建</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-02 14:17:51" itemprop="dateCreated datePublished" datetime="2022-03-02T14:17:51+08:00">2022-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="云服务器frps配置"><a href="#云服务器frps配置" class="headerlink" title="云服务器frps配置"></a>云服务器frps配置</h1><p>去<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a> 下载对应资源</p>
+<h2 id="下载并解压缩"><a href="#下载并解压缩" class="headerlink" title="下载并解压缩"></a>下载并解压缩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.45.0/frp_0.45.0_linux_amd64.tar.gz</span><br><span class="line">tar -xzvf frp_0.45.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="删除多余配置并移到根目录"><a href="#删除多余配置并移到根目录" class="headerlink" title="删除多余配置并移到根目录"></a>删除多余配置并移到根目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd frp_0.45.0_linux_amd64</span><br><span class="line">sudo rm frpc frpc.ini frpc_full.ini </span><br><span class="line">cd</span><br><span class="line">mv download/frp_0.45.0_linux_amd64 frp</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改frps-ini"><a href="#修改frps-ini" class="headerlink" title="修改frps.ini"></a>修改frps.ini</h2><p>修改公网服务器上的服务端配置文件 frps.ini，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000  #frp服务端端口（必须）</span><br></pre></td></tr></table></figure>
+<h2 id="后台运行frps"><a href="#后台运行frps" class="headerlink" title="后台运行frps"></a>后台运行frps</h2><p>先cd进frp文件后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./frps -c ./frps.ini &gt; /dev/null 2&gt;1&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h1 id="内网主机frpc配置"><a href="#内网主机frpc配置" class="headerlink" title="内网主机frpc配置"></a>内网主机frpc配置</h1><h2 id="下载并解压缩-1"><a href="#下载并解压缩-1" class="headerlink" title="下载并解压缩"></a>下载并解压缩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.45.0/frp_0.45.0_linux_amd64.tar.gz</span><br><span class="line">tar -xzvf frp_0.45.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="删除多余配置并移到根目录-1"><a href="#删除多余配置并移到根目录-1" class="headerlink" title="删除多余配置并移到根目录"></a>删除多余配置并移到根目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd frp_0.45.0_linux_amd64</span><br><span class="line">sudo rm frps frps.ini frps_full.ini </span><br><span class="line">cd</span><br><span class="line">mv download/frp_0.45.0_linux_amd64 frp</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改frpc-ini"><a href="#修改frpc-ini" class="headerlink" title="修改frpc.ini"></a>修改frpc.ini</h2><p>修改内网目标主机的客户端配置文件 frpc.ini，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = xxx.xxx.xxx.xxx   #frp服务端地址，必须是公网ip或者域名，这里假设为xxx.xxx.xxx.xxx</span><br><span class="line">server_port = 7000      #frp服务端端口，即填写服务端配置中的 bind_port</span><br><span class="line"></span><br><span class="line">[ssh]              #必须换掉名字，以免重复</span><br><span class="line">type = tcp              #连接类型，填tcp或udp</span><br><span class="line">local_ip = 127.0.0.1    #填127.0.0.1或内网ip都可以</span><br><span class="line">local_port = 22         #需要转发到的端口，ssh端口是22</span><br><span class="line">remote_port = 6000      #frp服务端的远程监听端口，即你访问服务端的remote_port就相当于访</span><br><span class="line">                        #问客户端的 local_port，如果填0则会随机分配一个端口</span><br></pre></td></tr></table></figure>
+
+<h1 id="设置开机自启动脚本"><a href="#设置开机自启动脚本" class="headerlink" title="设置开机自启动脚本"></a>设置开机自启动脚本</h1><h2 id="创建一个启动service脚本"><a href="#创建一个启动service脚本" class="headerlink" title="创建一个启动service脚本"></a>创建一个启动service脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
+
+<p>写入内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=frpc service </span><br><span class="line">After=network-online.target network.target syslog.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/home/用户名/.frp/frpc -c /home/用户名/.frp/frpc.ini</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=3</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置开机自启"><a href="#设置开机自启" class="headerlink" title="设置开机自启"></a>设置开机自启</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start frpc</span><br><span class="line">sudo systemctl enable frpc</span><br></pre></td></tr></table></figure>
+
+<h1 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h1><p>去云服务器上开放相关的端口</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
