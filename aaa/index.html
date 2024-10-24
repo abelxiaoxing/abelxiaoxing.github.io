@@ -135,6 +135,100 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/24/rdp%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/24/rdp%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">rdp远程桌面samba文件传输配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-24 14:19:42 / 修改时间：15:34:09" itemprop="dateCreated datePublished" datetime="2024-10-24T14:19:42+08:00">2024-10-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>向日葵需要通过登陆才能使用，且免费用户操作卡顿延迟较高，因此采用云服务器通过frp映射到公网IP</p>
+<h2 id="rdp远程桌面配置"><a href="#rdp远程桌面配置" class="headerlink" title="rdp远程桌面配置"></a>rdp远程桌面配置</h2><ol>
+<li>需要远程的服务器端上配置frp服务（略）</li>
+<li>点击系统属性-远程，在该界面点击允许远程连接到此计算机。此时windows的rdp服务已开启，端口号为3389</li>
+<li>将本地3389映射到公网ip上，在frpc.ini新增以下内容<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[win_rdp]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 3389</span><br><span class="line">remote_port = 13389(可以为任意数，自行定义)</span><br></pre></td></tr></table></figure></li>
+<li>远程连接<ul>
+<li>linux：使用krdc，勾选rdp协议，通过xxx.xxx.xxx.xxx:13389进行远程访问</li>
+<li>windows：打开远程桌面，通过xxx.xxx.xxx.xxx:13389进行远程访问</li>
+</ul>
+</li>
+</ol>
+<h2 id="samba公网文件传输配置"><a href="#samba公网文件传输配置" class="headerlink" title="samba公网文件传输配置"></a>samba公网文件传输配置</h2><ol>
+<li>服务端和客户端都需开启samba服务，并完成服务器端samba服务配置（略，linux见我博客，win创建共享文件夹并设置权限即可）</li>
+<li>将samba服务的默认端口445映射到公网ip上，在frpc.ini新增以下内容<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[win_samba]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 3389</span><br><span class="line">remote_port = 10445(可以为任意数，自行定义)</span><br></pre></td></tr></table></figure>
+服务端配置完毕</li>
+</ol>
+<h3 id="linux客户端"><a href="#linux客户端" class="headerlink" title="linux客户端"></a>linux客户端</h3><p>使用dolphin文件管理器，输入以下内容（xxx.xxx.xxx.xxx为的公网ip）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb://用户名@xxx.xxx.xxx.xxx:10445/</span><br></pre></td></tr></table></figure>
+<h3 id="windows客户端"><a href="#windows客户端" class="headerlink" title="windows客户端"></a>windows客户端</h3><p>cmd用管理员模式打开输入以下内容（xxx.xxx.xxx.xxx为的公网ip）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenport=445 listenaddress=127.0.0.1 connectport=10455 connectaddress= xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>效果就是本机访问127.0.0.1的445端口时，会转发到远程IP地址(117.73.12.12)的30445端口</p>
+<p>查看端口转发配置列表，可以看到已经成功转发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+<p>打开系统服务管理器，找到server，右键属性–&gt; 启动类型改为禁用，然后重启电脑，再次查看服务状态，没有正在运行就是成功了。<br>在windows资源管理器中输入<code>\\127.0.0.1\</code>访问远程文件夹</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43514847/article/details/133009479">https://blog.csdn.net/qq_43514847/article/details/133009479</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/23/arm%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AElunarvim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1116,148 +1210,6 @@ pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<fig
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4">https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4</a></li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/03/04/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/04/Cmake%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Cmake使用方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-04 12:44:15" itemprop="dateCreated datePublished" datetime="2024-03-04T12:44:15+08:00">2024-03-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Cmake使用方法"><a href="#Cmake使用方法" class="headerlink" title="Cmake使用方法"></a>Cmake使用方法</h1><h1 id="一、基础编译"><a href="#一、基础编译" class="headerlink" title="一、基础编译"></a>一、基础编译</h1><ol>
-<li>项目与文件结构<br> 项目结构 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── build</span><br><span class="line">├── CMakeList.txt</span><br><span class="line">├── main.c</span><br><span class="line">├── testFunc.c</span><br><span class="line">└── testFunc.h</span><br></pre></td></tr></table></figure>
- main.c <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;testFunc.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">func</span>(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- testFunc.c <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;testFunc.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;data is %d\n&quot;</span>, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- testFunc.h <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _TEST_FUNC_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _TEST_FUNC_H_</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> data)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
- CMakeLists.txt <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CMake最低版本号要求</span></span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line">project (demo)</span><br><span class="line"><span class="comment"># 指定生成目标</span></span><br><span class="line">add_executable(main main.c testFunc.c)</span><br></pre></td></tr></table></figure></li>
-<li>编译与运行 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd build &amp;&amp; cmake ../</span><br><span class="line">make -j8</span><br><span class="line">./main</span><br></pre></td></tr></table></figure></li>
-<li>思考与改进<ol>
-<li><p>如果在同一目录下有多个源文件，需要在add_executable里把所有源文件都添加进去，这太不优雅了。因此使用<code>aux_source_directory(dir var)</code>把指定目录下所有的源文件存储在一个变量中，第一个参数dir是指定目录，第二个参数var是用于存放源文件列表的变量名。</p>
-</li>
-<li><p>当程序文件比较多时，我们会进行分类管理，把代码根据功能放在不同的目录下，这样方便查找。这个时候头文件定位需要用以下命令来实现，不够优雅。</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;xxxxxx/testFunc.h&quot;</span><br><span class="line">#include &quot;xxxxxx/testFunc1.h&quot;</span><br></pre></td></tr></table></figure>
-<p> 因此使用<code>include_directories</code> 方法添加多个指定头文件的搜索路径，路径之间用空格分隔。</p>
-</li>
-<li><p>源代码随意放置，不够优雅，统一放入src文件夹后要用<code>add_subdirectory(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</code>设置源代码目录。其中**<code>source_dir</code> 指定一个包含CMakeLists.txt和代码文件所在的目录;<code>binary_dir</code>二进制代码目录执行后的输出文件将会存放在此处;<code>EXCLUDE_FROM_ALL</code>标记，表示新增加的子目录将会排除在ALL目录之外。**</p>
-</li>
-</ol>
-</li>
-</ol>
-<h1 id="二、进阶编译"><a href="#二、进阶编译" class="headerlink" title="二、进阶编译"></a>二、进阶编译</h1><ol>
-<li><p>项目与文件结构<br> 项目结构</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── CMakeList.txt</span><br><span class="line">├── include1</span><br><span class="line">|   └── testFunc1.h</span><br><span class="line">├── include2</span><br><span class="line">|   └── testFunc2.h</span><br><span class="line">└── src</span><br><span class="line">		├── main.c</span><br><span class="line">		├── testFunc1.c</span><br><span class="line">		└── testFunc2.c</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p> main.c</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;testFunc.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">func</span>(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> testFunc.c</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;testFunc.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;data is %d\n&quot;</span>, data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> testFunc.h</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _TEST_FUNC_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _TEST_FUNC_H_</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> data)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<p> CMakeLists.txt</p>
- <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line">project (demo)</span><br><span class="line"><span class="comment"># 设置源代码目录</span></span><br><span class="line">add_subdirectory (src)</span><br></pre></td></tr></table></figure>
-<p> 这里指定src目录下存放了源文件，当执行cmake时，就会进入src目录下去找src目录下的CMakeLists.txt，所以在src目录下也建立一个CMakeLists.txt，内容如下:<br> src&#x2F;CMakeLists.txt</p>
- <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将当前src/CMakeLists.txt同文件夹下所有文件添加进SRC_LIST变量</span></span><br><span class="line">aux_source_directory (. SRC_LIST)</span><br><span class="line"><span class="comment"># 添加头文件目录</span></span><br><span class="line">include_directories (../include1 ../include2)</span><br><span class="line"><span class="comment"># 制定生成目标</span></span><br><span class="line">add_executable (main $&#123;SRC_LIST&#125;)</span><br><span class="line"><span class="comment"># 设定目标二进制可执行文件的存放位置，其中PROJECT_SOURCE_DIR为工程根目录</span></span><br><span class="line">set (EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_SOURCE_DIR&#125;/bin)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编译与运行</p>
-<ol>
-<li>编译 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make -j8</span><br></pre></td></tr></table></figure>
- 这样Makefile会在build目录下生成，二进制程序会在bin目录下生成，然后运行可执行程序： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ../bin</span><br><span class="line">./main</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>思考与改进</p>
-<p> 只使用一个CMakeList.txt,把最外层的CMakeLists.txt内容改成如下<br> CMakeLists.txt</p>
- <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line">project (demo)</span><br><span class="line">set (EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_SOURCE_DIR&#125;/bin)</span><br><span class="line">aux_source_directory (src SRC_LIST)</span><br><span class="line">include_directories (include1 include2)</span><br><span class="line">add_executable (main $&#123;SRC_LIST&#125;)</span><br></pre></td></tr></table></figure>
-<p> 此时还需要把src目录下的CMakeList.txt删除即可</p>
-</li>
-</ol>
-<h1 id="三、生成库文件"><a href="#三、生成库文件" class="headerlink" title="三、生成库文件"></a>三、生成库文件</h1><ol>
-<li><p>项目结构</p>
- <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── CMakeList.txt</span><br><span class="line">├── include1</span><br><span class="line">|   └── testFunc1.h</span><br><span class="line">├── include2</span><br><span class="line">|   └── testFunc2.h</span><br><span class="line">├── lib</span><br><span class="line">└── src</span><br><span class="line">		├── main.c</span><br><span class="line">		├── testFunc1.c</span><br><span class="line">		└── testFunc2.c</span><br></pre></td></tr></table></figure>
-<p> CMakeList.txt</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required (VERSION 3.5)</span><br><span class="line">project (demo)</span><br><span class="line">set (SRC_LIST1 $&#123;PROJECT_SOURCE_DIR&#125;/src/testFunc1.c)</span><br><span class="line">set (SRC_LIST2 $&#123;PROJECT_SOURCE_DIR&#125;/src/testFunc2.c)</span><br><span class="line">include_directories (../include1 ../include2)</span><br><span class="line"></span><br><span class="line"># add_library:生成动态库或静态库(第1个参数指定库的名字；第2个参数决定是动态还是静态，如果没有就默认静态；第3个参数指定生成库的源文件)</span><br><span class="line">add_library (testFunc_shared1 SHARED $&#123;SRC_LIST1&#125;)</span><br><span class="line">add_library (testFunc_shared2 SHARED $&#123;SRC_LIST2&#125;)</span><br><span class="line">add_library (testFunc_static1 STATIC $&#123;SRC_LIST1&#125;)</span><br><span class="line">add_library (testFunc_static2 STATIC $&#123;SRC_LIST2&#125;)</span><br><span class="line"></span><br><span class="line"># set_target_properties: 设置最终生成的库的名称，还有其它功能，如设置库的版本号等</span><br><span class="line">set_target_properties (testFunc_shared1 PROPERTIES OUTPUT_NAME &quot;testFunc1&quot;)</span><br><span class="line">set_target_properties (testFunc_shared2 PROPERTIES OUTPUT_NAME &quot;testFunc2&quot;)</span><br><span class="line">set_target_properties (testFunc_static1 PROPERTIES OUTPUT_NAME &quot;testFunc1&quot;)</span><br><span class="line">set_target_properties (testFunc_static2 PROPERTIES OUTPUT_NAME &quot;testFunc2&quot;)</span><br><span class="line"></span><br><span class="line"># LIBRARY_OUTPUT_PATH: 库文件的默认输出路径，这里设置为工程目录下的lib目录</span><br><span class="line">set (LIBRARY_OUTPUT_PATH $&#123;PROJECT_SOURCE_DIR&#125;/lib)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行查看编译好的库文件</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">cd ../lib/</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p> 最后将会在lib文件夹下生成<code>libtestFunc.a</code>和<code>libtestFunc.so</code>。</p>
-</li>
-</ol>
-<h1 id="四、链接库文件"><a href="#四、链接库文件" class="headerlink" title="四、链接库文件"></a>四、链接库文件</h1><ol>
-<li><p>项目结构</p>
- <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── CMakeList.txt</span><br><span class="line">├── include1</span><br><span class="line">|   └── testFunc1.h</span><br><span class="line">├── include2</span><br><span class="line">|   └── testFunc2.h</span><br><span class="line">├── lib</span><br><span class="line">|   ├── libtestFunc1.a</span><br><span class="line">|   ├── libtestFunc1.so</span><br><span class="line">|   ├── libtestFunc2.a</span><br><span class="line">|   └── libtestFunc2.so</span><br><span class="line">└── src</span><br><span class="line">		├── main.c</span><br><span class="line">		├── testFunc1.c</span><br><span class="line">		└── testFunc2.c</span><br></pre></td></tr></table></figure>
-<p> main.c</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;testFunc.h&quot;</span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    func(100);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> CMakeLists.txt</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required (VERSION 3.5)</span><br><span class="line">project (demo)</span><br><span class="line">set (EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_SOURCE_DIR&#125;/bin)</span><br><span class="line">set (SRC_LIST $&#123;PROJECT_SOURCE_DIR&#125;/src/main.c)</span><br><span class="line">include_directories ($&#123;PROJECT_SOURCE_DIR&#125;/testFunc/inc)</span><br><span class="line"></span><br><span class="line"># find_library: 在指定目录下查找指定库，并把库的绝对路径存放到变量里，其第一个参数是变量名称，第二个参数是库名称，第三个参数是HINTS，第4个参数是路径</span><br><span class="line">find_library(TESTFUNC_LIB testFunc HINTS $&#123;PROJECT_SOURCE_DIR&#125;/testFunc/lib)</span><br><span class="line">add_executable (main $&#123;SRC_LIST&#125;)</span><br><span class="line"></span><br><span class="line"># target_link_libraries: 把目标文件与库文件进行链接</span><br><span class="line">target_link_libraries (main $&#123;TESTFUNC_LIB&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编译与运行</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">cd ../bin/</span><br><span class="line">./main</span><br></pre></td></tr></table></figure></li>
-</ol>
 
       
     </div>

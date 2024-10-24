@@ -135,6 +135,174 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/03/03/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/03/archlinux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">archlinux环境配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-03 23:19:57" itemprop="dateCreated datePublished" datetime="2022-03-03T23:19:57+08:00">2022-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-19 15:11:08" itemprop="dateModified" datetime="2024-08-19T15:11:08+08:00">2024-08-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="方式1（自主配置，推荐！）"><a href="#方式1（自主配置，推荐！）" class="headerlink" title="方式1（自主配置，推荐！）"></a>方式1（自主配置，推荐！）</h1><h2 id="更改系统源、社区源添加multilib支持"><a href="#更改系统源、社区源添加multilib支持" class="headerlink" title="更改系统源、社区源添加multilib支持"></a>更改系统源、社区源添加multilib支持</h2><h3 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>在开头添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</span><br><span class="line">## 163</span><br><span class="line">Server = http://mirrors.163.com/archlinux/$repo/os/$arch</span><br><span class="line">## aliyun</span><br><span class="line">Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="添加archlinuxcn、添加multilib"><a href="#添加archlinuxcn、添加multilib" class="headerlink" title="添加archlinuxcn、添加multilib"></a>添加archlinuxcn、添加multilib</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+<p>在最后添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line"># The Chinese Arch Linux communities packages.</span><br><span class="line"># SigLevel = Optional TrustedOnly</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line"># 清华大学</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
+<p>取消掉[multilib]的注释</p>
+<h3 id="安装同步密匙"><a href="#安装同步密匙" class="headerlink" title="安装同步密匙"></a>安装同步密匙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu &amp;&amp; pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+<h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
+<h2 id="安装paru"><a href="#安装paru" class="headerlink" title="安装paru"></a>安装paru</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S paru</span><br><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
+<p>用paru代替pacman进行安装，但注意升级系统还应使用<code>pacman -Syu</code></p>
+<h2 id="安装Display-Server"><a href="#安装Display-Server" class="headerlink" title="安装Display Server"></a>安装Display Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S xorg</span><br></pre></td></tr></table></figure>
+<h2 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h2><h3 id="安装AMD显卡驱动"><a href="#安装AMD显卡驱动" class="headerlink" title="安装AMD显卡驱动"></a>安装AMD显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S xf86-video-amdgpu</span><br></pre></td></tr></table></figure>
+<h3 id="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"><a href="#安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）" class="headerlink" title="安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）"></a>安装NVIDIA深度学习环境（显卡驱动、cudatoolkits、cudnn）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S cudnn</span><br></pre></td></tr></table></figure>
+<h3 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S nvidia nvidia-utils</span><br></pre></td></tr></table></figure>
+<h2 id="安装Display-Manager"><a href="#安装Display-Manager" class="headerlink" title="安装Display Manager"></a>安装Display Manager</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S sddm</span><br></pre></td></tr></table></figure>
+<h3 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable sddm</span><br></pre></td></tr></table></figure>
+<h2 id="安装桌面环境"><a href="#安装桌面环境" class="headerlink" title="安装桌面环境"></a>安装桌面环境</h2><p>kde美观功能强系统占用大<br>xfce轻量，linus御用桌面<br>i3wm平铺式桌面</p>
+<h3 id="kde"><a href="#kde" class="headerlink" title="kde"></a>kde</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S plasma kde-applications packagekit-qt5</span><br></pre></td></tr></table></figure>
+<h3 id="xfce"><a href="#xfce" class="headerlink" title="xfce"></a>xfce</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S xfce4 xfce4-goodies</span><br></pre></td></tr></table></figure>
+<h3 id="i3wm"><a href="#i3wm" class="headerlink" title="i3wm"></a>i3wm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S i3</span><br></pre></td></tr></table></figure>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>桌面环境安装后进行重启</p>
+<h3 id="中文字体支持"><a href="#中文字体支持" class="headerlink" title="中文字体支持"></a>中文字体支持</h3><p>选择自己喜欢的字体</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S ttf-sarasa-gothic noto-fonts-cjk</span><br></pre></td></tr></table></figure>
+<h3 id="安装x2go远程环境"><a href="#安装x2go远程环境" class="headerlink" title="安装x2go远程环境"></a>安装x2go远程环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S x2goserver # 安装x2go被控服务</span><br><span class="line">paru -S x2goclient # 安装x2go主控界面（单纯被控可不装）</span><br><span class="line">sudo x2godbadmin --createdb # 创建数据库</span><br></pre></td></tr></table></figure>
+<h3 id="解决win11下弹窗bug插曲"><a href="#解决win11下弹窗bug插曲" class="headerlink" title="解决win11下弹窗bug插曲"></a>解决win11下弹窗bug插曲</h3><p>在 Windows 中打开“终端”应用程序<br>转到设置<br>在打开的面板上，选择左侧的“启动”<br>在右侧，将“默认终端应用程序”更改为“Windows 控制台主机”  </p>
+<h2 id="设置壁纸"><a href="#设置壁纸" class="headerlink" title="设置壁纸"></a>设置壁纸</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S feh</span><br><span class="line">feh --randomize --bg-fill ~/Pictures/DesktopBackground </span><br></pre></td></tr></table></figure>
+<p>会随机切换一张图片作为墙纸，可以配合linux的crontab 设置成每隔10分钟自动切换壁纸。crontab的安装使用很简单，请自行百度。</p>
+<h3 id="向日葵远程控制"><a href="#向日葵远程控制" class="headerlink" title="向日葵远程控制"></a>向日葵远程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paru -S sunloginclient #安装向日葵</span><br><span class="line">systemctl start runsunloginclient #启动向日葵服务</span><br><span class="line">systemctl enable runsunloginclient #开机自启动向日葵服务</span><br></pre></td></tr></table></figure>
+<h3 id="企业微信"><a href="#企业微信" class="headerlink" title="企业微信"></a>企业微信</h3><p>安装企业微信前必须先安装微信  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S com.qq.weixin.deepin #微信</span><br><span class="line">paru -S com.qq.weixin.work.deepin #企业微信</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装微信时字体无法显示</li>
+</ul>
+<p>把修改后的字体（就叫fake_simsun.ttc吧）放到~&#x2F;.deepinwine&#x2F;Deepin-QQ&#x2F;drive_c&#x2F;windows&#x2F;Fonts下<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw">https://pan.baidu.com/s/1Y43YerNoPJVz_Fhp6BAWaw</a> 提取码: 96qm</p>
+<ul>
+<li>企业微信调整（重要，否则无法使用）<br>更新后3.1.12版本不能使用的原因是因为系统把libldap&#x2F;libber等此类与网络有关的openLDAP库由2.4升级到2.6,有以下后果:</li>
+</ul>
+<ol>
+<li>wine6在使用网络功能时最终有依赖链透到libldap&#x2F;libber,随着系统更新，wine6与libldap也都同步进行了更新，所以才有你们修改程序启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh里的APPRUN_CMD由deepin-wine6-stable改成wine后可以使程序运行  </li>
+<li>deepin那边的兄弟估计偷懒或是基于什么原因，编译deepin-wine6-stable的时候还是使用旧的依赖链，所以程序使用网络时在系统里找不到旧版libldap&#x2F;libber而停止运行  </li>
+<li>本次系统更新会导致很多软件无法运行，例如那些使用了最广泛网络库libcurl的软件都有相同的依赖，锅在openLDAP这些开源组织在做大版本变更的不兼容<br>建议的解决方式:  </li>
+<li>安装com.qq.weixin.deepin这个微信包（估计和本包是同一个作者），它里面打包了旧版本的libldap这些库，在&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib里  </li>
+<li>拷贝lib目录到某个地方，如cp -r &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.deepin&#x2F;lib &#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib  </li>
+<li>修改程序的启动脚本&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;files&#x2F;run.sh,里面加上export LD_LIBRARY_PATH&#x3D;&#x2F;opt&#x2F;apps&#x2F;com.qq.weixin.work.deepin&#x2F;lib,使deepin-wine6-stable运行时能找到并使用这个lib目录<br>不建议直接改APPRUN_CMD成wine,毕竟deepin-wine6-stable做了很多工作，比如去阴影、支持文件关联、字体搜索、屏幕识别截图等等，用了wine这些特性就没了。其他很多deepin软件无法运行的都可以用这个方式。<br>后续等这个包作者更新打包或者是deepin-wine6-stable编译使用新依赖链。</li>
+</ol>
+<h3 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">paru -S vmware-workstation #虚拟机</span><br><span class="line">sudo modprobe -a vmw_vmci vmmon #启动虚拟机相关应用</span><br><span class="line">lsmod | grep ^vm</span><br><span class="line">vmware-networks --start #配置vmware网络</span><br><span class="line">paru -S alacritty #可用gpu渲染的终端</span><br><span class="line">sudo vim ~/.config/alacritty/alacritty.yml #调节alacritty配置文件，如字体大小（size）</span><br><span class="line">paru -S safeeyes #护眼软件定时提醒休息</span><br><span class="line">paru -S redshiftgui-bin #图形化版本</span><br><span class="line">paru -S krita #作图工具，类似ps</span><br><span class="line">paru -S gimp #作图工具，类似ps</span><br><span class="line">paru -S obs-studio # 录屏推流工具</span><br><span class="line">paru -S fish # 一款shell</span><br><span class="line">paru -S firefox #火狐浏览器</span><br><span class="line">paru -S google-chrome #谷歌浏览器</span><br><span class="line">paru -S opera #opera浏览器</span><br><span class="line">paru -S microsoft-edge-dev-bin #edge浏览器</span><br><span class="line">paru -S gitter #开发者交流社区软件</span><br><span class="line">paru -S com.qq.weixin.deepin #微信</span><br><span class="line">paru -S mitalk #米聊(垃圾腾讯不开发linux版本)</span><br><span class="line">paru -S deepin-wine-tim #tim（qq替代版）</span><br><span class="line">paru -S visual-studio-code-bin #vscode</span><br><span class="line">paru -S ranger #终端文件浏览器</span><br><span class="line">paru -S neovim #最强终端编辑器</span><br><span class="line">paru -S wps-office wps-office-mui-zh-cn ttf-wps-fonts # 安装wps、中文支持、字体支持</span><br><span class="line">paru -S netease-cloud-music #网易云音乐</span><br><span class="line">paru -S qqmusic-bin #qq音乐</span><br><span class="line">paru -S freemind #思维导图</span><br><span class="line">paru -S filezilla #远程ftp工具</span><br><span class="line">paru -S htop #资源进程管理器 top命令的升级版</span><br><span class="line">paru -S lolcat #文本查看 也就是cat命令的升级版</span><br><span class="line">paru -S evolution # 邮箱管理器</span><br><span class="line">paru -S baidunetdisk-electrion #百度云</span><br><span class="line">paru -S uget #下载管理器</span><br><span class="line">paru -S timeshift #备份工具</span><br><span class="line">paru -S clash-for-windows-electron-bin #科学上网</span><br><span class="line">paru -S neofetch #显示系统信息</span><br><span class="line">paru -S lolcate #配合neofetch，使其炫酷渐变色</span><br><span class="line">paru -S flameshot #截图软件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="双时钟系统同步"><a href="#双时钟系统同步" class="headerlink" title="双时钟系统同步"></a>双时钟系统同步</h3><p>按照 Arch WiKi 的建议，这里修改Windows系统的注册表：</p>
+<p>鼠标右键左下角win按钮，以管理员方式打开PowerShell，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&quot; /v RealTimeIsUniversal /d 1 /t REG_QWORD /f</span><br></pre></td></tr></table></figure>
+<h2 id="安装fricx5输入法"><a href="#安装fricx5输入法" class="headerlink" title="安装fricx5输入法"></a>安装fricx5输入法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color fcitx5-nord</span><br></pre></td></tr></table></figure>
+<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
+<p>然后配置自动启动，提供以下3种方法，第一个不行，试第2个，然后第3个</p>
+<ol>
+<li>如果，支持XDG桌面环境，例如KDE,GNOME, Xfce,默认重启后即可</li>
+<li>在~&#x2F;.config&#x2F;autostart目录下添加fcitx-autostart.desktop文件，可以从目录etc&#x2F;xdg&#x2F;autostart中复制</li>
+<li>对于i3-wm,可以在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># fcitx5</span><br><span class="line">exec_always --no-startup-id fcitx5</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="fcitx4输入法安装-i3wm可能fcitx5有问题"><a href="#fcitx4输入法安装-i3wm可能fcitx5有问题" class="headerlink" title="fcitx4输入法安装(i3wm可能fcitx5有问题)"></a>fcitx4输入法安装(i3wm可能fcitx5有问题)</h2><p>i3wm环境下fcitx5有问题，因此选用fcitx4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S fcitx-im</span><br><span class="line">paru -S fcitx-rime</span><br></pre></td></tr></table></figure>
+<p>在环境变量配置文件&#x2F;etc&#x2F;environment中添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/environment</span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br><span class="line">SDL_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure>
+<p>在配置文件~&#x2F;.config&#x2F;i3&#x2F;config中添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec_always --no-startup-id fcitx</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装花生壳内网穿透"><a href="#安装花生壳内网穿透" class="headerlink" title="安装花生壳内网穿透"></a>安装花生壳内网穿透</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S phddns-bin # 安装花生壳</span><br></pre></td></tr></table></figure>
+
+<p>在linux中安装好花生壳后，进入目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/systemd/system</span><br></pre></td></tr></table></figure>
+
+<p>创建启动文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch phddns.service</span><br></pre></td></tr></table></figure>
+
+<p>编辑文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim phddns.service </span><br></pre></td></tr></table></figure>
+
+<p>在文件中加入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=phddns Service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line"># default start cmd</span><br><span class="line">ExecStart=/usr/sbin/phddns start</span><br><span class="line"># Suppress stderr to eliminate duplicated messages in syslog. NM calls openlog()</span><br><span class="line"># with LOG_PERROR when run in foreground. But systemd redirects stderr to</span><br><span class="line"># syslog by default, which results in logging each message twice.</span><br><span class="line">StandardOutput=syslog</span><br><span class="line">StandardError=null</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>设置开机自启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start phddns.service</span><br><span class="line">systemctl enable phddns.service</span><br></pre></td></tr></table></figure>
+<h2 id="让终端走代理"><a href="#让终端走代理" class="headerlink" title="让终端走代理"></a>让终端走代理</h2><p>在终端输入以下内容可临时走代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:7890</span><br><span class="line">export https_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+<p>在~&#x2F;.zshrc最后添加以下两行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># clash</span><br><span class="line">alias setproxy=&quot;export http_proxy=http://127.0.0.1:7890 &amp;&amp; export https_proxy=http://127.0.0.1:7890&quot;</span><br><span class="line">alias unproxy=&quot;unset All_PROXY&quot;</span><br></pre></td></tr></table></figure>
+<p>通过setproxy unproxy命令来控制代理</p>
+<h1 id="方式2（脚本配置，不做推荐，后续更新较为佛系列）"><a href="#方式2（脚本配置，不做推荐，后续更新较为佛系列）" class="headerlink" title="方式2（脚本配置，不做推荐，后续更新较为佛系列）"></a>方式2（脚本配置，不做推荐，后续更新较为佛系列）</h1><p>参考该项目介绍<a target="_blank" rel="noopener" href="https://github.com/abelxiaoxing/archlinux_config">abel的个人配置</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Fcitx5_(简体中文)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/157260502">https://zhuanlan.zhihu.com/p/157260502</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46973701">https://zhuanlan.zhihu.com/p/46973701</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/03/03/archlinux%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
