@@ -135,6 +135,107 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/11/15/kvm%E5%A4%9A%E6%98%BE%E5%8D%A1%E7%9B%B4%E9%80%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/15/kvm%E5%A4%9A%E6%98%BE%E5%8D%A1%E7%9B%B4%E9%80%9A/" class="post-title-link" itemprop="url">kvm多显卡直通</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-15 21:31:22 / 修改时间：21:56:03" itemprop="dateCreated datePublished" datetime="2024-11-15T21:31:22+08:00">2024-11-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>主板bios打开虚拟化（有的老旧cpu不支持）  </li>
+<li>宿主机系统中启用iommu组<br>打开&#x2F;etc&#x2F;default&#x2F;grub，找到GRUB_CMDLINE_LINUX_DE FAULT，修改为下面内容  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on&quot;</span><br></pre></td></tr></table></figure>
+更新grub  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub -u</span><br></pre></td></tr></table></figure>
+重启电脑，检查iommu是否正确启用  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep -i iommu</span><br></pre></td></tr></table></figure>
+如果你在输出中看到很多pci xxxx:xx:xx.x: Adding to iommu group xx，那么恭喜你，第一步完成了。<br>系统中的所有设备只能按照iommu group为单位分配给宿主机或者虚拟机。因此如果你看到两个不相关的设备在一个group里，那也没招，你只能给这俩设备一起丢虚拟机里去。<br>很可惜的是，Linux系统并不支持预留iommu group。<br>iommu group是硬件实现上的分组。在Linux的实现中，只认得各个在总线上的硬件，并挨个挨个的启动起来。<br>我们要做的就是阻止Linux内核在启动时初始化某些组里的硬件。   </li>
+<li>寻找需要预留的iommu组<br>首先确认我们显卡所在的PCIE总线和产品型号：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -nnv | grep -i nvidia</span><br></pre></td></tr></table></figure>
+我的电脑上输出如下：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel driver in use: nvidia</span><br><span class="line">        Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia</span><br><span class="line">01:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br><span class="line">05:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia</span><br><span class="line">05:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br></pre></td></tr></table></figure>
+可以看到输出分成两部分，编号加设备描述。01:00.0和01:00.1是编号通过冒号 “:” 又分成了三部分，第一个部分是PCIe的 domain ID，第二个部分是 bus ID，第三个部分是 device id.function id。PCI设备的组织形式是一个树形，这表示一个domain可以包含多个bus，一个bus又包含了多个device，一个device又包含多个function。<br>0300 是一个用来区分不同设备的编号，网络设备、存储设备、多媒体设备、显卡都有自己的编号。<br>10de:2203 这是一个厂商特有的编号，10de是 Nvidia的编号（Vendor ID），Nvidia所有的设备都是使用这一编号，2203 表示这是一个3090Ti显卡。<br>接下来我们需要找出我们的设备所在的iommu group：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dmesg | grep iommu | grep 01:00.0</span><br></pre></td></tr></table></figure>
+输出如下：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[    0.536462] pci 0000:01:00.0: Adding to iommu group 17</span><br><span class="line">$ sudo dmesg | grep iommu | grep 05:00.0</span><br><span class="line">[    0.536491] pci 0000:05:00.0: Adding to iommu group 20</span><br></pre></td></tr></table></figure>
+确认iommu group中的所有设备：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dmesg | grep &quot;iommu group 17&quot;</span><br></pre></td></tr></table></figure>
+输出如下：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    0.536462] pci 0000:01:00.0: Adding to iommu group 17</span><br><span class="line">[    0.536467] pci 0000:01:00.1: Adding to iommu group 17</span><br></pre></td></tr></table></figure></li>
+<li>屏蔽显卡</li>
+</ol>
+<ul>
+<li>型号屏蔽法：<br>如果只有一张显卡，或者两张显卡的ID不同，可以直接用pci-stub或者vfio-pci的方法来屏蔽即可，修改&#x2F;etc&#x2F;default&#x2F;grub：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on pci-stub.ids=10de:2203,10de:1aef&quot;</span><br><span class="line">或者</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on vfio-pci.ids=10de:2203,10de:1aef&quot;</span><br></pre></td></tr></table></figure>
+更新内核，并重启：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub -u</span><br></pre></td></tr></table></figure>
+如果屏蔽成功，内核驱动就会显示如下：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -nnv | grep -E &quot;(^\S|Kernel driver in use)&quot; | grep 01:00 -A 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel driver in use: vfio-pci</span><br><span class="line">01:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br><span class="line">        Kernel driver in use: vfio-pci</span><br></pre></td></tr></table></figure>
+否则下面还是驱动被nvidia接管的状态（其实nvidia-smi就能看了）：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -nnv | grep -E &quot;(^\S|Kernel driver in use)&quot; | grep 01:00 -A 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel driver in use: nvidia</span><br><span class="line">01:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br><span class="line">        Kernel driver in use: snd_hda_intel</span><br></pre></td></tr></table></figure></li>
+<li>脚本屏蔽法<br>当然如果两张显卡都是同一个型号，是不能用上面的方法屏蔽的。这个时候我们要为显卡指定驱动：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/initramfs-tools/scripts/init-top/vfio.sh</span><br></pre></td></tr></table></figure>
+脚本内容为：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">echo &quot;vfio-pci&quot; &gt; /sys/bus/pci/devices/0000:01:00.0/driver_override</span><br><span class="line">echo &quot;vfio-pci&quot; &gt; /sys/bus/pci/devices/0000:01:00.1/driver_override</span><br><span class="line">#echo &quot;0000:01:00.0&quot; &gt; /sys/bus/pci/drivers/vfio-pci/bind # 这里我没有加这个绑定，有人加了这两句，但我注释了，因为本地找不到这个文件夹</span><br><span class="line">#echo &quot;0000:01:00.1&quot; &gt; /sys/bus/pci/drivers/vfio-pci/bind # 需要modprobe -i vfio-pci之后才有这个文件夹，但不加仍然可用</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+给脚本增加权限，否则无法执行：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 744 /etc/initramfs-tools/scripts/init-top/vfio.sh</span><br></pre></td></tr></table></figure>
+完成后刷新initramfs，这个命令会执行上面的脚本：  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u -k all</span><br></pre></td></tr></table></figure>
+输出下面的结果，重启就可以正常屏蔽了。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update-initramfs: Generating /boot/initrd.img-6.2.0-31-generic</span><br><span class="line">update-initramfs: Generating /boot/initrd.img-6.2.0-26-generic</span><br></pre></td></tr></table></figure>
+重启配置成功后按照上一节的命令就能看到显卡的驱动被vfio-pci接管了，nvidia-smi也能发现显卡已经无法识别了。<br>如果想恢复显卡的挂载，就把脚本中的两行echo…注释掉，并刷新initramfs，重启机器即可。</li>
+</ul>
+<ol start="5">
+<li>打开kvm，加入该显卡即可</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ahmclishihao/article/details/132679686">https://blog.csdn.net/ahmclishihao/article/details/132679686</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/24/rdp%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1118,98 +1219,6 @@ pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<fig
 <li><p>数据加载<br>使用 torchvision.datasets.ImageFolder() 就可以直接加载处理好的数据集啦！</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"></span><br><span class="line">root = <span class="string">&#x27;data/imagenet&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_imagenet</span>(<span class="params">root, train = <span class="literal">True</span>, transform = <span class="literal">None</span>, target_transform = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">if</span> train:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;val&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> datasets.ImageFolder(root = root,</span><br><span class="line">                            transform = transform,</span><br><span class="line">                            target_transform = target_transform)</span><br></pre></td></tr></table></figure></li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/" class="post-title-link" itemprop="url">i3与dolphin文件关联</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-06-14 10:29:58" itemprop="dateCreated datePublished" datetime="2024-06-14T10:29:58+08:00">2024-06-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="错误说明"><a href="#错误说明" class="headerlink" title="错误说明"></a>错误说明</h2><ul>
-<li>新版本的kde5下,i3桌面下dolphin无法正确使用文件关联</li>
-</ul>
-<h2 id="解决方案一（最佳方法）"><a href="#解决方案一（最佳方法）" class="headerlink" title="解决方案一（最佳方法）"></a>解决方案一（最佳方法）</h2><ol>
-<li>安装downgrade降级软件</li>
-<li>降级 kservice5,kservice5 5.115.0-1</li>
-<li>不要选择忽略kservice5升级</li>
-<li>降级后, copy <code>applications.menu</code> from <code>/etc/xdg/menus/</code> to <code>~/.config/menus/</code></li>
-<li>重新升级kservice5</li>
-</ol>
-<h2 id="解决方法二（不太好的方法-方法一失败时使用）"><a href="#解决方法二（不太好的方法-方法一失败时使用）" class="headerlink" title="解决方法二（不太好的方法,方法一失败时使用）"></a>解决方法二（不太好的方法,方法一失败时使用）</h2><ol>
-<li>下载<a target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace/blob/master/menu/desktop/plasma-applications.menu">plasma-applications.menu</a></li>
-<li>将其复制到<code>.config/menus/</code>和<code>/etc/xdg/menus</code>下并重命名为<code>applications.menu</code></li>
-</ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4">https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4</a></li>
-</ul>
 
       
     </div>
