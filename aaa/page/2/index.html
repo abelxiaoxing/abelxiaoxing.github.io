@@ -135,6 +135,140 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">KVM虚拟化教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-07-19 16:59:58" itemprop="dateCreated datePublished" datetime="2024-07-19T16:59:58+08:00">2024-07-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="环境检查"><a href="#环境检查" class="headerlink" title="环境检查"></a>环境检查</h2><p>检查kvm环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo <span class="comment"># 检测CPU是否支持虚拟化，若大于0则支持</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y cpu-checker <span class="comment"># 安装cpu-checker软件包检查kvm环境</span></span><br><span class="line">kvm-ok <span class="comment"># 运行kvm-ok命令检查，输出KVM acceleration can be used即为可用</span></span><br></pre></td></tr></table></figure>
+<h2 id="软件包安装"><a href="#软件包安装" class="headerlink" title="软件包安装"></a>软件包安装</h2><h3 id="ARCH系"><a href="#ARCH系" class="headerlink" title="ARCH系"></a>ARCH系</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</span><br><span class="line"><span class="built_in">sudo</span> pacman -S ebtables iptables</span><br></pre></td></tr></table></figure>
+<ul>
+<li>kvm 负责CPU和内存的虚拟化</li>
+<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
+<li>ovmf 为虚拟机启用UEFI支持</li>
+<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
+<li>virt-manager 是管理虚拟机的GUI<br>安装libguestfs<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S libguestfs</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Debian系"><a href="#Debian系" class="headerlink" title="Debian系"></a>Debian系</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils libguestfs-tools virt-viewer virt-manager virtinst</span><br><span class="line"><span class="built_in">sudo</span> apt install python3-libvirt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>qemu-kvm：即qemu+kvm，kvm负责cpu和内存的虚拟化，而qemu负责IO设备，如网卡和磁盘等的虚拟化。</li>
+<li>libvirt-daemon-system：KVM管理工具，为不同的虚拟机监视器提供了统一的接口。</li>
+<li>libvirt-clients: 包含了一组用于与 libvirt 库交互的命令行工具，包括virsh、virt-install，virt-clone<ul>
+<li>virsh: 用于虚拟机的创建，启动，停止，迁移，克隆，配置文件管理等操作。</li>
+<li>virt-install：用于GuestOS安装</li>
+<li>virt-clone：用于虚拟机克隆</li>
+</ul>
+</li>
+<li>bridge-utils：配置网桥</li>
+<li>libguestfs-tools：虚拟机镜像管理工具，包括virt-cat、virt-edit、virt-ls、virt-rescue</li>
+<li>virt-viewer：用于虚拟机控制台</li>
+<li>virt-manager：图形界面管理KVM虚拟化</li>
+<li>virtinst: 命令行工具，包括virt-install、virt-clone、virt-manager等。</li>
+<li>python3-libvirt：libvirt库的Python 绑定，在Python中使用 libvirt 的功能，包括对虚拟机、存储池、网络等资源的管理，以及对虚拟化宿主机的监控和控制。</li>
+</ul>
+<h2 id="启动libvirt服务"><a href="#启动libvirt服务" class="headerlink" title="启动libvirt服务"></a>启动libvirt服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start libvirtd.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> libvirtd.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl status libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="检查kvm模块"><a href="#检查kvm模块" class="headerlink" title="检查kvm模块"></a>检查kvm模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lsmod  | grep kvm</span><br><span class="line">kvm_intel             372736  5</span><br><span class="line">kvm                  1032192  1 kvm_intel</span><br></pre></td></tr></table></figure>
+<h2 id="添加当前用户到-kvm和libvirt-组（可选）"><a href="#添加当前用户到-kvm和libvirt-组（可选）" class="headerlink" title="添加当前用户到 kvm和libvirt 组（可选）"></a>添加当前用户到 kvm和libvirt 组（可选）</h2><p>修改组后，需要重新登录或注销再登录才能使更改生效。</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG kvm <span class="variable">$USER</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG libvirt $(<span class="built_in">whoami</span>)</span><br><span class="line"><span class="built_in">id</span> $(<span class="built_in">whoami</span>) <span class="comment"># 验证用户是否加入组中</span></span><br><span class="line">uid=1001(gycx) gid=1001(gycx) <span class="built_in">groups</span>=1001(gycx),108(kvm),138(libvirt)</span><br></pre></td></tr></table></figure>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/libvirt/libvirtd.conf</span><br></pre></td></tr></table></figure>
+<p>将UNIX域套接字组所有权设置为libvirt(第85行)： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_group = &quot;libvirt&quot;</span><br></pre></td></tr></table></figure>
+<p>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_rw_perms = &quot;0770&quot;  </span><br></pre></td></tr></table></figure>
+<p>将你的用户帐户添加到libvirt组： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -a -G libvirt $(whoami)  </span><br><span class="line">newgrp libvirt  </span><br></pre></td></tr></table></figure>
+<p>重启libvirt守护进程： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2><ul>
+<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe -r kvm_intel </span><br><span class="line">sudo modprobe kvm_intel nested=1 </span><br></pre></td></tr></table></figure>
+要使此配置持久，请运行： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;options kvm-intel nested=1&quot; | sudo tee /etc/modprobe.d/kvm-intel.conf </span><br></pre></td></tr></table></figure>
+确认嵌套虚拟化设置为是： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systool -m kvm_intel -v | grep nested </span><br><span class="line">nested              = &quot;Y&quot; </span><br><span class="line">nested_early_check  = &quot;N&quot; </span><br><span class="line">cat /sys/module/kvm_intel/parameters/nested </span><br><span class="line">Y </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="创建网桥-br0-，配置同一网段"><a href="#创建网桥-br0-，配置同一网段" class="headerlink" title="创建网桥(br0)，配置同一网段"></a>创建网桥(br0)，配置同一网段</h2><p>为实现从本机外访问该虚拟机必须将虚拟机的网卡映射至网桥。virbr0 网桥是 KVM 安装完成后自动创建的，仅做测试用途。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brctl show <span class="comment"># 显示网桥信息</span></span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400a882e2       <span class="built_in">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure>
+
+<p>通过如下内容在 &#x2F;etc&#x2F;netplan 目录下创建文件 01-netcfg.yaml 来新建网桥：<br>输入ifconfig确认当前网口设备、ip地址和mac地址，本案例中设备为eno2，ip地址填入addresses中，mac地址填入macaddress中<br>输入ip route得到默认via和metric，填入routes的via和metric中  </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network</span>:</span><br><span class="line">  <span class="attr">ethernets</span>:</span><br><span class="line">    <span class="attr">eno2</span>:</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">bridges</span>:</span><br><span class="line">    <span class="attr">br0</span>:</span><br><span class="line">      <span class="attr">interfaces</span>: [eno2]</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">addresses</span>: [<span class="number">192.168</span><span class="number">.100</span><span class="number">.123</span>/<span class="number">24</span>]</span><br><span class="line">      <span class="attr">macaddress</span>: 7<span class="attr">c</span>:<span class="attr">c2</span>:<span class="number">55</span>:4<span class="attr">d</span>:<span class="attr">e1</span>:e9</span><br><span class="line">      <span class="attr">routes</span>:</span><br><span class="line">        - <span class="attr">to</span>: <span class="keyword">default</span></span><br><span class="line">          <span class="attr">via</span>: <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span></span><br><span class="line">          <span class="attr">metric</span>: <span class="number">101</span></span><br><span class="line">      <span class="attr">nameservers</span>:</span><br><span class="line">        <span class="attr">addresses</span>: [<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>]</span><br><span class="line">      <span class="attr">parameters</span>:</span><br><span class="line">        <span class="attr">stp</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">version</span>: <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>应用网络配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line">ip add show</span><br></pre></td></tr></table></figure>
+<h2 id="创建虚拟机（二选一）"><a href="#创建虚拟机（二选一）" class="headerlink" title="创建虚拟机（二选一）"></a>创建虚拟机（二选一）</h2><ol>
+<li><p>图形化创建虚拟机<br>运行virt-manager，启动图形化界面进行kvm虚拟机安装<br>  add connection——local install media——choose iso or CDROM install media——选择要安装的iso镜像点击choose volume——Forward——设置CPU和Memory点击Forward——点击enable storage for this virtual machine并点击create a disk image for the virtual machine选择硬盘大小点击Forward——选择网桥为br0点击Finish</p>
+</li>
+<li><p>终端创建虚拟机<br> 创建4c8g200G的虚拟机,磁盘为稀疏模式，格式为qcow2，总线类型为virtio。同启动一个串行终端打印输出</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-install  --virt-type=kvm --name=win10   --vcpus=4  --memory=8192 --osinfo=win10 --cdrom=/var/lib/libvirt/images/win10.iso  --disk path=/var/lib/libvirt/images/win10.qcow2,size=200,format=qcow2,bus=virtio,sparse --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --force</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -171,7 +305,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -304,7 +438,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -389,7 +523,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -481,7 +615,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -623,7 +757,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-06 13:34:28" itemprop="dateModified" datetime="2024-09-06T13:34:28+08:00">2024-09-06</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -715,7 +849,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -807,7 +941,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-06 13:22:53" itemprop="dateModified" datetime="2024-09-06T13:22:53+08:00">2024-09-06</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -915,7 +1049,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -1003,7 +1137,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
     </span>
 
   
@@ -1042,110 +1176,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/21/wintogo&&linuxtogo/" class="post-title-link" itemprop="url">wintogo&&linuxtogo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-21 10:35:28" itemprop="dateCreated datePublished" datetime="2022-06-21T10:35:28+08:00">2022-06-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-08-19 10:51:35" itemprop="dateModified" datetime="2024-08-19T10:51:35+08:00">2024-08-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ol>
-<li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</li>
-<li>将ventoy的启动盘格式化成NTFS格式</li>
-<li>安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">vhd文件启动插件</a></li>
-</ol>
-<h2 id="virtualbox安装linux或windows镜像系统"><a href="#virtualbox安装linux或windows镜像系统" class="headerlink" title="virtualbox安装linux或windows镜像系统"></a>virtualbox安装linux或windows镜像系统</h2><p>安装和普通流程基本一样,主要讲两点不太一样的  </p>
-<ol>
-<li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
-<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI</li>
-</ol>
-<h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2><ol>
-<li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
-<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功</li>
-</ol>
-<h2 id="linuxtogo提取制作"><a href="#linuxtogo提取制作" class="headerlink" title="linuxtogo提取制作"></a>linuxtogo提取制作</h2><ol>
-<li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可</li>
-<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
-</ol>
-<h2 id="wintogo提取制作"><a href="#wintogo提取制作" class="headerlink" title="wintogo提取制作"></a>wintogo提取制作</h2><ul>
-<li>将windows虚拟机关机,打开虚拟机安装目录,找到.vhd文件,移动到ventoy启动盘即可</li>
-</ul>
-<h2 id="wintogo扩容"><a href="#wintogo扩容" class="headerlink" title="wintogo扩容"></a>wintogo扩容</h2><ol>
-<li>查看虚拟磁盘wtg.vhdx信息<br>  <code>qemu-img info wtg.vhdx</code></li>
-<li>vhdx格式转换成qcow2<br>  <code>qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</code></li>
-<li>对wtg.qcow2扩容到100G<br>  <code>qemu-img resize wtg.qcow2 100G</code></li>
-<li>将qcow2文件转换回vhdx格式<br>  <code>qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</code></li>
-<li>重命名文件<br>  <code>mv wtg.vhdx wtg_old.vhdx</code><br>  <code>mv wtg_expanded.vhdx wtg.vhdx</code>  </li>
-<li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/aaa/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/aaa/">1</a><span class="page-number current">2</span><a class="page-number" href="/aaa/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/aaa/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1158,7 +1188,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
