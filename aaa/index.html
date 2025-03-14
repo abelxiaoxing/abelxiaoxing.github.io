@@ -135,6 +135,142 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2025/03/14/%E7%BB%93%E6%9E%84%E5%9B%BE%E6%B5%81%E7%A8%8B%E5%9B%BE%E5%BF%AB%E9%80%9F%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/14/%E7%BB%93%E6%9E%84%E5%9B%BE%E6%B5%81%E7%A8%8B%E5%9B%BE%E5%BF%AB%E9%80%9F%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">结构图/流程图快速绘制方法（Trae+Claude+DrawIO工作流）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-14 17:04:34 / 修改时间：17:15:21" itemprop="dateCreated datePublished" datetime="2025-03-14T17:04:34+08:00">2025-03-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="🌐-工具准备清单"><a href="#🌐-工具准备清单" class="headerlink" title="🌐 工具准备清单"></a>🌐 工具准备清单</h2><ol>
+<li>科学上网工具（必备）</li>
+<li><a target="_blank" rel="noopener" href="https://www.trae.ai/">Trae.ai 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.diagrams.net/">DrawIO 下载</a></li>
+<li>Claude Sonnet 3.7 (可选，如果有api，则无需trae工具)</li>
+</ol>
+<h2 id="📌-四步高效绘制流程"><a href="#📌-四步高效绘制流程" class="headerlink" title="📌 四步高效绘制流程"></a>📌 四步高效绘制流程</h2><h3 id="步骤-1：环境准备"><a href="#步骤-1：环境准备" class="headerlink" title="步骤 1：环境准备"></a>步骤 1：环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 连接科学上网</span><br><span class="line">2. 访问 trae.ai 下载最新客户端</span><br><span class="line">3. 安装后启动软件 &gt; 点击<span class="string">&quot;检查更新&quot;</span>获取最新版本</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤-2：AI-转换处理"><a href="#步骤-2：AI-转换处理" class="headerlink" title="步骤 2：AI 转换处理"></a>步骤 2：AI 转换处理</h3><p>操作指南</p>
+<ol>
+<li>将待转换内容（图片&#x2F;文字）发送至 Claude</li>
+<li>使用固定prompt模板：<br>“请用 drawio 的 mxGraph XML 格式清晰地复刻该____流程示意图，确保：”<br>“- 层级结构准确”<br>“- 图形元素完整”<br>“- 连线关系明确”</li>
+<li>等待生成规范的XML代码</li>
+</ol>
+<h3 id="步骤-3：文件创建规范"><a href="#步骤-3：文件创建规范" class="headerlink" title="步骤 3：文件创建规范"></a>步骤 3：文件创建规范</h3><p>文件操作步骤</p>
+<ol>
+<li>新建txt文本文件 &gt; 重命名为”流程图.drawio”</li>
+<li>用记事本打开该文件，粘贴生成的XML代码</li>
+<li>保存时选择编码格式为 UTF-8</li>
+</ol>
+<h3 id="步骤-4：可视化编辑"><a href="#步骤-4：可视化编辑" class="headerlink" title="步骤 4：可视化编辑"></a>步骤 4：可视化编辑</h3><ol>
+<li>右键文件 &gt; 选择”Open with drawio”</li>
+<li>进入图形化编辑界面后：<ul>
+<li>按 Ctrl+Shift+F 格式化排版</li>
+<li>使用F6快捷键调出样式面板</li>
+<li>通过左侧工具栏添加新元素</li>
+</ul>
+</li>
+</ol>
+<h2 id="💡-进阶技巧"><a href="#💡-进阶技巧" class="headerlink" title="💡 进阶技巧"></a>💡 进阶技巧</h2><ul>
+<li><strong>批量处理</strong>：可同时转换多个流程图组件后合并</li>
+<li><strong>版本控制</strong>：建议使用Git管理.drawio文件</li>
+<li><strong>云端协同</strong>：导出为XML后可直接导入GitHub&#x2F;GitLab</li>
+<li><strong>样式优化</strong>：在Claude prompt中添加特定样式要求<blockquote>
+<p>示例：”使用material design风格，配色方案#2E86C1&#x2F;#F4D03F”</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="⚠️-常见问题排查"><a href="#⚠️-常见问题排查" class="headerlink" title="⚠️ 常见问题排查"></a>⚠️ 常见问题排查</h2><table>
+<thead>
+<tr>
+<th>问题现象</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件打开乱码</td>
+<td>检查编码格式是否为UTF-8</td>
+</tr>
+<tr>
+<td>图形显示异常</td>
+<td>验证XML头信息是否完整</td>
+</tr>
+<tr>
+<td>连线错位</td>
+<td>添加<code>&lt;mxGeometry as=&quot;geometry&quot;/&gt;</code>节点</td>
+</tr>
+<tr>
+<td>样式丢失</td>
+<td>确保<code>&lt;mxStylesheet&gt;</code>标签存在</td>
+</tr>
+</tbody></table>
+<h2 id="🛠️-效率工具链"><a href="#🛠️-效率工具链" class="headerlink" title="🛠️ 效率工具链"></a>🛠️ 效率工具链</h2><ul>
+<li><strong>Snipaste</strong>：快速截图转文字</li>
+<li><strong>PowerToys</strong>：即时OCR识别</li>
+<li><strong>VS Code</strong>：安装DrawIO插件实时预览</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2025/02/19/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -997,158 +1133,6 @@ pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<fig
 <p>对于为什么要在测试的时候剪枝，而不是直接拿剪完的L1，L2，L3训练，我们的解释其实上一页ppt上面写了，剪掉的部分在训练时的反向传播中是有贡献的，如果直接拿L1，L2，L3训练，就相当于只训练了不同深度的U-Net，最后的结果会很差。<br>第二个问题，如何去决定剪多少，还是比较好回答的。因为在训练模型的时候会把数据分为训练集，验证集和测试集，训练集上是一定拟合的很好的，测试集是我们不能碰的，所以我们会根据子网络在验证集的结果来决定剪多少。所谓的验证集就是一开始从训练集中分出来的数据，用来监测训练过程用的。<br>好，讲完了思路，我们来看结果。<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/Untitled%2020.png" alt="Untitled"><br>先看看L1～L4的网络参数量，差了好多，L1只有0.1M，而L4有9M，也就是理论上如果L1的结果我是满意的，那么模型可以被剪掉的参数达到98.8%。不过根据我们的四个数据集，L1的效果并不会那么好，因为太浅了嘛。但是其中有三个数据集显示L2的结果和L4已经非常接近了，也就是说对于这三个数据集，在测试阶段，我们不需要用9M的网络，用半M的网络足够了。<br>回想一下一开始我提出的问题，网络需要多深合适，这幅图是不是就一目了然。网络的深度和数据集的难度是有关系的，这四个数据集当中，第二个，也就是息肉分割是最难的，大家可以看到纵坐标，它代表分割的评价指标，越大越好，其他都能达到挺高的，但是唯独息肉分割只有在30左右，对于比较难的数据集，可以看到网络越深，它的分割结果是在不断上升的。对于大多数比较简单的分割问题，其实并不需要非常深，非常大的网络就可以达到很不错的精度了。<br>横坐标代表的是在测试阶段，单显卡12G的TITAN X (Pascal)下，分割一万张图需要的时间。我们可以看到不同的模型大小，测试的时间差好多。如果比较L2和L4的话，就差了三倍之多。<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/Untitled%2021.png" alt="Untitled"><br>对于测试的速度，用这一幅图会更清晰。我们统计了用不同的模型，1秒钟可以分割多少的图。如果用L2来代替L4的话，速度确实能提升三倍。<br>剪枝应用最多的就是在移动手机端了，根据模型的参数量，如果L2得到的效果和L4相近，模型的内存可以省18倍。还是非常可观的数目。<br>关于剪枝的这部分我认为是对原先的U-Net的一个很大的改观，原来的结构过于刻板，并且没有很好的利用不用层级的特征。<br>简单的总结一下，UNet++的第一个优势就是精度的提升，这个应该它整合了不同层次的特征所带来的，第二个是灵活的网络结构配合深监督，让参数量巨大的深度网络在可接受的精度范围内大幅度的缩减参数量。  </p>
 <h2 id="5-说在后面"><a href="#5-说在后面" class="headerlink" title="5. 说在后面"></a>5. 说在后面</h2><p>再次放上UNet++结构<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/Untitled%2022.png" alt="Untitled"><br>回顾一下这次分享，就这么个分割网络，都能说这么久，要我说就放个结构图，说这个网络很牛逼，再告知一下代码在哪儿，谢谢大家就完事儿了。<br>其实搞学术做研究不是这样子的，UNet++肯定马上就会被更强的结构所代替，但是要设计出更强的结构，你得首先明白这个结构，甚至它的原型U-Net设计背后的心路历程。与其和大家分享一个苍白的分割网络，我更愿意分享的是这个项目背后从开始认识U-Net，到分析它的组成，到批判性的解读，再到改进思路的形成，实验设计，像刚刚分享过程中一次次尴尬的自问自答，中间那些非常饱满的心路历程。这也是我自己在学术生涯中学到的做研究的范式。<br>说句题外话，就跟玩狼人杀一样，你一上来就说自己预言家，验了谁谁谁，那没人信的呀，你得说清楚为什么要验他，警徽怎么留，把这些心路历程都盘盘清楚，身份才能做实。<br>其实网络结构怎么样真的不重要，重要的是你怎么能把故事给讲清楚，要是讲完以后还能够引起更多的思考和讨论那就更好了。  </p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://github.com/mrgloom/awesome-semantic-segmentation">语义分割网络代码汇总</a><br><a target="_blank" rel="noopener" href="https://github.com/handong1587/handong1587.github.io/blob/master/_posts/deep_learning/2015-10-09-segmentation.md">语义分割论文汇总</a><br><a target="_blank" rel="noopener" href="https://medium.com/@mikeliao/deep-layer-aggregation-combining-layers-in-nn-architectures-2744d29cab8">深层聚合思想</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44958351">研习U-Net</a>  </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">win环境配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-22 17:10:00" itemprop="dateCreated datePublished" datetime="2024-07-22T17:10:00+08:00">2024-07-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="终端代理配置"><a href="#终端代理配置" class="headerlink" title="终端代理配置"></a>终端代理配置</h2><ul>
-<li>安装Windows Terminal  </li>
-<li>系统变量配置Windows Terminal的代理<br><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png" alt="Untitled"></li>
-</ul>
-<h2 id="配置WSL2"><a href="#配置WSL2" class="headerlink" title="配置WSL2"></a>配置WSL2</h2><ol>
-<li><p>终端输入<code>wsl --install</code>，安装wsl2</p>
-</li>
-<li><p>将wsl从系统盘迁移到D盘</p>
-<ul>
-<li><code>wsl -l -v</code>，查看正在运行的实例</li>
-<li><code>wsl —terminate &lt;instance_name&gt;</code>,终止正在运行的实例</li>
-<li><code>wsl --export &lt;instance_name&gt; D:\export.tar</code>将需要迁移的实例，进行导出，导出路径自定义</li>
-<li><code>wsl --unregister &lt;instance_name&gt;</code>导出完成之后，就需要将原有的实例进行卸载</li>
-<li><code>wsl --import &lt;instance_name&gt; D:\import\ D:\export.tar --version 2</code>使用导出的文件进行导入即可(<code>--version 2</code>可以不加，现在默认都是 WSL2)</li>
-</ul>
-</li>
-<li><p>设置wsl启动方式为<code>systemd</code></p>
-<ul>
-<li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
-</li>
-<li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
-</li>
-<li><p>重启wsl</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>配置wsl代理</p>
-<ul>
-<li>在<code>C:\Users\&lt;UserName&gt;\.wslconfig</code>文件中 (如果不存在就手动创建一个) 加入以下内容: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">ipv6=true</span><br><span class="line">dnsTunneling=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>配置开启自启动wsl</p>
-<ul>
-<li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="设置开启启动frpc"><a href="#设置开启启动frpc" class="headerlink" title="设置开启启动frpc"></a>设置开启启动frpc</h2><p>先在你的 Frp 文件目录下新建一个名为start.txt的文本文档，在里面输入如下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">:home</span><br><span class="line">frpc -c frpc.ini</span><br><span class="line">goto home</span><br></pre></td></tr></table></figure>
-
-<p>保存后，改名为 start.bat，这样双击运行start.bat就可以启动frp客户端，而 Frp 在崩溃、异常退出进程后，将会自动重新启动。</p>
-<p>如果电脑没有显示扩展名请自行百度 “显示文件扩展名”</p>
-<p>但是我们需要的是frpc开机自己启动，我们让系统开机自己运行start.bat就可以了~</p>
-<h3 id="方法1：利用Windows开始菜单启动项"><a href="#方法1：利用Windows开始菜单启动项" class="headerlink" title="方法1：利用Windows开始菜单启动项"></a><strong>方法1：利用Windows开始菜单启动项</strong></h3><ol>
-<li><p>右键 start.bat，创建快捷方式。</p>
-</li>
-<li><p>打开</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的电脑用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将创建的快捷方式复制进去</p>
-</li>
-</ol>
-<p>这个方法的优缺点：</p>
-<p>优点：操作简单，拖进去就可以了。</p>
-<p>缺点：会显示出命令行窗口。</p>
-<h3 id="方法2：利用Windows任务计划程序"><a href="#方法2：利用Windows任务计划程序" class="headerlink" title="方法2：利用Windows任务计划程序"></a><strong>方法2：利用Windows任务计划程序</strong></h3><ol>
-<li>打开任务计划程序<ol>
-<li>打开开始菜单，输入 “任务计划程序” 将会自动搜索，接着打开它。</li>
-</ol>
-</li>
-<li>创建计划任务<ul>
-<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
-</li>
-<li><p>【常规】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"><br> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。<br> “使用最高权限运行” 也是可选的，根据个人需要可以选上。<br> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。  </p>
-</li>
-<li><p>【触发器】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"><br> 触发器页，点击新建，选择 “启动时”</p>
-</li>
-<li><p>接着转到 【<strong>操作</strong>】选项卡<br>   点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）<br>   例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong><br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"><br>   接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。<br>   以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~<br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/C_C666/article/details/127619978">https://blog.csdn.net/C_C666/article/details/127619978</a></p>
 
       
     </div>

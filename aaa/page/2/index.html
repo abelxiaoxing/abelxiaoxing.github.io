@@ -135,6 +135,158 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/22/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">win环境配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-07-22 17:10:00" itemprop="dateCreated datePublished" datetime="2024-07-22T17:10:00+08:00">2024-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="终端代理配置"><a href="#终端代理配置" class="headerlink" title="终端代理配置"></a>终端代理配置</h2><ul>
+<li>安装Windows Terminal  </li>
+<li>系统变量配置Windows Terminal的代理<br><img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled.png" alt="Untitled"></li>
+</ul>
+<h2 id="配置WSL2"><a href="#配置WSL2" class="headerlink" title="配置WSL2"></a>配置WSL2</h2><ol>
+<li><p>终端输入<code>wsl --install</code>，安装wsl2</p>
+</li>
+<li><p>将wsl从系统盘迁移到D盘</p>
+<ul>
+<li><code>wsl -l -v</code>，查看正在运行的实例</li>
+<li><code>wsl —terminate &lt;instance_name&gt;</code>,终止正在运行的实例</li>
+<li><code>wsl --export &lt;instance_name&gt; D:\export.tar</code>将需要迁移的实例，进行导出，导出路径自定义</li>
+<li><code>wsl --unregister &lt;instance_name&gt;</code>导出完成之后，就需要将原有的实例进行卸载</li>
+<li><code>wsl --import &lt;instance_name&gt; D:\import\ D:\export.tar --version 2</code>使用导出的文件进行导入即可(<code>--version 2</code>可以不加，现在默认都是 WSL2)</li>
+</ul>
+</li>
+<li><p>设置wsl启动方式为<code>systemd</code></p>
+<ul>
+<li><p>Windows WSL 默认使用很老的init启动方法，换成新的systemd方便配置。</p>
+</li>
+<li><p>输入<code>sudo vim /etc/wsl.conf</code>后添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sudo chmod +x /etc/init.wsl</code> 确保文件可执行</p>
+</li>
+<li><p>重启wsl</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>配置wsl代理</p>
+<ul>
+<li>在<code>C:\Users\&lt;UserName&gt;\.wslconfig</code>文件中 (如果不存在就手动创建一个) 加入以下内容: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">ipv6=true</span><br><span class="line">dnsTunneling=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>配置开启自启动wsl</p>
+<ul>
+<li><p>按<code>win+R</code>输入<code>shell:startup</code>创建一个<code>wps-start.vbs</code>文件，并输入以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set ws = WScript.CreateObject(<span class="string">&quot;WScript.Shell&quot;</span>)        </span><br><span class="line">ws.run <span class="string">&quot;wsl&quot;</span>, vbhide</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="设置开启启动frpc"><a href="#设置开启启动frpc" class="headerlink" title="设置开启启动frpc"></a>设置开启启动frpc</h2><p>先在你的 Frp 文件目录下新建一个名为start.txt的文本文档，在里面输入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">:home</span><br><span class="line">frpc -c frpc.ini</span><br><span class="line">goto home</span><br></pre></td></tr></table></figure>
+
+<p>保存后，改名为 start.bat，这样双击运行start.bat就可以启动frp客户端，而 Frp 在崩溃、异常退出进程后，将会自动重新启动。</p>
+<p>如果电脑没有显示扩展名请自行百度 “显示文件扩展名”</p>
+<p>但是我们需要的是frpc开机自己启动，我们让系统开机自己运行start.bat就可以了~</p>
+<h3 id="方法1：利用Windows开始菜单启动项"><a href="#方法1：利用Windows开始菜单启动项" class="headerlink" title="方法1：利用Windows开始菜单启动项"></a><strong>方法1：利用Windows开始菜单启动项</strong></h3><ol>
+<li><p>右键 start.bat，创建快捷方式。</p>
+</li>
+<li><p>打开</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的电脑用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将创建的快捷方式复制进去</p>
+</li>
+</ol>
+<p>这个方法的优缺点：</p>
+<p>优点：操作简单，拖进去就可以了。</p>
+<p>缺点：会显示出命令行窗口。</p>
+<h3 id="方法2：利用Windows任务计划程序"><a href="#方法2：利用Windows任务计划程序" class="headerlink" title="方法2：利用Windows任务计划程序"></a><strong>方法2：利用Windows任务计划程序</strong></h3><ol>
+<li>打开任务计划程序<ol>
+<li>打开开始菜单，输入 “任务计划程序” 将会自动搜索，接着打开它。</li>
+</ol>
+</li>
+<li>创建计划任务<ul>
+<li><p>点击右侧的 “创建任务”，名称随意填写，安全选项选择 “不管用户是否登录都要运行”，当然你也可以选择 “只在用户登录时运行”。<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%201.png" alt="Untitled"></p>
+</li>
+<li><p>【常规】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%202.png" alt="Untitled"><br> 选择 “不管用户是否登录都要运行” 可以让你的电脑在断电自动启动后自动运行 frp，你就可以远程桌面连接电脑了。<br> “使用最高权限运行” 也是可选的，根据个人需要可以选上。<br> 最后勾选 “隐藏”，就不会在启动时弹出命令行窗口了。  </p>
+</li>
+<li><p>【触发器】选项卡设置<br> <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%203.png" alt="Untitled"><br> 触发器页，点击新建，选择 “启动时”</p>
+</li>
+<li><p>接着转到 【<strong>操作</strong>】选项卡<br>   点击新建，选择 “启动程序” 在程序或脚本一栏选择第一步创建的 <strong>start.bat</strong>，下面的 “起始于” 填写 <strong>start.bat 的路径</strong>（不要包含 start.bat）<br>   例如你的 <strong>start.bat</strong> 在 <strong>E:frpstart.bat</strong>，那么你只需要在 “起始于” 填写 <strong>E:frp</strong><br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%204.png" alt="Untitled"><br>   接着返回 “常规” 页，点击确定，此时会要求输入密码，输入你的电脑密码，然后点击确定即可。<br>   以后就会开机自动启动 frp 了，并且不会弹出命令提示符窗口~<br>   <img src="/../images/win%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Untitled%205.png" alt="Untitled"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/C_C666/article/details/127619978">https://blog.csdn.net/C_C666/article/details/127619978</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1075,89 +1227,6 @@
 <li>添加&#x2F;etc&#x2F;rc.local.d文件夹<br><code>sudo mkdir /etc/rc.local.d</code></li>
 <li>启动并设置开机自启动<br><code>sudo systemctl start rclocal</code><br><code>sudo systemctl enable rclocal</code></li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="post-title-link" itemprop="url">wayfire下obs屏幕捕捉</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-01 15:36:01" itemprop="dateCreated datePublished" datetime="2022-09-01T15:36:01+08:00">2022-09-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S obs-studio</span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
-
-<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
-<p>或者用写入.zshrc里,用xobs代替这个命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
-<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
 
       
     </div>

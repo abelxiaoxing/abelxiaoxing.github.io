@@ -135,6 +135,89 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="post-title-link" itemprop="url">wayfire下obs屏幕捕捉</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-01 15:36:01" itemprop="dateCreated datePublished" datetime="2022-09-01T15:36:01+08:00">2022-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S obs-studio</span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
+
+<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
+<p>或者用写入.zshrc里,用xobs代替这个命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
