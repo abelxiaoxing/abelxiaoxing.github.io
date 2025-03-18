@@ -19,16 +19,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="一、开发环境配置 选择Ubuntu20.04系统 换源1sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list  使用国内镜像源  1234567891011121314deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic main restricted universe multiversedeb-src http:&#x2F;&#x2F;mirrors.aliyun.co">
+    <meta name="description" content="一、开发环境配置1. 系统准备 推荐系统: Ubuntu 20.04 LTS 换源配置:1sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list 替换为阿里云镜像源：1234567891011121314deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic main restricted universe multiversedeb-src http:&#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="昇腾CANN模型转换">
+<meta property="og:title" content="昇腾CANN模型转换实践指南">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="一、开发环境配置 选择Ubuntu20.04系统 换源1sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list  使用国内镜像源  1234567891011121314deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic main restricted universe multiversedeb-src http:&#x2F;&#x2F;mirrors.aliyun.co">
+<meta property="og:description" content="一、开发环境配置1. 系统准备 推荐系统: Ubuntu 20.04 LTS 换源配置:1sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list 替换为阿里云镜像源：1234567891011121314deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic main restricted universe multiversedeb-src http:&#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-09T06:20:26.000Z">
-<meta property="article:modified_time" content="2025-01-09T07:38:54.507Z">
+<meta property="article:modified_time" content="2025-03-18T09:25:07.166Z">
 <meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="昇腾">
+<meta property="article:tag" content="CANN">
+<meta property="article:tag" content="模型转换">
+<meta property="article:tag" content="嵌入式AI">
 <meta name="twitter:card" content="summary">
 
 
@@ -36,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/","path":"2024/08/09/昇腾CANN模型转换/","title":"昇腾CANN模型转换"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/","path":"2024/08/09/昇腾CANN模型转换/","title":"昇腾CANN模型转换实践指南"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>昇腾CANN模型转换 | abel的小天地</title>
+<title>昇腾CANN模型转换实践指南 | abel的小天地</title>
   
 
 
@@ -104,7 +108,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">一、开发环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85CANN-toolkit"><span class="nav-number">2.</span> <span class="nav-text">二、安装CANN toolkit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81onnx%E5%88%B0om%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text">三、onnx到om模型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">一、开发环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%B3%BB%E7%BB%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">1. 系统准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E4%BE%9D%E8%B5%96"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装基础依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Python%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">3. Python环境配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81CANN-Toolkit%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">二、CANN Toolkit安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B7%A5%E5%85%B7%E5%8C%85%E8%8E%B7%E5%8F%96"><span class="nav-number">2.1.</span> <span class="nav-text">1. 工具包获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">3. 环境配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">三、模型转换流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ONNX%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81"><span class="nav-number">3.1.</span> <span class="nav-text">1. ONNX模型验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-atc%E6%9C%AC%E5%9C%B0%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">2. atc本地转换（开发环境）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%98%87%E8%85%BE%E5%BC%80%E5%8F%91%E6%9D%BF%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">四、昇腾开发板部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">4.1.</span> <span class="nav-text">1. 文件传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9D%BF%E7%AB%AF%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">2. 板端模型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BD%AC%E6%8D%A2%E9%AA%8C%E8%AF%81"><span class="nav-number">4.3.</span> <span class="nav-text">3. 转换验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">5.</span> <span class="nav-text">常见问题排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="nav-number">6.</span> <span class="nav-text">附录：参考资源</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -116,7 +120,7 @@
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -156,12 +160,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="昇腾CANN模型转换 | abel的小天地">
+      <meta itemprop="name" content="昇腾CANN模型转换实践指南 | abel的小天地">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          昇腾CANN模型转换
+          昇腾CANN模型转换实践指南
         </h1>
 
         <div class="post-meta-container">
@@ -179,7 +183,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-18 17:25:07" itemprop="dateModified" datetime="2025-03-18T17:25:07+08:00">2025-03-18</time>
     </span>
 
   
@@ -191,40 +195,79 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一、开发环境配置"><a href="#一、开发环境配置" class="headerlink" title="一、开发环境配置"></a>一、开发环境配置</h2><ol>
-<li>选择Ubuntu20.04系统</li>
-<li>换源<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list </span><br></pre></td></tr></table></figure>
-使用国内镜像源  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure></li>
-<li>安装环境依赖<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br><span class="line">sudo apt-get install -y gcc g++ make cmake zlib1g zlib1g-dev openssl libsqlite3-dev libssl-dev libffi-dev </span><br><span class="line">sudo apt-get install -y unzip pciutils net-tools libblas-dev gfortran libblas3 libopenblas-dev libncursesw5-dev</span><br></pre></td></tr></table></figure></li>
-<li>python环境配置<br>安装miniconda<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/miniconda3</span><br><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh</span><br><span class="line">bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3</span><br><span class="line">rm -rf ~/miniconda3/miniconda.sh</span><br><span class="line">~/miniconda3/bin/conda init zsh</span><br></pre></td></tr></table></figure>
-创建cann的conda环境<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n cann python=3.9</span><br><span class="line">conda activate cann</span><br></pre></td></tr></table></figure>
-pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --upgrade pip</span><br><span class="line">pip3 install attrs numpy==1.17.2 decorator sympy cffi pyyaml pathlib2 psutil protobuf scipy requests</span><br><span class="line">pip install onnx</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="二、安装CANN-toolkit"><a href="#二、安装CANN-toolkit" class="headerlink" title="二、安装CANN toolkit"></a>二、安装CANN toolkit</h2><ol>
-<li>下载toolkit开发工具<br>官方最新：<a target="_blank" rel="noopener" href="https://www.hiascend.com/zh/developer/download/community/result?module=cann">华为社区版资源下载</a><br>个人：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XcSjmIDuwMz7I_bx2E4-uA?pwd=abel">Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run</a> 提取码: abel<br>个人：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1IG0vPiG9uhqPV_S110hdFA?pwd=abel">Ascend-cann-toolkit_8.0.RC3.alpha001_linux-aarch64.run</a> 提取码: abel  </li>
-<li>安装开发工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run</span><br><span class="line">./Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run --install</span><br></pre></td></tr></table></figure></li>
-<li>配置交叉编译环境<br>对于Atlas 200 AI加速模块 （RC场景）和Atlas 500 小站(运行环境aarch64架构)来说，当开发环境是一台X86 PC进行环境搭建时，需要在开发环境中安装交叉编译工具<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install g++-aarch64-linux-gnu</span><br></pre></td></tr></table></figure></li>
-<li>添加依赖库<br>出现报错<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libascend_hal.so: cannot open shared object file:No such……</span><br></pre></td></tr></table></figure>
-进入到Ascend目录下输入<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name libascend_hal.so</span><br></pre></td></tr></table></figure>
-把libascend_hal.so复制到&#x2F;usr&#x2F;local&#x2F;lib&#x2F;下<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp ~/Ascend/ascend-toolkit/8.0.RC3.alpha001/x86_64-linux/devlib/linux/x86_64/libascend_hal.so /usr/local/lib/</span><br></pre></td></tr></table></figure>
-进入“&#x2F;etc&#x2F;ld.so.conf”,并将“&#x2F;usr&#x2F;local&#x2F;lib”添加至文件最后一行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib/</span><br></pre></td></tr></table></figure>
-更新共享库缓存<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ldconfig</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure></li>
-<li>添加环境变量<br>在”~&#x2F;.zshrc”中加入”source &#x2F;home&#x2F;abelxiaoxing&#x2F;Ascend&#x2F;ascend-toolkit&#x2F;set_env.sh”<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvim ~/.zshrc</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /home/abelxiaoxing/Ascend/ascend-toolkit/set_env.sh</span><br></pre></td></tr></table></figure>
-重新载入zsh配置<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="三、onnx到om模型转换"><a href="#三、onnx到om模型转换" class="headerlink" title="三、onnx到om模型转换"></a>三、onnx到om模型转换</h2><p>查看模型输入名称，此处用’convnextv2_nano.onnx’来示范</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> onnx</span><br><span class="line"></span><br><span class="line">model = onnx.load(<span class="string">&#x27;convnextv2_nano.onnx&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">input</span> <span class="keyword">in</span> model.graph.<span class="built_in">input</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">input</span>.name)</span><br></pre></td></tr></table></figure>
-<p>此处输出”input”，因此于–input_shape中，填入的模型名称为”input”</p>
-<p>atc模型转换</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atc --model=./convnextv2_nano.onnx --framework=5 --output=./model --soc_version=Ascend310B1 --input_shape=&quot;input:1,3,224,224&quot;</span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><h2 id="一、开发环境配置"><a href="#一、开发环境配置" class="headerlink" title="一、开发环境配置"></a>一、开发环境配置</h2><h3 id="1-系统准备"><a href="#1-系统准备" class="headerlink" title="1. 系统准备"></a>1. 系统准备</h3><ul>
+<li><strong>推荐系统</strong>: Ubuntu 20.04 LTS</li>
+<li><strong>换源配置</strong>:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+替换为阿里云镜像源：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-安装基础依赖"><a href="#2-安装基础依赖" class="headerlink" title="2. 安装基础依赖"></a>2. 安装基础依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br><span class="line">sudo apt-get install -y gcc g++ make cmake zlib1g zlib1g-dev openssl libsqlite3-dev libssl-dev libffi-dev </span><br><span class="line">sudo apt-get install -y unzip pciutils net-tools libblas-dev gfortran libblas3 libopenblas-dev libncursesw5-dev</span><br></pre></td></tr></table></figure>
 
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/344623">https://bbs.huaweicloud.com/blogs/344623</a></li>
-<li><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/309707">https://bbs.huaweicloud.com/blogs/309707</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/80RC3alpha001/quickstart/quickstart/quickstart_18_0005.html">华为官方CANN环境安装</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/700alpha003/infacldevg/atctool/atlasatc_16_0039.html">华为官方atc参数说明</a></li>
+<h3 id="3-Python环境配置"><a href="#3-Python环境配置" class="headerlink" title="3. Python环境配置"></a>3. Python环境配置</h3><ul>
+<li><strong>安装Miniconda</strong>:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">bash Miniconda3-latest-Linux-x86_64.sh -b -u -p $HOME/miniconda3</span><br></pre></td></tr></table></figure></li>
+<li><strong>创建专用环境</strong>:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n cann python=3.9</span><br><span class="line">conda activate cann</span><br><span class="line">pip3 install --upgrade pip</span><br><span class="line">pip install attrs numpy==1.17.2 decorator sympy cffi pyyaml pathlib2 psutil protobuf scipy requests onnx</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="二、CANN-Toolkit安装"><a href="#二、CANN-Toolkit安装" class="headerlink" title="二、CANN Toolkit安装"></a>二、CANN Toolkit安装</h2><h3 id="1-工具包获取"><a href="#1-工具包获取" class="headerlink" title="1. 工具包获取"></a>1. 工具包获取</h3><ul>
+<li>官方渠道：<a target="_blank" rel="noopener" href="https://www.hiascend.com/zh/developer/download/community/result?module=cann">华为昇腾社区</a></li>
+<li>备用资源（x86架构）：<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XcSjmIDuwMz7I_bx2E4-uA?pwd=abel">Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run</a><br>提取码: abel  </li>
+<li>备用资源（aarch64架构）：<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1IG0vPiG9uhqPV_S110hdFA?pwd=abel">Ascend-cann-toolkit_8.0.RC3.alpha001_linux-aarch64.run</a><br>提取码: abel</li>
+</ul>
+<h3 id="2-安装步骤"><a href="#2-安装步骤" class="headerlink" title="2. 安装步骤"></a>2. 安装步骤</h3><p>在终端输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run</span><br><span class="line">./Ascend-cann-toolkit_8.0.RC3.alpha001_linux-x86_64.run --install</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-环境配置"><a href="#3-环境配置" class="headerlink" title="3. 环境配置"></a>3. 环境配置</h3><p>对于Atlas 200 AI加速模块 （RC场景）和Atlas 500 小站(运行环境aarch64架构)来说，当开发环境是一台X86 PC进行环境搭建时，需要在开发环境中安装交叉编译工具 </p>
+<ul>
+<li><p><strong>安装交叉编译工具</strong>:</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install g++-aarch64-linux-gnu</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>解决共享库问题</strong>:<br>上述安装过程中若出现报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">libascend_hal.so: cannot open shared object file: No such……</span><br></pre></td></tr></table></figure>
+<p>进入到Ascend目录下输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo find ./ -name libascend_hal.so  # 查找库路径</span><br><span class="line">sudo cp &#123;找到的路径&#125; /usr/local/lib/  # 拷贝库到共享库目录</span><br></pre></td></tr></table></figure>
+<p>进入“&#x2F;etc&#x2F;ld.so.conf”,并将<code>include /usr/local/lib</code>添加至文件最后一行后，终端输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ldconfig # 更新共享库缓存</span><br><span class="line">sudo ldconfig # 更新系统缓存</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加环境变量</strong>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;source ~/Ascend/ascend-toolkit/set_env.sh&quot; &gt;&gt; ~/.zshrc</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="三、模型转换流程"><a href="#三、模型转换流程" class="headerlink" title="三、模型转换流程"></a>三、模型转换流程</h2><h3 id="1-ONNX模型验证"><a href="#1-ONNX模型验证" class="headerlink" title="1. ONNX模型验证"></a>1. ONNX模型验证</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> onnx</span><br><span class="line">model = onnx.load(<span class="string">&#x27;model.onnx&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;输入节点:&quot;</span>, [<span class="built_in">input</span>.name <span class="keyword">for</span> <span class="built_in">input</span> <span class="keyword">in</span> model.graph.<span class="built_in">input</span>])</span><br></pre></td></tr></table></figure>
+<p>若此处输出”inputxxxx”，因此于–input_shape中，填入的模型名称为”inputxxxx”</p>
+<h3 id="2-atc本地转换（开发环境）"><a href="#2-atc本地转换（开发环境）" class="headerlink" title="2. atc本地转换（开发环境）"></a>2. atc本地转换（开发环境）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">atc --model=model.onnx \</span><br><span class="line">    --framework=5 \</span><br><span class="line">    --output=model \</span><br><span class="line">    --soc_version=Ascend310B1 \</span><br><span class="line">    --input_shape=&quot;inputxxxx:1,3,224,224&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、昇腾开发板部署"><a href="#四、昇腾开发板部署" class="headerlink" title="四、昇腾开发板部署"></a>四、昇腾开发板部署</h2><h3 id="1-文件传输"><a href="#1-文件传输" class="headerlink" title="1. 文件传输"></a>1. 文件传输</h3><p>将onnx文件传输到昇腾开发板上  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ./model.onnx root@10.0.0.1:/pytroch</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-板端模型转换"><a href="#2-板端模型转换" class="headerlink" title="2. 板端模型转换"></a>2. 板端模型转换</h3><p>使用ATC工具将onnx转化为om，我这里的昇腾型号是Ascend310B1  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atc --model=./model.onnx --framework=5 --output=/root --soc_version=Ascend310B1</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-转换验证"><a href="#3-转换验证" class="headerlink" title="3. 转换验证"></a>3. 转换验证</h3><p>成功输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ATC run success</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><ol>
+<li><p><strong>库文件缺失</strong>:</p>
+<ul>
+<li>现象：<code>libascend_hal.so: cannot open shared object file:No such……</code></li>
+<li>解决：检查环境变量配置，确认<code>LD_LIBRARY_PATH</code>包含库路径</li>
+</ul>
+</li>
+<li><p><strong>输入形状不匹配</strong>:</p>
+<ul>
+<li>现象：<code>Input shape mismatch</code></li>
+<li>解决：使用Netron工具可视化模型，确认输入节点名称和维度</li>
+</ul>
+</li>
+<li><p><strong>算子不支持</strong>:</p>
+<ul>
+<li>现象：<code>Unsupported op type: XXX</code></li>
+<li>解决：查阅<a target="_blank" rel="noopener" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition">CANN算子清单</a>，考虑自定义算子或模型结构调整</li>
+</ul>
+</li>
 </ol>
+<h2 id="附录：参考资源"><a href="#附录：参考资源" class="headerlink" title="附录：参考资源"></a>附录：参考资源</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition">CANN官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/700alpha003/infacldevg/atctool/atlasatc_16_0039.html">ATC工具参数详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/forum/forum-726-1.html">昇腾开发者论坛</a></li>
+</ol>
+<pre><code>
+</code></pre>
 
     </div>
 
@@ -233,6 +276,12 @@ pip、conda换源,此处省略，自行查阅相关资料<br>安装基础包<fig
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%98%87%E8%85%BE/" rel="tag"># 昇腾</a>
+              <a href="/tags/CANN/" rel="tag"># CANN</a>
+              <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag"># 模型转换</a>
+              <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" rel="tag"># 嵌入式AI</a>
+          </div>
 
         
 
