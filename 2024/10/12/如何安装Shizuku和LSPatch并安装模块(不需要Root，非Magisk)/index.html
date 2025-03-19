@@ -19,20 +19,21 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="安装 Shizuku官网 下载 官方手册  打开开发者模式 返回设置 -&gt; 其他设置 -&gt; 开发者选项 -&gt; 打开无线调试，ColorOS还需要打开禁止权限监控和usb调试 启动 Shizuku，点击配对，在无线调试中使用配对码配对设备，并在通知栏输入配对码 配对成功，启动shizuku  安装LSPatch下载 在 Shizuku 授权应用管理中把 LSPatch 打开，打开">
+    <meta name="description" content="前言本教程将指导您如何在不需要Root权限和Magisk的情况下，通过Shizuku和LSPatch来安装和使用Xposed模块。这种方法适用于大多数Android设备，无需复杂的系统修改。 一、安装 ShizukuShizuku是一个为应用提供系统API调用能力的工具，它可以在免Root环境下运行。 资源链接 官方网站：Shizuku官网 下载地址：GitHub最新版本 官方使用手册：设置指南">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何安装Shizuku和LSPatch并安装模块（不需要Root，非Magisk）">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2024/10/12/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97(%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk)/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="安装 Shizuku官网 下载 官方手册  打开开发者模式 返回设置 -&gt; 其他设置 -&gt; 开发者选项 -&gt; 打开无线调试，ColorOS还需要打开禁止权限监控和usb调试 启动 Shizuku，点击配对，在无线调试中使用配对码配对设备，并在通知栏输入配对码 配对成功，启动shizuku  安装LSPatch下载 在 Shizuku 授权应用管理中把 LSPatch 打开，打开">
+<meta property="og:description" content="前言本教程将指导您如何在不需要Root权限和Magisk的情况下，通过Shizuku和LSPatch来安装和使用Xposed模块。这种方法适用于大多数Android设备，无需复杂的系统修改。 一、安装 ShizukuShizuku是一个为应用提供系统API调用能力的工具，它可以在免Root环境下运行。 资源链接 官方网站：Shizuku官网 下载地址：GitHub最新版本 官方使用手册：设置指南">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image.png">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image%201.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image1.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image2.png">
 <meta property="article:published_time" content="2024-10-12T09:13:00.000Z">
-<meta property="article:modified_time" content="2025-01-09T07:38:54.507Z">
+<meta property="article:modified_time" content="2025-03-19T03:08:23.080Z">
 <meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image.png">
+<meta name="twitter:image" content="https://abelxiaoxing.github.io/images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image1.png">
 
 
 <link rel="canonical" href="https://abelxiaoxing.github.io/2024/10/12/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97(%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk)/">
@@ -107,7 +108,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Shizuku"><span class="nav-number">1.</span> <span class="nav-text">安装 Shizuku</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85LSPatch"><span class="nav-number">2.</span> <span class="nav-text">安装LSPatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">安装模块</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-Shizuku"><span class="nav-number">2.</span> <span class="nav-text">一、安装 Shizuku</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">资源链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">安装步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85LSPatch"><span class="nav-number">3.</span> <span class="nav-text">二、安装LSPatch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5-1"><span class="nav-number">3.1.</span> <span class="nav-text">资源链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">3.2.</span> <span class="nav-text">安装步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85Xposed%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">三、安装Xposed模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5-2"><span class="nav-number">4.1.</span> <span class="nav-text">资源链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">安装方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.3.</span> <span class="nav-text">使用步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94"><span class="nav-number">5.</span> <span class="nav-text">常见问题解答</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +183,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 11:08:23" itemprop="dateModified" datetime="2025-03-19T11:08:23+08:00">2025-03-19</time>
     </span>
 
   
@@ -194,21 +195,138 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="安装-Shizuku"><a href="#安装-Shizuku" class="headerlink" title="安装 Shizuku"></a>安装 Shizuku</h2><p><a target="_blank" rel="noopener" href="https://shizuku.rikka.app/zh-hans">官网</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/RikkaApps/Shizuku/releases/latest">下载</a></p>
-<p><a target="_blank" rel="noopener" href="https://shizuku.rikka.app/zh-hans/guide/setup/#%E9%80%9A%E8%BF%87%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95%E5%90%AF%E5%8A%A8">官方手册</a></p>
-<ol>
-<li>打开开发者模式</li>
-<li>返回设置 -&gt; 其他设置 -&gt; 开发者选项 -&gt; 打开无线调试，ColorOS还需要打开禁止权限监控和usb调试</li>
-<li>启动 Shizuku，点击配对，在无线调试中使用配对码配对设备，并在通知栏输入配对码</li>
-<li>配对成功，启动shizuku</li>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本教程将指导您如何在不需要Root权限和Magisk的情况下，通过Shizuku和LSPatch来安装和使用Xposed模块。这种方法适用于大多数Android设备，无需复杂的系统修改。</p>
+<h2 id="一、安装-Shizuku"><a href="#一、安装-Shizuku" class="headerlink" title="一、安装 Shizuku"></a>一、安装 Shizuku</h2><p>Shizuku是一个为应用提供系统API调用能力的工具，它可以在免Root环境下运行。</p>
+<h3 id="资源链接"><a href="#资源链接" class="headerlink" title="资源链接"></a>资源链接</h3><ul>
+<li><strong>官方网站</strong>：<a target="_blank" rel="noopener" href="https://shizuku.rikka.app/zh-hans">Shizuku官网</a></li>
+<li><strong>下载地址</strong>：<a target="_blank" rel="noopener" href="https://github.com/RikkaApps/Shizuku/releases/latest">GitHub最新版本</a></li>
+<li><strong>官方使用手册</strong>：<a target="_blank" rel="noopener" href="https://shizuku.rikka.app/zh-hans/guide/setup/#%E9%80%9A%E8%BF%87%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95%E5%90%AF%E5%8A%A8">设置指南</a></li>
+</ul>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
+<li><p><strong>开启开发者模式</strong></p>
+<ul>
+<li>进入设置 → 关于手机 → 连续点击「版本号」7次以上，直到提示已开启开发者模式</li>
+</ul>
+</li>
+<li><p><strong>配置开发者选项</strong></p>
+<ul>
+<li>返回设置 → 其他设置 → 开发者选项</li>
+<li>打开「无线调试」选项</li>
+<li>如果使用ColorOS系统，还需要额外打开「禁止权限监控」和「USB调试」选项</li>
+</ul>
+</li>
+<li><p><strong>配对设备</strong></p>
+<ul>
+<li>启动Shizuku应用</li>
+<li>点击应用中的「配对」按钮</li>
+<li>在系统的「无线调试」设置中使用配对码配对设备</li>
+<li>在通知栏中输入配对码完成配对</li>
+</ul>
+</li>
+<li><p><strong>启动Shizuku服务</strong></p>
+<ul>
+<li>配对成功后，Shizuku会自动启动</li>
+<li>确认Shizuku状态显示为「已启动」</li>
+</ul>
+</li>
 </ol>
-<h2 id="安装LSPatch"><a href="#安装LSPatch" class="headerlink" title="安装LSPatch"></a>安装LSPatch</h2><p><a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPatch/releases/download/v0.6/manager-v0.6-398-release.apk">下载</a></p>
-<p>在 Shizuku 授权应用管理中把 LSPatch 打开，打开 LSPatch</p>
-<p><img src="/../images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image.png" alt="image.png"></p>
-<p><img src="/../images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image%201.png" alt="image.png"></p>
-<h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h2><p><a target="_blank" rel="noopener" href="https://github.com/orgs/Xposed-Modules-Repo/repositories">下载</a></p>
-<p>本地模式可以灵活修改插件，但是必须要LSPatch后端运行。集成模式分享给别的用户也可正常使用对应模块，但是每次安装模块时必须重新修补。</p>
+<blockquote>
+<p><strong>注意</strong>：每次重启设备后，需要重新启动Shizuku服务。</p>
+</blockquote>
+<h2 id="二、安装LSPatch"><a href="#二、安装LSPatch" class="headerlink" title="二、安装LSPatch"></a>二、安装LSPatch</h2><p>LSPatch是一个可以在免Root环境下使用Xposed模块的工具，它通过修补应用实现功能注入。</p>
+<h3 id="资源链接-1"><a href="#资源链接-1" class="headerlink" title="资源链接"></a>资源链接</h3><ul>
+<li><strong>下载地址</strong>：<a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPatch/releases/download/v0.6/manager-v0.6-398-release.apk">LSPatch最新版本</a></li>
+</ul>
+<h3 id="安装步骤-1"><a href="#安装步骤-1" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
+<li><p><strong>下载并安装LSPatch应用</strong></p>
+</li>
+<li><p><strong>授权LSPatch使用Shizuku</strong></p>
+<ul>
+<li>打开Shizuku应用</li>
+<li>进入「授权应用管理」</li>
+<li>找到LSPatch并开启其权限<br> <img src="/../images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image1.png" alt="image.png"></li>
+</ul>
+</li>
+<li><p><strong>启动LSPatch</strong></p>
+<ul>
+<li>确保Shizuku服务正在运行</li>
+<li>打开LSPatch应用，此时应该能够正常使用<br> <img src="/../images/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Shizuku%E5%92%8CLSPatch%E5%B9%B6%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81Root%EF%BC%8C%E9%9D%9EMagisk%EF%BC%89/image2.png" alt="image.png"><blockquote>
+<p><strong>提示</strong>：如果LSPatch无法正常启动，请检查Shizuku服务状态和授权设置。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、安装Xposed模块"><a href="#三、安装Xposed模块" class="headerlink" title="三、安装Xposed模块"></a>三、安装Xposed模块</h2><p>通过LSPatch，您可以安装和使用各种Xposed模块，而无需Root权限。</p>
+<h3 id="资源链接-2"><a href="#资源链接-2" class="headerlink" title="资源链接"></a>资源链接</h3><ul>
+<li><strong>模块下载</strong>：<a target="_blank" rel="noopener" href="https://github.com/orgs/Xposed-Modules-Repo/repositories">Xposed模块仓库</a></li>
+</ul>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><p>LSPatch提供两种模式来安装模块：</p>
+<ol>
+<li><p><strong>本地模式</strong></p>
+<ul>
+<li><strong>优点</strong>：可以灵活修改插件配置</li>
+<li><strong>缺点</strong>：必须要LSPatch后端运行才能使用</li>
+<li><strong>适用场景</strong>：个人使用，需要频繁调整模块设置</li>
+</ul>
+</li>
+<li><p><strong>集成模式</strong></p>
+<ul>
+<li><strong>优点</strong>：修补后的应用可以分享给其他用户使用，无需对方安装LSPatch</li>
+<li><strong>缺点</strong>：每次安装新模块时必须重新修补应用</li>
+<li><strong>适用场景</strong>：分享给他人使用，或在不方便运行LSPatch的环境中使用</li>
+</ul>
+</li>
+</ol>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li><p><strong>下载所需的Xposed模块APK文件</strong></p>
+</li>
+<li><p><strong>在LSPatch中选择修补模式</strong></p>
+<ul>
+<li>打开LSPatch应用</li>
+<li>选择「修补新应用」</li>
+<li>选择要修补的应用</li>
+<li>选择修补模式（本地或集成）</li>
+<li>选择要应用的Xposed模块</li>
+<li>开始修补过程</li>
+</ul>
+</li>
+<li><p><strong>安装修补后的应用</strong></p>
+<ul>
+<li>修补完成后，安装生成的新APK文件</li>
+<li>卸载原应用（如果有）</li>
+<li>启动修补后的应用</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：某些应用可能无法成功修补，或修补后功能异常，这取决于应用的保护机制和模块的兼容性。</p>
+</blockquote>
+<h2 id="常见问题解答"><a href="#常见问题解答" class="headerlink" title="常见问题解答"></a>常见问题解答</h2><ol>
+<li><p><strong>Shizuku服务无法启动怎么办？</strong></p>
+<ul>
+<li>检查开发者选项是否正确开启</li>
+<li>确认无线调试功能已启用</li>
+<li>尝试重启设备后重新配置</li>
+</ul>
+</li>
+<li><p><strong>LSPatch修补应用失败？</strong></p>
+<ul>
+<li>确保Shizuku服务正常运行</li>
+<li>检查应用是否有特殊保护机制</li>
+<li>尝试使用不同版本的应用</li>
+</ul>
+</li>
+<li><p><strong>修补后的应用闪退？</strong></p>
+<ul>
+<li>可能是模块与应用不兼容</li>
+<li>尝试不同的修补模式</li>
+<li>检查是否有模块更新版本</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>希望本教程能帮助您成功安装和使用Shizuku、LSPatch以及各种Xposed模块。如有任何问题，请参考各项目的官方文档或社区讨论。</p>
 
     </div>
 
@@ -217,6 +335,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
 
         
 
@@ -227,8 +348,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/10/23/arm%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AElunarvim/" rel="next" title="arm设备配置lunarvim">
-                  arm设备配置lunarvim <i class="fa fa-angle-right"></i>
+                <a href="/2024/10/23/ARM%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AELunarVim%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" rel="next" title="ARM设备配置LunarVim完全指南">
+                  ARM设备配置LunarVim完全指南 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="系统迁移操作指南Windows 系统迁移🛠️ 准备工作 源系统盘：需要迁移的旧硬盘 目标磁盘：新硬盘（容量 ≥ 源盘已用空间） PE启动U盘：需集成DiskGenius工具（推荐微PE工具箱）  📝 详细操作步骤 制作启动盘  使用微PE工具箱制作启动U盘（官网：https:&#x2F;&#x2F;www.wepe.com.cn&#x2F;）   进入PE环境  插入U盘 → 开机时反复按F12&#x2F;Del&#x2F;F2（不同主板按键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平台系统迁移指南">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/04/25/%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="系统迁移操作指南Windows 系统迁移🛠️ 准备工作 源系统盘：需要迁移的旧硬盘 目标磁盘：新硬盘（容量 ≥ 源盘已用空间） PE启动U盘：需集成DiskGenius工具（推荐微PE工具箱）  📝 详细操作步骤 制作启动盘  使用微PE工具箱制作启动U盘（官网：https:&#x2F;&#x2F;www.wepe.com.cn&#x2F;）   进入PE环境  插入U盘 → 开机时反复按F12&#x2F;Del&#x2F;F2（不同主板按键">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-24T16:06:45.000Z">
+<meta property="article:modified_time" content="2025-03-19T07:42:49.630Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2022/04/25/%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2022/04/25/%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97/","path":"2022/04/25/平台系统迁移指南/","title":"平台系统迁移指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>平台系统迁移指南 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">系统迁移操作指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB"><span class="nav-number">1.1.</span> <span class="nav-text">Windows 系统迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">🛠️ 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9D-%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.2.</span> <span class="nav-text">📝 详细操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB"><span class="nav-number">1.2.</span> <span class="nav-text">Linux 系统迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%B0-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.1.</span> <span class="nav-text">🧰 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%90%A7-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">🐧 操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%BF%9B%E5%85%A5Live%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. 进入Live环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%86%E5%8C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. 分区操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">3. 格式化分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">4. 挂载文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">5. 数据迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%96%B0"><span class="nav-number">1.2.2.6.</span> <span class="nav-text">6. 系统配置更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.2.2.7.</span> <span class="nav-text">7. 引导修复</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-%E9%AA%8C%E8%AF%81%E6%A3%80%E6%9F%A5"><span class="nav-number">1.2.3.</span> <span class="nav-text">🔍 验证检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">通用注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE-Linux-%E5%B7%B2%E5%BA%9F%E5%BC%83"><span class="nav-number">1.4.</span> <span class="nav-text">历史数据(Linux,已废弃)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/04/25/%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="平台系统迁移指南 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          平台系统迁移指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-25 00:06:45" itemprop="dateCreated datePublished" datetime="2022-04-25T00:06:45+08:00">2022-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 15:42:49" itemprop="dateModified" datetime="2025-03-19T15:42:49+08:00">2025-03-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="系统迁移操作指南"><a href="#系统迁移操作指南" class="headerlink" title="系统迁移操作指南"></a>系统迁移操作指南</h1><h2 id="Windows-系统迁移"><a href="#Windows-系统迁移" class="headerlink" title="Windows 系统迁移"></a>Windows 系统迁移</h2><h3 id="🛠️-准备工作"><a href="#🛠️-准备工作" class="headerlink" title="🛠️ 准备工作"></a>🛠️ 准备工作</h3><ul>
+<li><strong>源系统盘</strong>：需要迁移的旧硬盘</li>
+<li><strong>目标磁盘</strong>：新硬盘（容量 ≥ 源盘已用空间）</li>
+<li><strong>PE启动U盘</strong>：需集成DiskGenius工具（推荐微PE工具箱）</li>
+</ul>
+<h3 id="📝-详细操作步骤"><a href="#📝-详细操作步骤" class="headerlink" title="📝 详细操作步骤"></a>📝 详细操作步骤</h3><ol>
+<li><p><strong>制作启动盘</strong></p>
+<ul>
+<li>使用微PE工具箱制作启动U盘（官网：<a target="_blank" rel="noopener" href="https://www.wepe.com.cn/%EF%BC%89">https://www.wepe.com.cn/）</a></li>
+</ul>
+</li>
+<li><p><strong>进入PE环境</strong></p>
+<ul>
+<li>插入U盘 → 开机时反复按<code>F12/Del/F2</code>（不同主板按键不同）</li>
+<li>在BIOS中设置U盘为第一启动项 → 进入PE桌面</li>
+</ul>
+</li>
+<li><p><strong>执行系统迁移</strong></p>
+<ul>
+<li>打开DiskGenius软件</li>
+<li>顶部菜单选择 <strong>工具 → 系统迁移</strong></li>
+<li>按向导操作：<ol>
+<li>选择<strong>源磁盘</strong>（原系统盘）</li>
+<li>选择<strong>目标磁盘</strong>（新硬盘）</li>
+<li>调整目标分区大小（默认自动填充）</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>迁移后操作</strong></p>
+<ul>
+<li>重启进入BIOS → 设置新硬盘为第一启动项</li>
+<li>进入系统后运行 <code>chkdsk C: /f</code> 检查磁盘完整性</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>⚠️ 关键注意事项：</p>
+<ol>
+<li>目标磁盘必须为<strong>GPT格式</strong>（如原系统为UEFI启动）</li>
+<li>迁移前备份重要数据（目标磁盘将被覆盖）</li>
+<li>迁移完成后拔出旧硬盘测试启动</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Linux-系统迁移"><a href="#Linux-系统迁移" class="headerlink" title="Linux 系统迁移"></a>Linux 系统迁移</h2><h3 id="🧰-准备工作"><a href="#🧰-准备工作" class="headerlink" title="🧰 准备工作"></a>🧰 准备工作</h3><ul>
+<li>Live USB（推荐和迁移系统相同的系统镜像）</li>
+<li>新硬盘（建议容量 ≥ 源盘已用空间）</li>
+</ul>
+<h3 id="🐧-操作流程"><a href="#🐧-操作流程" class="headerlink" title="🐧 操作流程"></a>🐧 操作流程</h3><h4 id="1-进入Live环境"><a href="#1-进入Live环境" class="headerlink" title="1. 进入Live环境"></a>1. 进入Live环境</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk  <span class="comment"># 确认磁盘标识（假设原盘为sdb，新盘为sda）</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-分区操作"><a href="#2-分区操作" class="headerlink" title="2. 分区操作"></a>2. 分区操作</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/sda  <span class="comment"># 创建新分区</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>分区方案建议：<table>
+<thead>
+<tr>
+<th>分区</th>
+<th>类型</th>
+<th>建议大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;boot</td>
+<td>EFI</td>
+<td>512M</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>f2fs</td>
+<td>剩余空间</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="3-格式化分区"><a href="#3-格式化分区" class="headerlink" title="3. 格式化分区"></a>3. 格式化分区</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1  <span class="comment"># 格式化EFI分区</span></span><br><span class="line">mkfs.f2fs -f /dev/sda2   <span class="comment"># f2fs格式化根分区</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-挂载文件系统"><a href="#4-挂载文件系统" class="headerlink" title="4. 挂载文件系统"></a>4. 挂载文件系统</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载新分区(假设新系统在sda2,新系统的EFI分区在sda1)</span></span><br><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot &amp;&amp; mount /dev/sda1 /mnt/boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载原分区（假设原系统在sdb2,原系统的根分区在sdb1）</span></span><br><span class="line"><span class="built_in">mkdir</span> /old_root &amp;&amp; mount /dev/sdb2 /old_root</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-数据迁移"><a href="#5-数据迁移" class="headerlink" title="5. 数据迁移"></a>5. 数据迁移</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avhP --exclude=&#123;<span class="string">&quot;/dev/*&quot;</span>,<span class="string">&quot;/proc/*&quot;</span>,<span class="string">&quot;/sys/*&quot;</span>,<span class="string">&quot;/tmp/*&quot;</span>&#125; /old_root/ /mnt/</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-系统配置更新"><a href="#6-系统配置更新" class="headerlink" title="6. 系统配置更新"></a>6. 系统配置更新</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成新fstab</span></span><br><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># Chroot环境配置</span></span><br><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-引导修复"><a href="#7-引导修复" class="headerlink" title="7. 引导修复"></a>7. 引导修复</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<h3 id="🔍-验证检查"><a href="#🔍-验证检查" class="headerlink" title="🔍 验证检查"></a>🔍 验证检查</h3><ol>
+<li>确认<code>/etc/fstab</code>中UUID与<code>blkid</code>输出一致</li>
+<li>检查EFI分区是否包含引导文件</li>
+<li>测试从新硬盘启动</li>
+</ol>
+<hr>
+<h2 id="通用注意事项"><a href="#通用注意事项" class="headerlink" title="通用注意事项"></a>通用注意事项</h2><ol>
+<li><p><strong>数据备份</strong>：建议使用<code>dd</code>命令创建完整磁盘镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sdX of=/path/to/backup.img bs=4M status=progress</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>迁移工具替代方案</strong>：</p>
+<ul>
+<li>Clonezilla（跨平台克隆工具）</li>
+<li>Timeshift（Linux系统快照工具）</li>
+</ul>
+</li>
+<li><p><strong>故障排查</strong>：</p>
+<ul>
+<li>引导失败：尝试<code>boot-repair</code>工具</li>
+<li>文件系统错误：使用<code>fsck</code>进行检查修复</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="历史数据-Linux-已废弃"><a href="#历史数据-Linux-已废弃" class="headerlink" title="历史数据(Linux,已废弃)"></a>历史数据(Linux,已废弃)</h2><ol>
+<li>准备工作：<ul>
+<li>原系统硬盘</li>
+<li>新系统硬盘</li>
+<li>带有Live USB的Un盘</li>
+</ul>
+</li>
+<li>bios设置启动U盘,进入U盘Live USB的linux系统</li>
+<li>输入<code>lsblk</code>命令查看磁盘信息,找到原系统的磁盘和新系统的磁盘,例如&#x2F;dev&#x2F;sdb1和&#x2F;dev&#x2F;sdb2分别为原系统的EFI分区和根分区,&#x2F;dev&#x2F;sda为新系统磁盘(此处为举例,具体根据<code>lsblk</code>命令输出进行修改)</li>
+<li>输入<code>cfdisk</code>命令,对新磁盘进行分区,创建efi分区和根分区,efi设置分区类型为fat32,根分区类型须和原来系统一致,例如原系统为ext4,则新系统根分区也为ext4<br> 格式化EFI分区<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    mkfs.fat -F32 /dev/sda1</span><br><span class="line">    ```  </span><br><span class="line">格式化根分区  </span><br><span class="line">    ```bash</span><br><span class="line">    mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure></li>
+<li>挂载分区<ul>
+<li>挂载旧磁盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /sdb1</span><br><span class="line">mount /dev/sdb1 /sdb1</span><br><span class="line"><span class="built_in">mkdir</span> /sdb2</span><br><span class="line">mount /dev/sdb2 /sdb2</span><br></pre></td></tr></table></figure></li>
+<li>挂载新磁盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/boot</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>复制原系统文件到新系统<ul>
+<li>复制根分区数据  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP --exclude=/boot /sdb2/ /mnt/</span><br></pre></td></tr></table></figure></li>
+<li>复制EFI分区数据  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP /sdb2/ /mnt/boot/</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>更新fstab<ul>
+<li>生成新的UUID  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid</span><br></pre></td></tr></table></figure></li>
+<li>修改&#x2F;etc&#x2F;fstab文件,将原系统的UUID和新系统的UUID进行替换</li>
+</ul>
+</li>
+<li>配置启动加载器 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br><span class="line"><span class="built_in">cp</span> /etc/resolv.conf /mnt/etc/resolv.conf</span><br></pre></td></tr></table></figure></li>
+<li>切换到新根目录   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure></li>
+<li>安装配置grub  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure></li>
+<li>重启系统,bios设置从新硬盘启动,进入新系统</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/18/Arco%20Linux%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" rel="prev" title="Arco Linux安装指南">
+                  <i class="fa fa-angle-left"></i> Arco Linux安装指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/" rel="next" title="home目录迁移方法">
+                  home目录迁移方法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

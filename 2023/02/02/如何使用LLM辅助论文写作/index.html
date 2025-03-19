@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="LLM辅助论文写作指南在人工智能时代，大语言模型(LLM)可以作为我们写作论文的得力助手。本文将介绍如何通过合理设计prompt来辅助论文写作。 一、论文结构设计首先，我们可以让LLM帮助我们设计论文的整体结构。以下是一个实际案例： 示例问题1请为一篇题为&quot;基于生活化材料在小学科学教育实验的设计探讨&quot;的硕士研究生论文设计结构纲要。  参考答案一篇硕士研究生论文的结构纲要通常包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用LLM辅助论文写作">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2023/02/02/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="LLM辅助论文写作指南在人工智能时代，大语言模型(LLM)可以作为我们写作论文的得力助手。本文将介绍如何通过合理设计prompt来辅助论文写作。 一、论文结构设计首先，我们可以让LLM帮助我们设计论文的整体结构。以下是一个实际案例： 示例问题1请为一篇题为&quot;基于生活化材料在小学科学教育实验的设计探讨&quot;的硕士研究生论文设计结构纲要。  参考答案一篇硕士研究生论文的结构纲要通常包括">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-02T09:10:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T07:00:46.047Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2023/02/02/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2023/02/02/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/","path":"2023/02/02/如何使用LLM辅助论文写作/","title":"如何使用LLM辅助论文写作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何使用LLM辅助论文写作 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">LLM辅助论文写作指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%AE%BA%E6%96%87%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.</span> <span class="nav-text">一、论文结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">示例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88"><span class="nav-number">1.1.2.</span> <span class="nav-text">参考答案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AB%A0%E8%8A%82%E5%86%85%E5%AE%B9%E5%86%99%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">二、章节内容写作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80%E5%86%99%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">引言写作示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prompt%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Prompt设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%86%99%E6%8A%80%E5%B7%A7"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">扩写技巧</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">三、论文写作注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">四、总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2023/02/02/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何使用LLM辅助论文写作 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何使用LLM辅助论文写作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-02 17:10:00" itemprop="dateCreated datePublished" datetime="2023-02-02T17:10:00+08:00">2023-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 15:00:46" itemprop="dateModified" datetime="2025-03-19T15:00:46+08:00">2025-03-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="LLM辅助论文写作指南"><a href="#LLM辅助论文写作指南" class="headerlink" title="LLM辅助论文写作指南"></a>LLM辅助论文写作指南</h1><p>在人工智能时代，大语言模型(LLM)可以作为我们写作论文的得力助手。本文将介绍如何通过合理设计prompt来辅助论文写作。</p>
+<h2 id="一、论文结构设计"><a href="#一、论文结构设计" class="headerlink" title="一、论文结构设计"></a>一、论文结构设计</h2><p>首先，我们可以让LLM帮助我们设计论文的整体结构。以下是一个实际案例：</p>
+<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请为一篇题为&quot;基于生活化材料在小学科学教育实验的设计探讨&quot;的硕士研究生论文设计结构纲要。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h3><p>一篇硕士研究生论文的结构纲要通常包括以下部分：</p>
+<ol>
+<li><p><strong>引言</strong></p>
+<ul>
+<li>研究背景和意义</li>
+<li>研究目的</li>
+<li>研究问题</li>
+<li>研究方法概述</li>
+</ul>
+</li>
+<li><p><strong>文献综述</strong></p>
+<ul>
+<li>核心概念界定</li>
+<li>相关理论基础</li>
+<li>国内外研究现状</li>
+<li>研究评述</li>
+</ul>
+</li>
+<li><p><strong>研究方法</strong></p>
+<ul>
+<li>研究设计</li>
+<li>研究对象</li>
+<li>数据收集方法</li>
+<li>分析方法</li>
+</ul>
+</li>
+<li><p><strong>研究结果</strong></p>
+<ul>
+<li>数据呈现</li>
+<li>结果分析</li>
+<li>图表展示</li>
+</ul>
+</li>
+<li><p><strong>讨论</strong></p>
+<ul>
+<li>结果解释</li>
+<li>理论意义</li>
+<li>实践启示</li>
+<li>研究局限</li>
+</ul>
+</li>
+<li><p><strong>结论</strong></p>
+<ul>
+<li>主要发现</li>
+<li>研究贡献</li>
+<li>未来展望</li>
+</ul>
+</li>
+<li><p><strong>参考文献</strong></p>
+<ul>
+<li>按照规范格式列出</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、章节内容写作"><a href="#二、章节内容写作" class="headerlink" title="二、章节内容写作"></a>二、章节内容写作</h2><p>确定好结构后，我们可以逐章节设计prompt来完成写作。下面以引言部分为例：</p>
+<h3 id="引言写作示例"><a href="#引言写作示例" class="headerlink" title="引言写作示例"></a>引言写作示例</h3><h4 id="Prompt设计"><a href="#Prompt设计" class="headerlink" title="Prompt设计"></a>Prompt设计</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">请以&quot;基于生活化材料在小学科学教育实验的设计探讨&quot;为题，写一段500字的引言。要求：</span><br><span class="line">1. 说明研究背景和现实意义</span><br><span class="line">2. 指出现有研究的不足</span><br><span class="line">3. 阐明研究目的和预期贡献</span><br><span class="line">4. 语言要学术化、专业化</span><br></pre></td></tr></table></figure>
+
+<h4 id="扩写技巧"><a href="#扩写技巧" class="headerlink" title="扩写技巧"></a>扩写技巧</h4><p>对于较短的段落，我们可以通过以下方式扩写：</p>
+<ol>
+<li>补充具体数据和案例</li>
+<li>增加理论支撑</li>
+<li>拓展论述维度</li>
+<li>加强逻辑连贯性</li>
+</ol>
+<h2 id="三、论文写作注意事项"><a href="#三、论文写作注意事项" class="headerlink" title="三、论文写作注意事项"></a>三、论文写作注意事项</h2><ol>
+<li><p><strong>提示词设计原则</strong></p>
+<ul>
+<li>明确写作目的和要求</li>
+<li>指定具体的字数范围</li>
+<li>提供必要的背景信息</li>
+<li>说明行文风格和语气</li>
+</ul>
+</li>
+<li><p><strong>内容优化建议</strong></p>
+<ul>
+<li>保持逻辑性和连贯性</li>
+<li>注意学术用语规范</li>
+<li>适当引用相关研究</li>
+<li>突出创新点和贡献</li>
+</ul>
+</li>
+<li><p><strong>常见问题避免</strong></p>
+<ul>
+<li>避免过于口语化表达</li>
+<li>避免逻辑跳跃</li>
+<li>避免观点重复</li>
+<li>避免论述空泛</li>
+</ul>
+</li>
+</ol>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>合理利用LLM可以显著提高论文写作效率，但要注意：</p>
+<ol>
+<li>LLM是辅助工具，需要人工审核和修改</li>
+<li>保持学术诚信，不过度依赖AI</li>
+<li>持续优化prompt以获得更好的输出</li>
+<li>结合专业知识对内容进行把关</li>
+</ol>
+<p>希望本文的prompt设计方法和写作建议能够帮助大家更好地完成论文写作任务。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/12/22/vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="prev" title="vim常用快捷键">
+                  <i class="fa fa-angle-left"></i> vim常用快捷键
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/02/samba%E9%85%8D%E7%BD%AE/" rel="next" title="samba配置">
+                  samba配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
