@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="便携式Windows和Linux系统制作指南本文将介绍如何使用Ventoy工具制作可随身携带的Windows和Linux系统，让你能够在任何电脑上运行自己的操作系统环境。 准备工作：制作Ventoy启动盘 准备一个高速U盘或移动固态硬盘（推荐使用固态设备以获得更好的性能） 下载并安装Ventoy，将准备好的存储设备制作成Ventoy启动盘 将Ventoy启动盘格式化为NTFS格式 安装VHD启动插">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作便携式Windows和Linux系统指南">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="便携式Windows和Linux系统制作指南本文将介绍如何使用Ventoy工具制作可随身携带的Windows和Linux系统，让你能够在任何电脑上运行自己的操作系统环境。 准备工作：制作Ventoy启动盘 准备一个高速U盘或移动固态硬盘（推荐使用固态设备以获得更好的性能） 下载并安装Ventoy，将准备好的存储设备制作成Ventoy启动盘 将Ventoy启动盘格式化为NTFS格式 安装VHD启动插">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-21T02:35:28.000Z">
+<meta property="article:modified_time" content="2025-03-20T08:19:45.331Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/","path":"2022/06/21/制作便携式Windows和Linux系统指南/","title":"制作便携式Windows和Linux系统指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>制作便携式Windows和Linux系统指南 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">便携式Windows和Linux系统制作指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E5%88%B6%E4%BD%9CVentoy%E5%90%AF%E5%8A%A8%E7%9B%98"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作：制作Ventoy启动盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">创建系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E7%B3%BB%E7%BB%9F%E4%BE%BF%E6%90%BA%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Linux系统便携化配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Ventoy-Linux%E6%8F%92%E4%BB%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">安装Ventoy Linux插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B6%E4%BD%9CLinuxToGo"><span class="nav-number">1.3.2.</span> <span class="nav-text">制作LinuxToGo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows%E7%B3%BB%E7%BB%9F%E4%BE%BF%E6%90%BA%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">Windows系统便携化配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B6%E4%BD%9CWinToGo"><span class="nav-number">1.4.1.</span> <span class="nav-text">制作WinToGo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WinToGo%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%AE%B9%E6%8C%87%E5%8D%97"><span class="nav-number">1.4.2.</span> <span class="nav-text">WinToGo系统扩容指南</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="制作便携式Windows和Linux系统指南 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          制作便携式Windows和Linux系统指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-21 10:35:28" itemprop="dateCreated datePublished" datetime="2022-06-21T10:35:28+08:00">2022-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 16:19:45" itemprop="dateModified" datetime="2025-03-20T16:19:45+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="便携式Windows和Linux系统制作指南"><a href="#便携式Windows和Linux系统制作指南" class="headerlink" title="便携式Windows和Linux系统制作指南"></a>便携式Windows和Linux系统制作指南</h1><p>本文将介绍如何使用Ventoy工具制作可随身携带的Windows和Linux系统，让你能够在任何电脑上运行自己的操作系统环境。</p>
+<h2 id="准备工作：制作Ventoy启动盘"><a href="#准备工作：制作Ventoy启动盘" class="headerlink" title="准备工作：制作Ventoy启动盘"></a>准备工作：制作Ventoy启动盘</h2><ol>
+<li>准备一个高速U盘或移动固态硬盘（推荐使用固态设备以获得更好的性能）</li>
+<li>下载并安装Ventoy，将准备好的存储设备制作成Ventoy启动盘</li>
+<li>将Ventoy启动盘格式化为NTFS格式</li>
+<li>安装VHD启动插件：<ul>
+<li>下载<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">VHD启动插件</a></li>
+<li>将插件文件放置在U盘第一分区（即存放ISO文件的分区）的<code>ventoy</code>目录下</li>
+<li>配置全局控制插件，在<code>ventoy</code>目录下配置ventoy.json文件，具体的json解析见<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_control.html">Ventoy 全局控制插件</a><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;control&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MENU_LANGUAGE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zh_CN&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_MENU_MODE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_TREE_VIEW_MENU_STYLE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_FILT_DOT_UNDERSCORE_FILE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SORT_CASE_SENSITIVE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MAX_SEARCH_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_SEARCH_ROOT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ISO&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span>        </span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MENU_TIMEOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_IMAGE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ISO/win11.iso&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_FILE_FLT_EFI&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_KBD_LAYOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;QWERTY_USA&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_WIN11_BYPASS_CHECK&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_WIN11_BYPASS_NRO&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SECONDARY_BOOT_MENU&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SECONDARY_TIMEOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;20&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;file&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ventoy/theme/blur/theme.txt&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;gfxmode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1920x1080&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="创建系统镜像"><a href="#创建系统镜像" class="headerlink" title="创建系统镜像"></a>创建系统镜像</h2><p>本文测试kvm和virtualbox虚拟机工具皆可</p>
+<ol>
+<li><p>创建虚拟硬盘时的设置：</p>
+<ul>
+<li>选择”专家模式”</li>
+<li>虚拟硬盘类型选择”VHD”</li>
+<li>存储方式选择”固定大小”</li>
+</ul>
+</li>
+<li><p>启用UEFI支持：</p>
+<ul>
+<li>在启动虚拟机前，进入设置</li>
+<li>选择”系统” → “扩展特性”</li>
+<li>勾选”启用EFI”</li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux系统便携化配置"><a href="#Linux系统便携化配置" class="headerlink" title="Linux系统便携化配置"></a>Linux系统便携化配置</h2><h3 id="安装Ventoy-Linux插件"><a href="#安装Ventoy-Linux插件" class="headerlink" title="安装Ventoy Linux插件"></a>安装Ventoy Linux插件</h3><ol>
+<li>在虚拟机中访问<code>ventoy.net</code>官网</li>
+<li>导航至：中文 → 文档手册 → 插件说明 → Linux vDisk启动插件</li>
+<li>下载并解压插件</li>
+<li>使用root权限执行安装命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh vtoyboot.sh</span><br></pre></td></tr></table></figure>
+当看到”vtoyboot process successfully finished”提示时表示安装成功</li>
+</ol>
+<h3 id="制作LinuxToGo"><a href="#制作LinuxToGo" class="headerlink" title="制作LinuxToGo"></a>制作LinuxToGo</h3><ol>
+<li>关闭Linux虚拟机</li>
+<li>找到虚拟机目录下的<code>.vhd</code>文件</li>
+<li>将文件重命名，在文件名后添加<code>.vtoy</code>后缀</li>
+<li>将重命名后的文件复制到Ventoy启动盘中</li>
+</ol>
+<blockquote>
+<p>注意：当系统进行内核升级后，建议重新执行<code>sudo sh vtoyboot.sh</code>以确保启动兼容性</p>
+</blockquote>
+<h2 id="Windows系统便携化配置"><a href="#Windows系统便携化配置" class="headerlink" title="Windows系统便携化配置"></a>Windows系统便携化配置</h2><h3 id="制作WinToGo"><a href="#制作WinToGo" class="headerlink" title="制作WinToGo"></a>制作WinToGo</h3><ol>
+<li>关闭Windows虚拟机</li>
+<li>找到虚拟机目录下的<code>.vhd</code>文件</li>
+<li>直接将文件复制到Ventoy启动盘中即可使用</li>
+</ol>
+<h3 id="WinToGo系统扩容指南"><a href="#WinToGo系统扩容指南" class="headerlink" title="WinToGo系统扩容指南"></a>WinToGo系统扩容指南</h3><p>如果需要增加WinToGo系统的存储空间，可以按照以下步骤操作：</p>
+<ol>
+<li><p>查看虚拟磁盘信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img info wtg.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换为qcow2格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扩展容量（例如扩展到100G）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize wtg.qcow2 100G</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换回vhdx格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新文件名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> wtg.vhdx wtg_old.vhdx</span><br><span class="line"><span class="built_in">mv</span> wtg_expanded.vhdx wtg.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，启动WinToGo系统，使用Windows的磁盘管理工具将新增的空间分配给C盘</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上步骤，你可以成功制作出可随身携带的Windows和Linux系统。这些便携式系统可以帮助你在不同的电脑间保持一致的工作环境，非常适合开发人员或需要特定系统环境的用户使用。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/" rel="prev" title="Linux与Windows的远程连接方法">
+                  <i class="fa fa-angle-left"></i> Linux与Windows的远程连接方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/01/Wayland%E4%B8%8BOBS%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" rel="next" title="Wayland下OBS屏幕捕捉配置指南">
+                  Wayland下OBS屏幕捕捉配置指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

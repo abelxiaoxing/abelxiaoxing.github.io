@@ -113,7 +113,7 @@
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -175,7 +175,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 16:55:46" itemprop="dateModified" datetime="2025-03-19T16:55:46+08:00">2025-03-19</time>
     </span>
 
   
@@ -188,65 +188,111 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="环境检查"><a href="#环境检查" class="headerlink" title="环境检查"></a>环境检查</h2><p>检查kvm环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo <span class="comment"># 检测CPU是否支持虚拟化，若大于0则支持</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y cpu-checker <span class="comment"># 安装cpu-checker软件包检查kvm环境</span></span><br><span class="line">kvm-ok <span class="comment"># 运行kvm-ok命令检查，输出KVM acceleration can be used即为可用</span></span><br></pre></td></tr></table></figure>
-<h2 id="软件包安装"><a href="#软件包安装" class="headerlink" title="软件包安装"></a>软件包安装</h2><h3 id="ARCH系"><a href="#ARCH系" class="headerlink" title="ARCH系"></a>ARCH系</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</span><br><span class="line"><span class="built_in">sudo</span> pacman -S ebtables iptables</span><br></pre></td></tr></table></figure>
-<ul>
-<li>kvm 负责CPU和内存的虚拟化</li>
-<li>qemu 向Guest OS模拟硬件（例如，CPU，网卡，磁盘，等）</li>
-<li>ovmf 为虚拟机启用UEFI支持</li>
-<li>libvirt 提供管理虚拟机和其它虚拟化功能的工具和API</li>
-<li>virt-manager 是管理虚拟机的GUI<br>安装libguestfs<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S libguestfs</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="Debian系"><a href="#Debian系" class="headerlink" title="Debian系"></a>Debian系</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils libguestfs-tools virt-viewer virt-manager virtinst</span><br><span class="line"><span class="built_in">sudo</span> apt install python3-libvirt</span><br></pre></td></tr></table></figure>
+          <h1 id="KVM虚拟化完全指南"><a href="#KVM虚拟化完全指南" class="headerlink" title="KVM虚拟化完全指南"></a>KVM虚拟化完全指南</h1><blockquote>
+<p>KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。</p>
+</blockquote>
+<h2 id="1-环境检查"><a href="#1-环境检查" class="headerlink" title="1. 环境检查"></a>1. 环境检查</h2><p>在开始安装KVM之前，首先需要确认您的硬件是否支持虚拟化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测CPU是否支持虚拟化，输出大于0则表示支持</span></span><br><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu也可以安装cpu-checker软件包检查KVM环境</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y cpu-checker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行kvm-ok命令检查，输出&quot;KVM acceleration can be used&quot;即为可用</span></span><br><span class="line">kvm-ok</span><br></pre></td></tr></table></figure>
 
+<h2 id="2-软件包安装"><a href="#2-软件包安装" class="headerlink" title="2. 软件包安装"></a>2. 软件包安装</h2><p>根据您的Linux发行版，选择对应的安装方式：</p>
+<h3 id="2-1-ARCH系（Arch-Linux-x2F-Manjaro等）"><a href="#2-1-ARCH系（Arch-Linux-x2F-Manjaro等）" class="headerlink" title="2.1 ARCH系（Arch Linux&#x2F;Manjaro等）"></a>2.1 ARCH系（Arch Linux&#x2F;Manjaro等）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装基本组件</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装网络相关组件</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S ebtables iptables</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装libguestfs工具</span></span><br><span class="line">paru -S libguestfs</span><br></pre></td></tr></table></figure>
+
+<p><strong>组件说明：</strong></p>
 <ul>
-<li>qemu-kvm：即qemu+kvm，kvm负责cpu和内存的虚拟化，而qemu负责IO设备，如网卡和磁盘等的虚拟化。</li>
-<li>libvirt-daemon-system：KVM管理工具，为不同的虚拟机监视器提供了统一的接口。</li>
-<li>libvirt-clients: 包含了一组用于与 libvirt 库交互的命令行工具，包括virsh、virt-install，virt-clone<ul>
-<li>virsh: 用于虚拟机的创建，启动，停止，迁移，克隆，配置文件管理等操作。</li>
-<li>virt-install：用于GuestOS安装</li>
-<li>virt-clone：用于虚拟机克隆</li>
+<li><strong>kvm</strong>: 负责CPU和内存的虚拟化</li>
+<li><strong>qemu</strong>: 向Guest OS模拟硬件（例如，CPU，网卡，磁盘等）</li>
+<li><strong>ovmf</strong>: 为虚拟机启用UEFI支持</li>
+<li><strong>libvirt</strong>: 提供管理虚拟机和其它虚拟化功能的工具和API</li>
+<li><strong>virt-manager</strong>: 图形界面管理KVM虚拟化</li>
+</ul>
+<h3 id="2-2-Debian系（Ubuntu-x2F-Debian等）"><a href="#2-2-Debian系（Ubuntu-x2F-Debian等）" class="headerlink" title="2.2 Debian系（Ubuntu&#x2F;Debian等）"></a>2.2 Debian系（Ubuntu&#x2F;Debian等）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新软件包列表</span></span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装KVM及相关工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils libguestfs-tools virt-viewer virt-manager virtinst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装Python绑定（可选）</span></span><br><span class="line"><span class="built_in">sudo</span> apt install python3-libvirt</span><br></pre></td></tr></table></figure>
+
+<p><strong>组件说明：</strong></p>
+<ul>
+<li><strong>qemu-kvm</strong>: 即qemu+kvm，kvm负责cpu和内存的虚拟化，而qemu负责IO设备，如网卡和磁盘等的虚拟化</li>
+<li><strong>libvirt-daemon-system</strong>: KVM管理工具，为不同的虚拟机监视器提供了统一的接口</li>
+<li><strong>libvirt-clients</strong>: 包含了一组用于与libvirt库交互的命令行工具，包括：<ul>
+<li><strong>virsh</strong>: 用于虚拟机的创建，启动，停止，迁移，克隆，配置文件管理等操作</li>
+<li><strong>virt-install</strong>: 用于GuestOS安装</li>
+<li><strong>virt-clone</strong>: 用于虚拟机克隆</li>
 </ul>
 </li>
-<li>bridge-utils：配置网桥</li>
-<li>libguestfs-tools：虚拟机镜像管理工具，包括virt-cat、virt-edit、virt-ls、virt-rescue</li>
-<li>virt-viewer：用于虚拟机控制台</li>
-<li>virt-manager：图形界面管理KVM虚拟化</li>
-<li>virtinst: 命令行工具，包括virt-install、virt-clone、virt-manager等。</li>
-<li>python3-libvirt：libvirt库的Python 绑定，在Python中使用 libvirt 的功能，包括对虚拟机、存储池、网络等资源的管理，以及对虚拟化宿主机的监控和控制。</li>
+<li><strong>bridge-utils</strong>: 配置网桥</li>
+<li><strong>libguestfs-tools</strong>: 虚拟机镜像管理工具，包括virt-cat、virt-edit、virt-ls、virt-rescue</li>
+<li><strong>virt-viewer</strong>: 用于虚拟机控制台</li>
+<li><strong>virt-manager</strong>: 图形界面管理KVM虚拟化</li>
+<li><strong>virtinst</strong>: 命令行工具，包括virt-install、virt-clone、virt-manager等</li>
+<li><strong>python3-libvirt</strong>: libvirt库的Python绑定，用于在Python中使用libvirt的功能</li>
 </ul>
-<h2 id="启动libvirt服务"><a href="#启动libvirt服务" class="headerlink" title="启动libvirt服务"></a>启动libvirt服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start libvirtd.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> libvirtd.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl status libvirtd.service</span><br></pre></td></tr></table></figure>
-<h2 id="检查kvm模块"><a href="#检查kvm模块" class="headerlink" title="检查kvm模块"></a>检查kvm模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lsmod  | grep kvm</span><br><span class="line">kvm_intel             372736  5</span><br><span class="line">kvm                  1032192  1 kvm_intel</span><br></pre></td></tr></table></figure>
-<h2 id="添加当前用户到-kvm和libvirt-组（可选）"><a href="#添加当前用户到-kvm和libvirt-组（可选）" class="headerlink" title="添加当前用户到 kvm和libvirt 组（可选）"></a>添加当前用户到 kvm和libvirt 组（可选）</h2><p>修改组后，需要重新登录或注销再登录才能使更改生效。</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG kvm <span class="variable">$USER</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG libvirt $(<span class="built_in">whoami</span>)</span><br><span class="line"><span class="built_in">id</span> $(<span class="built_in">whoami</span>) <span class="comment"># 验证用户是否加入组中</span></span><br><span class="line">uid=1001(gycx) gid=1001(gycx) <span class="built_in">groups</span>=1001(gycx),108(kvm),138(libvirt)</span><br></pre></td></tr></table></figure>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/libvirt/libvirtd.conf</span><br></pre></td></tr></table></figure>
-<p>将UNIX域套接字组所有权设置为libvirt(第85行)： </p>
+<h2 id="3-启动libvirt服务"><a href="#3-启动libvirt服务" class="headerlink" title="3. 启动libvirt服务"></a>3. 启动libvirt服务</h2><p>安装完成后，需要启动并启用libvirt服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动libvirt服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl start libvirtd.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置开机自启</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> libvirtd.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查服务状态</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status libvirtd.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-检查KVM模块"><a href="#4-检查KVM模块" class="headerlink" title="4. 检查KVM模块"></a>4. 检查KVM模块</h2><p>确认KVM模块已正确加载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ lsmod | grep kvm</span><br><span class="line">kvm_intel             372736  5</span><br><span class="line">kvm                  1032192  1 kvm_intel</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：AMD处理器用户会看到kvm_amd而不是kvm_intel</p>
+</blockquote>
+<h2 id="5-用户权限配置（可选）"><a href="#5-用户权限配置（可选）" class="headerlink" title="5. 用户权限配置（可选）"></a>5. 用户权限配置（可选）</h2><p>为了避免每次操作都需要使用sudo，可以将当前用户添加到kvm和libvirt组。<br>修改组后，需要重新登录或注销再登录才能使更改生效。</p>
+<h3 id="5-1-方法一：直接添加用户到组"><a href="#5-1-方法一：直接添加用户到组" class="headerlink" title="5.1 方法一：直接添加用户到组"></a>5.1 方法一：直接添加用户到组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加当前用户到kvm组</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG kvm <span class="variable">$USER</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前用户到libvirt组</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG libvirt $(<span class="built_in">whoami</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证用户是否已加入组中</span></span><br><span class="line"><span class="built_in">id</span> $(<span class="built_in">whoami</span>)</span><br><span class="line"><span class="comment"># 输出示例：uid=1001(gycx) gid=1001(gycx) groups=1001(gycx),108(kvm),138(libvirt)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-方法二：修改libvirt配置"><a href="#5-2-方法二：修改libvirt配置" class="headerlink" title="5.2 方法二：修改libvirt配置"></a>5.2 方法二：修改libvirt配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑libvirt配置文件</span></span><br><span class="line"><span class="built_in">sudo</span> vim /etc/libvirt/libvirtd.conf</span><br></pre></td></tr></table></figure>
+
+<p>将UNIX域套接字组所有权设置为libvirt(第85行)：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_group = &quot;libvirt&quot;</span><br></pre></td></tr></table></figure>
-<p>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_rw_perms = &quot;0770&quot;  </span><br></pre></td></tr></table></figure>
-<p>将你的用户帐户添加到libvirt组： </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -a -G libvirt $(whoami)  </span><br><span class="line">newgrp libvirt  </span><br></pre></td></tr></table></figure>
-<p>重启libvirt守护进程： </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart libvirtd.service</span><br></pre></td></tr></table></figure>
-<h2 id="启用嵌套虚拟化（可选）"><a href="#启用嵌套虚拟化（可选）" class="headerlink" title="启用嵌套虚拟化（可选）"></a>启用嵌套虚拟化（可选）</h2><ul>
-<li>嵌套虚拟化功能使你可以在VM中运行虚拟机，通过启用内核模块为kvm_intel启用嵌套虚拟化： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe -r kvm_intel </span><br><span class="line">sudo modprobe kvm_intel nested=1 </span><br></pre></td></tr></table></figure>
-要使此配置持久，请运行： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;options kvm-intel nested=1&quot; | sudo tee /etc/modprobe.d/kvm-intel.conf </span><br></pre></td></tr></table></figure>
-确认嵌套虚拟化设置为是： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systool -m kvm_intel -v | grep nested </span><br><span class="line">nested              = &quot;Y&quot; </span><br><span class="line">nested_early_check  = &quot;N&quot; </span><br><span class="line">cat /sys/module/kvm_intel/parameters/nested </span><br><span class="line">Y </span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="创建网桥-br0-，配置同一网段"><a href="#创建网桥-br0-，配置同一网段" class="headerlink" title="创建网桥(br0)，配置同一网段"></a>创建网桥(br0)，配置同一网段</h2><p>为实现从本机外访问该虚拟机必须将虚拟机的网卡映射至网桥。virbr0 网桥是 KVM 安装完成后自动创建的，仅做测试用途。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brctl show <span class="comment"># 显示网桥信息</span></span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400a882e2       <span class="built_in">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure>
 
-<p>通过如下内容在 &#x2F;etc&#x2F;netplan 目录下创建文件 01-netcfg.yaml 来新建网桥：<br>输入ifconfig确认当前网口设备、ip地址和mac地址，本案例中设备为eno2，ip地址填入addresses中，mac地址填入macaddress中<br>输入ip route得到默认via和metric，填入routes的via和metric中  </p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network</span>:</span><br><span class="line">  <span class="attr">ethernets</span>:</span><br><span class="line">    <span class="attr">eno2</span>:</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">bridges</span>:</span><br><span class="line">    <span class="attr">br0</span>:</span><br><span class="line">      <span class="attr">interfaces</span>: [eno2]</span><br><span class="line">      <span class="attr">dhcp4</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">addresses</span>: [<span class="number">192.168</span><span class="number">.100</span><span class="number">.123</span>/<span class="number">24</span>]</span><br><span class="line">      <span class="attr">macaddress</span>: 7<span class="attr">c</span>:<span class="attr">c2</span>:<span class="number">55</span>:4<span class="attr">d</span>:<span class="attr">e1</span>:e9</span><br><span class="line">      <span class="attr">routes</span>:</span><br><span class="line">        - <span class="attr">to</span>: <span class="keyword">default</span></span><br><span class="line">          <span class="attr">via</span>: <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span></span><br><span class="line">          <span class="attr">metric</span>: <span class="number">101</span></span><br><span class="line">      <span class="attr">nameservers</span>:</span><br><span class="line">        <span class="attr">addresses</span>: [<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>]</span><br><span class="line">      <span class="attr">parameters</span>:</span><br><span class="line">        <span class="attr">stp</span>: <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">version</span>: <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>应用网络配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line">ip add show</span><br></pre></td></tr></table></figure>
-<h2 id="创建虚拟机（二选一）"><a href="#创建虚拟机（二选一）" class="headerlink" title="创建虚拟机（二选一）"></a>创建虚拟机（二选一）</h2><ol>
-<li><p>图形化创建虚拟机<br>运行virt-manager，启动图形化界面进行kvm虚拟机安装<br>  add connection——local install media——choose iso or CDROM install media——选择要安装的iso镜像点击choose volume——Forward——设置CPU和Memory点击Forward——点击enable storage for this virtual machine并点击create a disk image for the virtual machine选择硬盘大小点击Forward——选择网桥为br0点击Finish</p>
-</li>
-<li><p>终端创建虚拟机<br> 创建4c8g200G的虚拟机,磁盘为稀疏模式，格式为qcow2，总线类型为virtio。同启动一个串行终端打印输出</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-install  --virt-type=kvm --name=win10   --vcpus=4  --memory=8192 --osinfo=win10 --cdrom=/var/lib/libvirt/images/win10.iso  --disk path=/var/lib/libvirt/images/win10.qcow2,size=200,format=qcow2,bus=virtio,sparse --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --force</span><br></pre></td></tr></table></figure></li>
+<p>设置R&#x2F;W套接字的UNIX套接字权限（第102行）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix_sock_rw_perms = &quot;0770&quot;</span><br></pre></td></tr></table></figure>
+
+<p>将用户帐户添加到libvirt组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -a -G libvirt $(<span class="built_in">whoami</span>)</span><br><span class="line">newgrp libvirt</span><br></pre></td></tr></table></figure>
+
+<p>重启libvirt守护进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart libvirtd.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-启用嵌套虚拟化（可选）"><a href="#6-启用嵌套虚拟化（可选）" class="headerlink" title="6. 启用嵌套虚拟化（可选）"></a>6. 启用嵌套虚拟化（可选）</h2><p>嵌套虚拟化功能使您可以在虚拟机中运行虚拟机，这对于测试和开发环境非常有用。</p>
+<h3 id="6-1-Intel处理器"><a href="#6-1-Intel处理器" class="headerlink" title="6.1 Intel处理器"></a>6.1 Intel处理器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载当前kvm_intel模块</span></span><br><span class="line"><span class="built_in">sudo</span> modprobe -r kvm_intel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新加载模块并启用嵌套虚拟化</span></span><br><span class="line"><span class="built_in">sudo</span> modprobe kvm_intel nested=1</span><br></pre></td></tr></table></figure>
+
+<p>要使此配置持久化，请运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;options kvm-intel nested=1&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/modprobe.d/kvm-intel.conf</span><br></pre></td></tr></table></figure>
+
+<p>确认嵌套虚拟化已启用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systool -m kvm_intel -v | grep nested</span><br><span class="line"><span class="comment"># 输出：nested = &quot;Y&quot;</span></span><br><span class="line"><span class="comment"># 输出：nested_early_check = &quot;N&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> /sys/module/kvm_intel/parameters/nested</span><br><span class="line"><span class="comment"># 输出：Y</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-AMD处理器"><a href="#6-2-AMD处理器" class="headerlink" title="6.2 AMD处理器"></a>6.2 AMD处理器</h3><p>对于AMD处理器，将上述命令中的<code>kvm_intel</code>替换为<code>kvm_amd</code>即可。</p>
+<h2 id="7-网络配置"><a href="#7-网络配置" class="headerlink" title="7. 网络配置"></a>7. 网络配置</h2><h3 id="7-1-创建网桥-br0-，配置同一网段"><a href="#7-1-创建网桥-br0-，配置同一网段" class="headerlink" title="7.1 创建网桥(br0)，配置同一网段"></a>7.1 创建网桥(br0)，配置同一网段</h3><p>为实现从本机外访问虚拟机，必须将虚拟机的网卡映射至网桥。virbr0网桥是KVM安装完成后自动创建的，仅做测试用途。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示网桥信息</span></span><br><span class="line">brctl show</span><br><span class="line"><span class="comment"># 输出示例：</span></span><br><span class="line"><span class="comment"># bridge name     bridge id               STP enabled     interfaces</span></span><br><span class="line"><span class="comment"># virbr0          8000.525400a882e2       yes             virbr0-nic</span></span><br></pre></td></tr></table></figure>
+
+<p>通过在<code>/etc/netplan</code>目录下创建文件<code>01-netcfg.yaml</code>来新建网桥：</p>
+<blockquote>
+<p>提示：</p>
+<ol>
+<li>使用<code>ifconfig</code>确认当前网口设备、IP地址和MAC地址</li>
+<li>使用<code>ip route</code>获取默认via和metric值</li>
 </ol>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network:</span></span><br><span class="line">  <span class="attr">ethernets:</span></span><br><span class="line">    <span class="attr">eno2:</span>  <span class="comment"># 替换为您的网络接口名称</span></span><br><span class="line">      <span class="attr">dhcp4:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">bridges:</span></span><br><span class="line">    <span class="attr">br0:</span></span><br><span class="line">      <span class="attr">interfaces:</span> [<span class="string">eno2</span>]  <span class="comment"># 替换为您的网络接口名称</span></span><br><span class="line">      <span class="attr">dhcp4:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">addresses:</span> [<span class="number">192.168</span><span class="number">.100</span><span class="number">.123</span><span class="string">/24</span>]  <span class="comment"># 替换为您的IP地址</span></span><br><span class="line">      <span class="attr">macaddress:</span> <span class="string">7c:c2:55:4d:e1:e9</span>  <span class="comment"># 替换为您的MAC地址</span></span><br><span class="line">      <span class="attr">routes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">to:</span> <span class="string">default</span></span><br><span class="line">          <span class="attr">via:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span>  <span class="comment"># 替换为您的网关地址</span></span><br><span class="line">          <span class="attr">metric:</span> <span class="number">101</span></span><br><span class="line">      <span class="attr">nameservers:</span></span><br><span class="line">        <span class="attr">addresses:</span> [<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>]  <span class="comment"># 替换为您的DNS服务器</span></span><br><span class="line">      <span class="attr">parameters:</span></span><br><span class="line">        <span class="attr">stp:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">dhcp6:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>应用网络配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line">ip add show  <span class="comment"># 检查配置是否生效</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-创建虚拟机"><a href="#8-创建虚拟机" class="headerlink" title="8. 创建虚拟机"></a>8. 创建虚拟机</h2><p>创建虚拟机有两种方式，您可以根据自己的喜好选择其中一种：</p>
+<h3 id="8-1-图形化创建虚拟机"><a href="#8-1-图形化创建虚拟机" class="headerlink" title="8.1 图形化创建虚拟机"></a>8.1 图形化创建虚拟机</h3><ol>
+<li>运行<code>virt-manager</code>，启动图形化界面进行KVM虚拟机安装</li>
+<li>点击「添加连接」(Add connection)，选择「本地安装介质」(Local install media)</li>
+<li>选择「选择ISO或CDROM安装介质」(Choose ISO or CDROM install media)</li>
+<li>选择要安装的ISO镜像，点击「选择卷」(Choose volume)</li>
+<li>点击「前进」(Forward)</li>
+<li>设置CPU和内存，点击「前进」(Forward)</li>
+<li>点击「为此虚拟机启用存储」(Enable storage for this virtual machine)，并点击「为虚拟机创建磁盘镜像」(Create a disk image for the virtual machine)，选择硬盘大小</li>
+<li>点击「前进」(Forward)</li>
+<li>选择网桥为br0，点击「完成」(Finish)</li>
+</ol>
+<h3 id="8-2-命令行创建虚拟机"><a href="#8-2-命令行创建虚拟机" class="headerlink" title="8.2 命令行创建虚拟机"></a>8.2 命令行创建虚拟机</h3><p>以下命令创建一个配置为4核CPU、8GB内存、200GB磁盘的Windows 10虚拟机，磁盘为稀疏模式，格式为qcow2，总线类型为virtio：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">virt-install --virt-type=kvm --name=win10 --vcpus=4 --memory=8192 \</span><br><span class="line">  --osinfo=win10 --cdrom=/var/lib/libvirt/images/win10.iso \</span><br><span class="line">  --disk path=/var/lib/libvirt/images/win10.qcow2,size=200,format=qcow2,bus=virtio,sparse \</span><br><span class="line">  --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --force</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-常用操作命令"><a href="#9-常用操作命令" class="headerlink" title="9. 常用操作命令"></a>9. 常用操作命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有虚拟机</span></span><br><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start &lt;vm-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机（正常关机）</span></span><br><span class="line">virsh shutdown &lt;vm-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制关闭虚拟机</span></span><br><span class="line">virsh destroy &lt;vm-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除虚拟机（先关闭再删除）</span></span><br><span class="line">virsh undefine &lt;vm-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆虚拟机</span></span><br><span class="line">virt-clone --original &lt;source-vm&gt; --name &lt;target-vm&gt; --auto-clone</span><br></pre></td></tr></table></figure>
+<hr>
 
       
     </div>
@@ -273,7 +319,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85MATLAB%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -291,7 +337,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/19/linux%E5%AE%89%E8%A3%85MATLAB%E6%AD%A5%E9%AA%A4/" class="post-title-link" itemprop="url">linux安装MATLAB步骤</a>
+          <a href="/2024/07/19/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85MATLAB%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Linux系统安装MATLAB完全指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -309,7 +355,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 17:02:23" itemprop="dateModified" datetime="2025-03-19T17:02:23+08:00">2025-03-19</time>
     </span>
 
   
@@ -322,65 +368,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="linux安装MATLAB步骤"><a href="#linux安装MATLAB步骤" class="headerlink" title="linux安装MATLAB步骤"></a>linux安装MATLAB步骤</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>下载MATLAB R2018a</li>
-</ol>
-<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1nSvdZvzt-NFKxVR01KQgfQ?pwd=abel">MATLAB R2018a </a> 提取码: abel</p>
-<ol start="2">
-<li>进入下载后的文件夹(假如下载后的文件放在了&#x2F;home&#x2F;jesson中,其中jesson是我的用户名,用你自己的替换就行了)解压破解文件Matlab2018aLinux64Crack.tar.gz文件,创建一个文件夹Crack来放置解压后的文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> Crack</span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">tar -xvf Matlab2018aLinux64Crack.tar.gz -C Crack</span><br><span class="line"><span class="built_in">cd</span> /mnt</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> iso</span><br></pre></td></tr></table></figure>
+          <h1 id="Linux系统安装MATLAB完全指南"><a href="#Linux系统安装MATLAB完全指南" class="headerlink" title="Linux系统安装MATLAB完全指南"></a>Linux系统安装MATLAB完全指南</h1><blockquote>
+<p>本文详细介绍了在Linux系统上安装MATLAB R2018a的完整步骤，包括准备工作、安装过程、激活方法以及后续处理。</p>
+</blockquote>
+<h2 id="📋-准备工作"><a href="#📋-准备工作" class="headerlink" title="📋 准备工作"></a>📋 准备工作</h2><h3 id="1-获取安装文件"><a href="#1-获取安装文件" class="headerlink" title="1. 获取安装文件"></a>1. 获取安装文件</h3><p>下载MATLAB R2018a安装包：</p>
+<ul>
+<li>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1nSvdZvzt-NFKxVR01KQgfQ?pwd=abel">MATLAB R2018a</a> </li>
+<li>提取码: <code>abel</code></li>
+</ul>
+<h3 id="2-解压破解文件"><a href="#2-解压破解文件" class="headerlink" title="2. 解压破解文件"></a>2. 解压破解文件</h3><p>假设下载后的文件放在了<code>/home/username</code>目录中（请将username替换为你的用户名）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建Crack文件夹用于存放破解文件</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> Crack</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压破解文件到Crack文件夹</span></span><br><span class="line">tar -xvf Matlab2018aLinux64Crack.tar.gz -C Crack</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>在&#x2F;mnt中创建一个文件夹用来挂载R2018a_glnxa64_dvd1.iso和R2018a_glnxa64_dvd2.iso</li>
-</ol>
+<h3 id="3-创建挂载点"><a href="#3-创建挂载点" class="headerlink" title="3. 创建挂载点"></a>3. 创建挂载点</h3><p>在<code>/mnt</code>中创建一个文件夹用来挂载ISO镜像文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> iso</span><br></pre></td></tr></table></figure>
 
-<ol start="4">
-<li>先挂载R2018a_glnxa64_dvd1.iso</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> mount -t auto -o loop R2018a_glnxa64_dvd1.iso /mnt/iso</span><br></pre></td></tr></table></figure>
+<h3 id="4-挂载第一个ISO镜像"><a href="#4-挂载第一个ISO镜像" class="headerlink" title="4. 挂载第一个ISO镜像"></a>4. 挂载第一个ISO镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> mount -t auto -o loop R2018a_glnxa64_dvd1.iso /mnt/iso</span><br></pre></td></tr></table></figure>
 
-<p>如果这个时候提示&#x2F;mnt&#x2F;iso: WARNING:device write-protected,mounted read-only,那就修改下&#x2F;mnt的权限</p>
+<blockquote>
+<p><strong>注意</strong>：如果提示<code>/mnt/iso: WARNING: device write-protected, mounted read-only</code>，需要修改<code>/mnt</code>的权限：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 755 mnt</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="5-启动安装程序"><a href="#5-启动安装程序" class="headerlink" title="5. 启动安装程序"></a>5. 启动安装程序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt/iso</span><br><span class="line"><span class="built_in">sudo</span> ./matlab</span><br></pre></td></tr></table></figure>
 
-<ol start="5">
-<li>安装开始,进入挂载的文件夹iso中</li>
+<h2 id="🔧-安装过程"><a href="#🔧-安装过程" class="headerlink" title="🔧 安装过程"></a>🔧 安装过程</h2><ol>
+<li>在安装界面选择 <strong>Use a File Installation Key</strong></li>
+<li>同意许可协议，选择 <strong>Yes</strong></li>
+<li>保留默认安装目录（通常为<code>/usr/local</code>）</li>
+<li>选择 <strong>I have the File Installation Key for my license</strong>，输入以下序列号：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">09806-07443-53955-64350-21751-41297</span><br></pre></td></tr></table></figure></li>
+<li>当安装进度提示需要第二张DVD时，挂载第二个ISO镜像：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> mount -t auto -o loop R2018a_glnxa64_dvd2.iso /mnt/iso</span><br></pre></td></tr></table></figure></li>
+<li>安装完成后，点击 <strong>Finish</strong> 结束安装向导</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt/iso</span><br><span class="line"><span class="built_in">sudo</span> ./matlab</span><br></pre></td></tr></table></figure>
+<h2 id="🔐-激活步骤"><a href="#🔐-激活步骤" class="headerlink" title="🔐 激活步骤"></a>🔐 激活步骤</h2><h3 id="1-复制许可证文件"><a href="#1-复制许可证文件" class="headerlink" title="1. 复制许可证文件"></a>1. 复制许可证文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Crack</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> license_standalone.lic /usr/local/MATLAB/R2018a/licenses</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ol>
-<li>选择 Use a File Installation Key</li>
-<li>选择Yes,同意条约</li>
-<li>选择默认安装目录,默认放在&#x2F;usr&#x2F;local中</li>
-<li>选择I have the File Installation Key for my license,输入:09806-07443-53955-64350-21751-41297</li>
-<li>安装到某个进度会提示插入iso2,这个时候挂载R2018a_glnxa64_dvd2.iso</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">sudo</span> mount -t auto -o loop R2018a_glnxa64_dvd2.iso /mnt/iso</span><br></pre></td></tr></table></figure>
+<h3 id="2-复制破解文件"><a href="#2-复制破解文件" class="headerlink" title="2. 复制破解文件"></a>2. 复制破解文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Crack</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r R2018a /usr/local/MATLAB</span><br></pre></td></tr></table></figure>
 
-<ol start="6">
-<li>最后安装完成选择finsh</li>
-</ol>
-<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><ol>
-<li>复制破解文件Crack中license_standalone.lic到安装目录中</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Crack</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> license_standalone.lic /usr/local/MATLAB/R2018a/licenses</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>复制Crack中的R2018a到安装目录</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Crack</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r R2018a /usr/local/MATLAB</span><br></pre></td></tr></table></figure>
-
-<p>至此激活完成</p>
-<h2 id="后续处理"><a href="#后续处理" class="headerlink" title="后续处理"></a>后续处理</h2><ol>
-<li>采用软链接的方式在&#x2F;usr&#x2F;local&#x2F;bin中创建启动命令matlab</li>
-</ol>
+<blockquote>
+<p><strong>提示</strong>：完成上述步骤后，MATLAB已成功激活，可以正常使用了。</p>
+</blockquote>
+<h2 id="⚙️-后续配置"><a href="#⚙️-后续配置" class="headerlink" title="⚙️ 后续配置"></a>⚙️ 后续配置</h2><h3 id="1-创建命令快捷方式"><a href="#1-创建命令快捷方式" class="headerlink" title="1. 创建命令快捷方式"></a>1. 创建命令快捷方式</h3><p>通过软链接方式在系统路径中创建<code>matlab</code>命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/bin</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/local/MATLAB/R2018a/bin/matlab matlab</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>取消挂载,删除文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> umunt /mnt/iso</span><br><span class="line"><span class="built_in">cd</span> /mnt</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rmdir</span> iso</span><br></pre></td></tr></table></figure>
+<p>完成此步骤后，可以在终端中直接输入<code>matlab</code>命令启动MATLAB。</p>
+<h3 id="2-清理安装文件"><a href="#2-清理安装文件" class="headerlink" title="2. 清理安装文件"></a>2. 清理安装文件</h3><p>卸载ISO镜像并删除挂载点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> umount /mnt/iso</span><br><span class="line"><span class="built_in">cd</span> /mnt</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rmdir</span> iso</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-总结"><a href="#📝-总结" class="headerlink" title="📝 总结"></a>📝 总结</h2><p>按照上述步骤操作后，您已经成功在Linux系统上安装并激活了MATLAB R2018a。现在可以通过终端输入<code>matlab</code>命令或在应用程序菜单中找到MATLAB图标来启动软件。</p>
+<p>如遇到问题，请检查各步骤是否正确执行，特别是文件路径和权限设置。</p>
+
       
     </div>
 
@@ -406,7 +441,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/06/23/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -424,7 +459,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/23/Imagenet1k%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AF%BC%E5%85%A5/" class="post-title-link" itemprop="url">Imagenet1k数据集导入</a>
+          <a href="/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">ImageNet-1K数据集的准备与导入指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -442,7 +477,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 16:14:24" itemprop="dateModified" datetime="2025-03-19T16:14:24+08:00">2025-03-19</time>
     </span>
 
   
@@ -455,16 +490,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="下载imagenet1k数据集"><a href="#下载imagenet1k数据集" class="headerlink" title="下载imagenet1k数据集"></a>下载imagenet1k数据集</h2><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel">https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel</a> 提取码: abel</p>
-<h2 id="数据格式配置"><a href="#数据格式配置" class="headerlink" title="数据格式配置"></a>数据格式配置</h2><p>创建train,val,test文件夹,把压缩包放入各文件夹中,解压各个压缩包文件.其中train压缩包会产生1000个子压缩包,删除原压缩包,输入以下shell命令进行批量解压缩  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> *.tar; do [ -f <span class="string">&quot;$f&quot;</span> ] &amp;&amp; mkdir -p <span class="string">&quot;$&#123;f%.tar&#125;&quot;</span> &amp;&amp; tar -xf <span class="string">&quot;$f&quot;</span> -C <span class="string">&quot;$&#123;f%.tar&#125;&quot;</span>; done &amp;&amp; rm *.rar</span><br><span class="line">```    </span><br><span class="line">执行脚本之后，我们就获得了train文件夹下<span class="number">1000</span>个文件夹和对应的图片数据</span><br><span class="line"><span class="comment">## 数据标记映射</span></span><br><span class="line"><span class="number">1.</span> 先解压devkit压缩包</span><br><span class="line">    </span><br><span class="line">    ```python</span><br><span class="line">    tar -xzf ILSVRC2012_devkit_t12.tar.gz</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>之后，在imagenet目录（devkit和val的根目录下）创建并运行如下 python 脚本</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">move_valimg</span>(<span class="params">val_dir=<span class="string">&#x27;./val&#x27;</span>, devkit_dir=<span class="string">&#x27;./ILSVRC2012_devkit_t12&#x27;</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    move valimg to correspongding folders.</span></span><br><span class="line"><span class="string">    val_id(start from 1) -&gt; ILSVRC_ID(start from 1) -&gt; WIND</span></span><br><span class="line"><span class="string">    organize like:</span></span><br><span class="line"><span class="string">    /val</span></span><br><span class="line"><span class="string">    /n01440764</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">    /n01443537</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">        .....</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># load synset, val ground truth and val images list</span></span><br><span class="line">    synset = io.loadmat(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;meta.mat&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">    ground_truth = <span class="built_in">open</span>(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;ILSVRC2012_validation_ground_truth.txt&#x27;</span>))</span><br><span class="line">    lines = ground_truth.readlines()</span><br><span class="line">    labels = [<span class="built_in">int</span>(line[:-<span class="number">1</span>]) <span class="keyword">for</span> line <span class="keyword">in</span> lines]</span><br><span class="line">    </span><br><span class="line">    root, _, filenames = <span class="built_in">next</span>(os.walk(val_dir))</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">        <span class="comment"># val image name -&gt; ILSVRC ID -&gt; WIND</span></span><br><span class="line">        val_id = <span class="built_in">int</span>(filename.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;_&#x27;</span>)[-<span class="number">1</span>])</span><br><span class="line">        ILSVRC_ID = labels[val_id-<span class="number">1</span>]</span><br><span class="line">        WIND = synset[<span class="string">&#x27;synsets&#x27;</span>][ILSVRC_ID-<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;val_id:%d, ILSVRC_ID:%d, WIND:%s&quot;</span> % (val_id, ILSVRC_ID, WIND))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># move val images</span></span><br><span class="line">        output_dir = os.path.join(root, WIND)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(output_dir):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            os.mkdir(output_dir)</span><br><span class="line">        shutil.move(os.path.join(root, filename), os.path.join(output_dir, filename))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    move_valimg()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据加载<br>使用 torchvision.datasets.ImageFolder() 就可以直接加载处理好的数据集啦！</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"></span><br><span class="line">root = <span class="string">&#x27;data/imagenet&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_imagenet</span>(<span class="params">root, train = <span class="literal">True</span>, transform = <span class="literal">None</span>, target_transform = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">if</span> train:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;val&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> datasets.ImageFolder(root = root,</span><br><span class="line">                            transform = transform,</span><br><span class="line">                            target_transform = target_transform)</span><br></pre></td></tr></table></figure></li>
+          <h1 id="ImageNet-1K数据集的准备与导入指南"><a href="#ImageNet-1K数据集的准备与导入指南" class="headerlink" title="ImageNet-1K数据集的准备与导入指南"></a>ImageNet-1K数据集的准备与导入指南</h1><blockquote>
+<p>ImageNet-1K是计算机视觉领域最常用的基准数据集之一，包含1000个类别的图像数据。本文将详细介绍如何下载、处理和加载ImageNet-1K数据集，帮助您快速开始深度学习模型的训练与测试。</p>
+</blockquote>
+<h2 id="1-数据集下载"><a href="#1-数据集下载" class="headerlink" title="1. 数据集下载"></a>1. 数据集下载</h2><p>您可以通过以下百度网盘链接获取ImageNet-1K数据集：</p>
+<p><strong>链接</strong>：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel">ImageNet-1K</a></p>
+<p><strong>提取码</strong>：<code>abel</code></p>
+<h2 id="2-数据集结构准备"><a href="#2-数据集结构准备" class="headerlink" title="2. 数据集结构准备"></a>2. 数据集结构准备</h2><p>下载完成后，请按照以下步骤组织数据集结构：</p>
+<ol>
+<li>创建三个主要文件夹：<code>train</code>、<code>val</code>和<code>test</code></li>
+<li>将对应的压缩包放入各自的文件夹中</li>
+<li>解压各个压缩包文件</li>
 </ol>
+<blockquote>
+<p><strong>注意</strong>：<code>train</code>压缩包解压后会产生1000个子压缩包，这些子压缩包对应ImageNet-1K的1000个类别。</p>
+</blockquote>
+<h2 id="3-批量解压训练数据"><a href="#3-批量解压训练数据" class="headerlink" title="3. 批量解压训练数据"></a>3. 批量解压训练数据</h2><p>解压完主压缩包后，需要批量解压<code>train</code>文件夹中的1000个子压缩包。请在<code>train</code>文件夹中执行以下Shell命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> *.tar; <span class="keyword">do</span> [ -f <span class="string">&quot;<span class="variable">$f</span>&quot;</span> ] &amp;&amp; <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$&#123;f%.tar&#125;</span>&quot;</span> &amp;&amp; tar -xf <span class="string">&quot;<span class="variable">$f</span>&quot;</span> -C <span class="string">&quot;<span class="variable">$&#123;f%.tar&#125;</span>&quot;</span>; <span class="keyword">done</span> &amp;&amp; <span class="built_in">rm</span> *.rar</span><br></pre></td></tr></table></figure>
+
+<p>执行上述脚本后，您将在<code>train</code>文件夹下获得1000个子文件夹，每个文件夹包含对应类别的图片数据。</p>
+<h2 id="4-验证集数据处理"><a href="#4-验证集数据处理" class="headerlink" title="4. 验证集数据处理"></a>4. 验证集数据处理</h2><p>验证集（<code>val</code>）的图片默认是平铺的，需要按类别组织到对应的文件夹中。请按照以下步骤操作：</p>
+<h3 id="4-1-解压开发工具包"><a href="#4-1-解压开发工具包" class="headerlink" title="4.1 解压开发工具包"></a>4.1 解压开发工具包</h3><p>首先，解压ImageNet开发工具包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzf ILSVRC2012_devkit_t12.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-组织验证集图片"><a href="#4-2-组织验证集图片" class="headerlink" title="4.2 组织验证集图片"></a>4.2 组织验证集图片</h3><p>在ImageNet根目录（包含<code>devkit</code>和<code>val</code>的目录）中，创建并运行以下Python脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">move_valimg</span>(<span class="params">val_dir=<span class="string">&#x27;./val&#x27;</span>, devkit_dir=<span class="string">&#x27;./ILSVRC2012_devkit_t12&#x27;</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将验证集图片移动到对应类别的文件夹中</span></span><br><span class="line"><span class="string">    val_id(从1开始) -&gt; ILSVRC_ID(从1开始) -&gt; WIND</span></span><br><span class="line"><span class="string">    组织结构如下：</span></span><br><span class="line"><span class="string">    /val</span></span><br><span class="line"><span class="string">    /n01440764</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">    /n01443537</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 加载synset、验证集真值和验证集图片列表</span></span><br><span class="line">    synset = io.loadmat(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;meta.mat&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">    ground_truth = <span class="built_in">open</span>(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;ILSVRC2012_validation_ground_truth.txt&#x27;</span>))</span><br><span class="line">    lines = ground_truth.readlines()</span><br><span class="line">    labels = [<span class="built_in">int</span>(line[:-<span class="number">1</span>]) <span class="keyword">for</span> line <span class="keyword">in</span> lines]</span><br><span class="line">    </span><br><span class="line">    root, _, filenames = <span class="built_in">next</span>(os.walk(val_dir))</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">        <span class="comment"># 验证集图片名称 -&gt; ILSVRC ID -&gt; WIND</span></span><br><span class="line">        val_id = <span class="built_in">int</span>(filename.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;_&#x27;</span>)[-<span class="number">1</span>])</span><br><span class="line">        ILSVRC_ID = labels[val_id-<span class="number">1</span>]</span><br><span class="line">        WIND = synset[<span class="string">&#x27;synsets&#x27;</span>][ILSVRC_ID-<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;val_id:%d, ILSVRC_ID:%d, WIND:%s&quot;</span> % (val_id, ILSVRC_ID, WIND))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 移动验证集图片到对应类别文件夹</span></span><br><span class="line">        output_dir = os.path.join(root, WIND)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(output_dir):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            os.mkdir(output_dir)</span><br><span class="line">        shutil.move(os.path.join(root, filename), os.path.join(output_dir, filename))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    move_valimg()</span><br></pre></td></tr></table></figure>
+
+<p>运行此脚本后，验证集图片将被组织到各自类别的文件夹中，便于后续使用。</p>
+<h2 id="5-使用PyTorch加载数据集"><a href="#5-使用PyTorch加载数据集" class="headerlink" title="5. 使用PyTorch加载数据集"></a>5. 使用PyTorch加载数据集</h2><p>完成上述准备工作后，您可以使用PyTorch的<code>torchvision.datasets.ImageFolder</code>轻松加载ImageNet-1K数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_imagenet</span>(<span class="params">root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">True</span>, transform=<span class="literal">None</span>, target_transform=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    加载ImageNet-1K数据集</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">        root: 数据集根目录</span></span><br><span class="line"><span class="string">        train: 是否加载训练集</span></span><br><span class="line"><span class="string">        transform: 图像变换</span></span><br><span class="line"><span class="string">        target_transform: 标签变换</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">        ImageFolder数据集对象</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> train:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;val&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> datasets.ImageFolder(root=root,</span><br><span class="line">                            transform=transform,</span><br><span class="line">                            target_transform=target_transform)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-数据集使用示例"><a href="#6-数据集使用示例" class="headerlink" title="6. 数据集使用示例"></a>6. 数据集使用示例</h2><p>以下是一个完整的示例，展示如何使用PyTorch加载并预处理ImageNet-1K数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数据变换</span></span><br><span class="line">train_transform = transforms.Compose([</span><br><span class="line">    transforms.RandomResizedCrop(<span class="number">224</span>),</span><br><span class="line">    transforms.RandomHorizontalFlip(),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">val_transform = transforms.Compose([</span><br><span class="line">    transforms.Resize(<span class="number">256</span>),</span><br><span class="line">    transforms.CenterCrop(<span class="number">224</span>),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">train_dataset = get_imagenet(root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">True</span>, transform=train_transform)</span><br><span class="line">val_dataset = get_imagenet(root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">False</span>, transform=val_transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据加载器</span></span><br><span class="line">train_loader = DataLoader(train_dataset, batch_size=<span class="number">256</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">8</span>, pin_memory=<span class="literal">True</span>)</span><br><span class="line">val_loader = DataLoader(val_dataset, batch_size=<span class="number">256</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">8</span>, pin_memory=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在您可以使用train_loader和val_loader进行模型训练和验证</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过本指南，您已经学会了如何下载、处理和加载ImageNet-1K数据集。这个数据集是计算机视觉研究和应用的重要资源，掌握其使用方法将有助于您开展深度学习模型的训练与评估工作。</p>
 
       
     </div>
@@ -527,7 +586,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 16:59:12" itemprop="dateModified" datetime="2025-03-19T16:59:12+08:00">2025-03-19</time>
     </span>
 
   
@@ -540,22 +599,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="错误说明"><a href="#错误说明" class="headerlink" title="错误说明"></a>错误说明</h2><ul>
-<li>新版本的kde5下,i3桌面下dolphin无法正确使用文件关联</li>
+          <h1 id="i3与Dolphin文件关联问题解决方案"><a href="#i3与Dolphin文件关联问题解决方案" class="headerlink" title="i3与Dolphin文件关联问题解决方案"></a>i3与Dolphin文件关联问题解决方案</h1><h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>在新版本的KDE5环境下，当使用i3窗口管理器时，Dolphin文件管理器无法正确处理文件关联。这意味着当你尝试打开文件时，可能无法使用默认应用程序或右键菜单中的选项无法正常工作。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：降级KService5（推荐方法）"><a href="#方案一：降级KService5（推荐方法）" class="headerlink" title="方案一：降级KService5（推荐方法）"></a>方案一：降级KService5（推荐方法）</h3><p>这是解决问题的最佳方法，通过临时降级KService5组件并进行配置修改来修复文件关联问题：</p>
+<ol>
+<li>安装<code>downgrade</code>降级工具（如果尚未安装）</li>
+<li>将<code>kservice5</code>降级到版本<code>5.115.0-1</code></li>
+<li><strong>重要</strong>：降级过程中不要选择忽略<code>kservice5</code>的未来升级</li>
+<li>降级完成后，将配置文件<code>applications.menu</code>从系统目录复制到用户目录：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /etc/xdg/menus/applications.menu ~/.config/menus/</span><br></pre></td></tr></table></figure></li>
+<li>完成上述步骤后，可以重新升级<code>kservice5</code>到最新版本</li>
+</ol>
+<p>这种方法的优点是只需临时降级，然后可以恢复到最新版本，同时保持文件关联功能正常工作。</p>
+<h3 id="方案二：手动配置菜单文件（备选方案）"><a href="#方案二：手动配置菜单文件（备选方案）" class="headerlink" title="方案二：手动配置菜单文件（备选方案）"></a>方案二：手动配置菜单文件（备选方案）</h3><p>如果方案一无法解决问题，可以尝试以下步骤：</p>
+<ol>
+<li><p>从KDE Plasma项目仓库下载<code>plasma-applications.menu</code>文件：<br><a target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace/blob/master/menu/desktop/plasma-applications.menu">plasma-applications.menu</a></p>
+</li>
+<li><p>将下载的文件复制到以下两个位置，并重命名为<code>applications.menu</code>：</p>
+<ul>
+<li>用户配置目录：<code>~/.config/menus/</code></li>
+<li>系统配置目录：<code>/etc/xdg/menus/</code></li>
 </ul>
-<h2 id="解决方案一（最佳方法）"><a href="#解决方案一（最佳方法）" class="headerlink" title="解决方案一（最佳方法）"></a>解决方案一（最佳方法）</h2><ol>
-<li>安装downgrade降级软件</li>
-<li>降级 kservice5,kservice5 5.115.0-1</li>
-<li>不要选择忽略kservice5升级</li>
-<li>降级后, copy <code>applications.menu</code> from <code>/etc/xdg/menus/</code> to <code>~/.config/menus/</code></li>
-<li>重新升级kservice5</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> plasma-applications.menu ~/.config/menus/applications.menu</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> plasma-applications.menu /etc/xdg/menus/applications.menu</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="解决方法二（不太好的方法-方法一失败时使用）"><a href="#解决方法二（不太好的方法-方法一失败时使用）" class="headerlink" title="解决方法二（不太好的方法,方法一失败时使用）"></a>解决方法二（不太好的方法,方法一失败时使用）</h2><ol>
-<li>下载<a target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace/blob/master/menu/desktop/plasma-applications.menu">plasma-applications.menu</a></li>
-<li>将其复制到<code>.config/menus/</code>和<code>/etc/xdg/menus</code>下并重命名为<code>applications.menu</code></li>
-</ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4">https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4</a></li>
+<h2 id="验证解决方案"><a href="#验证解决方案" class="headerlink" title="验证解决方案"></a>验证解决方案</h2><p>完成上述步骤后，重新启动i3窗口管理器或注销后重新登录，然后打开Dolphin文件管理器测试文件关联是否正常工作。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4">EndeavourOS论坛讨论</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace">KDE Plasma工作区仓库</a></li>
 </ul>
 
       
@@ -755,7 +823,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2023/02/02/samba%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -773,7 +841,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/02/samba%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">samba配置</a>
+          <a href="/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">LazyVim使用指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -784,14 +852,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-02-02 18:10:00" itemprop="dateCreated datePublished" datetime="2023-02-02T18:10:00+08:00">2023-02-02</time>
+      <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-20 15:27:24" itemprop="dateModified" datetime="2025-03-20T15:27:24+08:00">2025-03-20</time>
     </span>
 
   
@@ -804,23 +872,113 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h3><ol>
-<li>安装samba<br><code>paru -S samba</code>  </li>
-<li>创建配置文件<br><code>sudo vim /etc/samba/smb.conf</code>  </li>
-<li>写入需要共享的文件夹<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[homes] # 文件夹名称</span><br><span class="line">   comment = Home Directories # 注释</span><br><span class="line">   path = /home/smb_user/ # 共享的路径</span><br><span class="line">   browseable = yes # 是否显示文件夹</span><br><span class="line">   writable = no # 是否可写</span><br></pre></td></tr></table></figure></li>
-<li>创建samba日记文件夹:<br><code>sudo mkdir -p /usr/local/samba/var/</code>  </li>
-<li>添加samba 访问用户并设置密码，smb_user为你自己设置的用户名：<br><code>sudo smbpasswd -a smb_user</code></li>
-<li>启动服务<br><code>sudo systemctl enable --now smb.service nmb.service</code></li>
-<li>在win10文件夹点击网络，输入“\xxx”,xxx为linux宿主机的ip地址</li>
-</ol>
-<h3 id="win10"><a href="#win10" class="headerlink" title="win10"></a>win10</h3><ol>
-<li>打开启用或关闭Windows功能，勾选NFS服务和SMB1.0&#x2F;CIFS文件支持，重启</li>
-<li>win+r，在运行框输入“gpedit.msc”，enter回车，进入组策略编辑器。</li>
-<li>在组策略编辑器中找到“计算机配置”–“管理模板”–“网络”–“Lanman工作站”。点击“启用不安全的来宾登录”</li>
-</ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36953067/article/details/136443544">访问共享文件夹提示“你不能访问此共享文件夹，因为你组织的安全策略阻止未经身份验证的来宾访问”的解决方案</a></li>
-</ol>
+          <p>LazyVim是一个基于Neovim的现代化配置框架，它提供了优雅的界面和强大的功能。本文将帮助你快速上手LazyVim，从基础操作到高级技巧。</p>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h3 id="模式切换"><a href="#模式切换" class="headerlink" title="模式切换"></a>模式切换</h3><ul>
+<li><code>i</code> - 进入插入模式</li>
+<li><code>&lt;ESC&gt;</code> 或 <code>jk</code> - 返回普通模式</li>
+<li><code>v</code> - 进入可视模式</li>
+<li><code>&lt;Space&gt;</code> - 触发which-key菜单，显示可用的快捷键</li>
+</ul>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><ul>
+<li><code>:q</code> - 退出当前窗口</li>
+<li><code>:qa</code> - 退出所有窗口</li>
+<li><code>:w</code> - 保存文件</li>
+<li><code>:wq</code> 或 <code>:x</code> - 保存并退出</li>
+</ul>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="文件导航"><a href="#文件导航" class="headerlink" title="文件导航"></a>文件导航</h3><ul>
+<li><code>&lt;Space&gt;ff</code> - 查找文件</li>
+<li><code>&lt;Space&gt;fr</code> - 最近打开的文件</li>
+<li><code>&lt;Space&gt;fg</code> - 实时grep搜索</li>
+<li><code>&lt;Space&gt;fb</code> - 打开缓冲区列表</li>
+<li><code>&lt;Space&gt;/</code> - 在当前缓冲区中搜索</li>
+</ul>
+<h3 id="文件树操作"><a href="#文件树操作" class="headerlink" title="文件树操作"></a>文件树操作</h3><ul>
+<li><code>&lt;Space&gt;e</code> - 打开&#x2F;关闭文件树</li>
+<li><code>a</code> - 在文件树中新建文件&#x2F;文件夹</li>
+<li><code>d</code> - 在文件树中删除文件&#x2F;文件夹</li>
+<li><code>r</code> - 在文件树中重命名文件&#x2F;文件夹</li>
+</ul>
+<h2 id="编辑技巧"><a href="#编辑技巧" class="headerlink" title="编辑技巧"></a>编辑技巧</h2><h3 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h3><ul>
+<li><code>gg/G</code> - 跳转到文件开头&#x2F;结尾</li>
+<li><code>H/M/L</code> - 跳转到屏幕顶部&#x2F;中间&#x2F;底部</li>
+<li><code>&lt;C-d&gt;/&lt;C-u&gt;</code> - 向下&#x2F;向上滚动半页</li>
+<li><code>&lt;C-f&gt;/&lt;C-b&gt;</code> - 向下&#x2F;向上滚动整页</li>
+<li><code>zz</code>让光标所在行居屏幕中央</li>
+<li><code>zt</code>让光标所在行居屏幕最上一行 t&#x3D;top</li>
+<li><code>zb</code> 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
+<li><code>w/e</code> -跳转一个单词头&#x2F;尾</li>
+<li><code>b/B</code>(backword)回到上一个单词开头</li>
+<li><code>f&#123;char&#125;</code> - 跳转到当前行的指定字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个,3f{char}可以移动到第三个char字符上</li>
+<li><code>%</code> - 在配对的括号间跳转，包括 <code>(</code>, <code>&#123;</code>, <code>[</code></li>
+</ul>
+<h3 id="文本编辑"><a href="#文本编辑" class="headerlink" title="文本编辑"></a>文本编辑</h3><ul>
+<li><code>dd</code> - 删除当前行</li>
+<li><code>yy</code> - 复制当前行</li>
+<li><code>p/P</code> - 在光标后&#x2F;前粘贴</li>
+<li><code>u</code> - 撤销操作</li>
+<li><code>&lt;C-r&gt;</code> - 重做操作</li>
+<li><code>dw</code>删除单词,<code>x</code>删除字符</li>
+<li><code>dt)</code>删除右边到<code>)</code>为止的所有字符，其中<code>)</code>可以为任意字符</li>
+<li><code>r</code>(replace)可以替换一个字符</li>
+<li><code>s</code>(substitute)替换并进入插入模式</li>
+<li><code>c</code>(change)配合文本对象快速修改,例如<code>caw</code>先回到当前单词光标首字符并删除单词并进入插入模式,<code>cw</code>从当前光标删除到单词结束并进入插入模式,<code>ct)</code>删除到括号并进入插入模式,其中<code>)</code>可以为任意字符</li>
+<li>使用<code>/</code>或者<code>?</code>进行前向或者反向搜索</li>
+<li>使用<code>n/N</code>跳转到下一个或者上一个匹配</li>
+<li>使用<code>\*</code>或者<code>#</code>进行当前单词的前向或者后向匹配</li>
+</ul>
+<h2 id="LSP功能"><a href="#LSP功能" class="headerlink" title="LSP功能"></a>LSP功能</h2><h3 id="代码导航"><a href="#代码导航" class="headerlink" title="代码导航"></a>代码导航</h3><ul>
+<li><code>gd</code> - 跳转到定义</li>
+<li><code>gr</code> - 查看引用</li>
+<li><code>K</code> - 显示悬浮文档</li>
+<li><code>&lt;Space&gt;ca</code> - 代码操作</li>
+<li><code>&lt;Space&gt;cr</code> - 重命名符号</li>
+</ul>
+<h3 id="代码诊断"><a href="#代码诊断" class="headerlink" title="代码诊断"></a>代码诊断</h3><ul>
+<li><code>]d/[d</code> - 下一个&#x2F;上一个诊断</li>
+<li><code>&lt;Space&gt;cd</code> - 打开诊断窗口</li>
+<li><code>gl</code> - 显示当前行诊断</li>
+</ul>
+<h2 id="窗口管理"><a href="#窗口管理" class="headerlink" title="窗口管理"></a>窗口管理</h2><h3 id="分屏操作"><a href="#分屏操作" class="headerlink" title="分屏操作"></a>分屏操作</h3><ul>
+<li><code>&lt;C-w&gt;v</code> - 垂直分屏</li>
+<li><code>&lt;C-w&gt;s</code> - 水平分屏</li>
+<li><code>&lt;C-w&gt;h/j/k/l</code> - 在窗口间移动</li>
+<li><code>&lt;C-w&gt;q</code> - 关闭当前窗口</li>
+</ul>
+<h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><ul>
+<li><code>&lt;Space&gt;bb</code> - 切换缓冲区</li>
+<li><code>&lt;Space&gt;bd</code> - 删除当前缓冲区</li>
+<li><code>H/L</code> - 切换到上一个&#x2F;下一个标签页</li>
+</ul>
+<h2 id="终端集成"><a href="#终端集成" class="headerlink" title="终端集成"></a>终端集成</h2><ul>
+<li><code>&lt;Space&gt;ft</code> - 打开浮动终端</li>
+<li><code>&lt;Space&gt;fT</code> - 打开水平终端</li>
+<li><code>&lt;Esc&gt;&lt;Esc&gt;</code> - 在终端中进入普通模式</li>
+</ul>
+<h2 id="插件特性"><a href="#插件特性" class="headerlink" title="插件特性"></a>插件特性</h2><h3 id="Telescope"><a href="#Telescope" class="headerlink" title="Telescope"></a>Telescope</h3><ul>
+<li><code>&lt;Space&gt;ff</code> - 文件查找</li>
+<li><code>&lt;Space&gt;fg</code> - 实时grep</li>
+<li><code>&lt;Space&gt;fb</code> - 浏览缓冲区</li>
+<li><code>&lt;Space&gt;fh</code> - 帮助标签</li>
+</ul>
+<h3 id="Git集成"><a href="#Git集成" class="headerlink" title="Git集成"></a>Git集成</h3><ul>
+<li><code>&lt;Space&gt;gg</code> - 打开Lazygit</li>
+<li><code>]c/[c</code> - 下一个&#x2F;上一个Git修改</li>
+<li><code>&lt;Space&gt;gj/gk</code> - 下一个&#x2F;上一个Hunk</li>
+</ul>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><ul>
+<li><code>gcc</code> - 注释&#x2F;取消注释当前行</li>
+<li><code>&lt;Space&gt;mp</code> - 打开Markdown预览</li>
+<li><code>&lt;Space&gt;z</code> - 打开Zen模式</li>
+</ul>
+<h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><h3 id="常用设置"><a href="#常用设置" class="headerlink" title="常用设置"></a>常用设置</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 在 ~/.config/nvim/lua/config/keymaps.lua 中添加自定义快捷键</span></span><br><span class="line">vim.keymap.set(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;leader&gt;h&quot;</span>, <span class="string">&quot;:nohl&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Clear highlights&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在 ~/.config/nvim/lua/config/options.lua 中修改选项</span></span><br><span class="line">vim.opt.relativenumber = <span class="literal">true</span></span><br><span class="line">vim.opt.<span class="built_in">wrap</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.lazyvim.org/">LazyVim官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://neovim.io/doc/">Neovim官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rockerBOO/awesome-neovim">Awesome Neovim</a></li>
+<li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a></li>
+</ul>
+<p>require(“config.lazy”)</p>
 
       
     </div>
@@ -1024,114 +1182,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/12/22/vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/22/vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">vim常用快捷键</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-12-22 17:53:55" itemprop="dateCreated datePublished" datetime="2022-12-22T17:53:55+08:00">2022-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。  </p>
-<h2 id="存活"><a href="#存活" class="headerlink" title="存活"></a>存活</h2><ul>
-<li>了解normal模式和insert模式,在normal模式下按i进入insert模式,按ESC回到normal模式</li>
-<li>h&#x2F;j&#x2F;k&#x2F;l在normal模式下分别表示向左下上右移动</li>
-<li>:q!不保存退出</li>
-<li>:w保存</li>
-</ul>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h3><ul>
-<li>gg&#x2F;G移动到文件的开头和结尾,可以用ctrl+o快速返回</li>
-<li>H&#x2F;M&#x2F;L跳转到屏幕的开头(HEAD),中间(Middle)和结尾(Lower)</li>
-<li>ctrl+d(down)往前翻半页,ctrl+u(up)往后翻半页</li>
-<li>ctrl+f(forward)往前翻一页,ctrl+b(backward)往后翻一页</li>
-<li>zz让光标所在行居屏幕中央</li>
-<li>zt让光标所在行居屏幕最上一行 t&#x3D;top</li>
-<li>zb 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
-<li>w&#x2F;W移到下一个word&#x2F;WORD开头,e&#x2F;E下一个word&#x2F;WORD尾</li>
-<li>b&#x2F;B(backword)回到上一个word&#x2F;WORD开头</li>
-<li>使用f{char}可以移动到char字符上,t移动到char的前一个字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个,3f{char}可以移动到第三个char字符上</li>
-<li>0移动到行首,$移动到行尾</li>
-<li>字符# 和 * :  匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）</li>
-<li>% : 匹配括号移动，包括 (, {, [</li>
-</ul>
-<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><ul>
-<li>dw删除单词,x删除字符</li>
-<li>dt)删除右边到)为止的所有字符，其中”)”可以为任意字符</li>
-<li>r(replace)可以替换一个字符</li>
-<li>s(substitute)替换并进入插入模式</li>
-<li>c(change)配合文本对象快速修改,例如caw先回到当前单词光标首字符并删除单词并进入插入模式,cw从当前光标删除到单词结束并进入插入模式,ct)删除到括号并进入插入模式,其中”)”可以为任意字符</li>
-<li>使用&#x2F;或者?进行前向或者反向搜索</li>
-<li>使用n&#x2F;N跳转到下一个或者上一个匹配</li>
-<li>使用*或者#进行当前单词的前向或者后向匹配</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/11/29/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1271,7 +1321,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/09/01/Wayland%E4%B8%8BOBS%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1289,7 +1339,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/01/wayfire%E4%B8%8Bobs%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89/" class="post-title-link" itemprop="url">wayfire下obs屏幕捕捉</a>
+          <a href="/2022/09/01/Wayland%E4%B8%8BOBS%E5%B1%8F%E5%B9%95%E6%8D%95%E6%8D%89%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Wayland下OBS屏幕捕捉配置指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1307,7 +1357,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-20 15:35:02" itemprop="dateModified" datetime="2025-03-20T15:35:02+08:00">2025-03-20</time>
     </span>
 
   
@@ -1320,14 +1370,193 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="obs安装"><a href="#obs安装" class="headerlink" title="obs安装"></a>obs安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S obs-studio</span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
+          <p>在Wayfire窗口管理器下配置OBS（Open Broadcaster Software）进行屏幕捕捉需要一些特殊的设置。本文将详细介绍如何在Wayfire环境下正确配置和使用OBS进行窗口捕捉和屏幕录制。</p>
+<h2 id="安装必要组件"><a href="#安装必要组件" class="headerlink" title="安装必要组件"></a>安装必要组件</h2><p>首先，我们需要安装OBS和相关的依赖组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装OBS Studio</span></span><br><span class="line">paru -S obs-studio</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装Wayland支持组件</span></span><br><span class="line">paru -S xdg-desktop-portal-wlr xdg-desktop-portal</span><br></pre></td></tr></table></figure>
 
-<h2 id="窗口捕捉"><a href="#窗口捕捉" class="headerlink" title="窗口捕捉"></a>窗口捕捉</h2><p>用xwayland启动obs,再进行窗口捕获即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
-<p>或者用写入.zshrc里,用xobs代替这个命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias xobs =&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span><br></pre></td></tr></table></figure>
-<h2 id="屏幕捕捉"><a href="#屏幕捕捉" class="headerlink" title="屏幕捕捉"></a>屏幕捕捉</h2><p>安装pipewire后obs可以直接在kde(wayland)下使用,但是wayfire会出bug,因此wlrobs来代替xdg</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
+<h2 id="窗口捕捉配置"><a href="#窗口捕捉配置" class="headerlink" title="窗口捕捉配置"></a>窗口捕捉配置</h2><p>在Wayfire下，为了实现窗口捕捉功能，我们需要通过XWayland来启动OBS。这是因为原生Wayland下的窗口捕捉可能会存在一些限制。</p>
+<h3 id="方法一：直接启动"><a href="#方法一：直接启动" class="headerlink" title="方法一：直接启动"></a>方法一：直接启动</h3><p>使用以下命令通过XWayland启动OBS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb obs</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：创建别名（推荐）"><a href="#方法二：创建别名（推荐）" class="headerlink" title="方法二：创建别名（推荐）"></a>方法二：创建别名（推荐）</h3><p>为了使用更方便，建议在你的shell配置文件（如.zshrc）中添加一个别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> xobs=<span class="string">&#x27;QT_QPA_PLATFORM=xcb obs&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加后，你只需要输入<code>xobs</code>就可以启动OBS了。</p>
+<h2 id="全屏捕捉配置"><a href="#全屏捕捉配置" class="headerlink" title="全屏捕捉配置"></a>全屏捕捉配置</h2><p>对于全屏捕捉，有两种方案：</p>
+<ol>
+<li><p><strong>使用Pipewire（KDE Wayland）</strong>：<br>虽然在KDE Wayland环境下，安装Pipewire后OBS可以直接使用，但在Wayfire环境中可能会遇到一些问题。</p>
+</li>
+<li><p><strong>使用wlrobs（推荐）</strong>：<br>由于Wayfire的特殊性，建议使用wlrobs作为替代方案：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S wlrobs-hg</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，你可以在OBS的来源中选择”Wayland Output Capture”来进行屏幕捕捉。</p>
+<h2 id="虚拟摄像头配置"><a href="#虚拟摄像头配置" class="headerlink" title="虚拟摄像头配置"></a>虚拟摄像头配置</h2><p>除了屏幕捕捉，OBS还提供了虚拟摄像头功能，可以将OBS的输出作为摄像头信号提供给其他应用程序使用。</p>
+<h3 id="安装虚拟摄像头组件"><a href="#安装虚拟摄像头组件" class="headerlink" title="安装虚拟摄像头组件"></a>安装虚拟摄像头组件</h3><p>在Arch Linux下，需要安装以下组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装OBS虚拟摄像头模块</span></span><br><span class="line">paru -S obs-v4l2sink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装v4l2loopback内核模块</span></span><br><span class="line">paru -S v4l2loopback-dkms</span><br></pre></td></tr></table></figure>
+
+<h3 id="加载虚拟摄像头模块"><a href="#加载虚拟摄像头模块" class="headerlink" title="加载虚拟摄像头模块"></a>加载虚拟摄像头模块</h3><p>安装完成后，需要加载v4l2loopback内核模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载模块</span></span><br><span class="line"><span class="built_in">sudo</span> modprobe v4l2loopback</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置开机自动加载</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;v4l2loopback&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/modules-load.d/v4l2loopback.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="在OBS中启用虚拟摄像头"><a href="#在OBS中启用虚拟摄像头" class="headerlink" title="在OBS中启用虚拟摄像头"></a>在OBS中启用虚拟摄像头</h3><ol>
+<li>打开OBS Studio</li>
+<li>在顶部菜单栏中点击「工具」-&gt;「虚拟摄像头」</li>
+<li>点击「开始虚拟摄像头」</li>
+</ol>
+<h3 id="在其他应用中使用"><a href="#在其他应用中使用" class="headerlink" title="在其他应用中使用"></a>在其他应用中使用</h3><p>启用虚拟摄像头后，你可以在支持摄像头输入的应用程序（如浏览器、Zoom、Teams等）中选择”OBS Virtual Camera”作为视频输入源。</p>
+<p>注意事项：</p>
+<ul>
+<li>确保在使用虚拟摄像头之前已经在OBS中设置好了想要输出的场景</li>
+<li>某些应用可能需要重启才能识别到虚拟摄像头</li>
+<li>如果遇到权限问题，请确保当前用户属于video组：<code>sudo usermod -aG video $USER</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">制作便携式Windows和Linux系统指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-21 10:35:28" itemprop="dateCreated datePublished" datetime="2022-06-21T10:35:28+08:00">2022-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 16:19:45" itemprop="dateModified" datetime="2025-03-20T16:19:45+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="便携式Windows和Linux系统制作指南"><a href="#便携式Windows和Linux系统制作指南" class="headerlink" title="便携式Windows和Linux系统制作指南"></a>便携式Windows和Linux系统制作指南</h1><p>本文将介绍如何使用Ventoy工具制作可随身携带的Windows和Linux系统，让你能够在任何电脑上运行自己的操作系统环境。</p>
+<h2 id="准备工作：制作Ventoy启动盘"><a href="#准备工作：制作Ventoy启动盘" class="headerlink" title="准备工作：制作Ventoy启动盘"></a>准备工作：制作Ventoy启动盘</h2><ol>
+<li>准备一个高速U盘或移动固态硬盘（推荐使用固态设备以获得更好的性能）</li>
+<li>下载并安装Ventoy，将准备好的存储设备制作成Ventoy启动盘</li>
+<li>将Ventoy启动盘格式化为NTFS格式</li>
+<li>安装VHD启动插件：<ul>
+<li>下载<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">VHD启动插件</a></li>
+<li>将插件文件放置在U盘第一分区（即存放ISO文件的分区）的<code>ventoy</code>目录下</li>
+<li>配置全局控制插件，在<code>ventoy</code>目录下配置ventoy.json文件，具体的json解析见<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_control.html">Ventoy 全局控制插件</a><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;control&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MENU_LANGUAGE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zh_CN&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_MENU_MODE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_TREE_VIEW_MENU_STYLE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_FILT_DOT_UNDERSCORE_FILE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SORT_CASE_SENSITIVE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MAX_SEARCH_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_SEARCH_ROOT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ISO&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span>        </span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_MENU_TIMEOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_IMAGE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ISO/win11.iso&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_FILE_FLT_EFI&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_DEFAULT_KBD_LAYOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;QWERTY_USA&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_WIN11_BYPASS_CHECK&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_WIN11_BYPASS_NRO&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SECONDARY_BOOT_MENU&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span> <span class="attr">&quot;VTOY_SECONDARY_TIMEOUT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;20&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;file&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/ventoy/theme/blur/theme.txt&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;gfxmode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1920x1080&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="创建系统镜像"><a href="#创建系统镜像" class="headerlink" title="创建系统镜像"></a>创建系统镜像</h2><p>本文测试kvm和virtualbox虚拟机工具皆可</p>
+<ol>
+<li><p>创建虚拟硬盘时的设置：</p>
+<ul>
+<li>选择”专家模式”</li>
+<li>虚拟硬盘类型选择”VHD”</li>
+<li>存储方式选择”固定大小”</li>
+</ul>
+</li>
+<li><p>启用UEFI支持：</p>
+<ul>
+<li>在启动虚拟机前，进入设置</li>
+<li>选择”系统” → “扩展特性”</li>
+<li>勾选”启用EFI”</li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux系统便携化配置"><a href="#Linux系统便携化配置" class="headerlink" title="Linux系统便携化配置"></a>Linux系统便携化配置</h2><h3 id="安装Ventoy-Linux插件"><a href="#安装Ventoy-Linux插件" class="headerlink" title="安装Ventoy Linux插件"></a>安装Ventoy Linux插件</h3><ol>
+<li>在虚拟机中访问<code>ventoy.net</code>官网</li>
+<li>导航至：中文 → 文档手册 → 插件说明 → Linux vDisk启动插件</li>
+<li>下载并解压插件</li>
+<li>使用root权限执行安装命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh vtoyboot.sh</span><br></pre></td></tr></table></figure>
+当看到”vtoyboot process successfully finished”提示时表示安装成功</li>
+</ol>
+<h3 id="制作LinuxToGo"><a href="#制作LinuxToGo" class="headerlink" title="制作LinuxToGo"></a>制作LinuxToGo</h3><ol>
+<li>关闭Linux虚拟机</li>
+<li>找到虚拟机目录下的<code>.vhd</code>文件</li>
+<li>将文件重命名，在文件名后添加<code>.vtoy</code>后缀</li>
+<li>将重命名后的文件复制到Ventoy启动盘中</li>
+</ol>
+<blockquote>
+<p>注意：当系统进行内核升级后，建议重新执行<code>sudo sh vtoyboot.sh</code>以确保启动兼容性</p>
+</blockquote>
+<h2 id="Windows系统便携化配置"><a href="#Windows系统便携化配置" class="headerlink" title="Windows系统便携化配置"></a>Windows系统便携化配置</h2><h3 id="制作WinToGo"><a href="#制作WinToGo" class="headerlink" title="制作WinToGo"></a>制作WinToGo</h3><ol>
+<li>关闭Windows虚拟机</li>
+<li>找到虚拟机目录下的<code>.vhd</code>文件</li>
+<li>直接将文件复制到Ventoy启动盘中即可使用</li>
+</ol>
+<h3 id="WinToGo系统扩容指南"><a href="#WinToGo系统扩容指南" class="headerlink" title="WinToGo系统扩容指南"></a>WinToGo系统扩容指南</h3><p>如果需要增加WinToGo系统的存储空间，可以按照以下步骤操作：</p>
+<ol>
+<li><p>查看虚拟磁盘信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img info wtg.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换为qcow2格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扩展容量（例如扩展到100G）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize wtg.qcow2 100G</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换回vhdx格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新文件名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> wtg.vhdx wtg_old.vhdx</span><br><span class="line"><span class="built_in">mv</span> wtg_expanded.vhdx wtg.vhdx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，启动WinToGo系统，使用Windows的磁盘管理工具将新增的空间分配给C盘</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上步骤，你可以成功制作出可随身携带的Windows和Linux系统。这些便携式系统可以帮助你在不同的电脑间保持一致的工作环境，非常适合开发人员或需要特定系统环境的用户使用。</p>
 
       
     </div>

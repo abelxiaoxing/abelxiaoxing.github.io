@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="LazyVim是一个基于Neovim的现代化配置框架，它提供了优雅的界面和强大的功能。本文将帮助你快速上手LazyVim，从基础操作到高级技巧。 基础操作模式切换 i - 进入插入模式 &lt;ESC&gt; 或 jk - 返回普通模式 v - 进入可视模式 &lt;Space&gt; - 触发which-key菜单，显示可用的快捷键  基本命令 :q - 退出当前窗口 :qa - 退出所有窗口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LazyVim使用指南">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="LazyVim是一个基于Neovim的现代化配置框架，它提供了优雅的界面和强大的功能。本文将帮助你快速上手LazyVim，从基础操作到高级技巧。 基础操作模式切换 i - 进入插入模式 &lt;ESC&gt; 或 jk - 返回普通模式 v - 进入可视模式 &lt;Space&gt; - 触发which-key菜单，显示可用的快捷键  基本命令 :q - 退出当前窗口 :qa - 退出所有窗口">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-20T07:27:24.047Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="LazyVim">
+<meta property="article:tag" content="Neovim">
+<meta property="article:tag" content="编辑器">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/","path":"2024/01/01/LazyVim使用指南/","title":"LazyVim使用指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LazyVim使用指南 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">模式切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">基本命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%AF%BC%E8%88%AA"><span class="nav-number">2.1.</span> <span class="nav-text">文件导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A0%91%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">文件树操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%8A%80%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">编辑技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E7%A7%BB%E5%8A%A8"><span class="nav-number">3.1.</span> <span class="nav-text">快速移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91"><span class="nav-number">3.2.</span> <span class="nav-text">文本编辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSP%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">LSP功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AF%BC%E8%88%AA"><span class="nav-number">4.1.</span> <span class="nav-text">代码导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%AF%8A%E6%96%AD"><span class="nav-number">4.2.</span> <span class="nav-text">代码诊断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">窗口管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">5.1.</span> <span class="nav-text">分屏操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="nav-number">5.2.</span> <span class="nav-text">标签页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E9%9B%86%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">终端集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E7%89%B9%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">插件特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Telescope"><span class="nav-number">7.1.</span> <span class="nav-text">Telescope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E9%9B%86%E6%88%90"><span class="nav-number">7.2.</span> <span class="nav-text">Git集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">7.3.</span> <span class="nav-text">其他功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="nav-number">8.1.</span> <span class="nav-text">常用设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="nav-number">9.</span> <span class="nav-text">参考资源</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/01/01/LazyVim%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LazyVim使用指南 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LazyVim使用指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 15:27:24" itemprop="dateModified" datetime="2025-03-20T15:27:24+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>LazyVim是一个基于Neovim的现代化配置框架，它提供了优雅的界面和强大的功能。本文将帮助你快速上手LazyVim，从基础操作到高级技巧。</p>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h3 id="模式切换"><a href="#模式切换" class="headerlink" title="模式切换"></a>模式切换</h3><ul>
+<li><code>i</code> - 进入插入模式</li>
+<li><code>&lt;ESC&gt;</code> 或 <code>jk</code> - 返回普通模式</li>
+<li><code>v</code> - 进入可视模式</li>
+<li><code>&lt;Space&gt;</code> - 触发which-key菜单，显示可用的快捷键</li>
+</ul>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><ul>
+<li><code>:q</code> - 退出当前窗口</li>
+<li><code>:qa</code> - 退出所有窗口</li>
+<li><code>:w</code> - 保存文件</li>
+<li><code>:wq</code> 或 <code>:x</code> - 保存并退出</li>
+</ul>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="文件导航"><a href="#文件导航" class="headerlink" title="文件导航"></a>文件导航</h3><ul>
+<li><code>&lt;Space&gt;ff</code> - 查找文件</li>
+<li><code>&lt;Space&gt;fr</code> - 最近打开的文件</li>
+<li><code>&lt;Space&gt;fg</code> - 实时grep搜索</li>
+<li><code>&lt;Space&gt;fb</code> - 打开缓冲区列表</li>
+<li><code>&lt;Space&gt;/</code> - 在当前缓冲区中搜索</li>
+</ul>
+<h3 id="文件树操作"><a href="#文件树操作" class="headerlink" title="文件树操作"></a>文件树操作</h3><ul>
+<li><code>&lt;Space&gt;e</code> - 打开&#x2F;关闭文件树</li>
+<li><code>a</code> - 在文件树中新建文件&#x2F;文件夹</li>
+<li><code>d</code> - 在文件树中删除文件&#x2F;文件夹</li>
+<li><code>r</code> - 在文件树中重命名文件&#x2F;文件夹</li>
+</ul>
+<h2 id="编辑技巧"><a href="#编辑技巧" class="headerlink" title="编辑技巧"></a>编辑技巧</h2><h3 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h3><ul>
+<li><code>gg/G</code> - 跳转到文件开头&#x2F;结尾</li>
+<li><code>H/M/L</code> - 跳转到屏幕顶部&#x2F;中间&#x2F;底部</li>
+<li><code>&lt;C-d&gt;/&lt;C-u&gt;</code> - 向下&#x2F;向上滚动半页</li>
+<li><code>&lt;C-f&gt;/&lt;C-b&gt;</code> - 向下&#x2F;向上滚动整页</li>
+<li><code>zz</code>让光标所在行居屏幕中央</li>
+<li><code>zt</code>让光标所在行居屏幕最上一行 t&#x3D;top</li>
+<li><code>zb</code> 让光标所在行居屏幕最下一行 b&#x3D;bottom</li>
+<li><code>w/e</code> -跳转一个单词头&#x2F;尾</li>
+<li><code>b/B</code>(backword)回到上一个单词开头</li>
+<li><code>f&#123;char&#125;</code> - 跳转到当前行的指定字符,用分号(;)&#x2F;逗号(,)继续搜索该行下一个&#x2F;上一个,3f{char}可以移动到第三个char字符上</li>
+<li><code>%</code> - 在配对的括号间跳转，包括 <code>(</code>, <code>&#123;</code>, <code>[</code></li>
+</ul>
+<h3 id="文本编辑"><a href="#文本编辑" class="headerlink" title="文本编辑"></a>文本编辑</h3><ul>
+<li><code>dd</code> - 删除当前行</li>
+<li><code>yy</code> - 复制当前行</li>
+<li><code>p/P</code> - 在光标后&#x2F;前粘贴</li>
+<li><code>u</code> - 撤销操作</li>
+<li><code>&lt;C-r&gt;</code> - 重做操作</li>
+<li><code>dw</code>删除单词,<code>x</code>删除字符</li>
+<li><code>dt)</code>删除右边到<code>)</code>为止的所有字符，其中<code>)</code>可以为任意字符</li>
+<li><code>r</code>(replace)可以替换一个字符</li>
+<li><code>s</code>(substitute)替换并进入插入模式</li>
+<li><code>c</code>(change)配合文本对象快速修改,例如<code>caw</code>先回到当前单词光标首字符并删除单词并进入插入模式,<code>cw</code>从当前光标删除到单词结束并进入插入模式,<code>ct)</code>删除到括号并进入插入模式,其中<code>)</code>可以为任意字符</li>
+<li>使用<code>/</code>或者<code>?</code>进行前向或者反向搜索</li>
+<li>使用<code>n/N</code>跳转到下一个或者上一个匹配</li>
+<li>使用<code>\*</code>或者<code>#</code>进行当前单词的前向或者后向匹配</li>
+</ul>
+<h2 id="LSP功能"><a href="#LSP功能" class="headerlink" title="LSP功能"></a>LSP功能</h2><h3 id="代码导航"><a href="#代码导航" class="headerlink" title="代码导航"></a>代码导航</h3><ul>
+<li><code>gd</code> - 跳转到定义</li>
+<li><code>gr</code> - 查看引用</li>
+<li><code>K</code> - 显示悬浮文档</li>
+<li><code>&lt;Space&gt;ca</code> - 代码操作</li>
+<li><code>&lt;Space&gt;cr</code> - 重命名符号</li>
+</ul>
+<h3 id="代码诊断"><a href="#代码诊断" class="headerlink" title="代码诊断"></a>代码诊断</h3><ul>
+<li><code>]d/[d</code> - 下一个&#x2F;上一个诊断</li>
+<li><code>&lt;Space&gt;cd</code> - 打开诊断窗口</li>
+<li><code>gl</code> - 显示当前行诊断</li>
+</ul>
+<h2 id="窗口管理"><a href="#窗口管理" class="headerlink" title="窗口管理"></a>窗口管理</h2><h3 id="分屏操作"><a href="#分屏操作" class="headerlink" title="分屏操作"></a>分屏操作</h3><ul>
+<li><code>&lt;C-w&gt;v</code> - 垂直分屏</li>
+<li><code>&lt;C-w&gt;s</code> - 水平分屏</li>
+<li><code>&lt;C-w&gt;h/j/k/l</code> - 在窗口间移动</li>
+<li><code>&lt;C-w&gt;q</code> - 关闭当前窗口</li>
+</ul>
+<h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><ul>
+<li><code>&lt;Space&gt;bb</code> - 切换缓冲区</li>
+<li><code>&lt;Space&gt;bd</code> - 删除当前缓冲区</li>
+<li><code>H/L</code> - 切换到上一个&#x2F;下一个标签页</li>
+</ul>
+<h2 id="终端集成"><a href="#终端集成" class="headerlink" title="终端集成"></a>终端集成</h2><ul>
+<li><code>&lt;Space&gt;ft</code> - 打开浮动终端</li>
+<li><code>&lt;Space&gt;fT</code> - 打开水平终端</li>
+<li><code>&lt;Esc&gt;&lt;Esc&gt;</code> - 在终端中进入普通模式</li>
+</ul>
+<h2 id="插件特性"><a href="#插件特性" class="headerlink" title="插件特性"></a>插件特性</h2><h3 id="Telescope"><a href="#Telescope" class="headerlink" title="Telescope"></a>Telescope</h3><ul>
+<li><code>&lt;Space&gt;ff</code> - 文件查找</li>
+<li><code>&lt;Space&gt;fg</code> - 实时grep</li>
+<li><code>&lt;Space&gt;fb</code> - 浏览缓冲区</li>
+<li><code>&lt;Space&gt;fh</code> - 帮助标签</li>
+</ul>
+<h3 id="Git集成"><a href="#Git集成" class="headerlink" title="Git集成"></a>Git集成</h3><ul>
+<li><code>&lt;Space&gt;gg</code> - 打开Lazygit</li>
+<li><code>]c/[c</code> - 下一个&#x2F;上一个Git修改</li>
+<li><code>&lt;Space&gt;gj/gk</code> - 下一个&#x2F;上一个Hunk</li>
+</ul>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><ul>
+<li><code>gcc</code> - 注释&#x2F;取消注释当前行</li>
+<li><code>&lt;Space&gt;mp</code> - 打开Markdown预览</li>
+<li><code>&lt;Space&gt;z</code> - 打开Zen模式</li>
+</ul>
+<h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><h3 id="常用设置"><a href="#常用设置" class="headerlink" title="常用设置"></a>常用设置</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 在 ~/.config/nvim/lua/config/keymaps.lua 中添加自定义快捷键</span></span><br><span class="line">vim.keymap.set(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;leader&gt;h&quot;</span>, <span class="string">&quot;:nohl&lt;CR&gt;&quot;</span>, &#123; desc = <span class="string">&quot;Clear highlights&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在 ~/.config/nvim/lua/config/options.lua 中修改选项</span></span><br><span class="line">vim.opt.relativenumber = <span class="literal">true</span></span><br><span class="line">vim.opt.<span class="built_in">wrap</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.lazyvim.org/">LazyVim官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://neovim.io/doc/">Neovim官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rockerBOO/awesome-neovim">Awesome Neovim</a></li>
+<li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a></li>
+</ul>
+<p>require(“config.lazy”)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LazyVim/" rel="tag"># LazyVim</a>
+              <a href="/tags/Neovim/" rel="tag"># Neovim</a>
+              <a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/" rel="tag"># 编辑器</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/02/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LLM%E8%BE%85%E5%8A%A9%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/" rel="prev" title="如何使用LLM辅助论文写作">
+                  <i class="fa fa-angle-left"></i> 如何使用LLM辅助论文写作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/04/CMake%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="next" title="CMake使用指南">
+                  CMake使用指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

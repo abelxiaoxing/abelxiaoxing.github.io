@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="远程桌面与Samba文件传输配置指南本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。 一、RDP远程桌面配置1. 服务器端配置 配置frp服务：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）  开启Windows远程桌面：  点击系统属性 → 远程 勾选「允许远程连接到此计算机」 此时W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="远程桌面与Samba文件传输配置指南">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="远程桌面与Samba文件传输配置指南本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。 一、RDP远程桌面配置1. 服务器端配置 配置frp服务：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）  开启Windows远程桌面：  点击系统属性 → 远程 勾选「允许远程连接到此计算机」 此时W">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-24T06:19:42.000Z">
+<meta property="article:modified_time" content="2025-03-20T02:11:15.669Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/","path":"2024/10/24/远程桌面与Samba文件传输配置指南/","title":"远程桌面与Samba文件传输配置指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>远程桌面与Samba文件传输配置指南 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">远程桌面与Samba文件传输配置指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81RDP%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、RDP远程桌面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 服务器端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 客户端连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">二、Samba文件传输配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 服务器端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Windows服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E6%9C%8D%E5%8A%A1%E5%99%A8-Arch-Linux"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Linux服务器 (Arch Linux)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 客户端访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Linux客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Windows客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Windows-10%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A2%9D%E5%A4%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. Windows 10客户端额外配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B6%E5%BA%AD%E7%89%88%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">家庭版用户配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="远程桌面与Samba文件传输配置指南 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          远程桌面与Samba文件传输配置指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-24 14:19:42" itemprop="dateCreated datePublished" datetime="2024-10-24T14:19:42+08:00">2024-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 10:11:15" itemprop="dateModified" datetime="2025-03-20T10:11:15+08:00">2025-03-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="远程桌面与Samba文件传输配置指南"><a href="#远程桌面与Samba文件传输配置指南" class="headerlink" title="远程桌面与Samba文件传输配置指南"></a>远程桌面与Samba文件传输配置指南</h1><p>本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。</p>
+<h2 id="一、RDP远程桌面配置"><a href="#一、RDP远程桌面配置" class="headerlink" title="一、RDP远程桌面配置"></a>一、RDP远程桌面配置</h2><h3 id="1-服务器端配置"><a href="#1-服务器端配置" class="headerlink" title="1. 服务器端配置"></a>1. 服务器端配置</h3><ol>
+<li><p><strong>配置frp服务</strong>：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）</p>
+</li>
+<li><p><strong>开启Windows远程桌面</strong>：</p>
+<ul>
+<li>点击系统属性 → 远程</li>
+<li>勾选「允许远程连接到此计算机」</li>
+<li>此时Windows的RDP服务已开启，默认端口号为3389</li>
+</ul>
+</li>
+<li><p><strong>配置frpc客户端</strong>：在frpc.ini中新增以下内容，将本地3389端口映射到公网IP</p>
+</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[win_rdp]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">3389</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">13389</span>  <span class="comment"># 可以为任意端口号，自行定义</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-客户端连接"><a href="#2-客户端连接" class="headerlink" title="2. 客户端连接"></a>2. 客户端连接</h3><ul>
+<li><strong>Linux客户端</strong>：使用krdc，勾选RDP协议，通过<code>xxx.xxx.xxx.xxx:13389</code>进行远程访问</li>
+<li><strong>Windows客户端</strong>：打开远程桌面连接，通过<code>xxx.xxx.xxx.xxx:13389</code>进行远程访问</li>
+</ul>
+<h2 id="二、Samba文件传输配置"><a href="#二、Samba文件传输配置" class="headerlink" title="二、Samba文件传输配置"></a>二、Samba文件传输配置</h2><h3 id="1-服务器端配置-1"><a href="#1-服务器端配置-1" class="headerlink" title="1. 服务器端配置"></a>1. 服务器端配置</h3><h4 id="Windows服务器"><a href="#Windows服务器" class="headerlink" title="Windows服务器"></a>Windows服务器</h4><ol>
+<li><p><strong>创建共享文件夹</strong>：</p>
+<ul>
+<li>在需要共享的文件夹上右键 → 属性 → 共享</li>
+<li>点击「高级共享」，勾选「共享此文件夹」</li>
+<li>设置「共享名」（建议使用简短易记的名称）</li>
+<li>点击「权限」设置访问权限</li>
+</ul>
+</li>
+<li><p><strong>设置访问权限</strong>：</p>
+<ul>
+<li>在「权限」对话框中，可以添加或删除用户&#x2F;组</li>
+<li>为每个用户&#x2F;组设置适当的权限（完全控制、修改、读取等）</li>
+<li>如需允许匿名访问，添加「Everyone」组并设置相应权限</li>
+<li>点击「应用」和「确定」保存设置</li>
+</ul>
+</li>
+<li><p><strong>配置网络发现和文件共享</strong>：</p>
+<ul>
+<li>打开「控制面板」→「网络和共享中心」</li>
+<li>点击左侧的「更改高级共享设置」</li>
+<li>确保以下选项已启用：<ul>
+<li>网络发现</li>
+<li>文件和打印机共享</li>
+<li>密码保护共享（根据需求开启或关闭）</li>
+</ul>
+</li>
+<li>点击「保存更改」</li>
+</ul>
+</li>
+<li><p><strong>配置Windows防火墙</strong>：</p>
+<ul>
+<li>打开「控制面板」→「Windows Defender 防火墙」</li>
+<li>点击左侧的「允许应用或功能通过Windows Defender 防火墙」</li>
+<li>确保「文件和打印机共享」已勾选（私有网络和公用网络根据需求选择）</li>
+<li>点击「确定」保存设置</li>
+</ul>
+</li>
+<li><p><strong>创建共享用户（可选）</strong>：</p>
+<ul>
+<li>打开「计算机管理」（右键「此电脑」→「管理」）</li>
+<li>展开「系统工具」→「本地用户和组」→「用户」</li>
+<li>右键空白处 → 「新用户」</li>
+<li>填写用户名、密码等信息，根据需求设置密码永不过期</li>
+<li>创建用户后，将其添加到相应的用户组（如「Users」组）</li>
+</ul>
+</li>
+<li><p><strong>将Samba服务的默认端口445映射到公网IP</strong>：在frpc.ini中新增：</p>
+</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[win_samba]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">445</span>  <span class="comment"># Samba默认端口</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">10445</span>  <span class="comment"># 可以为任意端口号，自行定义</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Linux服务器-Arch-Linux"><a href="#Linux服务器-Arch-Linux" class="headerlink" title="Linux服务器 (Arch Linux)"></a>Linux服务器 (Arch Linux)</h4><ol>
+<li><p><strong>安装Samba</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建配置文件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nvim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置共享文件夹</strong>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[homes]</span>  <span class="comment"># 文件夹名称</span></span><br><span class="line">   <span class="attr">comment</span> = Home Directories  <span class="comment"># 注释</span></span><br><span class="line">   <span class="attr">path</span> = /home/smb_user/  <span class="comment"># 共享的路径</span></span><br><span class="line">   <span class="attr">browseable</span> = <span class="literal">yes</span>  <span class="comment"># 是否显示文件夹</span></span><br><span class="line">   <span class="attr">writable</span> = <span class="literal">yes</span>  <span class="comment"># 是否可写</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建Samba日志文件夹</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /usr/local/samba/var/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加Samba访问用户并设置密码</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> smbpasswd -a smb_user  <span class="comment"># smb_user为你自己设置的用户名</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动服务</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now smb.service nmb.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置frpc客户端</strong>：将本地445端口映射到公网IP，在frpc.ini中新增：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[linux_samba]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">445</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">10445</span>  <span class="comment"># 可以为任意端口号，自行定义</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="2-客户端访问配置"><a href="#2-客户端访问配置" class="headerlink" title="2. 客户端访问配置"></a>2. 客户端访问配置</h3><h4 id="Linux客户端"><a href="#Linux客户端" class="headerlink" title="Linux客户端"></a>Linux客户端</h4><p>使用dolphin文件管理器，在地址栏输入以下内容（xxx.xxx.xxx.xxx为服务器公网IP）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb://用户名@xxx.xxx.xxx.xxx:10445/</span><br></pre></td></tr></table></figure>
+
+<h4 id="Windows客户端"><a href="#Windows客户端" class="headerlink" title="Windows客户端"></a>Windows客户端</h4><ol>
+<li><p><strong>配置端口转发</strong>：以管理员身份打开CMD，输入以下命令（xxx.xxx.xxx.xxx为服务器公网IP）：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenport=<span class="number">445</span> listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> connectport=<span class="number">10445</span> connectaddress=xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>此命令的效果是：本机访问127.0.0.1的445端口时，会转发到远程IP地址的10445端口</p>
+</li>
+<li><p><strong>查看端口转发配置</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>禁用Server服务</strong>：</p>
+<ul>
+<li>打开系统服务管理器</li>
+<li>找到「Server」服务</li>
+<li>右键属性 → 启动类型改为「禁用」</li>
+<li>重启电脑</li>
+<li>再次查看服务状态，确认服务未运行</li>
+</ul>
+</li>
+<li><p><strong>访问远程共享</strong>：在Windows资源管理器地址栏中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\127.0.0.1\</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-Windows-10客户端额外配置"><a href="#3-Windows-10客户端额外配置" class="headerlink" title="3. Windows 10客户端额外配置"></a>3. Windows 10客户端额外配置</h3><p>在Windows 11系统中，微软加强了网络安全策略，导致文件共享可能无法正常工作。以下是解决方案：</p>
+<ol>
+<li><p><strong>启用必要的Windows功能</strong>：</p>
+<ul>
+<li>打开「启用或关闭Windows功能」</li>
+<li>勾选「NFS服务」和「SMB1.0&#x2F;CIFS文件支持」</li>
+<li>重启电脑</li>
+</ul>
+</li>
+<li><p><strong>修改组策略安全设置</strong>：</p>
+<ul>
+<li>按Windows+R组合键，输入「gpedit.msc」打开组策略编辑器</li>
+<li>导航至「计算机配置」→「Windows设置」→「安全设置」→「本地策略」→「安全选项」</li>
+<li>找到「Microsoft网络客户端：对通讯进行数字签名（始终）」，设置为「已禁用」</li>
+<li>如需将本机作为共享服务器，还需将「Microsoft网络服务器：对通讯进行数字签名（始终）」设置为「已禁用」</li>
+</ul>
+</li>
+<li><p><strong>启用不安全的来宾登录</strong>：</p>
+<ul>
+<li>导航至「计算机配置」→「管理模板」→「网络」→「Lanman工作站」</li>
+<li>找到「启用不安全的来宾登录」，设置为「已启用」</li>
+<li>完成设置后建议重启电脑并重新设置共享文件夹</li>
+</ul>
+</li>
+</ol>
+<h4 id="家庭版用户配置"><a href="#家庭版用户配置" class="headerlink" title="家庭版用户配置"></a>家庭版用户配置</h4><p>由于Windows 11家庭版没有组策略编辑器，可通过以下方法添加此功能：<br><strong>安装组策略编辑器</strong>：</p>
+<ul>
+<li>在桌面新建文本文档，粘贴以下内容：   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line">dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum &gt;List.txt</span><br><span class="line">dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum &gt;&gt;List.txt</span><br><span class="line">for /f %%i in (&#x27;findstr /i . List.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;C:\Windows\servicing\Packages\%%i&quot;</span><br><span class="line">pause</span><br></pre></td></tr></table></figure></li>
+<li>将文件后缀名从.txt改为.bat</li>
+<li>右键选择「以管理员身份运行」</li>
+<li>运行完成后重启电脑（系统会显示正在更新）</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43514847/article/details/133009479">CSDN - 远程桌面和Samba配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36953067/article/details/136443544">CSDN - 解决共享文件夹访问权限问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_61434477/article/details/120106909">已解决：Win10无法访问Samba共享文件夹</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/23/ARM%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AELunarVim%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" rel="prev" title="ARM设备配置LunarVim完全指南">
+                  <i class="fa fa-angle-left"></i> ARM设备配置LunarVim完全指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/15/KVM%E5%A4%9A%E6%98%BE%E5%8D%A1%E7%9B%B4%E9%80%9A%E6%8C%87%E5%8D%97/" rel="next" title="KVM多显卡直通指南">
+                  KVM多显卡直通指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

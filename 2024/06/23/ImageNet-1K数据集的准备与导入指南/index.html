@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="ImageNet-1K数据集的准备与导入指南 ImageNet-1K是计算机视觉领域最常用的基准数据集之一，包含1000个类别的图像数据。本文将详细介绍如何下载、处理和加载ImageNet-1K数据集，帮助您快速开始深度学习模型的训练与测试。  1. 数据集下载您可以通过以下百度网盘链接获取ImageNet-1K数据集： 链接：ImageNet-1K 提取码：abel 2. 数据集结构准备下载完成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ImageNet-1K数据集的准备与导入指南">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="ImageNet-1K数据集的准备与导入指南 ImageNet-1K是计算机视觉领域最常用的基准数据集之一，包含1000个类别的图像数据。本文将详细介绍如何下载、处理和加载ImageNet-1K数据集，帮助您快速开始深度学习模型的训练与测试。  1. 数据集下载您可以通过以下百度网盘链接获取ImageNet-1K数据集： 链接：ImageNet-1K 提取码：abel 2. 数据集结构准备下载完成">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-23T09:10:00.000Z">
+<meta property="article:modified_time" content="2025-03-19T08:14:24.918Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/","path":"2024/06/23/ImageNet-1K数据集的准备与导入指南/","title":"ImageNet-1K数据集的准备与导入指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ImageNet-1K数据集的准备与导入指南 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">ImageNet-1K数据集的准备与导入指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">1. 数据集下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BB%93%E6%9E%84%E5%87%86%E5%A4%87"><span class="nav-number">1.2.</span> <span class="nav-text">2. 数据集结构准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%89%B9%E9%87%8F%E8%A7%A3%E5%8E%8B%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">3. 批量解压训练数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">4. 验证集数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%A7%A3%E5%8E%8B%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 解压开发工具包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E7%BB%84%E7%BB%87%E9%AA%8C%E8%AF%81%E9%9B%86%E5%9B%BE%E7%89%87"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 组织验证集图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BD%BF%E7%94%A8PyTorch%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.5.</span> <span class="nav-text">5. 使用PyTorch加载数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6. 数据集使用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ImageNet-1K数据集的准备与导入指南 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ImageNet-1K数据集的准备与导入指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-23 17:10:00" itemprop="dateCreated datePublished" datetime="2024-06-23T17:10:00+08:00">2024-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 16:14:24" itemprop="dateModified" datetime="2025-03-19T16:14:24+08:00">2025-03-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="ImageNet-1K数据集的准备与导入指南"><a href="#ImageNet-1K数据集的准备与导入指南" class="headerlink" title="ImageNet-1K数据集的准备与导入指南"></a>ImageNet-1K数据集的准备与导入指南</h1><blockquote>
+<p>ImageNet-1K是计算机视觉领域最常用的基准数据集之一，包含1000个类别的图像数据。本文将详细介绍如何下载、处理和加载ImageNet-1K数据集，帮助您快速开始深度学习模型的训练与测试。</p>
+</blockquote>
+<h2 id="1-数据集下载"><a href="#1-数据集下载" class="headerlink" title="1. 数据集下载"></a>1. 数据集下载</h2><p>您可以通过以下百度网盘链接获取ImageNet-1K数据集：</p>
+<p><strong>链接</strong>：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1L5CSPffnVmeepC6pK35vbQ?pwd=abel">ImageNet-1K</a></p>
+<p><strong>提取码</strong>：<code>abel</code></p>
+<h2 id="2-数据集结构准备"><a href="#2-数据集结构准备" class="headerlink" title="2. 数据集结构准备"></a>2. 数据集结构准备</h2><p>下载完成后，请按照以下步骤组织数据集结构：</p>
+<ol>
+<li>创建三个主要文件夹：<code>train</code>、<code>val</code>和<code>test</code></li>
+<li>将对应的压缩包放入各自的文件夹中</li>
+<li>解压各个压缩包文件</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：<code>train</code>压缩包解压后会产生1000个子压缩包，这些子压缩包对应ImageNet-1K的1000个类别。</p>
+</blockquote>
+<h2 id="3-批量解压训练数据"><a href="#3-批量解压训练数据" class="headerlink" title="3. 批量解压训练数据"></a>3. 批量解压训练数据</h2><p>解压完主压缩包后，需要批量解压<code>train</code>文件夹中的1000个子压缩包。请在<code>train</code>文件夹中执行以下Shell命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> *.tar; <span class="keyword">do</span> [ -f <span class="string">&quot;<span class="variable">$f</span>&quot;</span> ] &amp;&amp; <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$&#123;f%.tar&#125;</span>&quot;</span> &amp;&amp; tar -xf <span class="string">&quot;<span class="variable">$f</span>&quot;</span> -C <span class="string">&quot;<span class="variable">$&#123;f%.tar&#125;</span>&quot;</span>; <span class="keyword">done</span> &amp;&amp; <span class="built_in">rm</span> *.rar</span><br></pre></td></tr></table></figure>
+
+<p>执行上述脚本后，您将在<code>train</code>文件夹下获得1000个子文件夹，每个文件夹包含对应类别的图片数据。</p>
+<h2 id="4-验证集数据处理"><a href="#4-验证集数据处理" class="headerlink" title="4. 验证集数据处理"></a>4. 验证集数据处理</h2><p>验证集（<code>val</code>）的图片默认是平铺的，需要按类别组织到对应的文件夹中。请按照以下步骤操作：</p>
+<h3 id="4-1-解压开发工具包"><a href="#4-1-解压开发工具包" class="headerlink" title="4.1 解压开发工具包"></a>4.1 解压开发工具包</h3><p>首先，解压ImageNet开发工具包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzf ILSVRC2012_devkit_t12.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-组织验证集图片"><a href="#4-2-组织验证集图片" class="headerlink" title="4.2 组织验证集图片"></a>4.2 组织验证集图片</h3><p>在ImageNet根目录（包含<code>devkit</code>和<code>val</code>的目录）中，创建并运行以下Python脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">move_valimg</span>(<span class="params">val_dir=<span class="string">&#x27;./val&#x27;</span>, devkit_dir=<span class="string">&#x27;./ILSVRC2012_devkit_t12&#x27;</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将验证集图片移动到对应类别的文件夹中</span></span><br><span class="line"><span class="string">    val_id(从1开始) -&gt; ILSVRC_ID(从1开始) -&gt; WIND</span></span><br><span class="line"><span class="string">    组织结构如下：</span></span><br><span class="line"><span class="string">    /val</span></span><br><span class="line"><span class="string">    /n01440764</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">    /n01443537</span></span><br><span class="line"><span class="string">        images</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 加载synset、验证集真值和验证集图片列表</span></span><br><span class="line">    synset = io.loadmat(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;meta.mat&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">    ground_truth = <span class="built_in">open</span>(os.path.join(devkit_dir, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;ILSVRC2012_validation_ground_truth.txt&#x27;</span>))</span><br><span class="line">    lines = ground_truth.readlines()</span><br><span class="line">    labels = [<span class="built_in">int</span>(line[:-<span class="number">1</span>]) <span class="keyword">for</span> line <span class="keyword">in</span> lines]</span><br><span class="line">    </span><br><span class="line">    root, _, filenames = <span class="built_in">next</span>(os.walk(val_dir))</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">        <span class="comment"># 验证集图片名称 -&gt; ILSVRC ID -&gt; WIND</span></span><br><span class="line">        val_id = <span class="built_in">int</span>(filename.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;_&#x27;</span>)[-<span class="number">1</span>])</span><br><span class="line">        ILSVRC_ID = labels[val_id-<span class="number">1</span>]</span><br><span class="line">        WIND = synset[<span class="string">&#x27;synsets&#x27;</span>][ILSVRC_ID-<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;val_id:%d, ILSVRC_ID:%d, WIND:%s&quot;</span> % (val_id, ILSVRC_ID, WIND))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 移动验证集图片到对应类别文件夹</span></span><br><span class="line">        output_dir = os.path.join(root, WIND)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(output_dir):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            os.mkdir(output_dir)</span><br><span class="line">        shutil.move(os.path.join(root, filename), os.path.join(output_dir, filename))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    move_valimg()</span><br></pre></td></tr></table></figure>
+
+<p>运行此脚本后，验证集图片将被组织到各自类别的文件夹中，便于后续使用。</p>
+<h2 id="5-使用PyTorch加载数据集"><a href="#5-使用PyTorch加载数据集" class="headerlink" title="5. 使用PyTorch加载数据集"></a>5. 使用PyTorch加载数据集</h2><p>完成上述准备工作后，您可以使用PyTorch的<code>torchvision.datasets.ImageFolder</code>轻松加载ImageNet-1K数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_imagenet</span>(<span class="params">root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">True</span>, transform=<span class="literal">None</span>, target_transform=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    加载ImageNet-1K数据集</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">        root: 数据集根目录</span></span><br><span class="line"><span class="string">        train: 是否加载训练集</span></span><br><span class="line"><span class="string">        transform: 图像变换</span></span><br><span class="line"><span class="string">        target_transform: 标签变换</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">        ImageFolder数据集对象</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> train:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root = os.path.join(root, <span class="string">&#x27;val&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> datasets.ImageFolder(root=root,</span><br><span class="line">                            transform=transform,</span><br><span class="line">                            target_transform=target_transform)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-数据集使用示例"><a href="#6-数据集使用示例" class="headerlink" title="6. 数据集使用示例"></a>6. 数据集使用示例</h2><p>以下是一个完整的示例，展示如何使用PyTorch加载并预处理ImageNet-1K数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数据变换</span></span><br><span class="line">train_transform = transforms.Compose([</span><br><span class="line">    transforms.RandomResizedCrop(<span class="number">224</span>),</span><br><span class="line">    transforms.RandomHorizontalFlip(),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">val_transform = transforms.Compose([</span><br><span class="line">    transforms.Resize(<span class="number">256</span>),</span><br><span class="line">    transforms.CenterCrop(<span class="number">224</span>),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">train_dataset = get_imagenet(root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">True</span>, transform=train_transform)</span><br><span class="line">val_dataset = get_imagenet(root=<span class="string">&#x27;data/imagenet&#x27;</span>, train=<span class="literal">False</span>, transform=val_transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据加载器</span></span><br><span class="line">train_loader = DataLoader(train_dataset, batch_size=<span class="number">256</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">8</span>, pin_memory=<span class="literal">True</span>)</span><br><span class="line">val_loader = DataLoader(val_dataset, batch_size=<span class="number">256</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">8</span>, pin_memory=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在您可以使用train_loader和val_loader进行模型训练和验证</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过本指南，您已经学会了如何下载、处理和加载ImageNet-1K数据集。这个数据集是计算机视觉研究和应用的重要资源，掌握其使用方法将有助于您开展深度学习模型的训练与评估工作。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/" rel="prev" title="i3与dolphin文件关联">
+                  <i class="fa fa-angle-left"></i> i3与dolphin文件关联
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/07/19/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85MATLAB%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" rel="next" title="Linux系统安装MATLAB完全指南">
+                  Linux系统安装MATLAB完全指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

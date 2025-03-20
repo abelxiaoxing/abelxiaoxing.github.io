@@ -113,7 +113,7 @@
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -139,7 +139,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/21/wintogo&&linuxtogo/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -157,111 +157,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/21/wintogo&&linuxtogo/" class="post-title-link" itemprop="url">wintogo&&linuxtogo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-21 10:35:28" itemprop="dateCreated datePublished" datetime="2022-06-21T10:35:28+08:00">2022-06-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="ventoy安装制作u盘"><a href="#ventoy安装制作u盘" class="headerlink" title="ventoy安装制作u盘"></a>ventoy安装制作u盘</h2><ol>
-<li>找个固态u盘或者移动固态,制作成ventoy启动盘(略)</li>
-<li>将ventoy的启动盘格式化成NTFS格式</li>
-<li>安装vhd文件启动插件，放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下。<a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/plugin_vhdboot.html">vhd文件启动插件</a></li>
-</ol>
-<h2 id="virtualbox安装linux或windows镜像系统"><a href="#virtualbox安装linux或windows镜像系统" class="headerlink" title="virtualbox安装linux或windows镜像系统"></a>virtualbox安装linux或windows镜像系统</h2><p>安装和普通流程基本一样,主要讲两点不太一样的  </p>
-<ol>
-<li>虚拟硬盘文件类型选择专家模式,选择VHD虚拟硬盘,选择固定大小  </li>
-<li>在硬盘创建后还未启动时开启UEFI,设置–系统–扩展特性–启用EFI</li>
-</ol>
-<h2 id="linux镜像系统添加ventoy插件"><a href="#linux镜像系统添加ventoy插件" class="headerlink" title="linux镜像系统添加ventoy插件"></a>linux镜像系统添加ventoy插件</h2><ol>
-<li>在虚拟机中打开浏览器,输入<code>ventoy.net</code>,选择中文,选择文档手册,选择插件说明,选择Linux vDisk启动插件,于”在系统下执行vtouboot脚本”处下载插件</li>
-<li>将插件解压,以root模式安装<code>sudo sh vtoyboot.sh</code>,出现vtoyboot process successfully finished即成功</li>
-</ol>
-<h2 id="linuxtogo提取制作"><a href="#linuxtogo提取制作" class="headerlink" title="linuxtogo提取制作"></a>linuxtogo提取制作</h2><ol>
-<li>将linux虚拟机关机,打开虚拟机安装目录,找到.vhd文件,在后面加上.vtoy,移动到ventoy启动盘即可</li>
-<li>linux内核升级后建议重新执行<code>sudo sh vtoyboot.sh</code></li>
-</ol>
-<h2 id="wintogo提取制作"><a href="#wintogo提取制作" class="headerlink" title="wintogo提取制作"></a>wintogo提取制作</h2><ul>
-<li>将windows虚拟机关机,打开虚拟机安装目录,找到.vhd文件,移动到ventoy启动盘即可</li>
-</ul>
-<h2 id="wintogo扩容"><a href="#wintogo扩容" class="headerlink" title="wintogo扩容"></a>wintogo扩容</h2><ol>
-<li>查看虚拟磁盘wtg.vhdx信息<br>  <code>qemu-img info wtg.vhdx</code></li>
-<li>vhdx格式转换成qcow2<br>  <code>qemu-img convert -f vhdx -O qcow2 wtg.vhdx wtg.qcow2</code></li>
-<li>对wtg.qcow2扩容到100G<br>  <code>qemu-img resize wtg.qcow2 100G</code></li>
-<li>将qcow2文件转换回vhdx格式<br>  <code>qemu-img convert -f qcow2 -O vhdx wtg.qcow2 wtg_expanded.vhdx</code></li>
-<li>重命名文件<br>  <code>mv wtg.vhdx wtg_old.vhdx</code><br>  <code>mv wtg_expanded.vhdx wtg.vhdx</code>  </li>
-<li>最后进入虚拟硬盘中,利用windows的磁盘管理工具扩容C盘</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/14/linux%E8%BF%9E%E6%8E%A5windows%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">linux连接windows方法</a>
+          <a href="/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Linux与Windows的远程连接方法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -279,7 +175,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-19 17:39:25" itemprop="dateModified" datetime="2025-03-19T17:39:25+08:00">2025-03-19</time>
     </span>
 
   
@@ -292,102 +188,44 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="linux远程桌面访问windows"><a href="#linux远程桌面访问windows" class="headerlink" title="linux远程桌面访问windows"></a>linux远程桌面访问windows</h1><h2 id="windows远程桌面开启"><a href="#windows远程桌面开启" class="headerlink" title="windows远程桌面开启"></a>windows远程桌面开启</h2><p>略</p>
-<h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><ul>
-<li>rdesktop实现了RDP协议,允许linux系统远程登陆windows系统<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S rdesktop</span><br><span class="line">paru -S freerdp</span><br></pre></td></tr></table></figure></li>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文总结了从Linux系统连接到Windows系统的两种主要方法：远程桌面连接和SSH连接。这些方法可以帮助您在不同操作系统之间实现高效的远程访问和控制。</p>
+<h2 id="一、Linux远程桌面访问Windows"><a href="#一、Linux远程桌面访问Windows" class="headerlink" title="一、Linux远程桌面访问Windows"></a>一、Linux远程桌面访问Windows</h2><h3 id="1-Windows远程桌面准备"><a href="#1-Windows远程桌面准备" class="headerlink" title="1. Windows远程桌面准备"></a>1. Windows远程桌面准备</h3><p>在Windows系统上，需要先开启远程桌面功能：</p>
+<ul>
+<li>打开系统属性 → 远程设置 → 勾选”允许远程连接到此计算机”</li>
+<li>确保Windows防火墙已允许远程桌面连接</li>
 </ul>
-<p>安装后可以用命令来访问远程windows系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+<h3 id="2-通过RDP协议连接"><a href="#2-通过RDP协议连接" class="headerlink" title="2. 通过RDP协议连接"></a>2. 通过RDP协议连接</h3><p>RDP（Remote Desktop Protocol）是Windows远程桌面使用的协议，Linux系统可以通过以下工具实现RDP连接：</p>
+<h4 id="2-1-使用rdesktop工具"><a href="#2-1-使用rdesktop工具" class="headerlink" title="2.1 使用rdesktop工具"></a>2.1 使用rdesktop工具</h4><p>rdesktop实现了RDP协议，允许Linux系统远程登录Windows系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装rdesktop</span></span><br><span class="line">paru -S rdesktop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装freerdp（另一个RDP客户端实现）</span></span><br><span class="line">paru -S freerdp</span><br></pre></td></tr></table></figure>
 
-<h2 id="图形前端工具krdc"><a href="#图形前端工具krdc" class="headerlink" title="图形前端工具krdc"></a>图形前端工具krdc</h2><ul>
-<li>krdc为kde系的远程图形化界面工具<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S krdc</span><br></pre></td></tr></table></figure></li>
+<p>安装后可以用以下命令访问远程Windows系统：<br>rdesktop</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数说明：</span></span><br><span class="line"><span class="comment"># -g 1440x900：设置远程桌面分辨率为1440x900</span></span><br><span class="line"><span class="comment"># -P：使用持久位图缓存</span></span><br><span class="line"><span class="comment"># -z：启用压缩</span></span><br><span class="line"><span class="comment"># -x l：设置体验级别</span></span><br><span class="line"><span class="comment"># -r sound:off：关闭声音重定向</span></span><br><span class="line"><span class="comment"># -u windowsuser：指定Windows用户名</span></span><br><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+<p>freerdp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp /v:IP_ADDRESS00 /u:windowsuser /p:password /clipboard /dynamic-resolution</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-2-使用图形前端工具KRDC"><a href="#2-2-使用图形前端工具KRDC" class="headerlink" title="2.2 使用图形前端工具KRDC"></a>2.2 使用图形前端工具KRDC</h4><p>KRDC是KDE桌面环境提供的远程桌面客户端，提供了友好的图形界面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装KRDC</span></span><br><span class="line">paru -S krdc</span><br></pre></td></tr></table></figure>
+
+<p>安装后可以通过图形界面轻松配置和连接到Windows远程桌面。</p>
+<h2 id="二、Linux通过SSH连接Windows"><a href="#二、Linux通过SSH连接Windows" class="headerlink" title="二、Linux通过SSH连接Windows"></a>二、Linux通过SSH连接Windows</h2><h3 id="1-Windows安装并启动SSH服务"><a href="#1-Windows安装并启动SSH服务" class="headerlink" title="1. Windows安装并启动SSH服务"></a>1. Windows安装并启动SSH服务</h3><p>在Windows系统上需要完成以下步骤：</p>
+<ol>
+<li>打开Windows设置 → 系统 → 可选功能，安装OpenSSH服务器</li>
+<li>打开Windows服务管理器，将OpenSSH服务设置为”自动(延时)”启动模式，并启动服务</li>
+<li>配置Windows防火墙，允许SSH连接：<ul>
+<li>打开网络和Internet设置</li>
+<li>选择Windows防火墙 → 高级设置</li>
+<li>选择入站规则 → 新建规则</li>
+<li>规则类型选择”自定义”</li>
+<li>协议和端口选择TCP 22</li>
 </ul>
-<h1 id="linux-ssh连接windows"><a href="#linux-ssh连接windows" class="headerlink" title="linux ssh连接windows"></a>linux ssh连接windows</h1><h2 id="windows安装并且启动ssh服务"><a href="#windows安装并且启动ssh服务" class="headerlink" title="windows安装并且启动ssh服务"></a>windows安装并且启动ssh服务</h2><ol>
-<li>打开Windows设置–&gt;系统–&gt;可选功能就可看到系统已经安装好的可选功能,安装ssh服务</li>
-<li>打开windows服务,将openssh服务设置为自动(延时),并启动</li>
-<li>放开windows防火墙端口,操作如下:打开网络和internet–&gt; 规则类型选自定义–&gt; Windows防火墙–&gt; 高级设置–&gt; 入站规则–&gt; 新建规则–&gt; 协议和端口选择22</li>
+</li>
 </ol>
+<h3 id="2-从Linux连接到Windows"><a href="#2-从Linux连接到Windows" class="headerlink" title="2. 从Linux连接到Windows"></a>2. 从Linux连接到Windows</h3><p>完成上述配置后，可以使用标准SSH客户端从Linux连接到Windows：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接到Windows SSH服务</span></span><br><span class="line">ssh username@windows_ip_address</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/25/home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">home目录迁移方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-04-25 00:06:45" itemprop="dateCreated datePublished" datetime="2022-04-25T00:06:45+08:00">2022-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="查看硬盘uuid"><a href="#查看硬盘uuid" class="headerlink" title="查看硬盘uuid"></a>查看硬盘uuid</h2><p><code>sudo blkid</code> </p>
-<h2 id="开机自动挂载硬盘-在文件的最后新增加一行代码"><a href="#开机自动挂载硬盘-在文件的最后新增加一行代码" class="headerlink" title="开机自动挂载硬盘,在文件的最后新增加一行代码"></a>开机自动挂载硬盘,在文件的最后新增加一行代码</h2><p><code>sudo vim /etc/fstab</code><br><code>输入硬盘UUID /media ext4  defaults  0 0</code></p>
-<h2 id="临时挂载硬盘"><a href="#临时挂载硬盘" class="headerlink" title="临时挂载硬盘"></a>临时挂载硬盘</h2><p><code>sudo mount /dev/sdb1 /media </code></p>
-<h2 id="创建软链接"><a href="#创建软链接" class="headerlink" title="创建软链接"></a>创建软链接</h2><p><code>sudo ln -s /media/abelxiaoxing /home/abelxiaoxing</code> </p>
-<h2 id="创建用户-并制定用户目录"><a href="#创建用户-并制定用户目录" class="headerlink" title="创建用户,并制定用户目录"></a>创建用户,并制定用户目录</h2><p><code>sudo useradd -d /home/abelxiaoxing abelxiaoxing </code></p>
-<h2 id="修改目录所属权"><a href="#修改目录所属权" class="headerlink" title="修改目录所属权"></a>修改目录所属权</h2><p><code>sudo chown -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing </code></p>
+<hr>
+<p>通过以上方法，您可以根据不同需求选择合适的方式从Linux系统连接到Windows系统，实现远程控制和文件访问。</p>
 
       
     </div>
@@ -450,7 +288,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-19 15:42:49" itemprop="dateModified" datetime="2025-03-19T15:42:49+08:00">2025-03-19</time>
+      <time title="修改时间：2025-03-19 16:04:07" itemprop="dateModified" datetime="2025-03-19T16:04:07+08:00">2025-03-19</time>
     </span>
 
   
@@ -552,6 +390,36 @@
 <li>检查EFI分区是否包含引导文件</li>
 <li>测试从新硬盘启动</li>
 </ol>
+<hr>
+<h2 id="Linux-Home目录迁移方法"><a href="#Linux-Home目录迁移方法" class="headerlink" title="Linux Home目录迁移方法"></a>Linux Home目录迁移方法</h2><h3 id="🏠-迁移目的"><a href="#🏠-迁移目的" class="headerlink" title="🏠 迁移目的"></a>🏠 迁移目的</h3><p>将用户的home目录迁移到新硬盘，可以有效扩展存储空间并提高系统性能。</p>
+<h3 id="📋-详细步骤"><a href="#📋-详细步骤" class="headerlink" title="📋 详细步骤"></a>📋 详细步骤</h3><h4 id="1-查看硬盘UUID"><a href="#1-查看硬盘UUID" class="headerlink" title="1. 查看硬盘UUID"></a>1. 查看硬盘UUID</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> blkid</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>记录新硬盘的UUID，后续配置会用到</p>
+</blockquote>
+<h4 id="2-开机自动挂载硬盘"><a href="#2-开机自动挂载硬盘" class="headerlink" title="2. 开机自动挂载硬盘"></a>2. 开机自动挂载硬盘</h4><p>编辑fstab文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>在文件末尾添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=&lt;你的硬盘UUID&gt; /media &lt;你的硬盘格式，例如ext4&gt; defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-临时挂载硬盘"><a href="#3-临时挂载硬盘" class="headerlink" title="3. 临时挂载硬盘"></a>3. 临时挂载硬盘</h4><p>如果不想立即重启，可以先手动挂载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount /dev/sdb1 /media</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-创建软链接"><a href="#4-创建软链接" class="headerlink" title="4. 创建软链接"></a>4. 创建软链接</h4><p>将新硬盘上的用户目录链接到home目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /media/abelxiaoxing /home/abelxiaoxing</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-创建用户并指定用户目录"><a href="#5-创建用户并指定用户目录" class="headerlink" title="5. 创建用户并指定用户目录"></a>5. 创建用户并指定用户目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> useradd -d /home/abelxiaoxing abelxiaoxing</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-修改目录所属权"><a href="#6-修改目录所属权" class="headerlink" title="6. 修改目录所属权"></a>6. 修改目录所属权</h4><p>确保用户对自己的目录有完全控制权：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ <strong>注意事项</strong>：</p>
+<ul>
+<li>迁移前备份重要数据</li>
+<li>确保新硬盘有足够空间</li>
+<li>迁移后测试用户登录和文件访问权限</li>
+</ul>
+</blockquote>
 <hr>
 <h2 id="通用注意事项"><a href="#通用注意事项" class="headerlink" title="通用注意事项"></a>通用注意事项</h2><ol>
 <li><p><strong>数据备份</strong>：建议使用<code>dd</code>命令创建完整磁盘镜像</p>
@@ -1272,7 +1140,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1290,7 +1158,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/28/Ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Ubuntu深度学习环境搭建</a>
+          <a href="/2022/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">深度学习环境搭建指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1308,7 +1176,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-09 15:38:54" itemprop="dateModified" datetime="2025-01-09T15:38:54+08:00">2025-01-09</time>
+      <time title="修改时间：2025-03-20 10:19:01" itemprop="dateModified" datetime="2025-03-20T10:19:01+08:00">2025-03-20</time>
     </span>
 
   
@@ -1321,33 +1189,75 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>如为archlinux,一行命令完成GPU驱动、cuda Toolkits、cudnn的安装<br><code>paru -S cudnn</code></p>
-<h1 id="GPU驱动安装"><a href="#GPU驱动安装" class="headerlink" title="GPU驱动安装"></a>GPU驱动安装</h1><p>首先ctrl + alt + F1进入字符界面</p>
-<h2 id="1-删除原有驱动"><a href="#1-删除原有驱动" class="headerlink" title="1.删除原有驱动"></a>1.删除原有驱动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br><span class="line">sudo apt-get autoremove</span><br><span class="line">sudo ./NIVIDIA-Linux-X86_64-384.59.run --uninstall</span><br></pre></td></tr></table></figure>
-<h2 id="2-安装依赖"><a href="#2-安装依赖" class="headerlink" title="2.安装依赖"></a>2.安装依赖</h2><p><code>sudo apt-get install build-essential gcc-multilib dkms</code></p>
-<h2 id="3-禁用nouveau驱动"><a href="#3-禁用nouveau驱动" class="headerlink" title="3.禁用nouveau驱动"></a>3.禁用nouveau驱动</h2><p>编辑 &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist-nouveau.conf 文件，添加以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line">alias nouveau off</span><br><span class="line">alias lbm-nouveau off</span><br></pre></td></tr></table></figure>
-<p>关闭nouveau：<br><code>echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf</code></p>
-<h2 id="4-reboot"><a href="#4-reboot" class="headerlink" title="4.reboot"></a>4.reboot</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-<h2 id="5-获取kernel-source"><a href="#5-获取kernel-source" class="headerlink" title="5.获取kernel source"></a>5.获取kernel source</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install linux-source</span><br><span class="line">apt-get install linux-headers-x.x.x-x-generic</span><br></pre></td></tr></table></figure>
-<p>其中x.x.x-x-generic可以通过$(uname -r)替换得到</p>
-<h2 id="6-关掉x-graphic-服务"><a href="#6-关掉x-graphic-服务" class="headerlink" title="6.关掉x graphic 服务"></a>6.关掉x graphic 服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop lightdm(or sudo service lightdm stop)</span><br><span class="line">sudo systemctl stop gdm</span><br><span class="line">sudo systemctl stop kdm</span><br></pre></td></tr></table></figure>
-<h2 id="7-安装nvidia驱动"><a href="#7-安装nvidia驱动" class="headerlink" title="7.安装nvidia驱动"></a>7.安装nvidia驱动</h2><p>下载对应版本<a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx?lang=cn">https://www.nvidia.cn/Download/index.aspx?lang=cn</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod NVIDIA*.run</span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-384.59.run</span><br></pre></td></tr></table></figure>
-<h2 id="8-显卡驱动检查"><a href="#8-显卡驱动检查" class="headerlink" title="8.显卡驱动检查"></a>8.显卡驱动检查</h2><p><code>nvidia-smi</code></p>
-<h1 id="安装cuda-Toolkits"><a href="#安装cuda-Toolkits" class="headerlink" title="安装cuda Toolkits"></a>安装cuda Toolkits</h1><h2 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a><br>fedora版本可用于archlinux</p>
-<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x cudxxxxxxxxxxxx</span><br><span class="line">sudo ./cudxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
-<h2 id="3-检查"><a href="#3-检查" class="headerlink" title="3.检查"></a>3.检查</h2><p><code>nvcc -V</code></p>
-<h1 id="安装cudnn（cuda加速库）"><a href="#安装cudnn（cuda加速库）" class="headerlink" title="安装cudnn（cuda加速库）"></a>安装cudnn（cuda加速库）</h1><h2 id="1-下载-1"><a href="#1-下载-1" class="headerlink" title="1.下载"></a>1.下载</h2><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a></p>
-<h2 id="2-复制cudnn头文件"><a href="#2-复制cudnn头文件" class="headerlink" title="2.复制cudnn头文件"></a>2.复制cudnn头文件</h2><p><code>sudo cp include/* /usr/local/cuda-11.6/include/</code></p>
-<h2 id="3-复制cudnn的库"><a href="#3-复制cudnn的库" class="headerlink" title="3.复制cudnn的库"></a>3.复制cudnn的库</h2><p><code>sudo cp lib/* /usr/local/cuda/lib64/</code></p>
-<h2 id="4-添加可执行权限"><a href="#4-添加可执行权限" class="headerlink" title="4.添加可执行权限"></a>4.添加可执行权限</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/cuda-11.6/include/cudnn.h</span><br><span class="line">sudo chmod +x /usr/local/cuda-11.6/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
-<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5.检查"></a>5.检查</h2><p>cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn_version.h | grep CUDNN_MAJOR -A 2</p>
-<h1 id="切换cuda版本"><a href="#切换cuda版本" class="headerlink" title="切换cuda版本"></a>切换cuda版本</h1><h2 id="进入目录"><a href="#进入目录" class="headerlink" title="进入目录"></a>进入目录</h2><p><code>cd /usr/local</code></p>
-<h2 id="删除原cuda映射"><a href="#删除原cuda映射" class="headerlink" title="删除原cuda映射"></a>删除原cuda映射</h2><p><code>sudo rm -rf cuda</code></p>
-<h2 id="建立新的cuda映射"><a href="#建立新的cuda映射" class="headerlink" title="建立新的cuda映射"></a>建立新的cuda映射</h2><p><code>ln -s cuda-9.0 cuda</code></p>
-<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p><code>nvcc -V</code></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/NVIDIA_(简体中文)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40907977/article/details/115305634">https://blog.csdn.net/qq_40907977/article/details/115305634</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/public669/article/details/98470857">https://blog.csdn.net/public669/article/details/98470857</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigconvience/article/details/8782668">https://blog.csdn.net/bigconvience/article/details/8782668</a></p>
+          <p>本文将详细介绍如何在Ubuntu系统上搭建深度学习环境，包括NVIDIA显卡驱动、CUDA Toolkit和cuDNN的安装配置过程。</p>
+<blockquote>
+<p>注：如果您使用的是Arch Linux系统，可以通过以下命令一键完成所有安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S cudnn</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="1-NVIDIA显卡驱动安装"><a href="#1-NVIDIA显卡驱动安装" class="headerlink" title="1. NVIDIA显卡驱动安装"></a>1. NVIDIA显卡驱动安装</h2><h3 id="1-1-准备工作"><a href="#1-1-准备工作" class="headerlink" title="1.1 准备工作"></a>1.1 准备工作</h3><p>首先使用 <code>Ctrl + Alt + F1</code> 进入字符终端界面，执行以下步骤：</p>
+<ol>
+<li><p>删除已有的NVIDIA驱动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get purge nvidia*</span><br><span class="line"><span class="built_in">sudo</span> apt-get autoremove</span><br><span class="line"><span class="built_in">sudo</span> ./NVIDIA-Linux-X86_64-384.59.run --uninstall</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装必要的依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install build-essential gcc-multilib dkms</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="1-2-禁用Nouveau驱动"><a href="#1-2-禁用Nouveau驱动" class="headerlink" title="1.2 禁用Nouveau驱动"></a>1.2 禁用Nouveau驱动</h3><ol>
+<li><p>编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nvim /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line"><span class="built_in">alias</span> nouveau off</span><br><span class="line"><span class="built_in">alias</span> lbm-nouveau off</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行以下命令禁用Nouveau：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> options nouveau modeset=0 | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/modprobe.d/nouveau-kms.conf</span><br><span class="line"><span class="built_in">sudo</span> update-initramfs -u</span><br><span class="line"><span class="built_in">sudo</span> reboot</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="1-3-安装NVIDIA驱动"><a href="#1-3-安装NVIDIA驱动" class="headerlink" title="1.3 安装NVIDIA驱动"></a>1.3 安装NVIDIA驱动</h3><ol>
+<li><p>安装内核源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install linux-source</span><br><span class="line"><span class="built_in">sudo</span> apt-get install linux-headers-$(<span class="built_in">uname</span> -r)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭图形界面服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl stop lightdm  <span class="comment"># 或 sudo service lightdm stop</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl stop gdm</span><br><span class="line"><span class="built_in">sudo</span> systemctl stop kdm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载并安装NVIDIA驱动：</p>
+</li>
+</ol>
+<ul>
+<li>从<a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx?lang=cn">NVIDIA官网</a>下载对应版本的驱动<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x NVIDIA*.run</span><br><span class="line"><span class="built_in">sudo</span> ./NVIDIA-Linux-x86_64-384.59.run</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>验证安装：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-CUDA-Toolkit安装"><a href="#2-CUDA-Toolkit安装" class="headerlink" title="2. CUDA Toolkit安装"></a>2. CUDA Toolkit安装</h2><ol>
+<li><p>从<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">NVIDIA CUDA下载页面</a>下载适合的CUDA版本</p>
+<blockquote>
+<p>注：Fedora版本也可用于Arch Linux</p>
+</blockquote>
+</li>
+<li><p>安装CUDA：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x cuda_&lt;version&gt;_linux.run</span><br><span class="line"><span class="built_in">sudo</span> ./cuda_&lt;version&gt;_linux.run</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-cuDNN安装"><a href="#3-cuDNN安装" class="headerlink" title="3. cuDNN安装"></a>3. cuDNN安装</h2><ol>
+<li><p>从<a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN下载页面</a>下载对应版本</p>
+</li>
+<li><p>安装cuDNN：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 复制头文件</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> include/* /usr/local/cuda/include/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制库文件</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> lib/* /usr/local/cuda/lib64/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加执行权限</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/cuda/include/cudnn.h</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="4-CUDA版本切换"><a href="#4-CUDA版本切换" class="headerlink" title="4. CUDA版本切换"></a>4. CUDA版本切换</h2><p>如需切换CUDA版本，执行以下步骤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/local</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除原CUDA符号链接</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> -rf cuda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立新的CUDA符号链接</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s cuda-&lt;version&gt; cuda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证版本</span></span><br><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Arch Linux Wiki - NVIDIA</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40907977/article/details/115305634">NVIDIA驱动安装教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/public669/article/details/98470857">CUDA环境配置指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigconvience/article/details/8782668">深度学习环境搭建</a></li>
+</ul>
 
       
     </div>

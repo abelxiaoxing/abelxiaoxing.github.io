@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言本文总结了从Linux系统连接到Windows系统的两种主要方法：远程桌面连接和SSH连接。这些方法可以帮助您在不同操作系统之间实现高效的远程访问和控制。 一、Linux远程桌面访问Windows1. Windows远程桌面准备在Windows系统上，需要先开启远程桌面功能：  打开系统属性 → 远程设置 → 勾选”允许远程连接到此计算机” 确保Windows防火墙已允许远程桌面连接  2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux与Windows的远程连接方法">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="前言本文总结了从Linux系统连接到Windows系统的两种主要方法：远程桌面连接和SSH连接。这些方法可以帮助您在不同操作系统之间实现高效的远程访问和控制。 一、Linux远程桌面访问Windows1. Windows远程桌面准备在Windows系统上，需要先开启远程桌面功能：  打开系统属性 → 远程设置 → 勾选”允许远程连接到此计算机” 确保Windows防火墙已允许远程桌面连接  2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-14T01:43:59.000Z">
+<meta property="article:modified_time" content="2025-03-19T09:39:25.713Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/","path":"2022/06/14/Linux与Windows的远程连接方法/","title":"Linux与Windows的远程连接方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux与Windows的远程连接方法 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Linux%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AEWindows"><span class="nav-number">2.</span> <span class="nav-text">一、Linux远程桌面访问Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">1. Windows远程桌面准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%9A%E8%BF%87RDP%E5%8D%8F%E8%AE%AE%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2. 通过RDP协议连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8rdesktop%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 使用rdesktop工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BD%A2%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7KRDC"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 使用图形前端工具KRDC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E9%80%9A%E8%BF%87SSH%E8%BF%9E%E6%8E%A5Windows"><span class="nav-number">3.</span> <span class="nav-text">二、Linux通过SSH连接Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Windows%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E5%8A%A8SSH%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">1. Windows安装并启动SSH服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%8ELinux%E8%BF%9E%E6%8E%A5%E5%88%B0Windows"><span class="nav-number">3.2.</span> <span class="nav-text">2. 从Linux连接到Windows</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2022/06/14/Linux%E4%B8%8EWindows%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux与Windows的远程连接方法 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux与Windows的远程连接方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-14 09:43:59" itemprop="dateCreated datePublished" datetime="2022-06-14T09:43:59+08:00">2022-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 17:39:25" itemprop="dateModified" datetime="2025-03-19T17:39:25+08:00">2025-03-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文总结了从Linux系统连接到Windows系统的两种主要方法：远程桌面连接和SSH连接。这些方法可以帮助您在不同操作系统之间实现高效的远程访问和控制。</p>
+<h2 id="一、Linux远程桌面访问Windows"><a href="#一、Linux远程桌面访问Windows" class="headerlink" title="一、Linux远程桌面访问Windows"></a>一、Linux远程桌面访问Windows</h2><h3 id="1-Windows远程桌面准备"><a href="#1-Windows远程桌面准备" class="headerlink" title="1. Windows远程桌面准备"></a>1. Windows远程桌面准备</h3><p>在Windows系统上，需要先开启远程桌面功能：</p>
+<ul>
+<li>打开系统属性 → 远程设置 → 勾选”允许远程连接到此计算机”</li>
+<li>确保Windows防火墙已允许远程桌面连接</li>
+</ul>
+<h3 id="2-通过RDP协议连接"><a href="#2-通过RDP协议连接" class="headerlink" title="2. 通过RDP协议连接"></a>2. 通过RDP协议连接</h3><p>RDP（Remote Desktop Protocol）是Windows远程桌面使用的协议，Linux系统可以通过以下工具实现RDP连接：</p>
+<h4 id="2-1-使用rdesktop工具"><a href="#2-1-使用rdesktop工具" class="headerlink" title="2.1 使用rdesktop工具"></a>2.1 使用rdesktop工具</h4><p>rdesktop实现了RDP协议，允许Linux系统远程登录Windows系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装rdesktop</span></span><br><span class="line">paru -S rdesktop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装freerdp（另一个RDP客户端实现）</span></span><br><span class="line">paru -S freerdp</span><br></pre></td></tr></table></figure>
+
+<p>安装后可以用以下命令访问远程Windows系统：<br>rdesktop</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数说明：</span></span><br><span class="line"><span class="comment"># -g 1440x900：设置远程桌面分辨率为1440x900</span></span><br><span class="line"><span class="comment"># -P：使用持久位图缓存</span></span><br><span class="line"><span class="comment"># -z：启用压缩</span></span><br><span class="line"><span class="comment"># -x l：设置体验级别</span></span><br><span class="line"><span class="comment"># -r sound:off：关闭声音重定向</span></span><br><span class="line"><span class="comment"># -u windowsuser：指定Windows用户名</span></span><br><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+<p>freerdp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp /v:IP_ADDRESS00 /u:windowsuser /p:password /clipboard /dynamic-resolution</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-2-使用图形前端工具KRDC"><a href="#2-2-使用图形前端工具KRDC" class="headerlink" title="2.2 使用图形前端工具KRDC"></a>2.2 使用图形前端工具KRDC</h4><p>KRDC是KDE桌面环境提供的远程桌面客户端，提供了友好的图形界面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装KRDC</span></span><br><span class="line">paru -S krdc</span><br></pre></td></tr></table></figure>
+
+<p>安装后可以通过图形界面轻松配置和连接到Windows远程桌面。</p>
+<h2 id="二、Linux通过SSH连接Windows"><a href="#二、Linux通过SSH连接Windows" class="headerlink" title="二、Linux通过SSH连接Windows"></a>二、Linux通过SSH连接Windows</h2><h3 id="1-Windows安装并启动SSH服务"><a href="#1-Windows安装并启动SSH服务" class="headerlink" title="1. Windows安装并启动SSH服务"></a>1. Windows安装并启动SSH服务</h3><p>在Windows系统上需要完成以下步骤：</p>
+<ol>
+<li>打开Windows设置 → 系统 → 可选功能，安装OpenSSH服务器</li>
+<li>打开Windows服务管理器，将OpenSSH服务设置为”自动(延时)”启动模式，并启动服务</li>
+<li>配置Windows防火墙，允许SSH连接：<ul>
+<li>打开网络和Internet设置</li>
+<li>选择Windows防火墙 → 高级设置</li>
+<li>选择入站规则 → 新建规则</li>
+<li>规则类型选择”自定义”</li>
+<li>协议和端口选择TCP 22</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-从Linux连接到Windows"><a href="#2-从Linux连接到Windows" class="headerlink" title="2. 从Linux连接到Windows"></a>2. 从Linux连接到Windows</h3><p>完成上述配置后，可以使用标准SSH客户端从Linux连接到Windows：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接到Windows SSH服务</span></span><br><span class="line">ssh username@windows_ip_address</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>通过以上方法，您可以根据不同需求选择合适的方式从Linux系统连接到Windows系统，实现远程控制和文件访问。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/25/%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97/" rel="prev" title="平台系统迁移指南">
+                  <i class="fa fa-angle-left"></i> 平台系统迁移指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/21/%E5%88%B6%E4%BD%9C%E4%BE%BF%E6%90%BA%E5%BC%8FWindows%E5%92%8CLinux%E7%B3%BB%E7%BB%9F%E6%8C%87%E5%8D%97/" rel="next" title="制作便携式Windows和Linux系统指南">
+                  制作便携式Windows和Linux系统指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
