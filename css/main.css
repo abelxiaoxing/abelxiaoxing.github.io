@@ -1233,7 +1233,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #f9b6b4;
+  background: #f93b05;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2509,4 +2509,79 @@ header.header {
   .sidebar-active .footer-fixed {
     left: 320px;
   }
+}
+.posts-expand {
+  padding-top: 20px;
+}
+.post-block {
+  margin-bottom: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+.post-block:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+}
+.post-title {
+  font-size: 1.8em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.post-meta {
+  margin: 10px 0;
+  color: #666;
+}
+.archive .collection-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #333;
+}
+.archive .post-header {
+  border-left: 3px solid #6491d9;
+  padding-left: 10px;
+  transition: all 0.3s ease;
+}
+.archive .post-header:hover {
+  border-left-color: #4078c0;
+  padding-left: 15px;
+}
+.menu {
+  border-bottom: 1px solid #f5f5f5;
+}
+.menu-item a {
+  font-size: 1.1em;
+  position: relative;
+}
+.menu-item a:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #4078c0;
+  transition: all 0.3s ease;
+}
+.menu-item a:hover:after {
+  width: 100%;
+  left: 0;
+}
+.sidebar {
+  box-shadow: inset -1px 0 5px rgba(0,0,0,0.05);
+}
+.sidebar-inner {
+  padding: 20px;
+}
+.site-author-image {
+  border-radius: 50%;
+  padding: 2px;
+  border: 2px solid #4078c0;
+  transition: all 0.5s ease;
+}
+.site-author-image:hover {
+  transform: rotate(360deg);
 }
