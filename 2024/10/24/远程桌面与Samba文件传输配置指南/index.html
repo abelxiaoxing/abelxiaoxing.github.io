@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -17,17 +18,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="远程桌面与Samba文件传输配置指南本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。 一、RDP远程桌面配置1. 服务器端配置 配置frp服务：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）  开启Windows远程桌面：  点击系统属性 → 远程 勾选「允许远程连接到此计算机」 此时W">
+    <meta name="description" content="本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="远程桌面与Samba文件传输配置指南">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="远程桌面与Samba文件传输配置指南本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。 一、RDP远程桌面配置1. 服务器端配置 配置frp服务：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）  开启Windows远程桌面：  点击系统属性 → 远程 勾选「允许远程连接到此计算机」 此时W">
+<meta property="og:description" content="本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-24T06:19:42.000Z">
-<meta property="article:modified_time" content="2025-03-21T07:06:07.613Z">
+<meta property="article:modified_time" content="2025-03-21T08:37:57.398Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta property="article:tag" content="RDP远程桌面">
 <meta property="article:tag" content="Samba文件传输">
@@ -88,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
 
@@ -113,12 +114,14 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">远程桌面与Samba文件传输配置指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81RDP%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、RDP远程桌面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 服务器端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 客户端连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">二、Samba文件传输配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 服务器端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Windows服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E6%9C%8D%E5%8A%A1%E5%99%A8-Arch-Linux"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Linux服务器 (Arch Linux)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 客户端访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Linux客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Windows客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Windows-10%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A2%9D%E5%A4%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. Windows 10客户端额外配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B6%E5%BA%AD%E7%89%88%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">家庭版用户配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81RDP%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">一、RDP远程桌面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1. 服务器端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">2. 客户端连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Samba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">二、Samba文件传输配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 服务器端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">Windows服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E6%9C%8D%E5%8A%A1%E5%99%A8-Arch-Linux"><span class="nav-number">2.1.2.</span> <span class="nav-text">Linux服务器 (Arch Linux)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2. 客户端访问配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">Linux客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.2.2.</span> <span class="nav-text">Windows客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Windows-10%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A2%9D%E5%A4%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">3. Windows 10客户端额外配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B6%E5%BA%AD%E7%89%88%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.1.</span> <span class="nav-text">家庭版用户配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="abelxiaoxing"
+      src="/images/avatar/avatar.jpg">
   <p class="site-author-name" itemprop="name">abelxiaoxing</p>
   <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
 </div>
@@ -137,11 +140,19 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/abelxiaoxing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;abelxiaoxing" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:abelxiaoxing@outlook.com" title="E-Mail → mailto:abelxiaoxing@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -167,7 +178,7 @@
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar/avatar.jpg">
       <meta itemprop="name" content="abelxiaoxing">
     </span>
 
@@ -200,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-21 15:06:07" itemprop="dateModified" datetime="2025-03-21T15:06:07+08:00">2025-03-21</time>
+      <time title="修改时间：2025-03-21 16:37:57" itemprop="dateModified" datetime="2025-03-21T16:37:57+08:00">2025-03-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,7 +232,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="远程桌面与Samba文件传输配置指南"><a href="#远程桌面与Samba文件传输配置指南" class="headerlink" title="远程桌面与Samba文件传输配置指南"></a>远程桌面与Samba文件传输配置指南</h1><p>本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文介绍如何通过RDP远程桌面和Samba文件共享服务实现远程控制和文件传输，特别适用于需要通过公网访问内网设备的场景。</p>
+<span id="more"></span>
+
 <h2 id="一、RDP远程桌面配置"><a href="#一、RDP远程桌面配置" class="headerlink" title="一、RDP远程桌面配置"></a>一、RDP远程桌面配置</h2><h3 id="1-服务器端配置"><a href="#1-服务器端配置" class="headerlink" title="1. 服务器端配置"></a>1. 服务器端配置</h3><ol>
 <li><p><strong>配置frp服务</strong>：在需要远程的服务器端配置frp服务，将内网服务映射到公网IP（具体frp服务器配置略）</p>
 </li>
@@ -425,7 +438,7 @@
     </span>
     <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
   </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
@@ -442,6 +455,9 @@
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/abelxiaoxing" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -450,7 +466,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
 

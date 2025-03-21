@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -17,17 +18,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="KVM虚拟化完全指南 KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。  1. 环境检查在开始安装KVM之前，首先需要确认您的硬件是否支持虚拟化。 12345678# 检测CPU是否支持虚拟化，输出大于0则表示支持egrep -c &amp;#x27;">
+    <meta name="description" content="KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVM虚拟化教程">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="KVM虚拟化完全指南 KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。  1. 环境检查在开始安装KVM之前，首先需要确认您的硬件是否支持虚拟化。 12345678# 检测CPU是否支持虚拟化，输出大于0则表示支持egrep -c &amp;#x27;">
+<meta property="og:description" content="KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-19T08:59:58.000Z">
-<meta property="article:modified_time" content="2025-03-21T07:12:38.285Z">
+<meta property="article:modified_time" content="2025-03-21T08:31:33.900Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta property="article:tag" content="KVM">
 <meta property="article:tag" content="虚拟化">
@@ -88,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
 
@@ -113,12 +114,14 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">KVM虚拟化完全指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%9F%A5"><span class="nav-number">1.1.</span> <span class="nav-text">1. 环境检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">2. 软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ARCH%E7%B3%BB%EF%BC%88Arch-Linux-x2F-Manjaro%E7%AD%89%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 ARCH系（Arch Linux&#x2F;Manjaro等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Debian%E7%B3%BB%EF%BC%88Ubuntu-x2F-Debian%E7%AD%89%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Debian系（Ubuntu&#x2F;Debian等）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8libvirt%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">3. 启动libvirt服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A3%80%E6%9F%A5KVM%E6%A8%A1%E5%9D%97"><span class="nav-number">1.4.</span> <span class="nav-text">4. 检查KVM模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">5. 用户权限配置（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%88%B0%E7%BB%84"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 方法一：直接添加用户到组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BF%AE%E6%94%B9libvirt%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 方法二：修改libvirt配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%90%AF%E7%94%A8%E5%B5%8C%E5%A5%97%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6. 启用嵌套虚拟化（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Intel%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 Intel处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-AMD%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 AMD处理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">1.7.</span> <span class="nav-text">7. 网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%88%9B%E5%BB%BA%E7%BD%91%E6%A1%A5-br0-%EF%BC%8C%E9%85%8D%E7%BD%AE%E5%90%8C%E4%B8%80%E7%BD%91%E6%AE%B5"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 创建网桥(br0)，配置同一网段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.8.</span> <span class="nav-text">8. 创建虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.8.1.</span> <span class="nav-text">8.1 图形化创建虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.8.2.</span> <span class="nav-text">8.2 命令行创建虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.9.</span> <span class="nav-text">9. 常用操作命令</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">1. 环境检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2. 软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ARCH%E7%B3%BB%EF%BC%88Arch-Linux-x2F-Manjaro%E7%AD%89%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 ARCH系（Arch Linux&#x2F;Manjaro等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Debian%E7%B3%BB%EF%BC%88Ubuntu-x2F-Debian%E7%AD%89%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Debian系（Ubuntu&#x2F;Debian等）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8libvirt%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">3. 启动libvirt服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A3%80%E6%9F%A5KVM%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">4. 检查KVM模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">5. 用户权限配置（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%88%B0%E7%BB%84"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 方法一：直接添加用户到组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BF%AE%E6%94%B9libvirt%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 方法二：修改libvirt配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%90%AF%E7%94%A8%E5%B5%8C%E5%A5%97%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">6. 启用嵌套虚拟化（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Intel%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 Intel处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-AMD%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 AMD处理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">7. 网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%88%9B%E5%BB%BA%E7%BD%91%E6%A1%A5-br0-%EF%BC%8C%E9%85%8D%E7%BD%AE%E5%90%8C%E4%B8%80%E7%BD%91%E6%AE%B5"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 创建网桥(br0)，配置同一网段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">8.</span> <span class="nav-text">8. 创建虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 图形化创建虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 命令行创建虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">9.</span> <span class="nav-text">9. 常用操作命令</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="abelxiaoxing"
+      src="/images/avatar/avatar.jpg">
   <p class="site-author-name" itemprop="name">abelxiaoxing</p>
   <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
 </div>
@@ -137,11 +140,19 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/abelxiaoxing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;abelxiaoxing" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:abelxiaoxing@outlook.com" title="E-Mail → mailto:abelxiaoxing@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -167,7 +178,7 @@
     <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/19/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar/avatar.jpg">
       <meta itemprop="name" content="abelxiaoxing">
     </span>
 
@@ -200,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-21 15:12:38" itemprop="dateModified" datetime="2025-03-21T15:12:38+08:00">2025-03-21</time>
+      <time title="修改时间：2025-03-21 16:31:33" itemprop="dateModified" datetime="2025-03-21T16:31:33+08:00">2025-03-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,9 +232,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="KVM虚拟化完全指南"><a href="#KVM虚拟化完全指南" class="headerlink" title="KVM虚拟化完全指南"></a>KVM虚拟化完全指南</h1><blockquote>
-<p>KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。</p>
-</blockquote>
+    <div class="post-body" itemprop="articleBody"><p>KVM (Kernel-based Virtual Machine) 是Linux内核的一个模块，可以将Linux转变为一个hypervisor。本教程将指导您从零开始搭建KVM虚拟化环境，并创建虚拟机。</p>
+<span id="more"></span>
+
 <h2 id="1-环境检查"><a href="#1-环境检查" class="headerlink" title="1. 环境检查"></a>1. 环境检查</h2><p>在开始安装KVM之前，首先需要确认您的硬件是否支持虚拟化。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测CPU是否支持虚拟化，输出大于0则表示支持</span></span><br><span class="line">egrep -c <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu也可以安装cpu-checker软件包检查KVM环境</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y cpu-checker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行kvm-ok命令检查，输出&quot;KVM acceleration can be used&quot;即为可用</span></span><br><span class="line">kvm-ok</span><br></pre></td></tr></table></figure>
 
@@ -376,7 +387,7 @@
     </span>
     <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
   </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
@@ -393,6 +404,9 @@
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/abelxiaoxing" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -401,7 +415,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
 
