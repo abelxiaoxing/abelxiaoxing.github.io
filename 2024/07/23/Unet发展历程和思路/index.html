@@ -50,8 +50,11 @@
 <meta property="og:image" content="https://abelxiaoxing.github.io/images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/%E9%80%9F%E5%BA%A6%E6%B5%8B%E8%AF%95.png">
 <meta property="og:image" content="https://abelxiaoxing.github.io/images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/UNet++%E7%BB%93%E6%9E%84%E5%AE%8C%E6%95%B4%E7%89%88.png">
 <meta property="article:published_time" content="2024-07-22T19:24:49.000Z">
-<meta property="article:modified_time" content="2025-03-21T01:45:26.793Z">
+<meta property="article:modified_time" content="2025-03-21T07:15:04.401Z">
 <meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://abelxiaoxing.github.io/images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/U-Net%E7%BB%93%E6%9E%84%E5%9B%BE.png">
 
@@ -145,9 +148,15 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">标签</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -209,7 +218,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-21 09:45:26" itemprop="dateModified" datetime="2025-03-21T09:45:26+08:00">2025-03-21</time>
+      <time title="修改时间：2025-03-21 15:15:04" itemprop="dateModified" datetime="2025-03-21T15:15:04+08:00">2025-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
     </span>
 
   
@@ -256,7 +274,7 @@
 </ul>
 <p>对于为什么要在测试的时候剪枝，而不是直接拿剪完的L1，L2，L3训练，我们的解释其实上一页ppt上面写了，剪掉的部分在训练时的反向传播中是有贡献的，如果直接拿L1，L2，L3训练，就相当于只训练了不同深度的U-Net，最后的结果会很差。<br>第二个问题，如何去决定剪多少，还是比较好回答的。因为在训练模型的时候会把数据分为训练集，验证集和测试集，训练集上是一定拟合的很好的，测试集是我们不能碰的，所以我们会根据子网络在验证集的结果来决定剪多少。所谓的验证集就是一开始从训练集中分出来的数据，用来监测训练过程用的。<br>好，讲完了思路，我们来看结果。<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/%E5%89%AA%E6%9E%9D%E7%BB%93%E6%9E%9C.png" alt="剪枝结果"><br>先看看L1～L4的网络参数量，差了好多，L1只有0.1M，而L4有9M，也就是理论上如果L1的结果我是满意的，那么模型可以被剪掉的参数达到98.8%。不过根据我们的四个数据集，L1的效果并不会那么好，因为太浅了嘛。但是其中有三个数据集显示L2的结果和L4已经非常接近了，也就是说对于这三个数据集，在测试阶段，我们不需要用9M的网络，用半M的网络足够了。<br>回想一下一开始我提出的问题，网络需要多深合适，这幅图是不是就一目了然。网络的深度和数据集的难度是有关系的，这四个数据集当中，第二个，也就是息肉分割是最难的，大家可以看到纵坐标，它代表分割的评价指标，越大越好，其他都能达到挺高的，但是唯独息肉分割只有在30左右，对于比较难的数据集，可以看到网络越深，它的分割结果是在不断上升的。对于大多数比较简单的分割问题，其实并不需要非常深，非常大的网络就可以达到很不错的精度了。<br>横坐标代表的是在测试阶段，单显卡12G的TITAN X (Pascal)下，分割一万张图需要的时间。我们可以看到不同的模型大小，测试的时间差好多。如果比较L2和L4的话，就差了三倍之多。<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/%E9%80%9F%E5%BA%A6%E6%B5%8B%E8%AF%95.png" alt="速度测试"><br>对于测试的速度，用这一幅图会更清晰。我们统计了用不同的模型，1秒钟可以分割多少的图。如果用L2来代替L4的话，速度确实能提升三倍。<br>剪枝应用最多的就是在移动手机端了，根据模型的参数量，如果L2得到的效果和L4相近，模型的内存可以省18倍。还是非常可观的数目。<br>关于剪枝的这部分我认为是对原先的U-Net的一个很大的改观，原来的结构过于刻板，并且没有很好的利用不用层级的特征。<br>简单的总结一下，UNet++的第一个优势就是精度的提升，这个应该它整合了不同层次的特征所带来的，第二个是灵活的网络结构配合深监督，让参数量巨大的深度网络在可接受的精度范围内大幅度的缩减参数量。  </p>
 <h2 id="5-说在后面"><a href="#5-说在后面" class="headerlink" title="5. 说在后面"></a>5. 说在后面</h2><p>再次放上UNet++结构<br><img src="/../images/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/UNet++%E7%BB%93%E6%9E%84%E5%AE%8C%E6%95%B4%E7%89%88.png" alt="UNet++结构完整版"><br>回顾一下这次分享，就这么个分割网络，都能说这么久，要我说就放个结构图，说这个网络很牛逼，再告知一下代码在哪儿，谢谢大家就完事儿了。<br>其实搞学术做研究不是这样子的，UNet++肯定马上就会被更强的结构所代替，但是要设计出更强的结构，你得首先明白这个结构，甚至它的原型U-Net设计背后的心路历程。与其和大家分享一个苍白的分割网络，我更愿意分享的是这个项目背后从开始认识U-Net，到分析它的组成，到批判性的解读，再到改进思路的形成，实验设计，像刚刚分享过程中一次次尴尬的自问自答，中间那些非常饱满的心路历程。这也是我自己在学术生涯中学到的做研究的范式。<br>说句题外话，就跟玩狼人杀一样，你一上来就说自己预言家，验了谁谁谁，那没人信的呀，你得说清楚为什么要验他，警徽怎么留，把这些心路历程都盘盘清楚，身份才能做实。<br>其实网络结构怎么样真的不重要，重要的是你怎么能把故事给讲清楚，要是讲完以后还能够引起更多的思考和讨论那就更好了。  </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://github.com/mrgloom/awesome-semantic-segmentation">语义分割网络代码汇总</a><br><a target="_blank" rel="noopener" href="https://github.com/handong1587/handong1587.github.io/blob/master/_posts/deep_learning/2015-10-09-segmentation.md">语义分割论文汇总</a><br><a target="_blank" rel="noopener" href="https://medium.com/@mikeliao/deep-layer-aggregation-combining-layers-in-nn-architectures-2744d29cab8">深层聚合思想</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44958351">研习U-Net</a>  </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://github.com/mrgloom/awesome-semantic-segmentation">语义分割网络代码汇总</a><br><a target="_blank" rel="noopener" href="https://github.com/handong1587/handong1587.github.io/blob/master/_posts/deep_learning/2015-10-09-segmentation.md">语义分割论文汇总</a><br><a target="_blank" rel="noopener" href="https://medium.com/@mikeliao/deep-layer-aggregation-combining-layers-in-nn-architectures-2744d29cab8">深层聚合思想</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44958351">研习U-Net</a></p>
 
     </div>
 
@@ -265,6 +283,11 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+          </div>
 
         
 
