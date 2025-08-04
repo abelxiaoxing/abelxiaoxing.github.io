@@ -85,7 +85,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">31</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
 
@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -160,6 +160,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2025/08/04/Linux%E6%97%A0%E5%9B%BE%E5%BD%A2%E5%8C%96Clash%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/avatar.jpg">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/04/Linux%E6%97%A0%E5%9B%BE%E5%BD%A2%E5%8C%96Clash%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-04 16:48:14" itemprop="dateCreated datePublished" datetime="2025-08-04T16:48:14+08:00">2025-08-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux无图形化使用-Clash-详细指南"><a href="#Linux无图形化使用-Clash-详细指南" class="headerlink" title="Linux无图形化使用 Clash 详细指南"></a>Linux无图形化使用 Clash 详细指南</h1><h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><p>首先更新系统软件包列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载和安装-Clash"><a href="#下载和安装-Clash" class="headerlink" title="下载和安装 Clash"></a>下载和安装 Clash</h2><h3 id="1-创建工作目录"><a href="#1-创建工作目录" class="headerlink" title="1. 创建工作目录"></a>1. 创建工作目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> clash</span><br><span class="line"><span class="built_in">cd</span> clash</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-下载-Clash"><a href="#2-下载-Clash" class="headerlink" title="2. 下载 Clash"></a>2. 下载 Clash</h3><blockquote>
+<p>⚠️ <strong>注意</strong>：请根据您的系统架构选择合适的版本。可以通过 <code>uname -a</code> 命令查看系统信息。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/doreamon-design/clash/releases/download/v2.0.24/clash_2.0.24_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-解压文件"><a href="#3-解压文件" class="headerlink" title="3. 解压文件"></a>3. 解压文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意活用 Tab 键自动补全</span></span><br><span class="line">tar -zxvf clash_2.0.24_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-重命名并设置权限"><a href="#4-重命名并设置权限" class="headerlink" title="4. 重命名并设置权限"></a>4. 重命名并设置权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名执行文件（注意是解压出来的文件，不是压缩包）</span></span><br><span class="line"><span class="built_in">mv</span> clash-linux-amd64 clash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予可执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> +x clash</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置文件设置"><a href="#配置文件设置" class="headerlink" title="配置文件设置"></a>配置文件设置</h2><h3 id="1-获取配置文件"><a href="#1-获取配置文件" class="headerlink" title="1. 获取配置文件"></a>1. 获取配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 订阅链接请自行替换，curl 获取的链接一定要加上引号</span></span><br><span class="line">curl -f <span class="string">&quot;订阅链接&quot;</span> &gt;&gt; config.yaml</span><br></pre></td></tr></table></figure>
+
+<p>成功后会在当前目录生成一个 <code>config.yaml</code> 文件。</p>
+<h3 id="2-启动-Clash"><a href="#2-启动-Clash" class="headerlink" title="2. 启动 Clash"></a>2. 启动 Clash</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行时会使用当前文件夹的 config.yaml 文件</span></span><br><span class="line">./clash -d ./</span><br></pre></td></tr></table></figure>
+
+<h2 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h2><h3 id="1-设置命令行代理"><a href="#1-设置命令行代理" class="headerlink" title="1. 设置命令行代理"></a>1. 设置命令行代理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-测试连接"><a href="#2-测试连接" class="headerlink" title="2. 测试连接"></a>2. 测试连接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 访问 Google 检查是否返回正常内容</span></span><br><span class="line">curl <span class="string">&quot;www.google.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-取消命令行代理"><a href="#3-取消命令行代理" class="headerlink" title="3. 取消命令行代理"></a>3. 取消命令行代理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> http_proxy</span><br><span class="line"><span class="built_in">unset</span> https_proxy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li><strong>权限问题</strong>：确保 Clash 文件具有执行权限 (<code>chmod +x clash</code>)</li>
+<li><strong>配置文件错误</strong>：检查 <code>config.yaml</code> 是否正确下载且格式无误</li>
+<li><strong>端口冲突</strong>：确认 7890 端口未被其他程序占用</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -971,98 +1071,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/08/09/%E6%98%87%E8%85%BECANN%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar/avatar.jpg">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">Unet发展历程和思路</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-23 03:24:49" itemprop="dateCreated datePublished" datetime="2024-07-23T03:24:49+08:00">2024-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-21 16:40:37" itemprop="dateModified" datetime="2025-03-21T16:40:37+08:00">2025-03-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在深度学习时代，U-Net作为一个里程碑式的网络结构，彻底改变了医学图像分割的研究范式。它不仅在医学影像处理领域取得了突破性的成果，更因其优雅的设计思路和卓越的性能，成为了计算机视觉领域最具影响力的网络之一。本文将带领读者深入探讨U-Net的设计哲学，剖析其结构演进的历程，并思考这个经典网络在未来发展中的潜力和可能性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/23/Unet%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%E5%92%8C%E6%80%9D%E8%B7%AF/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
