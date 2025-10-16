@@ -131,13 +131,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -154,272 +154,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2025/10/15/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="abelxiaoxing">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abel的小天地">
-      <meta itemprop="description" content="一个个人资料记录的小地方">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | abel的小天地">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/15/test/" class="post-title-link" itemprop="url">苹果树算法题解析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-10-15 14:56:56" itemprop="dateCreated datePublished" datetime="2025-10-15T14:56:56+08:00">2025-10-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-10-16 10:33:04" itemprop="dateModified" datetime="2025-10-16T10:33:04+08:00">2025-10-16</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="算法题目"><a href="#算法题目" class="headerlink" title="算法题目"></a>算法题目</h2><p>小 C在自己家的花园里种了一棵苹果树，树上每个结点都有恰好两个分支。经过细心的观察，小 C发现每一天这棵树都会生长出一个新的结点。</p>
-<p><strong>生长规则：</strong></p>
-<ul>
-<li><strong>第一天：</strong> 花园里什么都没有，我们种下第一颗种子，它长成了树的根。这个根结点很特殊，它有两个空位，可以用来长新的树枝。我们称这些空位为”插槽”。</li>
-<li><strong>第二天及以后：</strong> 每一天，果树会随机选择一个当前树中没有长出过结点的分支，然后在这个分支上长出一个新结点，新结点与分支所属的结点之间连接上一条边。</li>
-</ul>
-<p><strong>不便度定义：</strong> 树上两两结点之间的距离之和，两个结点之间的距离定义为从一个点走到另一个点的路径经过的边数。</p>
-<p><strong>求解目标：</strong> 计算 N 天后不便度的期望 E，并求 E × N! 对 P 取模的结果。</p>
-<p><strong>数据范围：</strong> $1 \leq N \leq 2000$，$1 \leq P \leq 10^9+7$</p>
-<p>输入样例1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 610745795</span><br></pre></td></tr></table></figure>
-<p>输出样例1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">24</span><br></pre></td></tr></table></figure>
-
-<p>输入样例2：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">305 1000000007</span><br></pre></td></tr></table></figure>
-<p>输出样例2：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">865018107</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="理解题目：从具体例子开始"><a href="#理解题目：从具体例子开始" class="headerlink" title="理解题目：从具体例子开始"></a>理解题目：从具体例子开始</h2><p>让我们通过一个具体的例子来理解这个过程：</p>
-<p><strong>第一天 (N&#x3D;1)：</strong> 花园里什么都没有，我们种下第一颗种子，它长成了树的根。这个根结点很特殊，它有两个空位，可以用来长新的树枝。我们称这些空位为”插槽”。</p>
-<p><strong>第二天 (N&#x3D;2)：</strong> 现在树上总共有2个空”插槽”。大自然会完全随机地从这2个插槽中选1个，让它长出一个新的苹果结点。现在树上有2个结点了。新长出的这个结点，自己又带来了2个新的空插槽。而被占用的那个老插槽消失了。</p>
-<p><strong>第三天 (N&#x3D;3)：</strong> 我们来算一下现在有几个空插槽。</p>
-<ul>
-<li>根结点 originally 有2个，被用掉了1个，剩下1个。</li>
-<li>第二天的新结点，自己带来了2个。</li>
-<li>总共就是 1 + 2 &#x3D; 3 个空插槽。</li>
-<li>大自然再次从这3个空插槽里完全随机地选1个，长出第三个结点。</li>
-</ul>
-<p><strong>规律发现：</strong> 你会发现一个规律，当树上有 k 个结点时，总会有 k+1 个空插槽可供选择。这个过程会一直持续到第 N 天，最终形成一棵有 N 个结点的树。</p>
-<p>“不便度”是什么？不便度就是树上任意两个苹果（结点）之间的距离之和。比如苹果A到苹果B要经过3条树枝，那它们之间的距离就是3。我们要把所有这种”A到B”的距离都加起来。</p>
-<p><strong>目标是什么？</strong> 因为树的生长是随机的，所以每次长出来的树的形状可能都不一样，从而”不便度”也不同。题目要求我们计算这个”不便度”在所有可能情况下的平均值，也就是期望 (E)。最后，因为结果可能是分数，题目让我们计算 E × N! 对P取模后的结果。</p>
-<h2 id="核心思路转换：从”点对距离”到”边做贡献”"><a href="#核心思路转换：从”点对距离”到”边做贡献”" class="headerlink" title="核心思路转换：从”点对距离”到”边做贡献”"></a>核心思路转换：从”点对距离”到”边做贡献”</h2><p>直接计算所有点对距离的期望非常复杂。这里有一个非常经典且重要的转化思想：考虑每一条边的贡献。</p>
-<p>现在，我们换个角度。我们不看点，而是看每一条边，问一个问题：”这条边，在我们的总距离计算中，被用到了多少次？”把所有边的贡献加起来，就是总的不便度。</p>
-<p>想象一下，把树上的一条边砍断，这棵树会立刻分成两半。假设左半部分有 a 个结点，右半部分有 b 个结点（显然 a+b&#x3D;N）。</p>
-<ul>
-<li>任何一个左边的点要走到右边的点，都必须经过刚才被我们砍断的这条边。</li>
-<li>左边有 a 个点，右边有 b 个点，所以总共有 a * b 对这样的”跨边点对”。</li>
-<li>因此，这条边对总的”不便度”的贡献正好是 a * b。</li>
-</ul>
-<p><strong>总不便度 &#x3D; 所有边的贡献之和 &#x3D; Σ (每条边连接的两侧结点数的乘积)</strong></p>
-<p>这个结论至关重要，它把一个复杂的问题简化为了对每一条边进行分析。</p>
-<p>将复杂的全局距离计算转化为局部边贡献的累加，为后续的期望分析奠定了基础。</p>
-<h2 id="聚焦单条边：分析子树大小的期望"><a href="#聚焦单条边：分析子树大小的期望" class="headerlink" title="聚焦单条边：分析子树大小的期望"></a>聚焦单条边：分析子树大小的期望</h2><p>我们的树是按天生长的。我们考虑在第 t 天（t 从2到N）长出来的那条边。这条边连接了一个父节点和一个在第 t 天新生成的子节点。</p>
-<p>这条边将整棵树（N个结点）分成了两部分：</p>
-<ul>
-<li>以这个第 t 天的新结点为根的子树。</li>
-<li>树的其余部分。</li>
-</ul>
-<p>我们令 X_t 表示到第N天结束时，这个子树最终的大小（包含多少个结点）。那么，树的其余部分大小就是 N - X_t。根据上一步的结论，这条边在第N天对总不便度的贡献就是 X_t * (N - X_t)。</p>
-<p>因为树的生长是随机的，X_t 的值也是不确定的。所以我们需要计算它的期望贡献：E[X_t * (N - X_t)]。</p>
-<p>根据期望的性质，E[A * B] 不一定等于 E[A] * E[B]，但 E[c<em>A - A^2] (c是常数) 等于 c</em>E[A] - E[A^2]。所以，我们有：</p>
-<p>E[X_t * (N - X_t)] &#x3D; E[N * X_t - X_t^2] &#x3D; N * E[X_t] - E[X_t^2]</p>
-<p>现在，问题变成了：对于第 t 天加入的结点，其最终子树大小的期望 E[X_t] 和平方的期望 E[X_t^2] 是多少？</p>
-<h2 id="求解期望值：最关键的数学推导"><a href="#求解期望值：最关键的数学推导" class="headerlink" title="求解期望值：最关键的数学推导"></a>求解期望值：最关键的数学推导</h2><p>这一步是整个解法的核心，我们来理解这些公式是怎么来的。</p>
-<p>我们不直接研究子树大小 X_t，而是研究一个更方便的量：子树的空插槽数量。一个包含 k 个结点的子树，总是有 k+1 个空插槽。所以，X_t &#x3D; (最终子树的空插槽数) - 1。</p>
-<p><strong>初始状态：</strong> 在第 t 天，当结点 t 刚被创建时，它自己是一个大小为1的子树，拥有2个空插槽。</p>
-<p><strong>演化过程：</strong> 从第 t 天到第 N 天，每天都会有一个新结点加入。假设在第 m 天（m &gt; t），树上总共有 m 个结点和 m+1 个空插槽。</p>
-<ul>
-<li>我们的子树当前有 S_{m-1} 个空插槽。</li>
-<li>新结点长到我们子树里的概率是 S_{m-1} &#x2F; m (子树插槽数 &#x2F; 总插槽数)。</li>
-<li>如果长进来了，子树的空插槽数会加1（失去1个旧的，得到2个新的）。</li>
-<li>如果没长进来，子树的空插槽数不变。</li>
-</ul>
-<p>通过这个概率过程，使用数学方法（条件期望和递推），可以精确地推导出：</p>
-<p><strong>子树大小的期望 (E[X_t]):</strong><br>E[X_t] &#x3D; (2 * (N+1) &#x2F; (t+1)) - 1</p>
-<p><strong>子树大小平方的期望 (E[X_t^2]):</strong><br>E[X_t^2] &#x3D; 1 + (6 * (N+1) * (N-t)) &#x2F; ((t+1) * (t+2))</p>
-<h2 id="数学推导详解"><a href="#数学推导详解" class="headerlink" title="数学推导详解"></a>数学推导详解</h2><p>以下是这两个关键公式的详细推导过程：</p>
-<h3 id="预备知识与核心工具"><a href="#预备知识与核心工具" class="headerlink" title="预备知识与核心工具"></a><strong>预备知识与核心工具</strong></h3><p>在开始之前，我们需要明确我们的核心工具：<strong>条件期望定律</strong>（或称<strong>全期望定律</strong>）。它的思想很简单：想求一个变量的期望，可以先”固定”某个相关的条件，求出在该条件下它的期望，然后再对这个条件本身求期望。</p>
-<p>数学上写为：$E[Y] &#x3D; E[E[Y | Z]]$。<br>在我们这里，就是 $E[S_m] &#x3D; E[E[S_m | S_{m-1}]]$。意思是，想知道 $m$ 时刻的期望，我们可以先看看在 $m-1$ 时刻 $S_{m-1}$ 取某个具体值 $s$ 的情况下 $S_m$ 的期望是多少，然后再对 $S_{m-1}$ 的所有可能取值 $s$ 求平均。</p>
-<p><strong>变量定义</strong>：</p>
-<ul>
-<li>$S_m$: 在整棵树有 $m$ 个结点时，我们所关注的、以结点 $t$ 为根的子树拥有的<strong>空插槽数量</strong>。</li>
-<li>$E_m$: $S_m$ 的期望，即 $E[S_m]$。</li>
-<li>$A_m$: $S_m^2$ 的期望，即 $E[S_m^2]$。</li>
-</ul>
-<hr>
-<h3 id="第一部分：推导子树大小的期望-E-X-t"><a href="#第一部分：推导子树大小的期望-E-X-t" class="headerlink" title="第一部分：推导子树大小的期望 $E[X_t]$"></a><strong>第一部分：推导子树大小的期望 $E[X_t]$</strong></h3><p>我们的目标是求出 $E[X_t]$。我们知道 $X_t &#x3D; S_N - 1$，所以关键是求 $E[S_N]$。</p>
-<h4 id="1-建立-S-m-和-S-m-1-的递推关系"><a href="#1-建立-S-m-和-S-m-1-的递推关系" class="headerlink" title="1. 建立 $S_m$ 和 $S_{m-1}$ 的递推关系"></a><strong>1. 建立 $S_m$ 和 $S_{m-1}$ 的递推关系</strong></h4><p>考虑从第 $m-1$ 天到第 $m$ 天，树上增加了一个新结点。</p>
-<ul>
-<li>在第 $m-1$ 天结束时，树上共有 $m-1$ 个结点，总空插槽数为 $(m-1)+1 &#x3D; m$ 个。</li>
-<li>我们关注的子树有 $S_{m-1}$ 个空插槽。</li>
-<li>第 $m$ 个结点会从全部 $m$ 个空插槽中等概率随机选择一个。</li>
-</ul>
-<p>现在，我们来计算 $S_m$ 的值。这取决于新结点落在哪里：</p>
-<ul>
-<li><p><strong>情况A：新结点落在我们的子树内部。</strong></p>
-<ul>
-<li>这个事件发生的概率是 $P_A &#x3D; \frac{S_{m-1}}{m}$。</li>
-<li>如果发生，子树失去1个旧插槽，但新结点带来2个新插槽。所以子树的插槽数净增1。</li>
-<li>此时，$S_m &#x3D; S_{m-1} + 1$。</li>
-</ul>
-</li>
-<li><p><strong>情况B：新结点落在我们的子树外部。</strong></p>
-<ul>
-<li>这个事件发生的概率是 $P_B &#x3D; 1 - \frac{S_{m-1}}{m}$。</li>
-<li>如果发生，子树的插槽数不变。</li>
-<li>此时，$S_m &#x3D; S_{m-1}$。</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-计算-E-S-m-S-m-1"><a href="#2-计算-E-S-m-S-m-1" class="headerlink" title="2. 计算 $E[S_m | S_{m-1}]$"></a><strong>2. 计算 $E[S_m | S_{m-1}]$</strong></h4><p>根据条件期望的定义，我们固定 $S_{m-1}$ 的值，计算 $S_m$ 的期望：<br>$$<br>\begin{aligned}<br>E[S_m | S_{m-1}] &amp;&#x3D; (S_{m-1} + 1) \cdot P_A + (S_{m-1}) \cdot P_B \<br>&amp;&#x3D; (S_{m-1} + 1) \cdot \frac{S_{m-1}}{m} + S_{m-1} \cdot \left(1 - \frac{S_{m-1}}{m}\right) \<br>&amp;&#x3D; \left(\frac{S_{m-1}^2}{m} + \frac{S_{m-1}}{m}\right) + \left(S_{m-1} - \frac{S_{m-1}^2}{m}\right) \<br>&amp;&#x3D; S_{m-1} + \frac{S_{m-1}}{m} \<br>&amp;&#x3D; S_{m-1} \cdot \left(1 + \frac{1}{m}\right) &#x3D; S_{m-1} \cdot \frac{m+1}{m}<br>\end{aligned}<br>$$</p>
-<h4 id="3-求解-E-m-的递推式"><a href="#3-求解-E-m-的递推式" class="headerlink" title="3. 求解 $E_m$ 的递推式"></a><strong>3. 求解 $E_m$ 的递推式</strong></h4><p>现在使用全期望定律：<br>$E_m &#x3D; E[S_m] &#x3D; E[E[S_m | S_{m-1}]]$<br>$E_m &#x3D; E\left[S_{m-1} \cdot \frac{m+1}{m}\right]$</p>
-<p>因为 $\frac{m+1}{m}$ 是一个常数，可以提出来：<br>$E_m &#x3D; \frac{m+1}{m} \cdot E[S_{m-1}] &#x3D; \frac{m+1}{m} \cdot E_{m-1}$</p>
-<p>这是一个非常简洁的递推关系！我们可以把它展开：<br>$$<br>E_m &#x3D; \frac{m+1}{m} E_{m-1} &#x3D; \frac{m+1}{m} \cdot \frac{m}{m-1} E_{m-2} &#x3D; \dots<br>$$<br>这是一个<strong>连乘</strong>的形式。我们一直展开到我们的<strong>初始时刻</strong>，也就是第 $t$ 天。<br>$$<br>E_m &#x3D; E_t \cdot \frac{t+2}{t+1} \cdot \frac{t+3}{t+2} \cdot \dots \cdot \frac{m}{m-1} \cdot \frac{m+1}{m}<br>$$<br>观察这个连乘，中间项会全部约掉（比如 $t+2$ 和 $t+2$ 约掉），只剩下头尾：<br>$$<br>E_m &#x3D; E_t \cdot \frac{m+1}{t+1}<br>$$</p>
-<h4 id="4-确定初始值-E-t"><a href="#4-确定初始值-E-t" class="headerlink" title="4. 确定初始值 $E_t$"></a><strong>4. 确定初始值 $E_t$</strong></h4><p>在第 $t$ 天，结点 $t$ 刚刚被创建。它自己构成了大小为1的子树。这个子树有 <strong>2</strong> 个空插槽。这是一个确定的值，不是随机的。<br>所以 $S_t &#x3D; 2$，因此 $E_t &#x3D; E[S_t] &#x3D; 2$。</p>
-<p>代入上式，我们得到 $E_m$ 的通项公式：<br>$$<br>E_m &#x3D; 2 \cdot \frac{m+1}{t+1}<br>$$</p>
-<h4 id="5-得到最终公式"><a href="#5-得到最终公式" class="headerlink" title="5. 得到最终公式"></a><strong>5. 得到最终公式</strong></h4><p>我们需要的是第 $N$ 天的情况，所以令 $m&#x3D;N$：<br>$E[S_N] &#x3D; 2 \cdot \frac{N+1}{t+1}$</p>
-<p>最后，转换回子树大小 $X_t$：<br>$E[X_t] &#x3D; E[S_N - 1] &#x3D; E[S_N] - 1$<br>$$<br>\boxed{E[X_t] &#x3D; \frac{2(N+1)}{t+1} - 1}<br>$$</p>
-<hr>
-<h3 id="第二部分：推导子树大小平方的期望-E-X-t-2"><a href="#第二部分：推导子树大小平方的期望-E-X-t-2" class="headerlink" title="第二部分：推导子树大小平方的期望 $E[X_t^2]$"></a><strong>第二部分：推导子树大小平方的期望 $E[X_t^2]$</strong></h3><p>这个过程类似，但计算会更复杂一些。我们的目标是求 $E[X_t^2]$，这需要我们先求出 $A_N &#x3D; E[S_N^2]$。</p>
-<h4 id="1-建立-S-m-2-和-S-m-1-2-的递推关系"><a href="#1-建立-S-m-2-和-S-m-1-2-的递推关系" class="headerlink" title="1. 建立 $S_m^2$ 和 $S_{m-1}^2$ 的递推关系"></a><strong>1. 建立 $S_m^2$ 和 $S_{m-1}^2$ 的递推关系</strong></h4><p>我们还是利用情况A和情况B：</p>
-<ul>
-<li><strong>情况A</strong> (概率 $\frac{S_{m-1}}{m}$): $S_m &#x3D; S_{m-1} + 1$，所以 $S_m^2 &#x3D; (S_{m-1}+1)^2 &#x3D; S_{m-1}^2 + 2S_{m-1} + 1$。</li>
-<li><strong>情况B</strong> (概率 $1 - \frac{S_{m-1}}{m}$): $S_m &#x3D; S_{m-1}$，所以 $S_m^2 &#x3D; S_{m-1}^2$。</li>
-</ul>
-<h4 id="2-计算-E-S-m-2-S-m-1"><a href="#2-计算-E-S-m-2-S-m-1" class="headerlink" title="2. 计算 $E[S_m^2 | S_{m-1}]$"></a><strong>2. 计算 $E[S_m^2 | S_{m-1}]$</strong></h4><p>$$<br>\begin{aligned}<br>E[S_m^2 | S_{m-1}] &amp;&#x3D; (S_{m-1}^2 + 2S_{m-1} + 1) \cdot \frac{S_{m-1}}{m} + (S_{m-1}^2) \cdot \left(1 - \frac{S_{m-1}}{m}\right) \<br>&amp;&#x3D; \left(\frac{S_{m-1}^3}{m} + \frac{2S_{m-1}^2}{m} + \frac{S_{m-1}}{m}\right) + \left(S_{m-1}^2 - \frac{S_{m-1}^3}{m}\right) \<br>&amp;&#x3D; S_{m-1}^2 + \frac{2}{m}S_{m-1}^2 + \frac{1}{m} S_{m-1} \<br>&amp;&#x3D; \left(1 + \frac{2}{m}\right) S_{m-1}^2 + \frac{1}{m} S_{m-1}<br>\end{aligned}<br>$$</p>
-<h4 id="3-求解-A-m-的递推式"><a href="#3-求解-A-m-的递推式" class="headerlink" title="3. 求解 $A_m$ 的递推式"></a><strong>3. 求解 $A_m$ 的递推式</strong></h4><p>使用全期望定律：<br>$A_m &#x3D; E[S_m^2] &#x3D; E[E[S_m^2 | S_{m-1}]]$<br>$A_m &#x3D; E\left[\left(1 + \frac{2}{m}\right) S_{m-1}^2 + \frac{1}{m} S_{m-1}\right]$</p>
-<p>根据期望的线性性质 $E[aY+bZ] &#x3D; aE[Y]+bE[Z]$：<br>$$<br>A_m &#x3D; \left(1 + \frac{2}{m}\right) E[S_{m-1}^2] + \frac{1}{m} E[S_{m-1}]<br>$$<br>$$<br>A_m &#x3D; \left(1 + \frac{2}{m}\right) A_{m-1} + \frac{1}{m} E_{m-1}<br>$$<br>我们已经求出了 $E_{m-1} &#x3D; 2 \cdot \frac{m}{t+1}$。代入上式：<br>$$<br>A_m &#x3D; \frac{m+2}{m} A_{m-1} + \frac{1}{m} \left(2 \frac{m}{t+1}\right)<br>$$<br>$$<br>A_m &#x3D; \frac{m+2}{m} A_{m-1} + \frac{2}{t+1}<br>$$<br>这是一个一阶线性非齐次递推方程。通过标准方法（或观察构造）可以求解。</p>
-<h4 id="4-求解该线性递推式并得到最终公式"><a href="#4-求解该线性递推式并得到最终公式" class="headerlink" title="4. 求解该线性递推式并得到最终公式"></a><strong>4. 求解该线性递推式并得到最终公式</strong></h4><h5 id="目标：求解递推方程"><a href="#目标：求解递推方程" class="headerlink" title="目标：求解递推方程"></a><strong>目标：求解递推方程</strong></h5><p>我们要解决的递推关系是：<br>$$<br>A_m &#x3D; \frac{m+2}{m} A_{m-1} + \frac{2}{t+1} \quad \text{for } m &gt; t<br>$$<br>其初始条件为<strong>第 t 天</strong>的情况。在第 t 天，子树就是结点 t 本身，它有 $S_t&#x3D;2$ 个确定的空插槽。因此，<br>$$<br>A_t &#x3D; E[S_t^2] &#x3D; 2^2 &#x3D; 4<br>$$</p>
-<p>这是一个<strong>一阶线性非齐次递推方程</strong>。我们将使用一种称为<strong>求和因子 (Summation Factor)</strong> 的标准方法来求解它，这种方法类似于求解线性微分方程时使用的积分因子法。</p>
-<h3 id="详细推导步骤"><a href="#详细推导步骤" class="headerlink" title="详细推导步骤"></a><strong>详细推导步骤</strong></h3><h4 id="第一步：将方程标准化"><a href="#第一步：将方程标准化" class="headerlink" title="第一步：将方程标准化"></a><strong>第一步：将方程标准化</strong></h4><p>首先，我们将所有与 $A$ 相关的项移到一边，写成标准形式 $A_m - f(m)A_{m-1} &#x3D; g(m)$。<br>$$<br>A_m - \frac{m+2}{m} A_{m-1} &#x3D; \frac{2}{t+1}<br>$$</p>
-<h4 id="第二步：寻找求和因子"><a href="#第二步：寻找求和因子" class="headerlink" title="第二步：寻找求和因子"></a><strong>第二步：寻找求和因子</strong></h4><p>我们的目标是找到一个因子 $I_m$，当它乘以方程两边后，左边可以“折叠”成一个单一的差分形式，即 $B_m - B_{m-1}$ 的样子。<br>我们希望：<br>$$<br>I_m \left( A_m - \frac{m+2}{m} A_{m-1} \right) &#x3D; (I_m A_m) - (I_{m-1} A_{m-1})<br>$$<br>为了让这个等式成立，通过比较 $A_{m-1}$ 的系数，我们必须满足：<br>$$<br>I_m \frac{m+2}{m} &#x3D; I_{m-1}<br>$$<br>或者写成关于 $I_m$ 的递推式：<br>$$<br>I_m &#x3D; I_{m-1} \cdot \frac{m}{m+2}<br>$$<br>我们可以通过连乘来解出 $I_m$。为了方便，我们设定初始值 $I_t&#x3D;1$。<br>$$<br>\begin{aligned}<br>I_m &amp;&#x3D; I_{m-1} \cdot \frac{m}{m+2} \<br>&amp;&#x3D; I_{m-2} \cdot \frac{m-1}{m+1} \cdot \frac{m}{m+2} \<br>&amp;&#x3D; \dots \<br>&amp;&#x3D; I_t \cdot \frac{t+1}{t+3} \cdot \frac{t+2}{t+4} \cdot \dots \cdot \frac{m-1}{m+1} \cdot \frac{m}{m+2}<br>\end{aligned}<br>$$<br>这个连乘看起来很复杂，但实际上有很多项可以消去。我们把分子和分母分别写出来：</p>
-<ul>
-<li><strong>分子</strong>: $(t+1) \cdot (t+2) \cdot (t+3) \cdot \dots \cdot m$</li>
-<li><strong>分母</strong>: $(t+3) \cdot (t+4) \cdot \dots \cdot m \cdot (m+1) \cdot (m+2)$</li>
-</ul>
-<p>可以看到，从 $(t+3)$ 到 $m$ 的所有项在分子和分母中都存在，可以约分。约分后剩下：<br>$$<br>I_m &#x3D; I_t \cdot \frac{(t+1)(t+2)}{(m+1)(m+2)}<br>$$<br>由于我们设定了 $I_t&#x3D;1$，所以求和因子就是：<br>$$<br>I_m &#x3D; \frac{(t+1)(t+2)}{(m+1)(m+2)}<br>$$</p>
-<h4 id="第三步：应用求和因子并求和"><a href="#第三步：应用求和因子并求和" class="headerlink" title="第三步：应用求和因子并求和"></a><strong>第三步：应用求和因子并求和</strong></h4><p>我们将原始方程 $A_m - \frac{m+2}{m} A_{m-1} &#x3D; \frac{2}{t+1}$ 的两边都乘以求和因子 $I_m$：<br>$$<br>I_m A_m - I_m \frac{m+2}{m} A_{m-1} &#x3D; I_m \frac{2}{t+1}<br>$$<br>根据我们构造 $I_m$ 的方式，左边变成了 $I_m A_m - I_{m-1} A_{m-1}$。所以：<br>$$<br>I_m A_m - I_{m-1} A_{m-1} &#x3D; \frac{(t+1)(t+2)}{(m+1)(m+2)} \cdot \frac{2}{t+1} &#x3D; \frac{2(t+2)}{(m+1)(m+2)}<br>$$<br>现在，我们将这个方程从 $m &#x3D; t+1$ 到 $N$ 进行求和：<br>$$<br>\sum_{m&#x3D;t+1}^{N} (I_m A_m - I_{m-1} A_{m-1}) &#x3D; \sum_{m&#x3D;t+1}^{N} \frac{2(t+2)}{(m+1)(m+2)}<br>$$<br>左边是一个<strong>伸缩求和 (Telescoping Sum)<strong>：<br>$$<br>(I_{t+1}A_{t+1} - I_t A_t) + (I_{t+2}A_{t+2} - I_{t+1}A_{t+1}) + \dots + (I_N A_N - I_{N-1}A_{N-1}) &#x3D; I_N A_N - I_t A_t<br>$$<br>右边可以提出常数项：<br>$$<br>2(t+2) \sum_{m&#x3D;t+1}^{N} \frac{1}{(m+1)(m+2)}<br>$$<br>我们使用</strong>部分分式分解</strong>来处理求和内部的项：$\frac{1}{(m+1)(m+2)} &#x3D; \frac{1}{m+1} - \frac{1}{m+2}$。<br>所以右边的和也是一个伸缩求和：<br>$$<br>\begin{aligned}<br>\sum_{m&#x3D;t+1}^{N} \left(\frac{1}{m+1} - \frac{1}{m+2}\right) &amp;&#x3D; \left(\frac{1}{t+2} - \frac{1}{t+3}\right) + \left(\frac{1}{t+3} - \frac{1}{t+4}\right) + \dots + \left(\frac{1}{N+1} - \frac{1}{N+2}\right) \<br>&amp;&#x3D; \frac{1}{t+2} - \frac{1}{N+2}<br>\end{aligned}<br>$$</p>
-<h4 id="第四步：合并并求解-A-N"><a href="#第四步：合并并求解-A-N" class="headerlink" title="第四步：合并并求解 $A_N$"></a><strong>第四步：合并并求解 $A_N$</strong></h4><p>现在，我们将左右两边的结果合并：<br>$$<br>I_N A_N - I_t A_t &#x3D; 2(t+2) \left( \frac{1}{t+2} - \frac{1}{N+2} \right)<br>$$<br>$$<br>I_N A_N - I_t A_t &#x3D; 2 - \frac{2(t+2)}{N+2}<br>$$</p>
-<p>代入我们已知的值：</p>
-<ul>
-<li>$I_N &#x3D; \frac{(t+1)(t+2)}{(N+1)(N+2)}$</li>
-<li>$I_t &#x3D; 1$</li>
-<li>$A_t &#x3D; 4$</li>
-</ul>
-<p>$$<br>\frac{(t+1)(t+2)}{(N+1)(N+2)} A_N - 1 \cdot 4 &#x3D; 2 - \frac{2(t+2)}{N+2}<br>$$</p>
-<p>现在，我们解出 $A_N$：<br>$$<br>\frac{(t+1)(t+2)}{(N+1)(N+2)} A_N &#x3D; 4 + 2 - \frac{2(t+2)}{N+2} &#x3D; 6 - \frac{2(t+2)}{N+2}<br>$$</p>
-<p>将右边通分：<br>$$<br>6 - \frac{2(t+2)}{N+2} &#x3D; \frac{6(N+2) - 2(t+2)}{N+2} &#x3D; \frac{6N + 12 - 2t - 4}{N+2} &#x3D; \frac{6N - 2t + 8}{N+2}<br>$$</p>
-<p>于是有：<br>$$<br>\frac{(t+1)(t+2)}{(N+1)(N+2)} A_N &#x3D; \frac{6N - 2t + 8}{N+2}<br>$$</p>
-<p>将 $A_N$ 的系数移到右边：<br>$$<br>A_N &#x3D; \frac{(N+1)(N+2)}{(t+1)(t+2)} \cdot \frac{6N - 2t + 8}{N+2}<br>$$</p>
-<p>$$<br>A_N &#x3D; \frac{(N+1)(6N - 2t + 8)}{(t+1)(t+2)}<br>$$<br>$$<br>A_N &#x3D; \frac{6(N+1)(N+2)}{(t+1)(t+2)} - \frac{2(N+1)}{t+1}<br>$$</p>
-<p>现在，转换回 $X_t^2$：<br>$$<br>\begin{aligned}<br>E[X_t^2] &amp;&#x3D; E[(S_N - 1)^2] &#x3D; E[S_N^2 - 2S_N + 1] \<br>&amp;&#x3D; E[S_N^2] - 2E[S_N] + 1 \<br>&amp;&#x3D; \left( \frac{6(N+1)(N+2)}{(t+1)(t+2)} - \frac{2(N+1)}{t+1} \right) - 2 \left( \frac{2(N+1)}{t+1} \right) + 1 \<br>&amp;&#x3D; \frac{6(N+1)(N+2)}{(t+1)(t+2)} - \frac{6(N+1)}{t+1} + 1 \<br>&amp;&#x3D; \frac{6(N+1) \cdot [(N+2) - (t+2)]}{(t+1)(t+2)} + 1 \<br>&amp;&#x3D; \frac{6(N+1)(N-t)}{(t+1)(t+2)} + 1<br>\end{aligned}<br>$$<br>最终得到：<br>$$<br>\boxed{E[X_t^2] &#x3D; 1 + \frac{6(N+1)(N-t)}{(t+1)(t+2)}}<br>$$</p>
-<h2 id="第五步：汇总与计算"><a href="#第五步：汇总与计算" class="headerlink" title="第五步：汇总与计算"></a>第五步：汇总与计算</h2><p>现在我们拥有了所有工具：</p>
-<p><strong>总不便度的期望 E &#x3D; Σ E[第t条边的贡献] (从 t&#x3D;2 到 N)</strong></p>
-<p><strong>每条边的期望贡献 &#x3D; N * E[X_t] - E[X_t^2]</strong></p>
-<p>所以，我们只需要写一个循环，t 从 2 遍历到 N：</p>
-<ul>
-<li>a. 根据上面的公式计算出 E[X_t] 和 E[X_t^2]。</li>
-<li>b. 计算出这条边的期望贡献 N * E[X_t] - E[X_t^2]。</li>
-<li>c. 把这个贡献累加到总期望 E 中。</li>
-</ul>
-<h3 id="如何处理分数？"><a href="#如何处理分数？" class="headerlink" title="如何处理分数？"></a>如何处理分数？</h3><p>在计算过程中，会出现大量的分数。使用Python的 fractions.Fraction 模块。这个模块可以精确地处理分数运算，不会有任何精度损失。</p>
-<ul>
-<li>我们用 Fraction 对象来存储 E 和中间计算结果。</li>
-<li>循环结束后，我们得到一个精确的分数 E。</li>
-<li>题目要求 E × N! 对 P 取模。我们可以先计算 E * N!。由于题目的保证，这个结果一定是个整数。</li>
-<li>最后，将这个整数结果对 P 取模。</li>
-</ul>
-<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fractions <span class="keyword">import</span> Fraction</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">compute_E_times_factorial_mod</span>(<span class="params">N, P</span>):</span><br><span class="line">    <span class="comment"># 初始化总期望 E 为 0</span></span><br><span class="line">    E = Fraction(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环遍历每一条边。边是在第 t 天创建的，t 从 2 到 N</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, N + <span class="number">1</span>):</span><br><span class="line">        <span class="comment"># 计算 E[X_t]</span></span><br><span class="line">        EX = Fraction(<span class="number">2</span> * (N + <span class="number">1</span>), t + <span class="number">1</span>) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 根据公式计算 E[X_t^2]</span></span><br><span class="line">        EX2 = Fraction(<span class="number">1</span>, <span class="number">1</span>) + Fraction(<span class="number">6</span> * (N + <span class="number">1</span>) * (N - t), (t + <span class="number">1</span>) * (t + <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算这条边 t 的期望贡献</span></span><br><span class="line">        Ct = N * EX - EX2</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将这条边的贡献累加到总期望 E 中</span></span><br><span class="line">        E += Ct</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环结束后，E 是一个精确的分数，代表了总不便度的期望</span></span><br><span class="line">    <span class="comment"># 题目要求 E * N!，根据题目保证，这一定是一个整数</span></span><br><span class="line">    val = E * math.factorial(N)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Fraction 对象的结果需要从其分子分母中提取整数值</span></span><br><span class="line">    <span class="comment"># val.numerator 是分子，val.denominator 是分母</span></span><br><span class="line">    val_int = val.numerator // val.denominator</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 最后对 P 取模并返回</span></span><br><span class="line">    <span class="keyword">return</span> val_int % P</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    data = sys.stdin.read().strip().split()</span><br><span class="line">    N = <span class="built_in">int</span>(data[<span class="number">0</span>])</span><br><span class="line">    P = <span class="built_in">int</span>(data[<span class="number">1</span>])</span><br><span class="line">    <span class="built_in">print</span>(compute_E_times_factorial_mod(N, P))</span><br></pre></td></tr></table></figure>
-
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><ul>
-<li><p><strong>时间复杂度：</strong> $O(N)$</p>
-<ul>
-<li>主循环执行$N-1$次</li>
-<li>每次迭代包含$O(1)$的算术运算</li>
-</ul>
-</li>
-<li><p><strong>空间复杂度：</strong> $O(1)$</p>
-<ul>
-<li>仅使用常数级别的额外空间</li>
-<li>Python的<code>Fraction</code>对象内部处理分数运算</li>
-</ul>
-</li>
-</ul>
-<h3 id="数值稳定性"><a href="#数值稳定性" class="headerlink" title="数值稳定性"></a>数值稳定性</h3><p>使用<code>Fraction</code>类型确保：</p>
-<ul>
-<li><strong>精确性：</strong> 避免浮点数误差</li>
-<li><strong>有理性：</strong> 保持数学推导的精确性</li>
-<li><strong>整数保证：</strong> 最终$E \times N!$必为整数（题设保证）</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本题展现了一个完整的<strong>数学建模-理论分析-算法设计</strong>流程：</p>
-<ol>
-<li><strong>理解题目：</strong> 通过具体例子理解随机生长过程</li>
-<li><strong>思路转换：</strong> 从复杂的点对距离计算转化为简单的边贡献分析</li>
-<li><strong>数学推导：</strong> 使用条件期望和递推关系求得关键公式</li>
-<li><strong>算法实现：</strong> 基于理论结果构造高效的$O(N)$算法</li>
-</ol>
-<p>这种从抽象理论到具体应用的思维路径，正是<strong>应用数学</strong>的精髓所在。通过对随机过程的深刻理解，我们不仅解决了具体问题，更获得了洞察复杂系统规律的有力工具。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1147,6 +881,89 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/10/24/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B8%8ESamba%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/10/23/ARM%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AELunarVim%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/23/ARM%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AELunarVim%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">ARM设备配置LunarVim完全指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-23 13:37:05" itemprop="dateCreated datePublished" datetime="2024-10-23T13:37:05+08:00">2024-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-15 15:05:16" itemprop="dateModified" datetime="2025-10-15T15:05:16+08:00">2025-10-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文主要介绍Arm设备下如何编译安装NeoVim并配置LunarVim环境</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/10/23/ARM%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AELunarVim%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
