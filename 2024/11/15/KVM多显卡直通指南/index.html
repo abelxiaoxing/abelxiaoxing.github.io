@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -67,6 +67,12 @@
 
 
 
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -123,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%AF%E7%94%A8BIOS%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8A%9F%E8%83%BD"><span class="nav-number">2.1.</span> <span class="nav-text">1. 启用BIOS中的虚拟化功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%AF%E7%94%A8IOMMU%E7%BB%84"><span class="nav-number">2.2.</span> <span class="nav-text">2. 在宿主机系统中启用IOMMU组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AF%BB%E6%89%BE%E9%9C%80%E8%A6%81%E9%A2%84%E7%95%99%E7%9A%84IOMMU%E7%BB%84"><span class="nav-number">2.3.</span> <span class="nav-text">3. 寻找需要预留的IOMMU组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B1%8F%E8%94%BD%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="nav-number">2.4.</span> <span class="nav-text">4. 屏蔽显卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%9E%8B%E5%8F%B7%E5%B1%8F%E8%94%BD%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">方法一：型号屏蔽法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E8%84%9A%E6%9C%AC%E5%B1%8F%E8%94%BD%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">方法二：脚本屏蔽法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%9C%A8KVM%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9B%B4%E9%80%9A%E6%98%BE%E5%8D%A1"><span class="nav-number">2.5.</span> <span class="nav-text">5. 在KVM中使用直通显卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8bios%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8A%9F%E8%83%BD"><span class="nav-number">2.1.</span> <span class="nav-text">1. 启用BIOS中的虚拟化功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%90%AF%E7%94%A8iommu%E7%BB%84"><span class="nav-number">2.2.</span> <span class="nav-text">2. 在宿主机系统中启用IOMMU组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E9%9C%80%E8%A6%81%E9%A2%84%E7%95%99%E7%9A%84iommu%E7%BB%84"><span class="nav-number">2.3.</span> <span class="nav-text">3. 寻找需要预留的IOMMU组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="nav-number">2.4.</span> <span class="nav-text">4. 屏蔽显卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E5%9E%8B%E5%8F%B7%E5%B1%8F%E8%94%BD%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">方法一：型号屏蔽法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E8%84%9A%E6%9C%AC%E5%B1%8F%E8%94%BD%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">方法二：脚本屏蔽法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8kvm%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9B%B4%E9%80%9A%E6%98%BE%E5%8D%A1"><span class="nav-number">2.5.</span> <span class="nav-text">5. 在KVM中使用直通显卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,139 +225,130 @@
     
     <div class="post-body" itemprop="articleBody"><p>在虚拟化环境中，将物理显卡直接分配给虚拟机（即显卡直通）是提升虚拟机图形性能的重要手段。本文将详细介绍如何在Linux系统中实现KVM多显卡直通，特别适用于需要在虚拟机中获得接近原生性能的用户。</p>
 <span id="more"></span>
-
-<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<h2 id="前提条件">前提条件</h2>
+<ul>
 <li>支持虚拟化的CPU（大多数现代CPU都支持）</li>
 <li>支持IOMMU的主板（Intel VT-d或AMD-Vi）</li>
 <li>至少一张可用于直通的独立显卡</li>
 <li>运行Linux的宿主机系统</li>
 </ul>
-<h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><h3 id="1-启用BIOS中的虚拟化功能"><a href="#1-启用BIOS中的虚拟化功能" class="headerlink" title="1. 启用BIOS中的虚拟化功能"></a>1. 启用BIOS中的虚拟化功能</h3><p>首先需要在主板BIOS中启用虚拟化功能。根据不同的主板和CPU，这个选项可能被称为：</p>
-<ul>
-<li>Intel系统：VT-x和VT-d</li>
-<li>AMD系统：AMD-V和AMD-Vi</li>
-</ul>
+<h2 id="详细步骤">详细步骤</h2>
+<h3 id="启用bios中的虚拟化功能">1. 启用BIOS中的虚拟化功能</h3>
+<p>首先需要在主板BIOS中启用虚拟化功能。根据不同的主板和CPU，这个选项可能被称为：
+- Intel系统：VT-x和VT-d - AMD系统：AMD-V和AMD-Vi</p>
 <blockquote>
 <p>注意：部分老旧CPU可能不支持这些功能</p>
 </blockquote>
-<h3 id="2-在宿主机系统中启用IOMMU组"><a href="#2-在宿主机系统中启用IOMMU组" class="headerlink" title="2. 在宿主机系统中启用IOMMU组"></a>2. 在宿主机系统中启用IOMMU组</h3><p>IOMMU（Input&#x2F;Output Memory Management Unit）是实现设备直通的关键技术。我们需要在Linux系统中启用它：</p>
-<ol>
+<h3 id="在宿主机系统中启用iommu组">2. 在宿主机系统中启用IOMMU组</h3>
+<p>IOMMU（Input/Output Memory Management
+Unit）是实现设备直通的关键技术。我们需要在Linux系统中启用它：</p>
+<ol type="1">
 <li>打开GRUB配置文件：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/default/grub</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol start="2" type="1">
 <li>找到<code>GRUB_CMDLINE_LINUX_DEFAULT</code>行，修改为：</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on&quot;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>注意：如果使用AMD处理器，请使用<code>amd_iommu=on</code>替代<code>intel_iommu=on</code></p>
 </blockquote>
-<ol start="3">
+<ol start="3" type="1">
 <li>更新GRUB配置：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arch Linux</span></span><br><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line"><span class="built_in">sudo</span> update-grub</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol start="4" type="1">
 <li>重启系统后，验证IOMMU是否正确启用：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep -i iommu</span><br></pre></td></tr></table></figure>
-
 <p>如果看到类似<code>pci xxxx:xx:xx.x: Adding to iommu group xx</code>的输出，说明IOMMU已成功启用。</p>
 <blockquote>
 <p><strong>重要说明</strong>：系统中的所有设备只能按照IOMMU组为单位分配给宿主机或虚拟机。如果两个不相关的设备在同一个组内，它们必须一起分配。Linux系统不支持预留IOMMU组，因此我们需要阻止Linux内核在启动时初始化特定组内的硬件。</p>
 </blockquote>
-<h3 id="3-寻找需要预留的IOMMU组"><a href="#3-寻找需要预留的IOMMU组" class="headerlink" title="3. 寻找需要预留的IOMMU组"></a>3. 寻找需要预留的IOMMU组</h3><ol>
+<h3 id="寻找需要预留的iommu组">3. 寻找需要预留的IOMMU组</h3>
+<ol type="1">
 <li>首先确认显卡所在的PCIe总线和产品型号：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -nnv | grep -i nvidia</span><br></pre></td></tr></table></figure>
-
 <p>输出示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel driver in use: nvidia</span><br><span class="line">        Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia</span><br><span class="line">01:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br><span class="line">05:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia</span><br><span class="line">05:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p><strong>解读PCI设备信息</strong>：</p>
-<ul>
-<li><code>01:00.0</code>和<code>01:00.1</code>等编号通过冒号分为三部分：PCIe的domain ID、bus ID和device id.function id</li>
-<li><code>[0300]</code>是设备类型编号，不同类型设备（网络、存储、显卡等）有不同编号</li>
-<li><code>[10de:2203]</code>中，<code>10de</code>是NVIDIA的厂商ID，<code>2203</code>表示这是一个3090Ti显卡</li>
-</ul>
+<p><strong>解读PCI设备信息</strong>： -
+<code>01:00.0</code>和<code>01:00.1</code>等编号通过冒号分为三部分：PCIe的domain
+ID、bus ID和device id.function id -
+<code>[0300]</code>是设备类型编号，不同类型设备（网络、存储、显卡等）有不同编号
+-
+<code>[10de:2203]</code>中，<code>10de</code>是NVIDIA的厂商ID，<code>2203</code>表示这是一个3090Ti显卡</p>
 </blockquote>
-<ol start="2">
+<ol start="2" type="1">
 <li>找出设备所在的IOMMU组：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> dmesg | grep iommu | grep 01:00.0</span><br><span class="line"><span class="built_in">sudo</span> dmesg | grep iommu | grep 05:00.0</span><br></pre></td></tr></table></figure>
-
 <p>输出示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    0.536462] pci 0000:01:00.0: Adding to iommu group 17</span><br><span class="line">[    0.536491] pci 0000:05:00.0: Adding to iommu group 20</span><br></pre></td></tr></table></figure>
-
-
-<ol start="3">
+<ol start="3" type="1">
 <li>确认IOMMU组中的所有设备：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> dmesg | grep <span class="string">&quot;iommu group 17&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>输出示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    0.536462] pci 0000:01:00.0: Adding to iommu group 17</span><br><span class="line">[    0.536467] pci 0000:01:00.1: Adding to iommu group 17</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-屏蔽显卡驱动"><a href="#4-屏蔽显卡驱动" class="headerlink" title="4. 屏蔽显卡驱动"></a>4. 屏蔽显卡驱动</h3><p>有两种方法可以屏蔽显卡，使其不被宿主机系统使用：</p>
-<h4 id="方法一：型号屏蔽法"><a href="#方法一：型号屏蔽法" class="headerlink" title="方法一：型号屏蔽法"></a>方法一：型号屏蔽法</h4><p>适用于只有一张显卡或多张显卡ID不同的情况：</p>
-<ol>
+<h3 id="屏蔽显卡驱动">4. 屏蔽显卡驱动</h3>
+<p>有两种方法可以屏蔽显卡，使其不被宿主机系统使用：</p>
+<h4 id="方法一型号屏蔽法">方法一：型号屏蔽法</h4>
+<p>适用于只有一张显卡或多张显卡ID不同的情况：</p>
+<ol type="1">
 <li>修改GRUB配置：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nvim /etc/default/grub</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol start="2" type="1">
 <li>在<code>GRUB_CMDLINE_LINUX_DEFAULT</code>中添加设备ID：</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用pci-stub方法</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on pci-stub.ids=10de:2203,10de:1aef&quot;</span><br><span class="line"></span><br><span class="line"># 或使用vfio-pci方法</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash intel_iommu=on vfio-pci.ids=10de:2203,10de:1aef&quot;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol start="3" type="1">
 <li>更新GRUB并重启：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arch Linux</span></span><br><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line"><span class="built_in">sudo</span> update-grub</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol start="4" type="1">
 <li>验证屏蔽是否成功：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci -nnv | grep -E <span class="string">&quot;(^\S|Kernel driver in use)&quot;</span> | grep 01:00 -A 1</span><br></pre></td></tr></table></figure>
-
 <p>成功屏蔽后的输出：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01:00.0 VGA compatible controller [0300]: NVIDIA Corporation Device [10de:2203] (rev a1) (prog-if 00 [VGA controller])</span><br><span class="line">        Kernel driver in use: vfio-pci</span><br><span class="line">01:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)</span><br><span class="line">        Kernel driver in use: vfio-pci</span><br></pre></td></tr></table></figure>
-
-<h4 id="方法二：脚本屏蔽法"><a href="#方法二：脚本屏蔽法" class="headerlink" title="方法二：脚本屏蔽法"></a>方法二：脚本屏蔽法</h4><p>适用于多张相同型号显卡的情况：</p>
-<ol>
+<h4 id="方法二脚本屏蔽法">方法二：脚本屏蔽法</h4>
+<p>适用于多张相同型号显卡的情况：</p>
+<ol type="1">
 <li>创建VFIO脚本：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/initramfs-tools/scripts/init-top/vfio.sh</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol start="2" type="1">
 <li>添加以下内容：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;vfio-pci&quot;</span> &gt; /sys/bus/pci/devices/0000:01:00.0/driver_override</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;vfio-pci&quot;</span> &gt; /sys/bus/pci/devices/0000:01:00.1/driver_override</span><br><span class="line"><span class="comment">#echo &quot;0000:01:00.0&quot; &gt; /sys/bus/pci/drivers/vfio-pci/bind # 这里我没有加这个绑定，有人加了这两句，但我注释了，因为本地找不到这个文件夹</span></span><br><span class="line"><span class="comment">#echo &quot;0000:01:00.1&quot; &gt; /sys/bus/pci/drivers/vfio-pci/bind # 可选，需要modprobe -i vfio-pci后才有此文件夹，但不加也能正常工作</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol start="3" type="1">
 <li>给脚本添加执行权限：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 744 /etc/initramfs-tools/scripts/init-top/vfio.sh</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol start="4" type="1">
 <li>更新initramfs：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> update-initramfs -u -k all</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
+<ol start="5" type="1">
 <li>重启系统后验证显卡驱动是否被vfio-pci接管</li>
 </ol>
 <blockquote>
 <p><strong>恢复显卡挂载</strong>：如需恢复显卡使用，只需注释掉脚本中的两行echo命令，刷新initramfs并重启即可。</p>
 </blockquote>
-<h3 id="5-在KVM中使用直通显卡"><a href="#5-在KVM中使用直通显卡" class="headerlink" title="5. 在KVM中使用直通显卡"></a>5. 在KVM中使用直通显卡</h3><p>完成以上步骤后，您可以在KVM虚拟机配置中添加PCI设备，选择已屏蔽的显卡，即可实现显卡直通。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF">KVM PCI passthrough on Arch Linux Wiki</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ahmclishihao/article/details/132679686">NVIDIA显卡直通详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/Documentation/vfio.txt">VFIO驱动官方文档</a></li>
+<h3 id="在kvm中使用直通显卡">5. 在KVM中使用直通显卡</h3>
+<p>完成以上步骤后，您可以在KVM虚拟机配置中添加PCI设备，选择已屏蔽的显卡，即可实现显卡直通。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF">KVM PCI
+passthrough on Arch Linux Wiki</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/ahmclishihao/article/details/132679686">NVIDIA显卡直通详解</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.kernel.org/doc/Documentation/vfio.txt">VFIO驱动官方文档</a></li>
 </ul>
 
     </div>

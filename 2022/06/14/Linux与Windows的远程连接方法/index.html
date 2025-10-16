@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -67,6 +67,12 @@
 
 
 
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -123,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Linux%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AEWindows"><span class="nav-number">1.</span> <span class="nav-text">一、Linux远程桌面访问Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">1. Windows远程桌面准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%9A%E8%BF%87RDP%E5%8D%8F%E8%AE%AE%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">2. 通过RDP协议连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8rdesktop%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 使用rdesktop工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BD%A2%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7KRDC"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 使用图形前端工具KRDC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E9%80%9A%E8%BF%87SSH%E8%BF%9E%E6%8E%A5Windows"><span class="nav-number">2.</span> <span class="nav-text">二、Linux通过SSH连接Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Windows%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E5%8A%A8SSH%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">1. Windows安装并启动SSH服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%8ELinux%E8%BF%9E%E6%8E%A5%E5%88%B0Windows"><span class="nav-number">2.2.</span> <span class="nav-text">2. 从Linux连接到Windows</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80linux%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%AE%BF%E9%97%AEwindows"><span class="nav-number">1.</span> <span class="nav-text">一、Linux远程桌面访问Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">1. Windows远程桌面准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87rdp%E5%8D%8F%E8%AE%AE%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">2. 通过RDP协议连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8rdesktop%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 使用rdesktop工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BD%A2%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7krdc"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 使用图形前端工具KRDC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Clinux%E9%80%9A%E8%BF%87ssh%E8%BF%9E%E6%8E%A5windows"><span class="nav-number">2.</span> <span class="nav-text">二、Linux通过SSH连接Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E5%8A%A8ssh%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">1. Windows安装并启动SSH服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8Elinux%E8%BF%9E%E6%8E%A5%E5%88%B0windows"><span class="nav-number">2.2.</span> <span class="nav-text">2. 从Linux连接到Windows</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,43 +225,41 @@
     
     <div class="post-body" itemprop="articleBody"><p>本文总结了从Linux系统连接到Windows系统的两种主要方法：远程桌面连接和SSH连接。这些方法可以帮助您在不同操作系统之间实现高效的远程访问和控制。</p>
 <span id="more"></span>
-
-<h2 id="一、Linux远程桌面访问Windows"><a href="#一、Linux远程桌面访问Windows" class="headerlink" title="一、Linux远程桌面访问Windows"></a>一、Linux远程桌面访问Windows</h2><h3 id="1-Windows远程桌面准备"><a href="#1-Windows远程桌面准备" class="headerlink" title="1. Windows远程桌面准备"></a>1. Windows远程桌面准备</h3><p>在Windows系统上，需要先开启远程桌面功能：</p>
-<ul>
-<li>打开系统属性 → 远程设置 → 勾选”允许远程连接到此计算机”</li>
-<li>确保Windows防火墙已允许远程桌面连接</li>
-</ul>
-<h3 id="2-通过RDP协议连接"><a href="#2-通过RDP协议连接" class="headerlink" title="2. 通过RDP协议连接"></a>2. 通过RDP协议连接</h3><p>RDP（Remote Desktop Protocol）是Windows远程桌面使用的协议，Linux系统可以通过以下工具实现RDP连接：</p>
-<h4 id="2-1-使用rdesktop工具"><a href="#2-1-使用rdesktop工具" class="headerlink" title="2.1 使用rdesktop工具"></a>2.1 使用rdesktop工具</h4><p>rdesktop实现了RDP协议，允许Linux系统远程登录Windows系统：</p>
+<h2 id="一linux远程桌面访问windows">一、Linux远程桌面访问Windows</h2>
+<h3 id="windows远程桌面准备">1. Windows远程桌面准备</h3>
+<p>在Windows系统上，需要先开启远程桌面功能： - 打开系统属性 → 远程设置 →
+勾选”允许远程连接到此计算机” - 确保Windows防火墙已允许远程桌面连接</p>
+<h3 id="通过rdp协议连接">2. 通过RDP协议连接</h3>
+<p>RDP（Remote Desktop
+Protocol）是Windows远程桌面使用的协议，Linux系统可以通过以下工具实现RDP连接：</p>
+<h4 id="使用rdesktop工具">2.1 使用rdesktop工具</h4>
+<p>rdesktop实现了RDP协议，允许Linux系统远程登录Windows系统：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装rdesktop</span></span><br><span class="line">paru -S rdesktop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装freerdp（另一个RDP客户端实现）</span></span><br><span class="line">paru -S freerdp</span><br></pre></td></tr></table></figure>
-
-<p>安装后可以用以下命令访问远程Windows系统：<br>rdesktop</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数说明：</span></span><br><span class="line"><span class="comment"># -g 1440x900：设置远程桌面分辨率为1440x900</span></span><br><span class="line"><span class="comment"># -P：使用持久位图缓存</span></span><br><span class="line"><span class="comment"># -z：启用压缩</span></span><br><span class="line"><span class="comment"># -x l：设置体验级别</span></span><br><span class="line"><span class="comment"># -r sound:off：关闭声音重定向</span></span><br><span class="line"><span class="comment"># -u windowsuser：指定Windows用户名</span></span><br><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
-<p>freerdp</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp /v:IP_ADDRESS00 /u:windowsuser /p:password /clipboard /dynamic-resolution</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-2-使用图形前端工具KRDC"><a href="#2-2-使用图形前端工具KRDC" class="headerlink" title="2.2 使用图形前端工具KRDC"></a>2.2 使用图形前端工具KRDC</h4><p>KRDC是KDE桌面环境提供的远程桌面客户端，提供了友好的图形界面：</p>
+<p>安装后可以用以下命令访问远程Windows系统： rdesktop <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数说明：</span></span><br><span class="line"><span class="comment"># -g 1440x900：设置远程桌面分辨率为1440x900</span></span><br><span class="line"><span class="comment"># -P：使用持久位图缓存</span></span><br><span class="line"><span class="comment"># -z：启用压缩</span></span><br><span class="line"><span class="comment"># -x l：设置体验级别</span></span><br><span class="line"><span class="comment"># -r sound:off：关闭声音重定向</span></span><br><span class="line"><span class="comment"># -u windowsuser：指定Windows用户名</span></span><br><span class="line">rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 192.168.31.100:22</span><br></pre></td></tr></table></figure>
+freerdp <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp /v:IP_ADDRESS00 /u:windowsuser /p:password /clipboard /dynamic-resolution</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用图形前端工具krdc">2.2 使用图形前端工具KRDC</h4>
+<p>KRDC是KDE桌面环境提供的远程桌面客户端，提供了友好的图形界面：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装KRDC</span></span><br><span class="line">paru -S krdc</span><br></pre></td></tr></table></figure>
-
 <p>安装后可以通过图形界面轻松配置和连接到Windows远程桌面。</p>
-<h2 id="二、Linux通过SSH连接Windows"><a href="#二、Linux通过SSH连接Windows" class="headerlink" title="二、Linux通过SSH连接Windows"></a>二、Linux通过SSH连接Windows</h2><h3 id="1-Windows安装并启动SSH服务"><a href="#1-Windows安装并启动SSH服务" class="headerlink" title="1. Windows安装并启动SSH服务"></a>1. Windows安装并启动SSH服务</h3><p>在Windows系统上需要完成以下步骤：</p>
-<ol>
+<h2 id="二linux通过ssh连接windows">二、Linux通过SSH连接Windows</h2>
+<h3 id="windows安装并启动ssh服务">1. Windows安装并启动SSH服务</h3>
+<p>在Windows系统上需要完成以下步骤：</p>
+<ol type="1">
 <li>打开Windows设置 → 系统 → 可选功能，安装OpenSSH服务器</li>
-<li>打开Windows服务管理器，将OpenSSH服务设置为”自动(延时)”启动模式，并启动服务</li>
-<li>配置Windows防火墙，允许SSH连接：<ul>
+<li>打开Windows服务管理器，将OpenSSH服务设置为”自动(延时)“启动模式，并启动服务</li>
+<li>配置Windows防火墙，允许SSH连接：
+<ul>
 <li>打开网络和Internet设置</li>
 <li>选择Windows防火墙 → 高级设置</li>
 <li>选择入站规则 → 新建规则</li>
 <li>规则类型选择”自定义”</li>
 <li>协议和端口选择TCP 22</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h3 id="2-从Linux连接到Windows"><a href="#2-从Linux连接到Windows" class="headerlink" title="2. 从Linux连接到Windows"></a>2. 从Linux连接到Windows</h3><p>完成上述配置后，可以使用标准SSH客户端从Linux连接到Windows：</p>
+<h3 id="从linux连接到windows">2. 从Linux连接到Windows</h3>
+<p>完成上述配置后，可以使用标准SSH客户端从Linux连接到Windows：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接到Windows SSH服务</span></span><br><span class="line">ssh username@windows_ip_address</span><br></pre></td></tr></table></figure>
-
-<hr>
+<hr />
 <p>通过以上方法，您可以根据不同需求选择合适的方式从Linux系统连接到Windows系统，实现远程控制和文件访问。</p>
 
     </div>

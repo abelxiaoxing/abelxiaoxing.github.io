@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="ArcoLinux是一个基于Arch Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。">
+    <meta name="description" content="ArcoLinux是一个基于Arch Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arco Linux安装指南">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2022/04/18/Arco%20Linux%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="ArcoLinux是一个基于Arch Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。">
+<meta property="og:description" content="ArcoLinux是一个基于Arch Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-17T23:59:16.000Z">
 <meta property="article:modified_time" content="2025-10-15T07:05:16.803Z">
@@ -65,6 +65,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
 
 
 
@@ -123,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9"><span class="nav-number">1.</span> <span class="nav-text">版本选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">下载系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.1.</span> <span class="nav-text">1. 启动系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">2. 网络配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85%E5%90%91%E5%AF%BC"><span class="nav-number">4.3.</span> <span class="nav-text">3. 安装向导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">安装后配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">参考资源</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9"><span class="nav-number">1.</span> <span class="nav-text">版本选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">下载系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.1.</span> <span class="nav-text">1. 启动系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">2. 网络配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%91%E5%AF%BC"><span class="nav-number">4.3.</span> <span class="nav-text">3. 安装向导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">安装后配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">参考资源</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -217,50 +223,56 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>ArcoLinux是一个基于Arch Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。</p>
+    <div class="post-body" itemprop="articleBody"><p>ArcoLinux是一个基于Arch
+Linux的Linux发行版，它提供了优秀的默认配置和丰富的软件包，特别适合那些想要使用Arch
+Linux但又不想从零开始配置的用户。本文将详细介绍ArcoLinux的安装过程。</p>
 <span id="more"></span>
-
-<h2 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h2><p>ArcoLinux提供多个版本，其中ArcoNet（Net版）是最推荐的版本：</p>
-<ul>
-<li>预装了丰富的常用软件</li>
-<li>默认使用XFCE4桌面环境</li>
-<li>支持通过快捷键<code>Ctrl + Alt + E</code>安装其他桌面环境</li>
-<li>系统稳定，适合日常使用</li>
-</ul>
-<h2 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h2><p>你可以从以下官方地址下载Arco ISO镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://sourceforge.net/projects/arconetpro/files/</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ol>
+<h2 id="版本选择">版本选择</h2>
+<p>ArcoLinux提供多个版本，其中ArcoNet（Net版）是最推荐的版本： -
+预装了丰富的常用软件 - 默认使用XFCE4桌面环境 -
+支持通过快捷键<code>Ctrl + Alt + E</code>安装其他桌面环境 -
+系统稳定，适合日常使用</p>
+<h2 id="下载系统">下载系统</h2>
+<p>你可以从以下官方地址下载Arco ISO镜像： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://sourceforge.net/projects/arconetpro/files/</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装准备">安装准备</h2>
+<ol type="1">
 <li>准备一个至少8GB的U盘</li>
 <li>下载并安装Rufus工具（用于制作启动盘）</li>
 <li>使用Rufus将ISO镜像写入U盘</li>
 <li>进入BIOS设置，将U盘设置为第一启动项</li>
 </ol>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-启动系统"><a href="#1-启动系统" class="headerlink" title="1. 启动系统"></a>1. 启动系统</h3><ul>
+<h2 id="安装步骤">安装步骤</h2>
+<h3 id="启动系统">1. 启动系统</h3>
+<ul>
 <li>插入制作好的启动U盘</li>
 <li>重启电脑，进入ArcoLinux安装环境</li>
 </ul>
-<h3 id="2-网络配置"><a href="#2-网络配置" class="headerlink" title="2. 网络配置"></a>2. 网络配置</h3><p>ArcoLinux默认通过访问Google来检测网络连接。如果你在国内无法访问Google，需要修改检测地址：</p>
+<h3 id="网络配置">2. 网络配置</h3>
+<p>ArcoLinux默认通过访问Google来检测网络连接。如果你在国内无法访问Google，需要修改检测地址：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改网络检测配置</span></span><br><span class="line"><span class="built_in">sudo</span> vim /etc/calamares/modules/welcome.conf</span><br><span class="line"><span class="built_in">sudo</span> vim /usr/share/arcolinux-welcome-app/arcolinux-welcome-app.py</span><br></pre></td></tr></table></figure>
 <p>将检测地址从google.com改为baidu.com或其他可访问的网站。</p>
-<h3 id="3-安装向导"><a href="#3-安装向导" class="headerlink" title="3. 安装向导"></a>3. 安装向导</h3><ol>
+<h3 id="安装向导">3. 安装向导</h3>
+<ol type="1">
 <li>选择语言和键盘布局</li>
 <li>选择时区</li>
 <li>分区设置（建议新手使用自动分区）</li>
 <li>创建用户账号和密码</li>
 <li>确认安装信息并开始安装</li>
 </ol>
-<h2 id="安装后配置"><a href="#安装后配置" class="headerlink" title="安装后配置"></a>安装后配置</h2><ol>
+<h2 id="安装后配置">安装后配置</h2>
+<ol type="1">
 <li>更新系统：<code>sudo pacman -Syu</code></li>
 <li>配置中文输入法（如需要）</li>
 <li>安装其他桌面环境（可选）：使用<code>Ctrl + Alt + E</code>打开桌面环境选择器</li>
 </ol>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ul>
+<h2 id="常见问题">常见问题</h2>
+<ul>
 <li>如果安装过程中遇到网络问题，建议先确保网络连接正常</li>
 <li>如果需要双系统，建议先安装Windows，再安装ArcoLinux</li>
 <li>建议在安装前备份重要数据</li>
 </ul>
-<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<h2 id="参考资源">参考资源</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://arcolinux.info/">ArcoLinux官网</a></li>
 <li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/">Arch Linux Wiki</a></li>
 </ul>

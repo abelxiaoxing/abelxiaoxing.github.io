@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -27,10 +27,10 @@
 <meta property="og:site_name" content="abel的小天地">
 <meta property="og:description" content="本文档主要介绍如何使用 YOLOv3 进行目标检测训练，以陶瓷片裂痕为例。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/1.png">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/2.png">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/3.png">
-<meta property="og:image" content="https://abelxiaoxing.github.io/images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/4.jpg">
+<meta property="og:image" content="https://abelxiaoxing.github.io/2019/12/21/images/yolov3-darknet训练手册/1.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/2019/12/21/images/yolov3-darknet训练手册/2.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/2019/12/21/images/yolov3-darknet训练手册/3.png">
+<meta property="og:image" content="https://abelxiaoxing.github.io/2019/12/21/images/yolov3-darknet训练手册/4.jpg">
 <meta property="article:published_time" content="2019-12-21T02:45:00.000Z">
 <meta property="article:modified_time" content="2025-10-15T07:05:19.267Z">
 <meta property="article:author" content="abelxiaoxing">
@@ -38,7 +38,7 @@
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="计算机视觉">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://abelxiaoxing.github.io/images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/1.png">
+<meta name="twitter:image" content="https://abelxiaoxing.github.io/2019/12/21/images/yolov3-darknet训练手册/1.png">
 
 
 <link rel="canonical" href="https://abelxiaoxing.github.io/2019/12/21/YOLOv3-Darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/">
@@ -71,6 +71,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
 
 
 
@@ -129,7 +135,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%BC%96%E8%AF%91-Darknet"><span class="nav-number">1.</span> <span class="nav-text">一、下载并编译 Darknet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD-Darknet"><span class="nav-number">1.1.</span> <span class="nav-text">1. 下载 Darknet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-Makefile"><span class="nav-number">1.2.</span> <span class="nav-text">2. 配置 Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E8%AF%91-Darknet"><span class="nav-number">1.3.</span> <span class="nav-text">3. 编译 Darknet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%8B%E8%BD%BD-YOLOv3-%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D"><span class="nav-number">1.4.</span> <span class="nav-text">4. 下载 YOLOv3 预训练权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">二、准备数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">三、配置模型文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">1. 修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E7%BD%91%E7%BB%9C%E8%BE%93%E5%85%A5%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">2. 修改网络输入参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BC%80%E5%A7%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">四、开始训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">日志字段说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">五、模型测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95"><span class="nav-number">5.1.</span> <span class="nav-text">1. 单张图片测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB"><span class="nav-number">6.</span> <span class="nav-text">六、常用命令汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E8%BD%AC%E6%8D%A2%EF%BC%88%E6%8F%90%E5%8F%96%E5%89%8D15%E5%B1%82%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">权重转换（提取前15层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%91%BD%E4%BB%A4"><span class="nav-number">6.2.</span> <span class="nav-text">训练命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="nav-number">6.3.</span> <span class="nav-text">测试命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E6%A3%80%E6%B5%8B"><span class="nav-number">6.3.1.</span> <span class="nav-text">单张图片检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B%E5%B9%B6%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E4%B8%BA-TXT"><span class="nav-number">6.3.2.</span> <span class="nav-text">批量检测并输出结果为 TXT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-%E7%A4%BA%E4%BE%8B%EF%BC%88yolo-console-dll-exe%EF%BC%89"><span class="nav-number">6.4.</span> <span class="nav-text">Windows 示例（yolo_console_dll.exe）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOv4-%E6%94%AF%E6%8C%81%E5%91%BD%E4%BB%A4"><span class="nav-number">6.5.</span> <span class="nav-text">YOLOv4 支持命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0%E9%A2%84%E6%B5%8B"><span class="nav-number">6.5.1.</span> <span class="nav-text">单张预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%91%BD%E4%BB%A4-1"><span class="nav-number">6.5.2.</span> <span class="nav-text">训练命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81CUDA-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%EF%BC%88GPU-%E6%8A%A5%E9%94%99%E6%97%B6%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">七、CUDA 环境变量配置（GPU 报错时）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%BC%96%E8%AF%91-darknet"><span class="nav-number">1.</span> <span class="nav-text">一、下载并编译 Darknet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-darknet"><span class="nav-number">1.1.</span> <span class="nav-text">1. 下载 Darknet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-makefile"><span class="nav-number">1.2.</span> <span class="nav-text">2. 配置 Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91-darknet"><span class="nav-number">1.3.</span> <span class="nav-text">3. 编译 Darknet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-yolov3-%E9%A2%84%E8%AE%AD%E7%BB%83%E6%9D%83%E9%87%8D"><span class="nav-number">1.4.</span> <span class="nav-text">4. 下载 YOLOv3 预训练权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">二、准备数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">三、配置模型文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">1. 修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%BD%91%E7%BB%9C%E8%BE%93%E5%85%A5%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">2. 修改网络输入参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%BC%80%E5%A7%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">四、开始训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text">日志字段说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">五、模型测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95"><span class="nav-number">5.1.</span> <span class="nav-text">1. 单张图片测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB"><span class="nav-number">6.</span> <span class="nav-text">六、常用命令汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E8%BD%AC%E6%8D%A2%E6%8F%90%E5%8F%96%E5%89%8D15%E5%B1%82"><span class="nav-number">6.1.</span> <span class="nav-text">权重转换（提取前15层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%91%BD%E4%BB%A4"><span class="nav-number">6.2.</span> <span class="nav-text">训练命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="nav-number">6.3.</span> <span class="nav-text">测试命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E6%A3%80%E6%B5%8B"><span class="nav-number">6.3.1.</span> <span class="nav-text">单张图片检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B%E5%B9%B6%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E4%B8%BA-txt"><span class="nav-number">6.3.2.</span> <span class="nav-text">批量检测并输出结果为 TXT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-%E7%A4%BA%E4%BE%8Byolo_console_dll.exe"><span class="nav-number">6.4.</span> <span class="nav-text">Windows
+示例（yolo_console_dll.exe）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yolov4-%E6%94%AF%E6%8C%81%E5%91%BD%E4%BB%A4"><span class="nav-number">6.5.</span> <span class="nav-text">YOLOv4 支持命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%BC%A0%E9%A2%84%E6%B5%8B"><span class="nav-number">6.5.1.</span> <span class="nav-text">单张预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%91%BD%E4%BB%A4-1"><span class="nav-number">6.5.2.</span> <span class="nav-text">训练命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83cuda-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AEgpu-%E6%8A%A5%E9%94%99%E6%97%B6"><span class="nav-number">7.</span> <span class="nav-text">七、CUDA 环境变量配置（GPU
+报错时）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,127 +232,139 @@
     
     
     <div class="post-body" itemprop="articleBody"><blockquote>
-<p>本文档主要介绍如何使用 YOLOv3 进行目标检测训练，以陶瓷片裂痕为例。</p>
+<p>本文档主要介绍如何使用 YOLOv3 进行目标检测训练，以陶瓷片裂痕为例。
+<span id="more"></span></p>
 </blockquote>
-<span id="more"></span>
-
-
-<h2 id="一、下载并编译-Darknet"><a href="#一、下载并编译-Darknet" class="headerlink" title="一、下载并编译 Darknet"></a>一、下载并编译 Darknet</h2><h3 id="1-下载-Darknet"><a href="#1-下载-Darknet" class="headerlink" title="1. 下载 Darknet"></a>1. 下载 Darknet</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pjreddie/darknet  </span><br><span class="line"><span class="built_in">cd</span> darknet</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-配置-Makefile"><a href="#2-配置-Makefile" class="headerlink" title="2. 配置 Makefile"></a>2. 配置 <code>Makefile</code></h3><p>编辑 <code>Makefile</code>：</p>
+<h2 id="一下载并编译-darknet">一、下载并编译 Darknet</h2>
+<h3 id="下载-darknet">1. 下载 Darknet</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pjreddie/darknet  </span><br><span class="line"><span class="built_in">cd</span> darknet</span><br></pre></td></tr></table></figure>
+<h3 id="配置-makefile">2. 配置 <code>Makefile</code></h3>
+<p>编辑 <code>Makefile</code>：</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GPU=1         <span class="comment"># 使用GPU为1，CPU为0  </span></span><br><span class="line">CUDNN=1       <span class="comment"># 使用CUDNN为1  </span></span><br><span class="line">OPENCV=0      <span class="comment"># 若使用摄像头或OpenCV相关操作，设置为1  </span></span><br><span class="line">OPENMP=0      <span class="comment"># 使用OpenMP并行处理设置为1  </span></span><br><span class="line">DEBUG=0       <span class="comment"># 调试信息设置为1</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-编译-Darknet"><a href="#3-编译-Darknet" class="headerlink" title="3. 编译 Darknet"></a>3. 编译 Darknet</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-下载-YOLOv3-预训练权重"><a href="#4-下载-YOLOv3-预训练权重" class="headerlink" title="4. 下载 YOLOv3 预训练权重"></a>4. 下载 YOLOv3 预训练权重</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://pjreddie.com/media/files/yolov3.weights</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="二、准备数据集"><a href="#二、准备数据集" class="headerlink" title="二、准备数据集"></a>二、准备数据集</h2><p>使用 <strong>VoTT</strong> 工具进行标注，保存格式选择为 <strong>YOLO</strong>，即可自动生成对应的 <code>*.txt</code> 文件。</p>
+<h3 id="编译-darknet">3. 编译 Darknet</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<h3 id="下载-yolov3-预训练权重">4. 下载 YOLOv3 预训练权重</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://pjreddie.com/media/files/yolov3.weights</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="二准备数据集">二、准备数据集</h2>
+<p>使用 <strong>VoTT</strong> 工具进行标注，保存格式选择为
+<strong>YOLO</strong>，即可自动生成对应的 <code>*.txt</code> 文件。</p>
 <p>示意图如下：</p>
-<p><img src="/../images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/1.png" alt="VoTT标注示意图"></p>
-<hr>
-<h2 id="三、配置模型文件"><a href="#三、配置模型文件" class="headerlink" title="三、配置模型文件"></a>三、配置模型文件</h2><h3 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1. 修改配置文件"></a>1. 修改配置文件</h3><p>复制 YOLOv3-tiny 的默认配置：</p>
+<figure>
+<img src="../images/yolov3-darknet训练手册/1.png"
+alt="VoTT标注示意图" />
+<figcaption aria-hidden="true">VoTT标注示意图</figcaption>
+</figure>
+<hr />
+<h2 id="三配置模型文件">三、配置模型文件</h2>
+<h3 id="修改配置文件">1. 修改配置文件</h3>
+<p>复制 YOLOv3-tiny 的默认配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> cfg/yolov3-tiny.cfg cfg/my_yolov3-tiny.cfg</span><br><span class="line">vim cfg/my_yolov3-tiny.cfg</span><br></pre></td></tr></table></figure>
-
 <p>编辑两个 <code>[yolo]</code> 层：</p>
 <ul>
-<li><p><code>classes=1</code>：表示陶瓷裂痕为一个类别</p>
-</li>
-<li><p><code>filters=18</code>：使用公式 <code>filters = 3 × (5 + classes)</code></p>
-</li>
-<li><p><code>anchors=39,39</code>：如使用统一方形框</p>
-</li>
-<li><p><code>random=0</code>：原来是1，如果显存不足可设置为0。（是否要多尺度输出）</p>
-</li>
+<li><p><code>classes=1</code>：表示陶瓷裂痕为一个类别</p></li>
+<li><p><code>filters=18</code>：使用公式
+<code>filters = 3 × (5 + classes)</code></p></li>
+<li><p><code>anchors=39,39</code>：如使用统一方形框</p></li>
+<li><p><code>random=0</code>：原来是1，如果显存不足可设置为0。（是否要多尺度输出）</p></li>
 </ul>
-<p><img src="/../images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/2.png" alt="yolo层参数示意图"></p>
-<h3 id="2-修改网络输入参数"><a href="#2-修改网络输入参数" class="headerlink" title="2. 修改网络输入参数"></a>2. 修改网络输入参数</h3><p>在 <code>[net]</code> 部分将训练部分启用，注释掉测试部分：</p>
+<figure>
+<img src="../images/yolov3-darknet训练手册/2.png"
+alt="yolo层参数示意图" />
+<figcaption aria-hidden="true">yolo层参数示意图</figcaption>
+</figure>
+<h3 id="修改网络输入参数">2. 修改网络输入参数</h3>
+<p>在 <code>[net]</code> 部分将训练部分启用，注释掉测试部分：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[net]</span></span><br><span class="line"><span class="comment"># Testing### 测试模式  </span></span><br><span class="line"><span class="comment"># batch=1</span></span><br><span class="line"><span class="comment"># subdivisions=1</span></span><br><span class="line"><span class="comment"># Training   ### 训练模式，每次前向的图片数目 = batch/subdivisions </span></span><br><span class="line"><span class="attr">batch</span>=<span class="number">64</span></span><br><span class="line"><span class="attr">subdivisions</span>=<span class="number">16</span></span><br><span class="line"><span class="attr">width</span>=<span class="number">416</span><span class="comment">### 网络的输入宽、高、通道数</span></span><br><span class="line"><span class="attr">height</span>=<span class="number">416</span></span><br><span class="line"><span class="attr">channels</span>=<span class="number">3</span></span><br><span class="line"><span class="attr">momentum</span>=<span class="number">0.9</span> <span class="comment">### 动量 </span></span><br><span class="line"><span class="attr">decay</span>=<span class="number">0.0005</span> <span class="comment">### 权重衰减</span></span><br><span class="line"><span class="attr">angle</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">saturation</span> = <span class="number">1.5</span> <span class="comment">### 饱和度</span></span><br><span class="line"><span class="attr">exposure</span> = <span class="number">1.5</span>   <span class="comment">### 曝光度 </span></span><br><span class="line"><span class="attr">hue</span>=.<span class="number">1</span>   <span class="comment">### 色调</span></span><br><span class="line"><span class="attr">learning_rate</span>=<span class="number">0.001</span>  <span class="comment">### 学习率 </span></span><br><span class="line"><span class="attr">burn_in</span>=<span class="number">1000</span> <span class="comment">### 学习率控制的参数</span></span><br><span class="line"><span class="attr">max_batches</span> = <span class="number">50200</span>  <span class="comment">### 迭代次数  </span></span><br><span class="line"><span class="attr">policy</span>=steps <span class="comment">### 学习率策略 </span></span><br><span class="line"><span class="attr">steps</span>=<span class="number">40000</span>,<span class="number">45000</span><span class="comment">### 学习率变动步长</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="四、开始训练"><a href="#四、开始训练" class="headerlink" title="四、开始训练"></a>四、开始训练</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train cfg/my_data.data cfg/my_yolov3-tiny.cfg yolov3-tiny.conv.15 -gpus 2,3</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="四开始训练">四、开始训练</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train cfg/my_data.data cfg/my_yolov3-tiny.cfg yolov3-tiny.conv.15 -gpus 2,3</span><br></pre></td></tr></table></figure>
 <p>说明：</p>
 <ul>
-<li><p><code>my_data.data</code>：包含类别路径、训练集、验证集、备份路径等</p>
-</li>
-<li><p><code>yolov3-tiny.conv.15</code>：用于微调的预训练模型</p>
-</li>
-<li><p><code>-gpus 2,3</code>：指定使用第 2 和第 3 个 GPU</p>
-</li>
+<li><p><code>my_data.data</code>：包含类别路径、训练集、验证集、备份路径等</p></li>
+<li><p><code>yolov3-tiny.conv.15</code>：用于微调的预训练模型</p></li>
+<li><p><code>-gpus 2,3</code>：指定使用第 2 和第 3 个 GPU</p></li>
 </ul>
 <p>训练日志示意：</p>
-<p><img src="/../images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/3.png" alt="训练日志"></p>
-<h3 id="日志字段说明："><a href="#日志字段说明：" class="headerlink" title="日志字段说明："></a>日志字段说明：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Region 16 Avg IOU: </span><br><span class="line">Region 23 Avg IOU:</span><br></pre></td></tr></table></figure>
-
+<figure>
+<img src="../images/yolov3-darknet训练手册/3.png" alt="训练日志" />
+<figcaption aria-hidden="true">训练日志</figcaption>
+</figure>
+<h3 id="日志字段说明">日志字段说明：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Region 16 Avg IOU: </span><br><span class="line">Region 23 Avg IOU:</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>这是两个尺度下的目标检测预测框的平均 IOU（交并比）；</p>
-</li>
+<li><p>这是两个尺度下的目标检测预测框的平均 IOU（交并比）；</p></li>
 <li><p>YOLOv3-tiny 使用两个不同的检测尺度来预测不同大小的目标框：</p>
 <ul>
-<li><p><strong>Region 23</strong>：对应网络中的第 23 层卷积，是最大的预测尺度，使用较大的 anchor mask，但能预测出较小的物体；</p>
-</li>
-<li><p><strong>Region 16</strong>：对应网络中的第 16 层卷积，是最小的预测尺度，使用较小的 anchor mask，适合预测较大的物体；</p>
-</li>
+<li><p><strong>Region 23</strong>：对应网络中的第 23
+层卷积，是最大的预测尺度，使用较大的 anchor
+mask，但能预测出较小的物体；</p></li>
+<li><p><strong>Region 16</strong>：对应网络中的第 16
+层卷积，是最小的预测尺度，使用较小的 anchor
+mask，适合预测较大的物体；</p></li>
+</ul></li>
+<li><p>如果某个尺度频繁出现
+<code>nan</code>，说明该尺度检测效果不佳，可以忽略。</p></li>
 </ul>
-</li>
-<li><p>如果某个尺度频繁出现 <code>nan</code>，说明该尺度检测效果不佳，可以忽略。</p>
-</li>
-</ul>
-<p>对于训练日志中最后一行的输出信息，如下所示（由 <code>detector.c</code> 生成）：</p>
+<p>对于训练日志中最后一行的输出信息，如下所示（由
+<code>detector.c</code> 生成）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">25667: 0.035626, 0.044029 avg, 0.000100 rate, 11.142451 seconds, 6570752 images</span><br></pre></td></tr></table></figure>
-
 <p>各字段含义如下：</p>
 <ul>
-<li><p><strong>25667</strong>：当前训练迭代次数；</p>
-</li>
-<li><p><strong>0.035626</strong>：本次迭代的 Loss（总损失）；</p>
-</li>
-<li><p><strong>0.044029 avg</strong>：当前的平均 Loss（越小越好，表明模型稳定性提升）；</p>
-</li>
-<li><p><strong>0.000100 rate</strong>：当前的学习率，该值由 <code>.cfg</code> 文件中的策略控制；</p>
-</li>
-<li><p><strong>11.142451 seconds</strong>：当前 batch（一个 mini-batch）训练所用的时间（单位：秒）；</p>
-</li>
-<li><p><strong>6570752 images</strong>：到目前为止累计参与训练的图片数量，计算方式为迭代次数 × batch 大小。</p>
-</li>
+<li><p><strong>25667</strong>：当前训练迭代次数；</p></li>
+<li><p><strong>0.035626</strong>：本次迭代的 Loss（总损失）；</p></li>
+<li><p><strong>0.044029 avg</strong>：当前的平均
+Loss（越小越好，表明模型稳定性提升）；</p></li>
+<li><p><strong>0.000100 rate</strong>：当前的学习率，该值由
+<code>.cfg</code> 文件中的策略控制；</p></li>
+<li><p><strong>11.142451 seconds</strong>：当前 batch（一个
+mini-batch）训练所用的时间（单位：秒）；</p></li>
+<li><p><strong>6570752
+images</strong>：到目前为止累计参与训练的图片数量，计算方式为迭代次数 ×
+batch 大小。</p></li>
 </ul>
-<hr>
-<h2 id="五、模型测试"><a href="#五、模型测试" class="headerlink" title="五、模型测试"></a>五、模型测试</h2><h3 id="1-单张图片测试"><a href="#1-单张图片测试" class="headerlink" title="1. 单张图片测试"></a>1. 单张图片测试</h3><p>单张图片测试命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights /path/to/image.png</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="五模型测试">五、模型测试</h2>
+<h3 id="单张图片测试">1. 单张图片测试</h3>
+<p>单张图片测试命令： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights /path/to/image.png</span><br></pre></td></tr></table></figure></p>
 <p>结果示意图：</p>
-<p><img src="/../images/yolov3-darknet%E8%AE%AD%E7%BB%83%E6%89%8B%E5%86%8C/4.jpg" alt="测试结果"></p>
-<hr>
-<h2 id="六、常用命令汇总"><a href="#六、常用命令汇总" class="headerlink" title="六、常用命令汇总"></a>六、常用命令汇总</h2><h3 id="权重转换（提取前15层）"><a href="#权重转换（提取前15层）" class="headerlink" title="权重转换（提取前15层）"></a>权重转换（提取前15层）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet partial cfg/my_yolov3-tiny.cfg backup/tiny-yolo.backup yolov3-tiny.conv.15 15</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="训练命令"><a href="#训练命令" class="headerlink" title="训练命令"></a>训练命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从头训练（带预训练权重）</span></span><br><span class="line">./darknet detector train data/obj.data cfg/my_yolov3-tiny.cfg yolov3-tiny.conv.15 -gpus 1,2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 断点续训</span></span><br><span class="line">./darknet detector train data/obj.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights -gpus 1,2</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="测试命令"><a href="#测试命令" class="headerlink" title="测试命令"></a>测试命令</h3><h4 id="单张图片检测"><a href="#单张图片检测" class="headerlink" title="单张图片检测"></a>单张图片检测</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights 59.png</span><br></pre></td></tr></table></figure>
-
-<h4 id="批量检测并输出结果为-TXT"><a href="#批量检测并输出结果为-TXT" class="headerlink" title="批量检测并输出结果为 TXT"></a>批量检测并输出结果为 TXT</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector valid cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights ./results</span><br></pre></td></tr></table></figure>
-
+<figure>
+<img src="../images/yolov3-darknet训练手册/4.jpg" alt="测试结果" />
+<figcaption aria-hidden="true">测试结果</figcaption>
+</figure>
+<hr />
+<h2 id="六常用命令汇总">六、常用命令汇总</h2>
+<h3 id="权重转换提取前15层">权重转换（提取前15层）</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet partial cfg/my_yolov3-tiny.cfg backup/tiny-yolo.backup yolov3-tiny.conv.15 15</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="训练命令">训练命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从头训练（带预训练权重）</span></span><br><span class="line">./darknet detector train data/obj.data cfg/my_yolov3-tiny.cfg yolov3-tiny.conv.15 -gpus 1,2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 断点续训</span></span><br><span class="line">./darknet detector train data/obj.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights -gpus 1,2</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="测试命令">测试命令</h3>
+<h4 id="单张图片检测">单张图片检测</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights 59.png</span><br></pre></td></tr></table></figure>
+<h4 id="批量检测并输出结果为-txt">批量检测并输出结果为 TXT</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector valid cfg/my_data.data cfg/my_yolov3-tiny.cfg backup/my_yolov3-tiny_60000.weights ./results</span><br></pre></td></tr></table></figure>
 <p>或者通用格式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector valid &lt;data_cfg&gt; &lt;test_cfg&gt; &lt;weights&gt; &lt;output_dir&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Windows-示例（yolo-console-dll-exe）"><a href="#Windows-示例（yolo-console-dll-exe）" class="headerlink" title="Windows 示例（yolo_console_dll.exe）"></a>Windows 示例（yolo_console_dll.exe）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\yolo_console_dll.exe data/obj.names cfg/yolov3.cfg yolov3.weights C:\Users\Administrator\Desktop\<span class="built_in">nl</span>\NL</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="YOLOv4-支持命令"><a href="#YOLOv4-支持命令" class="headerlink" title="YOLOv4 支持命令"></a>YOLOv4 支持命令</h3><h4 id="单张预测"><a href="#单张预测" class="headerlink" title="单张预测"></a>单张预测</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> data/obj.data cfg/my_yolov4-tiny.cfg my_yolov4-tiny_final.weights 127.png</span><br></pre></td></tr></table></figure>
-
-<h4 id="训练命令-1"><a href="#训练命令-1" class="headerlink" title="训练命令"></a>训练命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train data/obj.data cfg/my_yolov4-tiny.cfg backup/my_yolov4-tiny_2000.weights -gpus 0 -dont_show</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="七、CUDA-环境变量配置（GPU-报错时）"><a href="#七、CUDA-环境变量配置（GPU-报错时）" class="headerlink" title="七、CUDA 环境变量配置（GPU 报错时）"></a>七、CUDA 环境变量配置（GPU 报错时）</h2><p>若出现如下报错：</p>
+<hr />
+<h3 id="windows-示例yolo_console_dll.exe">Windows
+示例（yolo_console_dll.exe）</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\yolo_console_dll.exe data/obj.names cfg/yolov3.cfg yolov3.weights C:\Users\Administrator\Desktop\<span class="built_in">nl</span>\NL</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="yolov4-支持命令">YOLOv4 支持命令</h3>
+<h4 id="单张预测">单张预测</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector <span class="built_in">test</span> data/obj.data cfg/my_yolov4-tiny.cfg my_yolov4-tiny_final.weights 127.png</span><br></pre></td></tr></table></figure>
+<h4 id="训练命令-1">训练命令</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet detector train data/obj.data cfg/my_yolov4-tiny.cfg backup/my_yolov4-tiny_2000.weights -gpus 0 -dont_show</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="七cuda-环境变量配置gpu-报错时">七、CUDA 环境变量配置（GPU
+报错时）</h2>
+<p>若出现如下报错：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./darknet: error while loading shared libraries: libcudart.so.10.0</span><br></pre></td></tr></table></figure>
-
 <p>请设置 CUDA 环境变量：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/cuda-10.0/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:/usr/local/cuda-10.0/lib64</span><br><span class="line"><span class="built_in">export</span> LIBRARY_PATH=<span class="variable">$LIBRARY_PATH</span>:/usr/local/cuda-10.0/lib64</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
-
-<hr>
+<hr />
 
     </div>
 

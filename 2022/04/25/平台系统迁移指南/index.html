@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -66,6 +66,12 @@
 
 
 
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -122,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">Windows 系统迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">🛠️ 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9D-%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text">📝 详细操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">Linux 系统迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%B0-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">🧰 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%90%A7-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">🐧 操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%BF%9B%E5%85%A5Live%E7%8E%AF%E5%A2%83"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 进入Live环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%86%E5%8C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 分区操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 格式化分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 挂载文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="nav-number">2.2.5.</span> <span class="nav-text">5. 数据迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%96%B0"><span class="nav-number">2.2.6.</span> <span class="nav-text">6. 系统配置更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D"><span class="nav-number">2.2.7.</span> <span class="nav-text">7. 引导修复</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-%E9%AA%8C%E8%AF%81%E6%A3%80%E6%9F%A5"><span class="nav-number">2.3.</span> <span class="nav-text">🔍 验证检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Linux Home目录迁移方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A0-%E8%BF%81%E7%A7%BB%E7%9B%AE%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">🏠 迁移目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8B-%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">📋 详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98UUID"><span class="nav-number">3.2.1.</span> <span class="nav-text">1. 查看硬盘UUID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98"><span class="nav-number">3.2.2.</span> <span class="nav-text">2. 开机自动挂载硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%B8%B4%E6%97%B6%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98"><span class="nav-number">3.2.3.</span> <span class="nav-text">3. 临时挂载硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%88%9B%E5%BB%BA%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">3.2.4.</span> <span class="nav-text">4. 创建软链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95"><span class="nav-number">3.2.5.</span> <span class="nav-text">5. 创建用户并指定用户目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E4%BF%AE%E6%94%B9%E7%9B%AE%E5%BD%95%E6%89%80%E5%B1%9E%E6%9D%83"><span class="nav-number">3.2.6.</span> <span class="nav-text">6. 修改目录所属权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">通用注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE-Linux-%E5%B7%B2%E5%BA%9F%E5%BC%83"><span class="nav-number">5.</span> <span class="nav-text">历史数据(Linux,已废弃)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">📝 详细操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB"><span class="nav-number"></span> <span class="nav-text">Linux 系统迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">🧰 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">🐧 操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5live%E7%8E%AF%E5%A2%83"><span class="nav-number">2.1.</span> <span class="nav-text">1. 进入Live环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2. 分区操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%88%86%E5%8C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">3. 格式化分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.4.</span> <span class="nav-text">4. 挂载文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="nav-number">2.5.</span> <span class="nav-text">5. 数据迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%96%B0"><span class="nav-number">2.6.</span> <span class="nav-text">6. 系统配置更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D"><span class="nav-number">2.7.</span> <span class="nav-text">7. 引导修复</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%A3%80%E6%9F%A5"><span class="nav-number">3.</span> <span class="nav-text">🔍 验证检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-home%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">Linux Home目录迁移方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">🏠 迁移目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">📋 详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98uuid"><span class="nav-number">2.1.</span> <span class="nav-text">1. 查看硬盘UUID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98"><span class="nav-number">2.2.</span> <span class="nav-text">2. 开机自动挂载硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98"><span class="nav-number">2.3.</span> <span class="nav-text">3. 临时挂载硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">2.4.</span> <span class="nav-text">4. 创建软链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95"><span class="nav-number">2.5.</span> <span class="nav-text">5. 创建用户并指定用户目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E5%BD%95%E6%89%80%E5%B1%9E%E6%9D%83"><span class="nav-number">2.6.</span> <span class="nav-text">6. 修改目录所属权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number"></span> <span class="nav-text">通用注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AElinux%E5%B7%B2%E5%BA%9F%E5%BC%83"><span class="nav-number"></span> <span class="nav-text">历史数据(Linux,已废弃)</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -216,173 +222,148 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>本文主要讲解更换Windows和Linux系统盘的方法。</p>
-<span id="more"></span>
-<h2 id="Windows-系统迁移"><a href="#Windows-系统迁移" class="headerlink" title="Windows 系统迁移"></a>Windows 系统迁移</h2><h3 id="🛠️-准备工作"><a href="#🛠️-准备工作" class="headerlink" title="🛠️ 准备工作"></a>🛠️ 准备工作</h3><ul>
-<li><strong>源系统盘</strong>：需要迁移的旧硬盘</li>
-<li><strong>目标磁盘</strong>：新硬盘（容量 ≥ 源盘已用空间）</li>
-<li><strong>PE启动U盘</strong>：需集成DiskGenius工具（推荐微PE工具箱）</li>
-</ul>
-<h3 id="📝-详细操作步骤"><a href="#📝-详细操作步骤" class="headerlink" title="📝 详细操作步骤"></a>📝 详细操作步骤</h3><ol>
-<li><p><strong>制作启动盘</strong></p>
+    <div class="post-body" itemprop="articleBody"><p>本文主要讲解更换Windows和Linux系统盘的方法。 <span id="more"></span> ## Windows
+系统迁移 ### 🛠️ 准备工作 - <strong>源系统盘</strong>：需要迁移的旧硬盘 -
+<strong>目标磁盘</strong>：新硬盘（容量 ≥ 源盘已用空间） -
+<strong>PE启动U盘</strong>：需集成DiskGenius工具（推荐微PE工具箱）</p>
+<h3 id="详细操作步骤">📝 详细操作步骤</h3>
+<ol type="1">
+<li><strong>制作启动盘</strong>
 <ul>
-<li>使用微PE工具箱制作启动U盘（官网：<a target="_blank" rel="noopener" href="https://www.wepe.com.cn/%EF%BC%89">https://www.wepe.com.cn/）</a></li>
-</ul>
-</li>
-<li><p><strong>进入PE环境</strong></p>
+<li>使用微PE工具箱制作启动U盘（官网：https://www.wepe.com.cn/）</li>
+</ul></li>
+<li><strong>进入PE环境</strong>
 <ul>
-<li>插入U盘 → 开机时反复按<code>F12/Del/F2</code>（不同主板按键不同）</li>
+<li>插入U盘 →
+开机时反复按<code>F12/Del/F2</code>（不同主板按键不同）</li>
 <li>在BIOS中设置U盘为第一启动项 → 进入PE桌面</li>
-</ul>
-</li>
-<li><p><strong>执行系统迁移</strong></p>
+</ul></li>
+<li><strong>执行系统迁移</strong>
 <ul>
 <li>打开DiskGenius软件</li>
 <li>顶部菜单选择 <strong>工具 → 系统迁移</strong></li>
-<li>按向导操作：<ol>
+<li>按向导操作：
+<ol type="1">
 <li>选择<strong>源磁盘</strong>（原系统盘）</li>
 <li>选择<strong>目标磁盘</strong>（新硬盘）</li>
 <li>调整目标分区大小（默认自动填充）</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>迁移后操作</strong></p>
+</ol></li>
+</ul></li>
+<li><strong>迁移后操作</strong>
 <ul>
 <li>重启进入BIOS → 设置新硬盘为第一启动项</li>
 <li>进入系统后运行 <code>chkdsk C: /f</code> 检查磁盘完整性</li>
-</ul>
-</li>
+</ul></li>
 </ol>
 <blockquote>
-<p>⚠️ 关键注意事项：</p>
-<ol>
-<li>目标磁盘必须为<strong>GPT格式</strong>（如原系统为UEFI启动）</li>
-<li>迁移前备份重要数据（目标磁盘将被覆盖）</li>
-<li>迁移完成后拔出旧硬盘测试启动</li>
-</ol>
+<p>⚠️ 关键注意事项： 1.
+目标磁盘必须为<strong>GPT格式</strong>（如原系统为UEFI启动） 2.
+迁移前备份重要数据（目标磁盘将被覆盖） 3.
+迁移完成后拔出旧硬盘测试启动</p>
 </blockquote>
-<hr>
-<h2 id="Linux-系统迁移"><a href="#Linux-系统迁移" class="headerlink" title="Linux 系统迁移"></a>Linux 系统迁移</h2><h3 id="🧰-准备工作"><a href="#🧰-准备工作" class="headerlink" title="🧰 准备工作"></a>🧰 准备工作</h3><ul>
+<hr />
+<h2 id="linux-系统迁移">Linux 系统迁移</h2>
+<h3 id="准备工作">🧰 准备工作</h3>
+<ul>
 <li>Live USB（推荐和迁移系统相同的系统镜像）</li>
 <li>新硬盘（建议容量 ≥ 源盘已用空间）</li>
 </ul>
-<h3 id="🐧-操作流程"><a href="#🐧-操作流程" class="headerlink" title="🐧 操作流程"></a>🐧 操作流程</h3><h4 id="1-进入Live环境"><a href="#1-进入Live环境" class="headerlink" title="1. 进入Live环境"></a>1. 进入Live环境</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk  <span class="comment"># 确认磁盘标识（假设原盘为sdb，新盘为sda）</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-分区操作"><a href="#2-分区操作" class="headerlink" title="2. 分区操作"></a>2. 分区操作</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/sda  <span class="comment"># 创建新分区</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>分区方案建议：<table>
-<thead>
-<tr>
-<th>分区</th>
-<th>类型</th>
-<th>建议大小</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;boot</td>
-<td>EFI</td>
-<td>512M</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>f2fs</td>
-<td>剩余空间</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h4 id="3-格式化分区"><a href="#3-格式化分区" class="headerlink" title="3. 格式化分区"></a>3. 格式化分区</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1  <span class="comment"># 格式化EFI分区</span></span><br><span class="line">mkfs.f2fs -f /dev/sda2   <span class="comment"># f2fs格式化根分区</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-挂载文件系统"><a href="#4-挂载文件系统" class="headerlink" title="4. 挂载文件系统"></a>4. 挂载文件系统</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载新分区(假设新系统在sda2,新系统的EFI分区在sda1)</span></span><br><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot &amp;&amp; mount /dev/sda1 /mnt/boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载原分区（假设原系统在sdb2,原系统的根分区在sdb1）</span></span><br><span class="line"><span class="built_in">mkdir</span> /old_root &amp;&amp; mount /dev/sdb2 /old_root</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-数据迁移"><a href="#5-数据迁移" class="headerlink" title="5. 数据迁移"></a>5. 数据迁移</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avhP --exclude=&#123;<span class="string">&quot;/dev/*&quot;</span>,<span class="string">&quot;/proc/*&quot;</span>,<span class="string">&quot;/sys/*&quot;</span>,<span class="string">&quot;/tmp/*&quot;</span>&#125; /old_root/ /mnt/</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-系统配置更新"><a href="#6-系统配置更新" class="headerlink" title="6. 系统配置更新"></a>6. 系统配置更新</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成新fstab</span></span><br><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># Chroot环境配置</span></span><br><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-引导修复"><a href="#7-引导修复" class="headerlink" title="7. 引导修复"></a>7. 引导修复</h4>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-
-<h3 id="🔍-验证检查"><a href="#🔍-验证检查" class="headerlink" title="🔍 验证检查"></a>🔍 验证检查</h3><ol>
+<h3 id="操作流程">🐧 操作流程</h3>
+<h4 id="进入live环境">1. 进入Live环境</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk  <span class="comment"># 确认磁盘标识（假设原盘为sdb，新盘为sda）</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="分区操作">2. 分区操作</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/sda  <span class="comment"># 创建新分区</span></span><br></pre></td></tr></table></figure> - 分区方案建议： | 分区 | 类型 | 建议大小 |
+|——–|———-|———-| | /boot | EFI | 512M | | / | f2fs | 剩余空间 |</p>
+<h4 id="格式化分区">3. 格式化分区</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1  <span class="comment"># 格式化EFI分区</span></span><br><span class="line">mkfs.f2fs -f /dev/sda2   <span class="comment"># f2fs格式化根分区</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="挂载文件系统">4. 挂载文件系统</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载新分区(假设新系统在sda2,新系统的EFI分区在sda1)</span></span><br><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot &amp;&amp; mount /dev/sda1 /mnt/boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载原分区（假设原系统在sdb2,原系统的根分区在sdb1）</span></span><br><span class="line"><span class="built_in">mkdir</span> /old_root &amp;&amp; mount /dev/sdb2 /old_root</span><br></pre></td></tr></table></figure></p>
+<h4 id="数据迁移">5. 数据迁移</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avhP --exclude=&#123;<span class="string">&quot;/dev/*&quot;</span>,<span class="string">&quot;/proc/*&quot;</span>,<span class="string">&quot;/sys/*&quot;</span>,<span class="string">&quot;/tmp/*&quot;</span>&#125; /old_root/ /mnt/</span><br></pre></td></tr></table></figure></p>
+<h4 id="系统配置更新">6. 系统配置更新</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成新fstab</span></span><br><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># Chroot环境配置</span></span><br><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure></p>
+<h4 id="引导修复">7. 引导修复</h4>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<h3 id="验证检查">🔍 验证检查</h3>
+<ol type="1">
 <li>确认<code>/etc/fstab</code>中UUID与<code>blkid</code>输出一致</li>
 <li>检查EFI分区是否包含引导文件</li>
 <li>测试从新硬盘启动</li>
 </ol>
-<hr>
-<h2 id="Linux-Home目录迁移方法"><a href="#Linux-Home目录迁移方法" class="headerlink" title="Linux Home目录迁移方法"></a>Linux Home目录迁移方法</h2><h3 id="🏠-迁移目的"><a href="#🏠-迁移目的" class="headerlink" title="🏠 迁移目的"></a>🏠 迁移目的</h3><p>将用户的home目录迁移到新硬盘，可以有效扩展存储空间并提高系统性能。</p>
-<h3 id="📋-详细步骤"><a href="#📋-详细步骤" class="headerlink" title="📋 详细步骤"></a>📋 详细步骤</h3><h4 id="1-查看硬盘UUID"><a href="#1-查看硬盘UUID" class="headerlink" title="1. 查看硬盘UUID"></a>1. 查看硬盘UUID</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> blkid</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="linux-home目录迁移方法">Linux Home目录迁移方法</h2>
+<h3 id="迁移目的">🏠 迁移目的</h3>
+<p>将用户的home目录迁移到新硬盘，可以有效扩展存储空间并提高系统性能。</p>
+<h3 id="详细步骤">📋 详细步骤</h3>
+<h4 id="查看硬盘uuid">1. 查看硬盘UUID</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> blkid</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>记录新硬盘的UUID，后续配置会用到</p>
 </blockquote>
-<h4 id="2-开机自动挂载硬盘"><a href="#2-开机自动挂载硬盘" class="headerlink" title="2. 开机自动挂载硬盘"></a>2. 开机自动挂载硬盘</h4><p>编辑fstab文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fstab</span><br></pre></td></tr></table></figure>
-<p>在文件末尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=&lt;你的硬盘UUID&gt; /media &lt;你的硬盘格式，例如ext4&gt; defaults 0 0</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-临时挂载硬盘"><a href="#3-临时挂载硬盘" class="headerlink" title="3. 临时挂载硬盘"></a>3. 临时挂载硬盘</h4><p>如果不想立即重启，可以先手动挂载：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount /dev/sdb1 /media</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-创建软链接"><a href="#4-创建软链接" class="headerlink" title="4. 创建软链接"></a>4. 创建软链接</h4><p>将新硬盘上的用户目录链接到home目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /media/abelxiaoxing /home/abelxiaoxing</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-创建用户并指定用户目录"><a href="#5-创建用户并指定用户目录" class="headerlink" title="5. 创建用户并指定用户目录"></a>5. 创建用户并指定用户目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> useradd -d /home/abelxiaoxing abelxiaoxing</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-修改目录所属权"><a href="#6-修改目录所属权" class="headerlink" title="6. 修改目录所属权"></a>6. 修改目录所属权</h4><p>确保用户对自己的目录有完全控制权：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing</span><br></pre></td></tr></table></figure>
-
+<h4 id="开机自动挂载硬盘">2. 开机自动挂载硬盘</h4>
+<p>编辑fstab文件： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fstab</span><br></pre></td></tr></table></figure> 在文件末尾添加： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=&lt;你的硬盘UUID&gt; /media &lt;你的硬盘格式，例如ext4&gt; defaults 0 0</span><br></pre></td></tr></table></figure></p>
+<h4 id="临时挂载硬盘">3. 临时挂载硬盘</h4>
+<p>如果不想立即重启，可以先手动挂载： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount /dev/sdb1 /media</span><br></pre></td></tr></table></figure></p>
+<h4 id="创建软链接">4. 创建软链接</h4>
+<p>将新硬盘上的用户目录链接到home目录： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /media/abelxiaoxing /home/abelxiaoxing</span><br></pre></td></tr></table></figure></p>
+<h4 id="创建用户并指定用户目录">5. 创建用户并指定用户目录</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> useradd -d /home/abelxiaoxing abelxiaoxing</span><br></pre></td></tr></table></figure>
+<h4 id="修改目录所属权">6. 修改目录所属权</h4>
+<p>确保用户对自己的目录有完全控制权： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R abelxiaoxing:abelxiaoxing /media/abelxiaoxing</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>⚠️ <strong>注意事项</strong>：</p>
-<ul>
-<li>迁移前备份重要数据</li>
-<li>确保新硬盘有足够空间</li>
-<li>迁移后测试用户登录和文件访问权限</li>
-</ul>
+<p>⚠️ <strong>注意事项</strong>： - 迁移前备份重要数据 -
+确保新硬盘有足够空间 - 迁移后测试用户登录和文件访问权限</p>
 </blockquote>
-<hr>
-<h2 id="通用注意事项"><a href="#通用注意事项" class="headerlink" title="通用注意事项"></a>通用注意事项</h2><ol>
-<li><p><strong>数据备份</strong>：建议使用<code>dd</code>命令创建完整磁盘镜像</p>
+<hr />
+<h2 id="通用注意事项">通用注意事项</h2>
+<ol type="1">
+<li><strong>数据备份</strong>：建议使用<code>dd</code>命令创建完整磁盘镜像
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sdX of=/path/to/backup.img bs=4M status=progress</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>迁移工具替代方案</strong>：</p>
+<li><strong>迁移工具替代方案</strong>：
 <ul>
 <li>Clonezilla（跨平台克隆工具）</li>
 <li>Timeshift（Linux系统快照工具）</li>
-</ul>
-</li>
-<li><p><strong>故障排查</strong>：</p>
+</ul></li>
+<li><strong>故障排查</strong>：
 <ul>
 <li>引导失败：尝试<code>boot-repair</code>工具</li>
 <li>文件系统错误：使用<code>fsck</code>进行检查修复</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<hr>
-<h2 id="历史数据-Linux-已废弃"><a href="#历史数据-Linux-已废弃" class="headerlink" title="历史数据(Linux,已废弃)"></a>历史数据(Linux,已废弃)</h2><ol>
-<li>准备工作：<ul>
+<hr />
+<h2 id="历史数据linux已废弃">历史数据(Linux,已废弃)</h2>
+<ol type="1">
+<li>准备工作：
+<ul>
 <li>原系统硬盘</li>
 <li>新系统硬盘</li>
 <li>带有Live USB的Un盘</li>
-</ul>
-</li>
+</ul></li>
 <li>bios设置启动U盘,进入U盘Live USB的linux系统</li>
-<li>输入<code>lsblk</code>命令查看磁盘信息,找到原系统的磁盘和新系统的磁盘,例如&#x2F;dev&#x2F;sdb1和&#x2F;dev&#x2F;sdb2分别为原系统的EFI分区和根分区,&#x2F;dev&#x2F;sda为新系统磁盘(此处为举例,具体根据<code>lsblk</code>命令输出进行修改)</li>
-<li>输入<code>cfdisk</code>命令,对新磁盘进行分区,创建efi分区和根分区,efi设置分区类型为fat32,根分区类型须和原来系统一致,例如原系统为ext4,则新系统根分区也为ext4<br> 格式化EFI分区<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    mkfs.fat -F32 /dev/sda1</span><br><span class="line">    ```  </span><br><span class="line">格式化根分区  </span><br><span class="line">    ```bash</span><br><span class="line">    mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure></li>
-<li>挂载分区<ul>
-<li>挂载旧磁盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /sdb1</span><br><span class="line">mount /dev/sdb1 /sdb1</span><br><span class="line"><span class="built_in">mkdir</span> /sdb2</span><br><span class="line">mount /dev/sdb2 /sdb2</span><br></pre></td></tr></table></figure></li>
-<li>挂载新磁盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/boot</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>复制原系统文件到新系统<ul>
-<li>复制根分区数据  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP --exclude=/boot /sdb2/ /mnt/</span><br></pre></td></tr></table></figure></li>
-<li>复制EFI分区数据  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP /sdb2/ /mnt/boot/</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>更新fstab<ul>
-<li>生成新的UUID  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid</span><br></pre></td></tr></table></figure></li>
-<li>修改&#x2F;etc&#x2F;fstab文件,将原系统的UUID和新系统的UUID进行替换</li>
-</ul>
-</li>
+<li>输入<code>lsblk</code>命令查看磁盘信息,找到原系统的磁盘和新系统的磁盘,例如/dev/sdb1和/dev/sdb2分别为原系统的EFI分区和根分区,/dev/sda为新系统磁盘(此处为举例,具体根据<code>lsblk</code>命令输出进行修改)</li>
+<li>输入<code>cfdisk</code>命令,对新磁盘进行分区,创建efi分区和根分区,efi设置分区类型为fat32,根分区类型须和原来系统一致,例如原系统为ext4,则新系统根分区也为ext4<br />
+格式化EFI分区<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    mkfs.fat -F32 /dev/sda1</span><br><span class="line">    ```  </span><br><span class="line">格式化根分区  </span><br><span class="line">    ```bash</span><br><span class="line">    mkfs.ext4 /dev/sda2</span><br></pre></td></tr></table></figure></li>
+<li>挂载分区
+<ul>
+<li>挂载旧磁盘 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /sdb1</span><br><span class="line">mount /dev/sdb1 /sdb1</span><br><span class="line"><span class="built_in">mkdir</span> /sdb2</span><br><span class="line">mount /dev/sdb2 /sdb2</span><br></pre></td></tr></table></figure></li>
+<li>挂载新磁盘 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/boot</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>复制原系统文件到新系统
+<ul>
+<li>复制根分区数据 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP --exclude=/boot /sdb2/ /mnt/</span><br></pre></td></tr></table></figure></li>
+<li>复制EFI分区数据 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aHAXxSP /sdb2/ /mnt/boot/</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>更新fstab
+<ul>
+<li>生成新的UUID <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid</span><br></pre></td></tr></table></figure></li>
+<li>修改/etc/fstab文件,将原系统的UUID和新系统的UUID进行替换</li>
+</ul></li>
 <li>配置启动加载器 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br><span class="line"><span class="built_in">cp</span> /etc/resolv.conf /mnt/etc/resolv.conf</span><br></pre></td></tr></table></figure></li>
-<li>切换到新根目录   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure></li>
-<li>安装配置grub  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure></li>
+<li>切换到新根目录<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure></li>
+<li>安装配置grub<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure></li>
 <li>重启系统,bios设置从新硬盘启动,进入新系统</li>
 </ol>
 
