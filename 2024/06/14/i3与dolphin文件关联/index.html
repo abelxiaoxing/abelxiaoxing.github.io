@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="在新版本的KDE5环境下，当使用i3等窗口管理器时，Dolphin文件管理器无法正确处理文件关联。这意味着当你尝试打开文件时，可能无法使用默认应用程序或右键菜单中的选项无法正常工作。 本文将介绍如何解决这个问题，让Dolphin文件管理器在i3等窗口管理器下正常工作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="i3与dolphin文件关联">
+<meta property="og:url" content="https://abelxiaoxing.github.io/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/index.html">
+<meta property="og:site_name" content="abel的小天地">
+<meta property="og:description" content="在新版本的KDE5环境下，当使用i3等窗口管理器时，Dolphin文件管理器无法正确处理文件关联。这意味着当你尝试打开文件时，可能无法使用默认应用程序或右键菜单中的选项无法正常工作。 本文将介绍如何解决这个问题，让Dolphin文件管理器在i3等窗口管理器下正常工作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-14T02:29:58.000Z">
+<meta property="article:modified_time" content="2025-10-15T07:05:17.000Z">
+<meta property="article:author" content="abelxiaoxing">
+<meta property="article:tag" content="i3wm">
+<meta property="article:tag" content="dolphin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://abelxiaoxing.github.io/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/","path":"2024/06/14/i3与dolphin文件关联/","title":"i3与dolphin文件关联"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>i3与dolphin文件关联 | abel的小天地</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">abel的小天地</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%E9%99%8D%E7%BA%A7kservice5%E6%8E%A8%E8%8D%90%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方案一：降级KService5（推荐方法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%87%E9%80%89%E6%96%B9%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">方案二：手动配置菜单文件（备选方案）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">验证解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">abelxiaoxing</p>
+  <div class="site-description" itemprop="description">一个个人资料记录的小地方</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2024/06/14/i3%E4%B8%8Edolphin%E6%96%87%E4%BB%B6%E5%85%B3%E8%81%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="abelxiaoxing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abel的小天地">
+      <meta itemprop="description" content="一个个人资料记录的小地方">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="i3与dolphin文件关联 | abel的小天地">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          i3与dolphin文件关联
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-14 10:29:58" itemprop="dateCreated datePublished" datetime="2024-06-14T10:29:58+08:00">2024-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-15 15:05:17" itemprop="dateModified" datetime="2025-10-15T15:05:17+08:00">2025-10-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在新版本的KDE5环境下，当使用i3等窗口管理器时，Dolphin文件管理器无法正确处理文件关联。这意味着当你尝试打开文件时，可能无法使用默认应用程序或右键菜单中的选项无法正常工作。
+本文将介绍如何解决这个问题，让Dolphin文件管理器在i3等窗口管理器下正常工作。
+<span id="more"></span></p>
+<h2 id="解决方案">解决方案</h2>
+<h3
+id="方案一降级kservice5推荐方法">方案一：降级KService5（推荐方法）</h3>
+<p>这是解决问题的最佳方法，通过临时降级KService5组件并进行配置修改来修复文件关联问题：</p>
+<ol type="1">
+<li>安装<code>downgrade</code>降级工具（如果尚未安装）</li>
+<li>将<code>kservice5</code>降级到版本<code>5.115.0-1</code></li>
+<li><strong>重要</strong>：降级过程中不要选择忽略<code>kservice5</code>的未来升级</li>
+<li>降级完成后，将配置文件<code>applications.menu</code>从系统目录复制到用户目录：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /etc/xdg/menus/applications.menu ~/.config/menus/</span><br></pre></td></tr></table></figure></li>
+<li>完成上述步骤后，可以重新升级<code>kservice5</code>到最新版本</li>
+</ol>
+<p>这种方法的优点是只需临时降级，然后可以恢复到最新版本，同时保持文件关联功能正常工作。</p>
+<h3
+id="方案二手动配置菜单文件备选方案">方案二：手动配置菜单文件（备选方案）</h3>
+<p>如果方案一无法解决问题，可以尝试以下步骤：</p>
+<ol type="1">
+<li><p>从KDE
+Plasma项目仓库下载<code>plasma-applications.menu</code>文件： <a
+target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace/blob/master/menu/desktop/plasma-applications.menu">plasma-applications.menu</a></p></li>
+<li><p>将下载的文件复制到以下两个位置，并重命名为<code>applications.menu</code>：</p>
+<ul>
+<li>用户配置目录：<code>~/.config/menus/</code></li>
+<li>系统配置目录：<code>/etc/xdg/menus/</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> plasma-applications.menu ~/.config/menus/applications.menu</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> plasma-applications.menu /etc/xdg/menus/applications.menu</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="验证解决方案">验证解决方案</h2>
+<p>完成上述步骤后，重新启动i3窗口管理器或注销后重新登录，然后打开Dolphin文件管理器测试文件关联是否正常工作。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://forum.endeavouros.com/t/i3-issue-with-dolphin-and-file-associations-in-i3/54405/4">EndeavourOS论坛讨论</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/KDE/plasma-workspace">KDE
+Plasma工作区仓库</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/i3wm/" rel="tag"># i3wm</a>
+              <a href="/tags/dolphin/" rel="tag"># dolphin</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/04/CMake%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="prev" title="CMake使用指南">
+                  <i class="fa fa-angle-left"></i> CMake使用指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/23/ImageNet-1K%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%8C%87%E5%8D%97/" rel="next" title="ImageNet-1K数据集的准备与导入指南">
+                  ImageNet-1K数据集的准备与导入指南 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">abelxiaoxing</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
