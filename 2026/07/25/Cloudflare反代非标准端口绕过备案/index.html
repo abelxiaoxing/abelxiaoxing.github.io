@@ -20,31 +20,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"abelxiaoxing.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="将 Cloudflare 橙色云改为灰色云 DNS Only，让客户端直连源站，可减少跨境代理延迟。直连后浏览器会直接校验源站证书，所以必须先把自签名证书换成 Let’s Encrypt 证书。">
+    <meta name="description" content="将 Cloudflare 记录切换为 DNS Only 后，请求会直接到达源站，浏览器也会直接校验源站证书。要在 8443 等非标准端口上提供可信 HTTPS，只需通过 DNS-01 签发 Let’s Encrypt 证书，并由 Nginx 加载。 DNS-01 不依赖 80&#x2F;443 端口，也不需要临时自签名证书。本文按 签发证书 → 配置 Nginx → 验证源站 → 切换 DNS 的顺序操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cloudflare DNS Only：非标准端口直连与可信 HTTPS">
+<meta property="og:title" content="Cloudflare DNS Only：非标准端口直连 HTTPS">
 <meta property="og:url" content="https://abelxiaoxing.github.io/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/index.html">
 <meta property="og:site_name" content="abel的小天地">
-<meta property="og:description" content="将 Cloudflare 橙色云改为灰色云 DNS Only，让客户端直连源站，可减少跨境代理延迟。直连后浏览器会直接校验源站证书，所以必须先把自签名证书换成 Let’s Encrypt 证书。">
+<meta property="og:description" content="将 Cloudflare 记录切换为 DNS Only 后，请求会直接到达源站，浏览器也会直接校验源站证书。要在 8443 等非标准端口上提供可信 HTTPS，只需通过 DNS-01 签发 Let’s Encrypt 证书，并由 Nginx 加载。 DNS-01 不依赖 80&#x2F;443 端口，也不需要临时自签名证书。本文按 签发证书 → 配置 Nginx → 验证源站 → 切换 DNS 的顺序操作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-24T20:31:33.000Z">
-<meta property="article:modified_time" content="2026-07-28T09:43:03.339Z">
+<meta property="article:modified_time" content="2026-08-04T18:12:18.088Z">
 <meta property="article:author" content="abelxiaoxing">
 <meta property="article:tag" content="Cloudflare">
 <meta property="article:tag" content="DNS">
 <meta property="article:tag" content="Nginx">
 <meta property="article:tag" content="Let&#39;s Encrypt">
 <meta property="article:tag" content="腾讯云">
+<meta property="article:tag" content="反向代理">
 <meta name="twitter:card" content="summary">
 
 
 <link rel="canonical" href="https://abelxiaoxing.github.io/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/","path":"2026/07/25/Cloudflare反代非标准端口绕过备案/","title":"Cloudflare DNS Only：非标准端口直连与可信 HTTPS"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://abelxiaoxing.github.io/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/","path":"2026/07/25/Cloudflare反代非标准端口绕过备案/","title":"Cloudflare DNS Only：非标准端口直连 HTTPS"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Cloudflare DNS Only：非标准端口直连与可信 HTTPS | abel的小天地</title>
+<title>Cloudflare DNS Only：非标准端口直连 HTTPS | abel的小天地</title>
   
 
 
@@ -132,7 +133,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A1%AB%E5%86%99%E5%8F%98%E9%87%8F%E5%B9%B6%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">1. 填写变量并检查环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%BE%E5%8F%91%E5%8F%AF%E4%BF%A1%E8%AF%81%E4%B9%A6"><span class="nav-number">3.</span> <span class="nav-text">2. 签发可信证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-nginx-%E8%AF%81%E4%B9%A6"><span class="nav-number">4.</span> <span class="nav-text">3. 修改 Nginx 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%89%8D%E7%9B%B4%E8%BF%9E%E9%AA%8C%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">4. 切换前直连验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2-dns-only"><span class="nav-number">6.</span> <span class="nav-text">5. 切换 DNS Only</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E9%AA%8C%E8%AF%81"><span class="nav-number">7.</span> <span class="nav-text">6. 最终验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F"><span class="nav-number">8.</span> <span class="nav-text">7. 自动续期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E9%94%99%E4%B8%8E%E5%9B%9E%E6%BB%9A"><span class="nav-number">9.</span> <span class="nav-text">排错与回滚</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%8E%9F%E7%90%86%E4%B8%8E%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">一、原理与准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%AD%BE%E5%8F%91-lets-encrypt-%E8%AF%81%E4%B9%A6"><span class="nav-number">2.</span> <span class="nav-text">二、签发 Let’s Encrypt 证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-cloudflare-api-token"><span class="nav-number">2.1.</span> <span class="nav-text">1. 配置 Cloudflare API Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%BE%E5%8F%91%E8%AF%81%E4%B9%A6"><span class="nav-number">2.2.</span> <span class="nav-text">2. 签发证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E9%85%8D%E7%BD%AE-nginx"><span class="nav-number">3.</span> <span class="nav-text">三、配置 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E9%AA%8C%E8%AF%81%E6%BA%90%E7%AB%99%E5%B9%B6%E5%88%87%E6%8D%A2-dns"><span class="nav-number">4.</span> <span class="nav-text">四、验证源站并切换 DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F"><span class="nav-number">5.</span> <span class="nav-text">五、自动续期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,12 +192,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Cloudflare DNS Only：非标准端口直连与可信 HTTPS | abel的小天地">
+      <meta itemprop="name" content="Cloudflare DNS Only：非标准端口直连 HTTPS | abel的小天地">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Cloudflare DNS Only：非标准端口直连与可信 HTTPS
+          Cloudflare DNS Only：非标准端口直连 HTTPS
         </h1>
 
         <div class="post-meta-container">
@@ -214,7 +215,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-07-28 17:43:03" itemprop="dateModified" datetime="2026-07-28T17:43:03+08:00">2026-07-28</time>
+      <time title="修改时间：2026-08-05 02:12:18" itemprop="dateModified" datetime="2026-08-05T02:12:18+08:00">2026-08-05</time>
     </span>
 
   
@@ -226,64 +227,69 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>将 Cloudflare 橙色云改为灰色云 <strong>DNS
-Only</strong>，让客户端直连源站，可减少跨境代理延迟。直连后浏览器会直接校验源站证书，所以必须先把自签名证书换成
-Let’s Encrypt 证书。 <span id="more"></span></p>
+    <div class="post-body" itemprop="articleBody"><p>将 Cloudflare 记录切换为 DNS Only
+后，请求会直接到达源站，浏览器也会直接校验源站证书。要在
+<code>8443</code> 等非标准端口上提供可信 HTTPS，只需通过 DNS-01 签发
+Let’s Encrypt 证书，并由 Nginx 加载。</p>
+<p>DNS-01 不依赖 <code>80/443</code>
+端口，也不需要临时自签名证书。本文按 <strong>签发证书 → 配置 Nginx →
+验证源站 → 切换 DNS</strong> 的顺序操作。 <span id="more"></span></p>
 <blockquote>
-<p>非标准端口不等于免除备案义务。请遵守当地法规、云厂商政策和服务条款。</p>
+<p>DNS Only 仅使用 Cloudflare 权威 DNS。源站 IP
+将公开，CDN、WAF、Cloudflare Access
+等代理能力也会失效。备案和网络接入要求请遵守当地法规及云厂商规则。</p>
 </blockquote>
-<h2 id="原理">原理</h2>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DNS 查询：Cloudflare 仅返回源站地址</span><br><span class="line">HTTPS：浏览器 ──直连──→ 源站:8443</span><br><span class="line">                             └─ Nginx 按 SNI/server_name 分流</span><br><span class="line">                                ├─ 域名 A → 本地服务 A</span><br><span class="line">                                └─ 域名 B → 本地服务 B</span><br></pre></td></tr></table></figure>
-<p>证书绑定域名，不绑定端口，因此可信证书可正常用于
-<code>8443</code>。多个服务可以共用该端口，但每个域名都应有独立的 Nginx
-<code>server</code> 块和证书。</p>
-<p>严格按此顺序操作：<strong>签发证书 → 修改 Nginx → 直连验证 → DNS
-Only</strong>。</p>
-<h2 id="填写变量并检查环境">1. 填写变量并检查环境</h2>
-<p>以下命令需在同一个终端窗口执行。按提示输入实际值，不要带协议或端口：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> -rp <span class="string">&#x27;完整域名：&#x27;</span> DOMAIN</span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&#x27;源站公网 IPv4：&#x27;</span> ORIGIN_IP</span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&#x27;Nginx 配置文件绝对路径：&#x27;</span> NGINX_FILE</span><br><span class="line"><span class="built_in">read</span> -rp <span class="string">&#x27;Let’s Encrypt 通知邮箱：&#x27;</span> EMAIL</span><br><span class="line">HTTPS_PORT=8443</span><br><span class="line">CF_CREDENTIALS=/root/.secrets/certbot/cloudflare.ini</span><br></pre></td></tr></table></figure>
-<p>暂时保留橙色云。云平台安全组和系统防火墙需放行公网
-<code>TCP 8443</code>；若以前只允许 Cloudflare
-IP，切换前必须取消该限制。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ss -lntp | grep <span class="string">&quot;:<span class="variable">$HTTPS_PORT</span>&quot;</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">test</span> -f <span class="string">&quot;<span class="variable">$NGINX_FILE</span>&quot;</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;Nginx 配置文件正常&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">test</span> -r <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;Cloudflare Token 文件正常&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> certbot plugins | grep dns-cloudflare</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 600 <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<p>Cloudflare Token 至少需要目标 Zone 的 DNS
-编辑权限。任一检查失败都先停止，不要切换 DNS。</p>
-<h2 id="签发可信证书">2. 签发可信证书</h2>
-<p>先测试 DNS-01 签发；测试证书不会保存：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot certonly \</span><br><span class="line">  --dry-run \</span><br><span class="line">  --dns-cloudflare \</span><br><span class="line">  --dns-cloudflare-credentials <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span> \</span><br><span class="line">  --dns-cloudflare-propagation-seconds 60 \</span><br><span class="line">  --cert-name <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> -d <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> \</span><br><span class="line">  --email <span class="string">&quot;<span class="variable">$EMAIL</span>&quot;</span> --agree-tos --non-interactive</span><br></pre></td></tr></table></figure>
-<p>测试成功后，<strong>只删除 <code>--dry-run \</code>
-这一行，再执行同一段命令</strong>，即可正式签发。然后确认：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot certificates</span><br></pre></td></tr></table></figure>
-<p>多个域名应分别修改 <code>DOMAIN</code>
-并重复本步骤，以便独立续期和排错。</p>
-<h2 id="修改-nginx-证书">3. 修改 Nginx 证书</h2>
-<p>先备份再编辑：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -a <span class="string">&quot;<span class="variable">$NGINX_FILE</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;NGINX_FILE&#125;</span>.bak.<span class="subst">$(date +%F-%H%M%S)</span>&quot;</span></span><br><span class="line">sudoedit <span class="string">&quot;<span class="variable">$NGINX_FILE</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<p>找到该域名对应的 <code>server</code>
-块，仅确认或替换以下内容；<code>&lt;完整域名&gt;</code>
-必须换成实际值：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">listen</span> <span class="number">8443</span> ssl;</span><br><span class="line"><span class="attribute">server_name</span> &lt;完整域名&gt;;</span><br><span class="line"></span><br><span class="line"><span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/&lt;完整域名&gt;/fullchain.pem;</span><br><span class="line"><span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/&lt;完整域名&gt;/privkey.pem;</span><br><span class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p>已有的 <code>location</code> 和 <code>proxy_pass</code>
-保持不动。多个域名应各用一个 <code>server</code> 块，通过不同的
-<code>server_name</code> 分流。</p>
-<p>仅在检查通过时重载：</p>
+<h2 id="一原理与准备">一、原理与准备</h2>
+<p>切换后的链路如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户 → 源站:8443 → Nginx → 本地服务</span><br><span class="line">                    Let’s Encrypt 证书</span><br></pre></td></tr></table></figure>
+<p>证书绑定域名而非端口，因此可用于 <code>8443</code>。DNS 只解析
+IP，访问时仍需显式指定端口：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api1.example.com:8443/</span><br></pre></td></tr></table></figure>
+<p>本文以腾讯云
+Ubuntu/Debian、两个域名和两个本地服务为例。先替换以下变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN1=api1.example.com</span><br><span class="line">DOMAIN2=api2.example.com</span><br><span class="line">ORIGIN_IP=203.0.113.10</span><br><span class="line">HTTPS_PORT=8443</span><br><span class="line">NGINX_FILE=/etc/nginx/conf.d/example.conf</span><br><span class="line">EMAIL=admin@example.com</span><br><span class="line">CF_CREDENTIALS=/root/.secrets/certbot/cloudflare.ini</span><br></pre></td></tr></table></figure>
+<p><code>203.0.113.10</code> 是文档示例地址，必须替换为源站公网 IP。</p>
+<p>安装依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install -y nginx certbot python3-certbot-dns-cloudflare</span><br></pre></td></tr></table></figure>
+<p>在腾讯云安全组中放行源站 TCP <code>8443</code>；若启用了
+UFW，再执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw allow 8443/tcp</span><br></pre></td></tr></table></figure>
+<p>最终由浏览器直连，安全组不能只允许 Cloudflare IP。使用公网 IPv6
+时，还需同步配置 IPv6 防火墙、Nginx 监听和 <code>AAAA</code> 记录。</p>
+<h2 id="二签发-lets-encrypt-证书">二、签发 Let’s Encrypt 证书</h2>
+<h3 id="配置-cloudflare-api-token">1. 配置 Cloudflare API Token</h3>
+<p>进入 Cloudflare <strong>API Tokens → Create Token</strong>，使用
+<strong>Edit zone DNS</strong> 模板，并将权限限制为目标 Zone 的
+<strong>DNS: Edit</strong>。不要使用 Global API Key。</p>
+<p>创建 Certbot 凭据文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> install -d -m 700 /root/.secrets/certbot</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">touch</span> <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 600 <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span></span><br><span class="line">sudoedit <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>写入：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dns_cloudflare_api_token</span> = YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></table></figure>
+<p>该文件用于自动续期，不要提交到仓库或在签发后删除。</p>
+<h3 id="签发证书">2. 签发证书</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> DOMAIN <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$DOMAIN1</span>&quot;</span> <span class="string">&quot;<span class="variable">$DOMAIN2</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">sudo</span> certbot certonly \</span><br><span class="line">    --dns-cloudflare \</span><br><span class="line">    --dns-cloudflare-credentials <span class="string">&quot;<span class="variable">$CF_CREDENTIALS</span>&quot;</span> \</span><br><span class="line">    --dns-cloudflare-propagation-seconds 60 \</span><br><span class="line">    --cert-name <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> -d <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> \</span><br><span class="line">    --email <span class="string">&quot;<span class="variable">$EMAIL</span>&quot;</span> --agree-tos --non-interactive</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>每个域名单独签发，便于续期和排错。DNS-01
+可在记录仍为橙色云时完成，不会中断现有代理流量。</p>
+<h2 id="三配置-nginx">三、配置 Nginx</h2>
+<p>编辑配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudoedit <span class="string">&quot;<span class="variable">$NGINX_FILE</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>以下示例将两个域名分别转发到本地 <code>11025</code> 和
+<code>11026</code>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> api1.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/api1.example.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/api1.example.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">client_max_body_size</span> <span class="number">50M</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:11025;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> api2.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/api2.example.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/api2.example.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">client_max_body_size</span> <span class="number">50M</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:11026;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如无需 WebSocket，可删除 <code>Upgrade</code> 和
+<code>Connection</code> 两行。加载配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t &amp;&amp; <span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
-<p>若报错，先检查域名、证书路径和分号，不要强行重启 Nginx。</p>
-<h2 id="切换前直连验证">4. 切换前直连验证</h2>
-<p>保留橙色云，用 <code>--resolve</code> 绕过 Cloudflare
-测试源站。<strong>不要添加
-<code>-k</code></strong>，否则证书验证无效。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --noproxy <span class="string">&#x27;*&#x27;</span> --connect-timeout 10 \</span><br><span class="line">  --resolve <span class="string">&quot;<span class="variable">$&#123;DOMAIN&#125;</span>:<span class="variable">$&#123;HTTPS_PORT&#125;</span>:<span class="variable">$&#123;ORIGIN_IP&#125;</span>&quot;</span> \</span><br><span class="line">  -sS -o /dev/null \</span><br><span class="line">  -w <span class="string">&#x27;HTTP=%&#123;http_code&#125; remote=%&#123;remote_ip&#125; TLS=%&#123;ssl_verify_result&#125; total=%&#123;time_total&#125;s\n&#x27;</span> \</span><br><span class="line">  <span class="string">&quot;https://<span class="variable">$&#123;DOMAIN&#125;</span>:<span class="variable">$&#123;HTTPS_PORT&#125;</span>/&quot;</span></span><br></pre></td></tr></table></figure>
-<p>只有同时满足以下条件才能继续：</p>
-<ul>
-<li><code>remote</code> 等于刚才填写的源站地址。</li>
-<li><code>TLS=0</code>，表示浏览器信任链验证成功。</li>
-</ul>
-<p>接口返回 <code>401</code> 等鉴权状态不代表证书失败；验证重点是
-<code>TLS=0</code>。</p>
-<h2 id="切换-dns-only">5. 切换 DNS Only</h2>
-<p>进入 <strong>Cloudflare Dashboard → 目标 Zone → DNS →
-Records</strong>，修改对应记录：</p>
+<h2 id="四验证源站并切换-dns">四、验证源站并切换 DNS</h2>
+<p>切换前使用 <code>--resolve</code> 绕过当前 DNS，直接验证源站、SNI
+和证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> DOMAIN <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$DOMAIN1</span>&quot;</span> <span class="string">&quot;<span class="variable">$DOMAIN2</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">  curl --noproxy <span class="string">&#x27;*&#x27;</span> --connect-timeout 10 \</span><br><span class="line">    --resolve <span class="string">&quot;<span class="variable">$&#123;DOMAIN&#125;</span>:<span class="variable">$&#123;HTTPS_PORT&#125;</span>:<span class="variable">$&#123;ORIGIN_IP&#125;</span>&quot;</span> \</span><br><span class="line">    -sS -o /dev/null \</span><br><span class="line">    -w <span class="string">&quot;domain=<span class="variable">$&#123;DOMAIN&#125;</span> HTTP=%&#123;http_code&#125; remote=%&#123;remote_ip&#125; TLS=%&#123;ssl_verify_result&#125;\n&quot;</span> \</span><br><span class="line">    <span class="string">&quot;https://<span class="variable">$&#123;DOMAIN&#125;</span>:<span class="variable">$&#123;HTTPS_PORT&#125;</span>/&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>确认 <code>remote</code> 为源站 IP、<code>TLS=0</code>，且 HTTP
+状态符合应用预期。不要使用 <code>-k</code>，否则无法验证证书。</p>
+<p>若源站只允许 Cloudflare IP，或启用了 Authenticated Origin
+Pulls、Cloudflare Access
+等边缘鉴权，应先调整限制，否则浏览器无法直连。</p>
+<p>验证通过后，在 Cloudflare <strong>DNS → Records</strong>
+中将记录改为灰色云：</p>
 <table>
 <thead>
 <tr class="header">
@@ -296,74 +302,35 @@ Records</strong>，修改对应记录：</p>
 <tbody>
 <tr class="odd">
 <td>A</td>
-<td><code>&lt;子域名前缀&gt;</code></td>
-<td><code>&lt;源站公网 IPv4&gt;</code></td>
+<td><code>api1</code></td>
+<td>源站公网 IPv4</td>
+<td><strong>DNS only</strong></td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td><code>api2</code></td>
+<td>源站公网 IPv4</td>
 <td><strong>DNS only</strong></td>
 </tr>
 </tbody>
 </table>
-<p>将橙色云点成灰色云。源站没有公网 IPv6 时，应删除该域名下手动创建的
-<code>AAAA</code> 记录，避免客户端优先连接错误地址。</p>
-<blockquote>
-<p>DNS Only 后，Cloudflare 的 SSL 模式、CDN、WAF 和 Authenticated Origin
-Pulls 均不再生效。不要启用 Origin Pull 验证，也不要把 <code>8443</code>
-限制为仅允许 Cloudflare IP，否则浏览器无法直连。</p>
-</blockquote>
-<h2 id="最终验证">6. 最终验证</h2>
-<p>等待 DNS 缓存更新，然后执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dig +short A <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span></span><br><span class="line">dig +short AAAA <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span></span><br><span class="line"></span><br><span class="line">curl --noproxy <span class="string">&#x27;*&#x27;</span> --connect-timeout 10 \</span><br><span class="line">  -sS -o /dev/null \</span><br><span class="line">  -w <span class="string">&#x27;HTTP=%&#123;http_code&#125; remote=%&#123;remote_ip&#125; TLS=%&#123;ssl_verify_result&#125; total=%&#123;time_total&#125;s\n&#x27;</span> \</span><br><span class="line">  <span class="string">&quot;https://<span class="variable">$&#123;DOMAIN&#125;</span>:<span class="variable">$&#123;HTTPS_PORT&#125;</span>/&quot;</span></span><br></pre></td></tr></table></figure>
-<p>成功标准：</p>
+<p>没有公网 IPv6 时，应删除对应的 <code>AAAA</code> 记录。等待 DNS
+缓存更新后，即可访问：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://api1.example.com:8443/</span><br><span class="line">https://api2.example.com:8443/</span><br></pre></td></tr></table></figure>
+<p>DNS 无法将 <code>443</code> 自动映射到
+<code>8443</code>。如需省略端口，入口服务必须监听 <code>443</code>。</p>
+<h2 id="五自动续期">五、自动续期</h2>
+<p>创建 deploy hook，使 Nginx 在证书续期后自动重载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> install -d -m 755 /etc/letsencrypt/renewal-hooks/deploy</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh &gt;/dev/null &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line">nginx -t &amp;&amp; systemctl reload nginx</span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 755 /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now certbot.timer</span><br><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run --run-deploy-hooks</span><br></pre></td></tr></table></figure>
+<p>保留 Cloudflare 凭据文件及 Token；修改 Token 后需同步更新文件。</p>
+<h2 id="参考资料">参考资料</h2>
 <ul>
-<li><code>A</code> 查询只返回填写的源站地址。</li>
-<li>没有公网 IPv6 时，<code>AAAA</code> 查询为空。</li>
-<li><code>remote</code> 等于源站地址，且 <code>TLS=0</code>。</li>
+<li><a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/proxy-status/">Cloudflare：DNS
+记录的代理状态</a></li>
+<li><a target="_blank" rel="noopener" href="https://certbot-dns-cloudflare.readthedocs.io/">Certbot DNS
+Cloudflare 插件文档</a></li>
 </ul>
-<p>在本机生成浏览器访问地址：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;https://%s:%s/\n&#x27;</span> <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> <span class="string">&quot;<span class="variable">$HTTPS_PORT</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="自动续期">7. 自动续期</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run</span><br><span class="line">systemctl status certbot.timer --no-pager</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">test</span> -x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh \</span><br><span class="line">  &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;Nginx 续期重载脚本正常&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>DNS-01 在 DNS Only 下仍可续期。不要删除 Cloudflare Token
-文件，续期后还需通过 deploy hook 重载 Nginx。</p>
-<h2 id="排错与回滚">排错与回滚</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>现象</th>
-<th>检查项</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>超时</td>
-<td>安全组、系统防火墙、是否仍只允许 Cloudflare IP</td>
-</tr>
-<tr class="even">
-<td><code>TLS</code> 不是 <code>0</code></td>
-<td>Nginx 是否仍使用自签名证书、证书路径是否匹配；不要用
-<code>-k</code></td>
-</tr>
-<tr class="odd">
-<td><code>remote</code> 不是源站地址</td>
-<td>记录仍为橙色云，或本地 DNS 缓存未更新</td>
-</tr>
-<tr class="even">
-<td><code>502</code></td>
-<td>本地后端服务及 <code>proxy_pass</code> 端口</td>
-</tr>
-<tr class="odd">
-<td><code>401</code></td>
-<td>通常是应用鉴权响应，与证书无关</td>
-</tr>
-</tbody>
-</table>
-<p>需要回滚时，把 DNS 记录切回橙色云。DNS Only 会公开源站地址，并失去
-Cloudflare 代理防护；优点是请求不再绕经跨境代理。</p>
-<p>访问地址仍需保留 <code>:8443</code>。若要省略端口，必须让 Nginx
-监听标准 HTTPS 端口，并先处理端口占用问题。</p>
 
     </div>
 
@@ -378,6 +345,7 @@ Cloudflare 代理防护；优点是请求不再绕经跨境代理。</p>
               <a href="/tags/Nginx/" rel="tag"># Nginx</a>
               <a href="/tags/Let-s-Encrypt/" rel="tag"># Let's Encrypt</a>
               <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" rel="tag"># 腾讯云</a>
+              <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag"># 反向代理</a>
           </div>
 
         

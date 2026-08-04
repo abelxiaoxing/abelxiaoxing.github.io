@@ -143,7 +143,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -187,7 +187,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/" class="post-title-link" itemprop="url">Cloudflare DNS Only：非标准端口直连与可信 HTTPS</a>
+          <a href="/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/" class="post-title-link" itemprop="url">Cloudflare DNS Only：非标准端口直连 HTTPS</a>
         </h2>
 
         <div class="post-meta-container">
@@ -205,7 +205,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-07-28 17:43:03" itemprop="dateModified" datetime="2026-07-28T17:43:03+08:00">2026-07-28</time>
+      <time title="修改时间：2026-08-05 02:12:18" itemprop="dateModified" datetime="2026-08-05T02:12:18+08:00">2026-08-05</time>
     </span>
 
   
@@ -218,9 +218,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>将 Cloudflare 橙色云改为灰色云 <strong>DNS
-Only</strong>，让客户端直连源站，可减少跨境代理延迟。直连后浏览器会直接校验源站证书，所以必须先把自签名证书换成
-Let’s Encrypt 证书。
+          <p>将 Cloudflare 记录切换为 DNS Only
+后，请求会直接到达源站，浏览器也会直接校验源站证书。要在
+<code>8443</code> 等非标准端口上提供可信 HTTPS，只需通过 DNS-01 签发
+Let’s Encrypt 证书，并由 Nginx 加载。</p>
+<p>DNS-01 不依赖 <code>80/443</code>
+端口，也不需要临时自签名证书。本文按 <strong>签发证书 → 配置 Nginx →
+验证源站 → 切换 DNS</strong> 的顺序操作。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/#more" rel="contents">
