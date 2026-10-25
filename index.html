@@ -137,13 +137,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -169,7 +169,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="https://abelxiaoxing.github.io/2026/07/25/Cloudflare%20DNS%20Only%20%E9%9D%9E%E6%A0%87%E7%AB%AF%E5%8F%A3%20HTTPS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/" class="post-title-link" itemprop="url">Cloudflare DNS Only：非标准端口直连 HTTPS</a>
+          <a href="/2026/07/25/Cloudflare%20DNS%20Only%20%E9%9D%9E%E6%A0%87%E7%AB%AF%E5%8F%A3%20HTTPS/" class="post-title-link" itemprop="url">Cloudflare DNS Only：非标端口直连可信 HTTPS（含 frp 内网穿透）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -205,7 +205,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-08-05 02:12:18" itemprop="dateModified" datetime="2026-08-05T02:12:18+08:00">2026-08-05</time>
+      <time title="修改时间：2026-10-26 00:23:11" itemprop="dateModified" datetime="2026-10-26T00:23:11+08:00">2026-10-26</time>
     </span>
 
   
@@ -218,21 +218,301 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>将 Cloudflare 记录切换为 DNS Only
-后，请求会直接到达源站，浏览器也会直接校验源站证书。要在
-<code>8443</code> 等非标准端口上提供可信 HTTPS，只需通过 DNS-01 签发
-Let’s Encrypt 证书，并由 Nginx 加载。</p>
-<p>DNS-01 不依赖 <code>80/443</code>
-端口，也不需要临时自签名证书。本文按 <strong>签发证书 → 配置 Nginx →
-验证源站 → 切换 DNS</strong> 的顺序操作。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/07/25/Cloudflare%E5%8F%8D%E4%BB%A3%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%E7%BB%95%E8%BF%87%E5%A4%87%E6%A1%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>国内云厂商对未备案域名的拦截集中在 80/443，非标端口通常不受影响。将
+Cloudflare 设为 <strong>DNS
+Only（灰云）</strong>，让浏览器直连源站的非标端口，再用 DNS-01 签发
+Let’s Encrypt 证书，即可在未备案的情况下提供可信 HTTPS。</p>
+<p><strong>DNS Only 不是 Cloudflare
+反代</strong>：橙云（Proxied）才会转发流量，灰云只负责解析。</p>
+<p>按应用位置分为两种形态： - <strong>形态 A</strong>：应用与 Nginx
+都在云服务器上。 - <strong>形态 B</strong>：应用在 NAT
+后的内网机器上，通过 frp 穿透。frp 基础可参考<a
+href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">《frp内网穿透搭建教程》</a>。</p>
+<p>两种形态的证书与公网 Nginx 配置基本相同，操作顺序为：<strong>接入
+Cloudflare → 签发证书 → 配置 Nginx（形态 B 再配 frp）→ 验证 → 确认
+DNS</strong>。</p>
+<h2 id="一为什么选择-dns-only">一、为什么选择 DNS Only？</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>橙云（Proxied）</th>
+<th>灰云（DNS Only，本文）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>浏览器连接</td>
+<td>Cloudflare 边缘</td>
+<td>直连源站</td>
+</tr>
+<tr class="even">
+<td>HTTPS 端口</td>
+<td>443、2053、2083、2087、2096、8443</td>
+<td>任意端口</td>
+</tr>
+<tr class="odd">
+<td>源站证书</td>
+<td>Origin CA 或自签即可</td>
+<td>必须是浏览器信任的证书</td>
+</tr>
+<tr class="even">
+<td>源站 IP</td>
+<td>隐藏</td>
+<td>公开</td>
+</tr>
+<tr class="odd">
+<td>上传、流式输出、WebSocket</td>
+<td>受 Cloudflare 限制</td>
+<td>由源站自行控制</td>
+</tr>
+<tr class="even">
+<td>国内访问</td>
+<td>延迟可能波动</td>
+<td>通常更稳定</td>
+</tr>
+</tbody>
+</table>
+<p>灰云适合需要任意端口、流式传输或端到端控制的场景；代价是源站 IP
+暴露，需要自行配置证书和防火墙。</p>
+<h2 id="二目标链路">二、目标链路</h2>
+<h3 id="形态-a应用在云服务器">形态 A：应用在云服务器</h3>
+<p>以 <code>https://api.example.com:8443/</code> 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    U[&quot;浏览器&lt;br/&gt;https://api.example.com:8443/&quot;]</span><br><span class="line">    DNS[&quot;Cloudflare DNS（灰云）&quot;]</span><br><span class="line">    subgraph ORIGIN[&quot;云服务器&quot;]</span><br><span class="line">        NGINX[&quot;Nginx :8443&lt;br/&gt;终结 TLS&quot;]</span><br><span class="line">        APP[&quot;应用 · 127.0.0.1:3000&quot;]</span><br><span class="line">    end</span><br><span class="line">    U --&gt; DNS</span><br><span class="line">    DNS --&gt; U</span><br><span class="line">    U -- &quot;HTTPS&quot; --&gt; NGINX</span><br><span class="line">    NGINX -- &quot;明文 HTTP&quot; --&gt; APP</span><br></pre></td></tr></table></figure>
+<h3 id="形态-b应用在内网机器">形态 B：应用在内网机器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    U[&quot;浏览器&lt;br/&gt;https://a.example.com:8443/&quot;]</span><br><span class="line">    DNS[&quot;Cloudflare DNS（灰云）&quot;]</span><br><span class="line">    subgraph VPS[&quot;云服务器&quot;]</span><br><span class="line">        NGINX[&quot;Nginx :8443&lt;br/&gt;终结 TLS，保留 Host&quot;]</span><br><span class="line">        FRPS[&quot;frps&lt;br/&gt;控制端口 27500&lt;br/&gt;代理端口 127.0.0.1:27022&quot;]</span><br><span class="line">    end</span><br><span class="line">    subgraph LAN[&quot;内网机器（无公网 IP）&quot;]</span><br><span class="line">        FRPC[&quot;frpc&lt;br/&gt;主动外连 VPS:27500&quot;]</span><br><span class="line">        NGLAN[&quot;Nginx :8899&lt;br/&gt;按 Host 分发&quot;]</span><br><span class="line">        APP1[&quot;应用 A · :3000&quot;]</span><br><span class="line">        APP2[&quot;应用 B · :8000（WebSocket）&quot;]</span><br><span class="line">    end</span><br><span class="line">    U --&gt; DNS</span><br><span class="line">    DNS --&gt; U</span><br><span class="line">    U -- &quot;HTTPS&quot; --&gt; NGINX</span><br><span class="line">    NGINX -- &quot;回环 HTTP&quot; --&gt; FRPS</span><br><span class="line">    FRPS &lt;-- &quot;frp 隧道（TLS）&quot; --&gt; FRPC</span><br><span class="line">    FRPC --&gt; NGLAN</span><br><span class="line">    NGLAN --&gt; APP1</span><br><span class="line">    NGLAN --&gt; APP2</span><br></pre></td></tr></table></figure>
+<p>Nginx 到 frps 的 HTTP 仅走本机回环，frpc 到 frps 的隧道由 frp TLS
+加密。</p>
+<h2 id="三准备">三、准备</h2>
+<p>先在当前终端设置变量（替换为自己的值），后文命令会自动展开
+<code>$DOMAIN</code>
+等变量；变量仅在当前终端有效，新窗口需重新设置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN=example.com          <span class="comment"># 主域名；通配符证书覆盖所有一级子域</span></span><br><span class="line">ORIGIN_IP=203.0.113.10      <span class="comment"># 服务器公网 IP（示例地址，必须替换）</span></span><br><span class="line">HTTPS_PORT=8443             <span class="comment"># 对外 HTTPS 端口</span></span><br><span class="line">APP_PORT=3000               <span class="comment"># 形态 A：本地应用端口</span></span><br><span class="line">FRP_PORT=27500              <span class="comment"># 形态 B：frps 控制端口</span></span><br></pre></td></tr></table></figure>
+<h3 id="接入-cloudflare-并配置解析">1. 接入 Cloudflare 并配置解析</h3>
+<p>打开 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare
+控制台</a>，通过 <strong>Add a site</strong>
+添加主域名，再按提示在域名注册商处把 NS 修改为 Cloudflare
+分配的两个服务器（<a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/">官方接入教程</a>）。等待
+Zone 状态变为 <strong>Active</strong>，这是后续 DNS-01
+签发证书的前提。</p>
+<p>进入 <strong>DNS → Records</strong>，添加需要访问的子域记录（<a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/manage-dns-records/">记录管理文档</a>）：</p>
+<table>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>名称</th>
+<th>IPv4 地址</th>
+<th>代理状态</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td><code>api</code></td>
+<td><code>$&#123;ORIGIN_IP&#125;</code></td>
+<td>DNS Only</td>
+<td>形态 A</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td><code>a</code></td>
+<td><code>$&#123;ORIGIN_IP&#125;</code></td>
+<td>DNS Only</td>
+<td>形态 B 应用 A</td>
+</tr>
+<tr class="odd">
+<td>A</td>
+<td><code>c</code></td>
+<td><code>$&#123;ORIGIN_IP&#125;</code></td>
+<td>DNS Only</td>
+<td>形态 B WebSocket 应用</td>
+</tr>
+</tbody>
+</table>
+<p>TTL 可先使用
+Auto。新部署可直接使用灰云；已有橙云记录可暂时保留，等第八节再切换。每个实际访问的子域都需要解析记录，<strong>通配符证书不会自动创建
+DNS 记录</strong>。记录只填写 IP，不包含 <code>:8443</code>；没有公网
+IPv6 就不要添加 AAAA。</p>
+<h3 id="安装依赖">2. 安装依赖</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install -y nginx certbot python3-certbot-dns-cloudflare</span><br></pre></td></tr></table></figure>
+<h3 id="配置安全组">3. 配置安全组</h3>
+<p>安全组与防火墙按以下范围配置：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>端口</th>
+<th>用途</th>
+<th>开放范围</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8443/tcp</td>
+<td>Nginx HTTPS</td>
+<td>0.0.0.0/0</td>
+</tr>
+<tr class="even">
+<td>27500/tcp</td>
+<td>frps 控制通道（形态 B）</td>
+<td>仅 frpc 出口 IP；无法固定时，依靠强 token 与 TLS</td>
+</tr>
+<tr class="odd">
+<td>27022/tcp</td>
+<td>frps 代理端口（形态 B）</td>
+<td>不对公网开放，并配置 <code>proxyBindAddr</code></td>
+</tr>
+<tr class="even">
+<td>80 / 443</td>
+<td>本方案不使用</td>
+<td>无需放行</td>
+</tr>
+</tbody>
+</table>
+<p>frpc 主动外连，因此内网机器无需入站规则。若使用公网 IPv6，需同步配置
+Nginx 监听与 IPv6 防火墙。</p>
+<h2 id="四签发通配符证书">四、签发通配符证书</h2>
+<p>一张证书可覆盖主域和所有一级子域，后续新增子域无需重签。</p>
+<h3 id="创建-cloudflare-api-token">1. 创建 Cloudflare API Token</h3>
+<p>在 <a
+target="_blank" rel="noopener" href="https://dash.cloudflare.com/profile/api-tokens">Cloudflare API
+Tokens</a> 页面选择 <strong>Create Token</strong>，使用 <strong>Edit
+zone DNS</strong> 模板，仅授予目标 Zone 的 <strong>DNS: Edit</strong>
+权限，不要使用 Global API Key。</p>
+<p>创建凭据文件（续期仍需使用，注意保密且不要提交到仓库）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> install -d -m 700 /root/.secrets/certbot</span><br><span class="line"><span class="built_in">sudo</span> install -m 600 /dev/null /root/.secrets/certbot/cloudflare.ini</span><br><span class="line">sudoedit /root/.secrets/certbot/cloudflare.ini</span><br></pre></td></tr></table></figure>
+<p>写入：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dns_cloudflare_api_token</span> = YOUR_CLOUDFLARE_API_TOKEN</span><br></pre></td></tr></table></figure>
+<h3 id="签发">2. 签发</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot certonly \</span><br><span class="line">  --dns-cloudflare \</span><br><span class="line">  --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \</span><br><span class="line">  --dns-cloudflare-propagation-seconds 60 \</span><br><span class="line">  --cert-name <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> \</span><br><span class="line">  -d <span class="string">&quot;<span class="variable">$DOMAIN</span>&quot;</span> -d <span class="string">&quot;*.<span class="variable">$&#123;DOMAIN&#125;</span>&quot;</span> \</span><br><span class="line">  --email admin@example.com --agree-tos --non-interactive</span><br></pre></td></tr></table></figure>
+<p>关键参数：</p>
+<ul>
+<li><code>$DOMAIN</code> 是第三节定义的变量，执行时会展开为
+<code>example.com</code>；<code>$&#123;DOMAIN&#125;</code>
+与其等价，花括号用于明确变量边界。</li>
+<li><code>--cert-name</code> 指定证书名称，产物位于
+<code>/etc/letsencrypt/live/$&#123;DOMAIN&#125;/</code>，Nginx
+和续期均使用此名称。</li>
+<li>两个 <code>-d</code> 分别覆盖 <code>example.com</code> 和
+<code>*.example.com</code>，后者仅包含一级子域，不含
+<code>a.b.example.com</code>。</li>
+<li>DNS-01 仅验证 DNS，不占用 80/443，证书可在橙云状态下签发；等待 60
+秒是为了给 DNS 传播留时间。</li>
+</ul>
+<h2 id="五配置公网-nginx">五、配置公网 Nginx</h2>
+<p>两种形态的 TLS 与转发头配置相同，但 <code>server_name</code>
+和上游地址不同。下面分别给出形态 A、B 的公网 <code>server</code>
+块，按实际部署选用；形态 B 不能只修改形态 A 的
+<code>proxy_pass</code>。</p>
+<p><code>/etc/nginx/nginx.conf</code> 会通过
+<code>include /etc/nginx/conf.d/*.conf;</code>
+加载该目录下的全部配置。文件名和拆分方式不限，可按站点分别创建文件；以下最小示例也可放入同一文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudoedit /etc/nginx/conf.d/tunnel.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># WebSocket：避免给普通请求硬编码 Connection &quot;upgrade&quot;</span></span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="attribute">default</span> upgrade;</span><br><span class="line">    &#x27;&#x27;      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选加固：拒绝未知 SNI（nginx &gt;= 1.19.4）</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8443</span> ssl default_server;</span><br><span class="line">    <span class="attribute">ssl_reject_handshake</span> <span class="literal">on</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 形态 A：本机应用</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> api.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     /etc/letsencrypt/live/example.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/example.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">client_max_body_size</span> <span class="number">100M</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:3000;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="comment"># 公网 Nginx 是可信代理边界，覆盖客户端提交的转发头</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Port <span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># WebSocket，不需要可删除这两行</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="variable">$connection_upgrade</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 流式输出 / SSE / 音频流</span></span><br><span class="line">        <span class="attribute">proxy_read_timeout</span> <span class="number">3600s</span>;</span><br><span class="line">        <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line">        <span class="attribute">proxy_request_buffering</span> <span class="literal">off</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 形态 B：两个子域通过同一 frp 隧道，由内网 Nginx 按 Host 分发</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> a.example.com c.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     /etc/letsencrypt/live/example.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/example.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">client_max_body_size</span> <span class="number">100M</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:27022;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Port <span class="variable">$server_port</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="variable">$connection_upgrade</span>;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">proxy_read_timeout</span> <span class="number">3600s</span>;</span><br><span class="line">        <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line">        <span class="attribute">proxy_request_buffering</span> <span class="literal">off</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他后端可复制对应形态的 <code>server</code> 块，并修改
+<code>server_name</code>、<code>proxy_pass</code>。<code>X-Forwarded-For $remote_addr</code>
+会丢弃客户端伪造的 XFF；<code>X-Forwarded-Host</code> 保留原始 Host（含
+<code>:8443</code>），<code>X-Forwarded-Port</code>
+单独传递端口。应用必须按框架配置可信代理，只信任来自对应 Nginx
+的转发头，不能无条件信任任意客户端提供的
+<code>X-Forwarded-*</code>。</p>
+<p>配置完成后加载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t &amp;&amp; <span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+<h2 id="六形态-b配置-frp-隧道">六、形态 B：配置 frp 隧道</h2>
+<h3 id="服务器端-frps">1. 服务器端 frps</h3>
+<p>编辑 <code>/etc/frp/frps.toml</code>：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bindAddr</span> = <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="attr">bindPort</span> = <span class="number">27500</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;换成强随机值，openssl rand -hex 16&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 代理端口仅监听回环，避免直接暴露给公网</span></span><br><span class="line"><span class="attr">proxyBindAddr</span> = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制 frpc 使用 TLS（frp &gt;= 0.50）</span></span><br><span class="line"><span class="attr">transport.tls.force</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>创建 systemd 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/systemd/system/frps.service &gt;/dev/null &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=FRP Server</span></span><br><span class="line"><span class="string">After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=simple</span></span><br><span class="line"><span class="string">ExecStart=/usr/local/bin/frps -c /etc/frp/frps.toml</span></span><br><span class="line"><span class="string">Restart=always</span></span><br><span class="line"><span class="string">RestartSec=5</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now frps</span><br></pre></td></tr></table></figure>
+<p>确认代理端口仅绑定回环地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss -tlnp | grep frps</span><br><span class="line"><span class="comment"># 127.0.0.1:27022    # 代理端口</span></span><br><span class="line"><span class="comment"># 0.0.0.0:27500      # 控制端口</span></span><br></pre></td></tr></table></figure>
+<p>确认第五节使用形态 B 的 <code>server</code> 块后，重新加载公网
+Nginx。</p>
+<h3 id="内网机器-frpc">2. 内网机器 frpc</h3>
+<p>编辑 <code>/etc/frp/frpc.toml</code>：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">serverAddr</span> = <span class="string">&quot;203.0.113.10&quot;</span></span><br><span class="line"><span class="attr">serverPort</span> = <span class="number">27500</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;与 frps 一致&quot;</span></span><br><span class="line"><span class="attr">transport.tls.enable</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[[proxies]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;web-tunnel&quot;</span></span><br><span class="line"><span class="attr">type</span> = <span class="string">&quot;tcp&quot;</span></span><br><span class="line"><span class="attr">localIP</span> = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line"><span class="attr">localPort</span> = <span class="number">8899</span></span><br><span class="line"><span class="attr">remotePort</span> = <span class="number">27022</span></span><br></pre></td></tr></table></figure>
+<p>同样使用 systemd 常驻并设置 <code>Restart=always</code>，避免 frpc
+退出导致全部站点中断。</p>
+<h3 id="内网-nginx-分发">3. 内网 Nginx 分发</h3>
+<p>编辑
+<code>/etc/nginx/conf.d/lan.conf</code>，按域名转发到不同应用：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="attribute">default</span> upgrade;</span><br><span class="line">    &#x27;&#x27;      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">127.0.0.1:8899</span>;</span><br><span class="line">    <span class="attribute">server_name</span> a.example.com;</span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:3000;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="comment"># 透传公网 Nginx 已重建的转发头，不按 frpc 回环地址重新生成</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$http_x_real_ip</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$http_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$http_x_forwarded_proto</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$http_x_forwarded_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Port <span class="variable">$http_x_forwarded_port</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">127.0.0.1:8899</span>;</span><br><span class="line">    <span class="attribute">server_name</span> c.example.com;  <span class="comment"># WebSocket 应用</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:8000;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$http_x_real_ip</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$http_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$http_x_forwarded_proto</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$http_x_forwarded_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Port <span class="variable">$http_x_forwarded_port</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="variable">$connection_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_read_timeout</span> <span class="number">3600s</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>应用仅监听 <code>127.0.0.1</code>，无需开放内网机器的入站端口。内网
+Nginx 也应仅通过上述可信 frp
+链路接收流量；否则，直接连接它的客户端可以伪造所透传的转发头。</p>
+<h2 id="七验证">七、验证</h2>
+<p><strong>请在另一台外网机器上测试</strong>，部分云环境不支持从本机访问自身公网
+IP（hairpin）。以下命令通过 <code>--resolve</code> 绕过
+DNS，直接验证源站：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --noproxy <span class="string">&#x27;*&#x27;</span> --connect-timeout 10 \</span><br><span class="line">  --resolve <span class="string">&quot;api.example.com:8443:<span class="variable">$&#123;ORIGIN_IP&#125;</span>&quot;</span> \</span><br><span class="line">  -sS -o /dev/null \</span><br><span class="line">  -w <span class="string">&quot;HTTP=%&#123;http_code&#125; remote=%&#123;remote_ip&#125; TLS=%&#123;ssl_verify_result&#125;\n&quot;</span> \</span><br><span class="line">  <span class="string">&quot;https://api.example.com:8443/&quot;</span></span><br></pre></td></tr></table></figure>
+<p>预期 <code>remote</code> 为源站 IP、<code>TLS=0</code>，HTTP
+状态符合应用预期。不要加 <code>-k</code>，否则会跳过证书验证。</p>
+<p>涉及登录或重定向时，还要检查应用日志中的客户端
+IP、<code>Location</code>、登录回调和 Secure Cookie：外部协议应为
+HTTPS/WSS，且跳转地址不能丢失
+<code>:8443</code>。并非所有框架都会自动采用
+<code>X-Forwarded-Host</code> 和
+<code>X-Forwarded-Port</code>，需按所用框架启用代理感知并验证。</p>
+<p>形态 B 再检查代理端口未暴露，并按需测试 WebSocket：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --connect-timeout 5 <span class="string">&quot;http://<span class="variable">$&#123;ORIGIN_IP&#125;</span>:27022/&quot;</span> \</span><br><span class="line">  &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;❌ 27022 暴露，检查 proxyBindAddr 和安全组&quot;</span> \</span><br><span class="line">  || <span class="built_in">echo</span> <span class="string">&quot;✅ 27022 已隔离&quot;</span></span><br><span class="line"></span><br><span class="line">npx wscat -c <span class="string">&quot;wss://c.example.com:8443/ws&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="八确认-dns-only-并验证解析">八、确认 DNS Only 并验证解析</h2>
+<p>新部署如果在第三节已创建灰云记录，无需再次切换。已有橙云记录则在 <a
+target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare
+控制台</a>选择对应域名，进入 <strong>DNS → Records</strong>，将 A
+记录改为 <strong>DNS only（灰云）</strong>并确认指向
+<code>$&#123;ORIGIN_IP&#125;</code>；需要回切时可提前调短 TTL。</p>
+<p>如果此前使用橙云，还需关闭源站“仅允许 Cloudflare
+IP”的防火墙规则，以及 Authenticated Origin Pulls、Cloudflare Access
+等边缘鉴权，否则直连会失败。</p>
+<p>等待 DNS 缓存更新后，在外网机器检查解析：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig +short api.example.com @1.1.1.1</span><br></pre></td></tr></table></figure>
+<p>灰云生效后应返回 <code>$&#123;ORIGIN_IP&#125;</code>，而不是 Cloudflare 的
+IP。随后即可直接访问
+<code>https://api.example.com:8443/</code>，不再需要
+<code>--resolve</code>。</p>
+<h2 id="九自动续期">九、自动续期</h2>
+<p>创建续期后的 Nginx 重载脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> install -d -m 755 /etc/letsencrypt/renewal-hooks/deploy</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh &gt;/dev/null &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line">nginx -t &amp;&amp; systemctl reload nginx</span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 755 /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now certbot.timer</span><br><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run --run-deploy-hooks</span><br></pre></td></tr></table></figure>
+<p>保留 Cloudflare 凭据供续期使用；更换 Token 后同步更新凭据文件。</p>
+<h2 id="十安全清单">十、安全清单</h2>
+<ul>
+<li>灰云会公开源站 IP：最小化安全组放行范围，并加固 SSH。</li>
+<li>Cloudflare Token 仅授予必要权限，妥善保管并定期轮换。</li>
+<li>形态 B：frp token
+使用强随机值、两端一致且不进仓库；控制端口尽量限制来源 IP。</li>
+<li>形态 B：<code>proxyBindAddr</code> 与安全组共同隔离
+27022，并显式启用 frp TLS。</li>
+<li>形态 B：frpc 是单点，配置自动重启和定期探活。</li>
+<li>为 <code>client_max_body_size</code>
+设置明确上限，避免无限上传。</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/">Cloudflare：将域名接入
+Cloudflare</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/manage-dns-records/">Cloudflare：管理
+DNS 记录</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/proxy-status/">Cloudflare：DNS
+记录的代理状态</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://developers.cloudflare.com/fundamentals/reference/network-ports/">Cloudflare：代理网络端口</a></li>
+<li><a target="_blank" rel="noopener" href="https://certbot-dns-cloudflare.readthedocs.io/">Certbot DNS
+Cloudflare 插件文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">frp 官方文档</a></li>
+<li><a
+href="/2022/03/02/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">frp内网穿透搭建教程（基础篇）</a></li>
+</ul>
+
       
     </div>
 
@@ -378,7 +658,7 @@ Let’s Encrypt 证书，并由 Nginx 加载。</p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-10-15 15:05:17" itemprop="dateModified" datetime="2025-10-15T15:05:17+08:00">2025-10-15</time>
+      <time title="修改时间：2026-10-24 23:17:38" itemprop="dateModified" datetime="2026-10-24T23:17:38+08:00">2026-10-24</time>
     </span>
 
   
